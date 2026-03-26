@@ -1,0 +1,38 @@
+import { Country } from '../schema'
+import { Locale } from './schema'
+
+export const countryFlags: Record<Country, string> = {
+  [Country.USA]: '🇺🇸',
+  [Country.GERMANY]: '🇩🇪',
+  [Country.FRANCE]: '🇫🇷',
+  [Country.UK]: '🇬🇧',
+  [Country.NETHERLANDS]: '🇳🇱',
+  [Country.SPAIN]: '🇪🇸',
+  [Country.ITALY]: '🇮🇹',
+  [Country.BELGIUM]: '🇧🇪',
+  [Country.SWEDEN]: '🇸🇪',
+  [Country.CZECH_REPUBLIC]: '🇨🇿',
+  [Country.SLOVENIA]: '🇸🇮',
+  [Country.UAE]: '🇦🇪',
+  [Country.MEXICO]: '🇲🇽',
+  [Country.VENEZUELA]: '🇻🇪',
+  [Country.GEORGIA]: '🇬🇪',
+}
+
+export const countryLabels: Record<Country, Record<Locale, string>> = {
+  [Country.USA]:            { [Locale.EN]: 'United States' },
+  [Country.GERMANY]:        { [Locale.EN]: 'Germany' },
+  [Country.FRANCE]:         { [Locale.EN]: 'France' },
+  [Country.UK]:             { [Locale.EN]: 'United Kingdom' },
+  [Country.NETHERLANDS]:    { [Locale.EN]: 'Netherlands' },
+  [Country.SPAIN]:          { [Locale.EN]: 'Spain' },
+  [Country.ITALY]:          { [Locale.EN]: 'Italy' },
+  [Country.BELGIUM]:        { [Locale.EN]: 'Belgium' },
+  [Country.SWEDEN]:         { [Locale.EN]: 'Sweden' },
+  [Country.CZECH_REPUBLIC]: { [Locale.EN]: 'Czech Republic' },
+  [Country.SLOVENIA]:       { [Locale.EN]: 'Slovenia' },
+  [Country.UAE]:            { [Locale.EN]: 'UAE' },
+  [Country.MEXICO]:         { [Locale.EN]: 'Mexico' },
+  [Country.VENEZUELA]:      { [Locale.EN]: 'Venezuela' },
+  [Country.GEORGIA]:        { [Locale.EN]: 'Georgia' },
+}
