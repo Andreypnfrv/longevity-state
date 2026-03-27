@@ -259,17 +259,109 @@ export const BIOMARKER_CLAIM_SCALES: Record<BiomarkerCollectionClaim, Record<num
 }
 
 export enum PreventiveTrialsClaim {
-  EMBEDDED_IN_CARE         = 'embedded_in_care',
-  REGISTER_BASED_RCTS      = 'register_based_rcts',
-  LONGEVITY_ENDPOINTS_USED = 'longevity_endpoints_used',
-  NATIONAL_COORDINATION    = 'national_coordination',
+  TRIAL_EFFICIENCY           = 'trial_efficiency',           // Cost & seamlessness of enrolling patients at scale
+  REGULATORY_RWE_ACCEPTANCE  = 'regulatory_rwe_acceptance',  // Regulator accepts real-world evidence from pragmatic trials
+  LONGEVITY_ENDPOINTS_USED   = 'longevity_endpoints_used',   // Aging-specific endpoints in active trials
+  AGING_AGENTS_IN_PREVENTION = 'aging_agents_in_prevention', // Active trials of agents targeting aging mechanisms
+  NATIONAL_COORDINATION      = 'national_coordination',      // Body coordinating aging trial infrastructure & standards
+}
+
+// Per-claim 0–5 ordinal scales for Preventive Trials.
+// Each level describes what a score means for that specific dimension.
+export const PREVENTIVE_TRIAL_CLAIM_SCALES: Record<PreventiveTrialsClaim, Record<number, string>> = {
+  [PreventiveTrialsClaim.TRIAL_EFFICIENCY]: {
+    0: 'No trial infrastructure; each study built from scratch',
+    1: 'Standard academic model — separate sites, paper consent, >$20k per patient',
+    2: 'Electronic consent + partial EHR integration; outcomes still require active follow-up',
+    3: 'Register-based outcome capture; consent still requires explicit separate enrolment',
+    4: 'Point-of-care randomisation + register-based outcomes; participation indistinguishable from routine care',
+    5: 'Fully seamless — waiver/broad consent, automatic randomisation on clinical trigger, outcomes entirely passive; near-zero marginal cost per patient',
+  },
+  [PreventiveTrialsClaim.REGULATORY_RWE_ACCEPTANCE]: {
+    0: 'Only classic RCT accepted; RWE not recognised in any regulatory context',
+    1: 'RWE accepted for post-market surveillance and pharmacovigilance only',
+    2: 'RWE accepted for label expansions in selected categories',
+    3: 'Register-based RCTs recognised as primary evidence in some approval categories',
+    4: 'Explicit regulatory framework for pragmatic trials in primary prevention',
+    5: 'Full regulatory equivalence; embedded RWE routinely used for primary approvals',
+  },
+  [PreventiveTrialsClaim.LONGEVITY_ENDPOINTS_USED]: {
+    0: 'Disease endpoints only (MI, stroke, cancer incidence, mortality)',
+    1: 'Functional aging endpoints in some trials (grip strength, gait speed, cognitive tests)',
+    2: 'Composite aging score as pre-specified secondary (frailty index, multi-morbidity, organ function composite, or clinical biological age score from standard labs)',
+    3: 'Validated biological age surrogate — any type (epigenetic clock, proteomic age, multi-organ functional age) as pre-specified secondary in ≥1 national trial',
+    4: 'Biological age surrogate accepted by regulator as secondary evidence of drug effect (with regulatory agreement)',
+    5: 'Biological age surrogate as primary endpoint in an approved trial; or approved agent with aging-mechanism label',
+  },
+  [PreventiveTrialsClaim.AGING_AGENTS_IN_PREVENTION]: {
+    0: 'No trials of aging-targeting agents in a prevention context',
+    1: 'Academic-only pilots (<100 participants): senolytics, rapamycin, NAD precursors, etc.',
+    2: 'Phase II trials of aging-mechanism agents; no national coordination',
+    3: 'National or multinational Phase II/III trial of an aging-mechanism intervention',
+    4: 'Regulatory pathway for aging prevention agents established; pivotal trials underway',
+    5: 'Approved preventive aging agents in clinical use; ongoing Phase IV and next-generation trials',
+  },
+  [PreventiveTrialsClaim.NATIONAL_COORDINATION]: {
+    0: 'No coordination; each trial operates independently',
+    1: 'Voluntary networks without standardisation',
+    2: 'National clinical trial network with shared protocols',
+    3: 'National coordination body with an aging/longevity mandate; standardised endpoints',
+    4: 'National body + active collaboration with international aging trial networks',
+    5: 'Integrated into an international harmonised platform; trials span borders with shared endpoints and mutual regulatory recognition',
+  },
 }
 
 export enum GeroEndpointsClaim {
-  BIOLOGICAL_AGE_ACCEPTED  = 'biological_age_accepted',
-  FUNCTIONAL_COMPOSITE     = 'functional_composite',
-  HTA_FRAMEWORK_UPDATED    = 'hta_framework_updated',
-  REIMBURSEMENT_LINKED     = 'reimbursement_linked',
+  AGING_AS_INDICATION      = 'aging_as_indication',      // Is aging itself a regulatorily targetable indication?
+  ENDPOINT_ACCEPTANCE      = 'endpoint_acceptance',      // Which aging endpoints has the regulator formally accepted?
+  HEALTHSPAN_VALUATION     = 'healthspan_valuation',     // Can HTA quantify the value of healthspan extension?
+  COVERAGE_PATHWAY         = 'coverage_pathway',         // Is there a funded route for patients to access geroprotectors?
+  EXPEDITED_PATHWAY_ACCESS = 'expedited_pathway_access', // Can aging agents qualify for accelerated regulatory review?
+}
+
+// Per-claim 0–5 ordinal scales for Gero-Therapeutic Endpoints.
+// Scale: can aging be targeted? → what can you measure? → how is value assessed? → does anyone pay? → how fast?
+export const GERO_ENDPOINT_CLAIM_SCALES: Record<GeroEndpointsClaim, Record<number, string>> = {
+  [GeroEndpointsClaim.AGING_AS_INDICATION]: {
+    0: 'Aging explicitly not an indication; disease-only endpoints required',
+    1: 'Regulatory guidance acknowledges aging as a biological process; no indication category',
+    2: 'Organ-specific aging indications recognised (sarcopenia, frailty, AMD, etc.)',
+    3: 'Organ-specific aging indication with approved drug precedent; systemic aging pathway under active regulatory development',
+    4: 'Systemic aging accepted as primary indication; IND for aging prevention accepted, pivotal trials underway',
+    5: 'Approved drug with systemic aging as its primary indication',
+  },
+  [GeroEndpointsClaim.ENDPOINT_ACCEPTANCE]: {
+    0: 'Hard clinical events only (MI, stroke, death)',
+    1: 'Single functional endpoints accepted in geriatric indications (grip strength, gait speed, SPPB)',
+    2: 'Multi-domain functional composite accepted as primary in some geriatric indications',
+    3: 'Validated biological age surrogate — any type (epigenetic clock, proteomic age, multi-organ functional age) — accepted as secondary with regulatory agreement',
+    4: 'Validated surrogate accepted as primary endpoint with regulatory precedent',
+    5: 'Multiple surrogate types validated; routinely used in approvals',
+  },
+  [GeroEndpointsClaim.HEALTHSPAN_VALUATION]: {
+    0: 'QALY only; no mechanism to value compression of morbidity or healthspan extension',
+    1: 'Standard QALY can theoretically capture some healthspan value; no explicit HTA guidance',
+    2: 'HTA guidance explicitly acknowledges healthspan as a relevant outcome dimension',
+    3: 'Methodological framework published for valuing aging-prevention interventions beyond standard QALY',
+    4: 'Validated health-economic model applied in ≥1 HTA assessment with positive outcome for an aging-mechanism intervention',
+    5: 'Established norm — multiple positive HTA assessments; healthspan valuation is standard practice',
+  },
+  [GeroEndpointsClaim.COVERAGE_PATHWAY]: {
+    0: 'No reimbursement pathway for aging-prevention agents',
+    1: 'Off-label coverage theoretically possible via individual physician request',
+    2: 'Conditional or pilot coverage pathway defined for aging-prevention agents',
+    3: 'Defined reimbursement pathway with active assessment processes for aging agents',
+    4: '≥1 aging-mechanism agent reimbursed; value-based pricing under development',
+    5: 'Aging-prevention agents covered with established value-based pricing linked to aging endpoints',
+  },
+  [GeroEndpointsClaim.EXPEDITED_PATHWAY_ACCESS]: {
+    0: 'No expedited pathway; standard review only',
+    1: 'Aging agents can apply for existing expedited pathways (Breakthrough Therapy, PRIME) — no aging-specific designation',
+    2: 'Some aging agents have received Breakthrough/PRIME designation for disease indications',
+    3: 'Regulatory guidance published on expedited pathways specifically for geroscience-informed drugs',
+    4: 'Dedicated aging-prevention pathway established with pre-defined endpoint acceptance criteria',
+    5: 'Multiple aging agents approved via expedited pathway; regulatory precedent firmly established',
+  },
 }
 
 export enum OpenDataClaim {

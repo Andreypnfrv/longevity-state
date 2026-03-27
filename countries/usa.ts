@@ -415,48 +415,97 @@ const usa: CountryData = {
     },
 
     [HealthcareField.PREVENTIVE_TRIALS]: {
-      [PreventiveTrialsClaim.EMBEDDED_IN_CARE]: {
+      [PreventiveTrialsClaim.TRIAL_EFFICIENCY]: {
+        // PCORnet enables some pragmatic trials with electronic consent + partial EHR integration,
+        // but outcomes still require active follow-up. No register-based RCT methodology. Score: 2.
         score: 2,
-        text: 'Most US preventive trials run as standalone studies, not embedded in routine care. PCORnet enables some pragmatic trials but uptake is limited compared to Nordic register-based RCT model.',
-        links: [{ label: 'PCORnet', url: 'https://pcornet.org/', comment: 'Network for pragmatic trials — some embedding in clinical care but not systematic' }],
+        text: 'Most US preventive trials are standalone academic studies — separate sites, paper or e-consent, active outcome collection. PCORnet enables electronic consent and partial EHR integration but outcomes still require active follow-up. No national register-based RCT methodology comparable to Nordic model. Score: 2 (electronic consent + partial EHR; outcomes still active).',
+        links: [
+          { label: 'PCORnet', url: 'https://pcornet.org/', comment: 'National patient-centred research network — some pragmatic trial embedding' },
+        ],
       },
-      [PreventiveTrialsClaim.REGISTER_BASED_RCTS]: {
-        score: 2,
-        text: 'No national register-based RCT methodology. US lacks unified national health registries that would enable Nordic-style register-based randomisation.',
-        links: [],
+      [PreventiveTrialsClaim.REGULATORY_RWE_ACCEPTANCE]: {
+        // FDA 21st Century Cures Act (2016) created formal RWE framework.
+        // RWE used for some label expansions; register-based RCTs recognised in select categories. Score: 3.
+        score: 3,
+        text: 'FDA\'s 21st Century Cures Act (2016) created a formal real-world evidence framework. RWE accepted for some supplemental approvals and label expansions. FDA has issued RWE guidance documents. Not yet an explicit framework for primary prevention approvals or aging-specific pathways. Score: 3 (register-based RCTs recognised as primary evidence in some categories).',
+        links: [
+          { label: 'FDA Real-World Evidence Framework', url: 'https://www.fda.gov/science-research/science-and-research-special-topics/real-world-evidence', comment: '21st Century Cures Act RWE programme' },
+        ],
       },
       [PreventiveTrialsClaim.LONGEVITY_ENDPOINTS_USED]: {
+        // TAME trial uses composite aging endpoint (multi-morbidity + functional outcomes).
+        // This qualifies as level 2 (composite aging score as pre-specified secondary in a national trial).
         score: 2,
-        text: 'TAME trial is the key example — first US trial designed with aging as a primary endpoint. Isolated exception rather than standard practice.',
-        links: [{ label: 'TAME Trial', url: 'https://www.afar.org/tame-trial', comment: 'Landmark trial attempting to establish aging as a regulatory endpoint' }],
+        text: 'TAME (Targeting Aging with Metformin) is the landmark example — a Phase III trial using a composite aging endpoint (incidence of disease, functional decline, mortality) as primary outcome. Isolated exception rather than standard practice; disease endpoints still dominate US preventive trials. Score: 2 (composite aging score as pre-specified primary in ≥1 national trial — TAME).',
+        links: [
+          { label: 'TAME Trial', url: 'https://www.afar.org/tame-trial', comment: 'First Phase III trial with aging itself as primary endpoint — metformin in healthy older adults' },
+        ],
+      },
+      [PreventiveTrialsClaim.AGING_AGENTS_IN_PREVENTION]: {
+        // TAME = metformin Phase III. PEARL = rapamycin Phase II pilot. Both ongoing but no national coordination.
+        score: 2,
+        text: 'TAME trial (metformin, Phase III, ~3,000 participants) and PEARL trial (rapamycin, Phase II) are active prevention trials targeting aging mechanisms. Dasatinib + quercetin senolytic pilots exist but are small (<100 participants). No national coordination of aging agent trials; each runs independently. Score: 2 (Phase II trials of aging-mechanism agents; no national coordination).',
+        links: [
+          { label: 'TAME Trial — AFAR', url: 'https://www.afar.org/tame-trial', comment: 'Metformin in primary prevention of aging — Phase III' },
+          { label: 'PEARL Trial', url: 'https://www.perltrials.org/', comment: 'Rapamycin in healthy older adults — Phase II' },
+        ],
       },
       [PreventiveTrialsClaim.NATIONAL_COORDINATION]: {
+        // CTSA network, NIA-funded trial networks. No longevity-specific coordination mandate. Score: 3.
         score: 3,
-        text: 'NIH-funded clinical trial networks (CTSA, ACTIV) provide coordination infrastructure. Not longevity-specific but usable for aging trials.',
-        links: [{ label: 'CTSA Program', url: 'https://ncats.nih.gov/ctsa', comment: 'Clinical and Translational Science Awards — national trial coordination network' }],
+        text: 'NIH CTSA (Clinical and Translational Science Awards) network provides national trial coordination infrastructure across 60+ academic medical centres. NIA (National Institute on Aging) funds aging-specific trial networks. No dedicated longevity prevention trial platform with standardised endpoints. Score: 3 (national coordination body with aging mandate; standardised endpoints partial).',
+        links: [
+          { label: 'CTSA Program', url: 'https://ncats.nih.gov/ctsa', comment: 'NIH Clinical and Translational Science Awards — 60+ centres' },
+          { label: 'NIA Clinical Trials', url: 'https://www.nia.nih.gov/research/clinical-trials', comment: 'NIA-funded aging trial portfolio' },
+        ],
       },
     },
 
     [HealthcareField.GERO_THERAPEUTIC_ENDPOINTS]: {
-      [GeroEndpointsClaim.BIOLOGICAL_AGE_ACCEPTED]: {
-        score: 1,
-        text: 'FDA has not accepted any biological aging measure as a regulatory endpoint. TAME trial outcome will be the first test. Critical gap.',
-        links: [],
-      },
-      [GeroEndpointsClaim.FUNCTIONAL_COMPOSITE]: {
+      [GeroEndpointsClaim.AGING_AS_INDICATION]: {
+        // Sarcopenia not formally an FDA indication yet. Frailty has no approved drug.
+        // Age-related conditions (osteoporosis, AMD) approved but as disease not aging.
+        // Aging per se not an indication. Score: 2 (organ-specific aging-adjacent recognised).
         score: 2,
-        text: 'FDA accepts SPPB (Short Physical Performance Battery) and gait speed in some geriatric drug approvals. No aging composite accepted as primary endpoint for a geroprotector.',
+        text: 'FDA has not recognised aging itself as an indication. Sarcopenia, frailty, and age-related macular degeneration are discussed but have no approved geroprotector with aging as primary indication. Osteoporosis and muscle-wasting agents exist but are approved as disease treatments, not aging interventions. TAME (metformin) is testing the boundary but no regulatory decision yet. Score: 2 (organ-specific aging-adjacent indications recognised; no approved drug, no systemic aging pathway).',
+        links: [
+          { label: 'FDA — Geroscience Interest Group', url: 'https://www.nia.nih.gov/research/dbsr/geroscience-interest-group', comment: 'NIA-led effort to build FDA pathway for aging indication' },
+        ],
+      },
+      [GeroEndpointsClaim.ENDPOINT_ACCEPTANCE]: {
+        // FDA accepts SPPB, gait speed, 6MWT in geriatric indications (e.g., Duchenne, sarcopenia pilots).
+        // Multi-domain composites emerging. No biological age surrogate with regulatory agreement. Score: 2.
+        score: 2,
+        text: 'FDA accepts single functional endpoints (SPPB, gait speed, grip strength) in geriatric and neuromuscular indications. TAME trial will be the first major test of a multi-domain composite aging endpoint as primary. No biological age surrogate (epigenetic clock, proteomic age, organ function composite) has been accepted as a regulatory endpoint. Score: 2 (multi-domain composite emerging as primary in TAME; no validated surrogate yet).',
+        links: [
+          { label: 'FDA Guidance — Sarcopenia Endpoints', url: 'https://www.fda.gov/media/133885/download', comment: 'FDA guidance on functional endpoints in sarcopenia trials' },
+        ],
+      },
+      [GeroEndpointsClaim.HEALTHSPAN_VALUATION]: {
+        // No formal HTA body in the US. ICER uses standard QALY without aging-specific adaptation.
+        // No published methodology for valuing healthspan or compression of morbidity. Score: 1.
+        score: 1,
+        text: 'The US has no formal HTA body — ICER operates privately and uses standard QALY methodology with no aging-specific adaptation. CMS cost-effectiveness assessments are minimal. No published framework for valuing compression of morbidity or healthspan extension. QALY can theoretically capture some healthspan value but has not been applied. Score: 1 (standard QALY available in principle; no explicit healthspan guidance).',
+        links: [
+          { label: 'ICER', url: 'https://icer.org/', comment: 'Private US HTA body — standard QALY framework' },
+        ],
+      },
+      [GeroEndpointsClaim.COVERAGE_PATHWAY]: {
+        // No approved geroprotectors. Off-label use of metformin/rapamycin possible but not covered for aging.
+        // No defined reimbursement pathway for aging prevention. Score: 1.
+        score: 1,
+        text: 'No reimbursement pathway exists for aging-prevention agents in the US. Off-label prescribing of metformin or rapamycin for aging is legally possible but insurance does not cover it for this indication. CMS reimburses specific approved indications only. No pilot or conditional coverage pathway for geroprotectors. Score: 1 (off-label coverage theoretically possible via physician request; no funded pathway).',
         links: [],
       },
-      [GeroEndpointsClaim.HTA_FRAMEWORK_UPDATED]: {
-        score: 1,
-        text: 'The US does not have a formal HTA body. ICER (private) uses standard QALY framework without aging-specific adaptation.',
-        links: [{ label: 'ICER', url: 'https://icer.org/', comment: 'Private HTA body in the US — QALY framework, no aging-specific adaptation' }],
-      },
-      [GeroEndpointsClaim.REIMBURSEMENT_LINKED]: {
-        score: 1,
-        text: 'No reimbursement decisions are linked to aging-specific endpoints in the US. CMS covers specific indications, not healthspan improvement.',
-        links: [],
+      [GeroEndpointsClaim.EXPEDITED_PATHWAY_ACCESS]: {
+        // Some geroscience drugs (senolytics for IPF, idiopathic pulmonary fibrosis) received Breakthrough designation.
+        // No aging-specific pathway. FDA Geroscience Interest Group working on this. Score: 2.
+        score: 2,
+        text: 'No aging-specific expedited pathway exists. Aging agents can apply for Breakthrough Therapy, Fast Track, or Accelerated Approval — some geroscience-adjacent drugs (e.g., senolytics for IPF) have received Breakthrough designation for disease indications. FDA Geroscience Interest Group and NIA are working toward a geroscience regulatory pathway but no published guidance yet. Score: 2 (some aging-adjacent agents received Breakthrough for disease indications; no aging-specific framework).',
+        links: [
+          { label: 'FDA Breakthrough Therapy Designation', url: 'https://www.fda.gov/patients/fast-track-breakthrough-therapy-accelerated-approval-priority-review/breakthrough-therapy', comment: 'Expedited pathway — available to aging agents for disease indications' },
+        ],
       },
     },
   },

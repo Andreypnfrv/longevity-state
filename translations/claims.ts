@@ -324,41 +324,49 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
 
   // ── Healthcare: Preventive Trials ────────────────────────────────────────
   [HealthcareField.PREVENTIVE_TRIALS]: {
-    [PreventiveTrialsClaim.EMBEDDED_IN_CARE]: { [Locale.EN]: {
-      title: 'Trials embedded in routine clinical care',
-      description: 'Preventive trials are systematically integrated into routine clinical workflows.',
+    [PreventiveTrialsClaim.TRIAL_EFFICIENCY]: { [Locale.EN]: {
+      title: 'Trial efficiency',
+      description: 'How cheaply and seamlessly patients can be enrolled at scale: from standalone academic trials (0–1) through register-based RCT infrastructure (3–4) to fully invisible participation (5).',
     }},
-    [PreventiveTrialsClaim.REGISTER_BASED_RCTS]: { [Locale.EN]: {
-      title: 'Register-based RCT methodology used',
-      description: 'Randomisation through national health registries is used, enabling large-scale trials at low marginal cost.',
+    [PreventiveTrialsClaim.REGULATORY_RWE_ACCEPTANCE]: { [Locale.EN]: {
+      title: 'Regulatory RWE acceptance',
+      description: 'Whether the regulator accepts real-world evidence from pragmatic trials: from pharmacovigilance only (1) through some primary evidence (3) to full regulatory equivalence (5).',
     }},
     [PreventiveTrialsClaim.LONGEVITY_ENDPOINTS_USED]: { [Locale.EN]: {
-      title: 'Longevity/aging endpoints included',
-      description: 'Preventive trials routinely include aging-specific endpoints (biological age, functional capacity, multi-morbidity).',
+      title: 'Longevity endpoints used',
+      description: 'Aging-specific endpoints in active trials: from disease endpoints only (0) through functional/composite scores (1–2) to validated biological age surrogate with regulatory acceptance (4–5).',
+    }},
+    [PreventiveTrialsClaim.AGING_AGENTS_IN_PREVENTION]: { [Locale.EN]: {
+      title: 'Aging agents in prevention trials',
+      description: 'Active trials of agents targeting aging mechanisms (senolytics, rapamycin analogues, NAD precursors, etc.) in a primary prevention context.',
     }},
     [PreventiveTrialsClaim.NATIONAL_COORDINATION]: { [Locale.EN]: {
-      title: 'National coordination infrastructure',
-      description: 'A national body or network coordinates and standardises preventive trial conduct across sites.',
+      title: 'National coordination',
+      description: 'Whether a national body coordinates aging trial infrastructure and standardises endpoints: from no coordination (0) through aging-mandated national body (3) to international harmonised platform (5).',
     }},
   },
 
   // ── Healthcare: Gero Endpoints ────────────────────────────────────────────
   [HealthcareField.GERO_THERAPEUTIC_ENDPOINTS]: {
-    [GeroEndpointsClaim.BIOLOGICAL_AGE_ACCEPTED]: { [Locale.EN]: {
-      title: 'Biological age accepted as regulatory endpoint',
-      description: 'The regulatory authority has accepted a biological aging measure as a valid endpoint for drug approval.',
+    [GeroEndpointsClaim.AGING_AS_INDICATION]: { [Locale.EN]: {
+      title: 'Aging as a targetable indication',
+      description: 'Whether the regulatory system recognises aging itself as an indication: from organ-specific aging conditions (sarcopenia, frailty) to systemic aging as a primary target.',
     }},
-    [GeroEndpointsClaim.FUNCTIONAL_COMPOSITE]: { [Locale.EN]: {
-      title: 'Functional aging composite accepted',
-      description: 'A composite functional outcome measure is accepted as a primary regulatory endpoint for aging trials.',
+    [GeroEndpointsClaim.ENDPOINT_ACCEPTANCE]: { [Locale.EN]: {
+      title: 'Aging endpoint acceptance',
+      description: 'Which aging endpoints the regulator formally accepts: from single functional measures (grip, gait) through composites to validated biological age surrogates as primary endpoints.',
     }},
-    [GeroEndpointsClaim.HTA_FRAMEWORK_UPDATED]: { [Locale.EN]: {
-      title: 'HTA framework updated for aging outcomes',
-      description: 'The health technology assessment framework has been updated to capture healthspan and aging-specific outcomes.',
+    [GeroEndpointsClaim.HEALTHSPAN_VALUATION]: { [Locale.EN]: {
+      title: 'Healthspan valuation methodology',
+      description: 'Whether HTA bodies can quantify the economic value of healthspan extension: from standard QALY only (0) to an established framework with positive assessment precedent (4–5).',
     }},
-    [GeroEndpointsClaim.REIMBURSEMENT_LINKED]: { [Locale.EN]: {
-      title: 'Reimbursement linked to aging endpoints',
-      description: 'Reimbursement decisions for gero-therapeutic interventions are explicitly linked to aging-specific endpoints.',
+    [GeroEndpointsClaim.COVERAGE_PATHWAY]: { [Locale.EN]: {
+      title: 'Coverage pathway for geroprotectors',
+      description: 'Whether a funded route exists for patients to access aging-prevention agents: from no pathway (0) through pilot reimbursement (2–3) to value-based coverage linked to aging endpoints (5).',
+    }},
+    [GeroEndpointsClaim.EXPEDITED_PATHWAY_ACCESS]: { [Locale.EN]: {
+      title: 'Expedited regulatory pathway',
+      description: 'Whether aging-prevention agents can qualify for accelerated review: from standard timelines only (0) through Breakthrough/PRIME designations (2) to a dedicated aging-prevention pathway (4–5).',
     }},
   },
 

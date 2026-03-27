@@ -3,6 +3,8 @@ import {
   PolicyGroup,
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField,
   BiomarkerCollectionClaim, BIOMARKER_CLAIM_SCALES,
+  PreventiveTrialsClaim, PREVENTIVE_TRIAL_CLAIM_SCALES,
+  GeroEndpointsClaim, GERO_ENDPOINT_CLAIM_SCALES,
   type CountryData, type ClaimData,
 } from '../schema'
 import { allCountries } from '../countries'
@@ -87,6 +89,18 @@ function getScaleLevelText(fieldKey: string, claimKey: string, score: number): s
     const desc = scales[level]
     return desc ? `${level}/5 — ${desc}` : null
   }
+  if (fieldKey === HealthcareField.PREVENTIVE_TRIALS) {
+    const scales = PREVENTIVE_TRIAL_CLAIM_SCALES[claimKey as PreventiveTrialsClaim]
+    if (!scales) return null
+    const desc = scales[level]
+    return desc ? `${level}/5 — ${desc}` : null
+  }
+  if (fieldKey === HealthcareField.GERO_THERAPEUTIC_ENDPOINTS) {
+    const scales = GERO_ENDPOINT_CLAIM_SCALES[claimKey as GeroEndpointsClaim]
+    if (!scales) return null
+    const desc = scales[level]
+    return desc ? `${level}/5 — ${desc}` : null
+  }
   // Standard 1–5
   const label = STANDARD_SCALE_LABELS[Math.round(score)]
   return label ?? null
@@ -143,11 +157,9 @@ function ScoreDots({ score, maxScore = 5, size = 7 }: { score: number; maxScore?
           flexShrink: 0,
         }} />
       ))}
-      {maxScore === 6 && (
-        <span style={{ fontSize: 9, color: 'var(--muted)', marginLeft: 2, fontFamily: 'var(--font-mono)' }}>
-          {score}/6
-        </span>
-      )}
+      <span style={{ fontSize: 9, color: 'var(--muted)', marginLeft: 2, fontFamily: 'var(--font-mono)', minWidth: 22 }}>
+        {score}/{maxScore}
+      </span>
     </span>
   )
 }

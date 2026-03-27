@@ -425,48 +425,99 @@ const sweden: CountryData = {
     },
 
     [HealthcareField.PREVENTIVE_TRIALS]: {
-      [PreventiveTrialsClaim.EMBEDDED_IN_CARE]: {
+      [PreventiveTrialsClaim.TRIAL_EFFICIENCY]: {
+        // TASTE (2014) via SWEDHEART: point-of-care randomisation, register-based outcomes,
+        // ~$500 marginal cost per patient. Participation indistinguishable from routine care. Score: 4.
         score: 4,
-        text: 'SCAPIS (30k participants, cardiovascular imaging) embedded in routine healthcare. Hälsosamtal trials use existing clinical infrastructure. Strong tradition of care-embedded research.',
-        links: [{ label: 'SCAPIS', url: 'https://scapis.se/en/', comment: '30k participant study embedded in healthcare settings' }],
+        text: 'Sweden pioneered register-based RCTs (RRCTs) — TASTE trial (2014) randomised 7,244 STEMI patients through the SWEDHEART registry at point of care; outcomes captured entirely from registers; estimated marginal cost ~$500/patient vs $20k+ in standard RCTs. SCAPIS enrolled 30k participants through clinical infrastructure. Score: 4 (point-of-care randomisation + register-based outcomes; participation indistinguishable from routine care).',
+        links: [
+          { label: 'TASTE Trial — NEJM', url: 'https://www.nejm.org/doi/full/10.1056/NEJMoa1405312', comment: 'First large register-based RCT — 7,244 patients, outcomes from SWEDHEART registry' },
+          { label: 'SCAPIS', url: 'https://scapis.se/en/', comment: '30k participants — cardiovascular imaging embedded in clinical infrastructure' },
+        ],
       },
-      [PreventiveTrialsClaim.REGISTER_BASED_RCTS]: {
-        score: 5,
-        text: 'Sweden pioneered register-based RCTs (RRCTs) — the TASTE trial (2014) randomised patients through the SWEDHEART registry. Method now adopted internationally.',
-        links: [{ label: 'TASTE Trial', url: 'https://www.nejm.org/doi/full/10.1056/NEJMoa1405312', comment: 'Landmark NEJM paper — first large RRCТ, now adopted globally' }],
+      [PreventiveTrialsClaim.REGULATORY_RWE_ACCEPTANCE]: {
+        // EMA (EU-level) has an RWE framework; Sweden follows EMA via MPA.
+        // Some label expansions accepted; not yet primary prevention specific. Score: 3.
+        score: 3,
+        text: 'Sweden follows EMA regulatory framework. EMA\'s RWE programme accepts register-based RCT evidence for some regulatory decisions; MPA (Swedish Medical Products Agency) applies EMA guidance. No dedicated framework for aging prevention agents. Score: 3 (register-based RCTs recognised as primary evidence in some EMA approval categories).',
+        links: [
+          { label: 'EMA Real-World Evidence', url: 'https://www.ema.europa.eu/en/human-regulatory-overview/research-development/real-world-evidence', comment: 'EMA RWE framework — applies to Sweden via MPA' },
+        ],
       },
       [PreventiveTrialsClaim.LONGEVITY_ENDPOINTS_USED]: {
-        score: 2,
-        text: 'No Swedish preventive trials systematically use longevity-specific endpoints. Disease endpoints dominate.',
+        // SCAPIS measures grip strength, 6MWT, pulmonary function — functional endpoints.
+        // No composite aging scores or biological age surrogates as pre-specified secondary. Score: 1.
+        score: 1,
+        text: 'SCAPIS includes functional measurements (grip strength, 6-minute walk test, pulmonary function, cognition) but these are observational endpoints, not pre-specified trial outcomes. No Swedish preventive trial uses a composite aging score or biological age surrogate as a pre-specified secondary endpoint. Disease endpoints dominate. Score: 1 (functional aging endpoints measured in some studies; not pre-specified trial secondaries).',
+        links: [
+          { label: 'SCAPIS Endpoints', url: 'https://scapis.se/en/about-scapis/', comment: 'SCAPIS measurement battery — includes functional aging measures as observational endpoints' },
+        ],
+      },
+      [PreventiveTrialsClaim.AGING_AGENTS_IN_PREVENTION]: {
+        // No national Swedish trials of senolytics, rapamycin, or aging-mechanism agents.
+        // Academic interest exists but no active Phase II. Score: 1.
+        score: 1,
+        text: 'No active Swedish national trials of agents targeting aging mechanisms (senolytics, rapamycin analogues, NAD precursors, etc.) in a primary prevention context. Academic interest is growing — Karolinska and Uppsala have aging biology programmes — but no Phase II prevention trial has been launched. Score: 1 (academic-only pilots; no Phase II prevention trials of aging agents).',
         links: [],
       },
       [PreventiveTrialsClaim.NATIONAL_COORDINATION]: {
+        // UCR: national trial coordination. Nordic Trial Alliance: cross-Nordic. NEAR: aging research network.
+        // No dedicated aging prevention trial platform. Score: 4.
         score: 4,
-        text: 'Uppsala Clinical Research Center (UCR) and the Nordic Trial Alliance provide national and Nordic trial coordination infrastructure.',
-        links: [{ label: 'Uppsala Clinical Research Center', url: 'https://www.ucr.uu.se/en/', comment: 'National trial coordination centre — develops standardised endpoints' }],
+        text: 'Uppsala Clinical Research Center (UCR) provides national trial coordination infrastructure, including standardised endpoints and data management. The Nordic Trial Alliance enables cross-Nordic harmonisation. NEAR (National E-infrastructure for Aging Research) coordinates 15 longitudinal aging databases. No dedicated aging prevention trial platform with standardised longevity endpoints. Score: 4 (national body + active international collaboration; aging mandate present in research networks).',
+        links: [
+          { label: 'Uppsala Clinical Research Center', url: 'https://www.ucr.uu.se/en/', comment: 'National trial coordination — standardised endpoints, data management' },
+          { label: 'Nordic Trial Alliance', url: 'https://www.nordictrialalliance.org/', comment: 'Cross-Nordic harmonisation of trial methodology' },
+        ],
       },
     },
 
     [HealthcareField.GERO_THERAPEUTIC_ENDPOINTS]: {
-      [GeroEndpointsClaim.BIOLOGICAL_AGE_ACCEPTED]: {
-        score: 1,
-        text: 'EMA has not accepted biological aging measures as regulatory endpoints. Sweden follows EMA — no national carve-out.',
-        links: [],
-      },
-      [GeroEndpointsClaim.FUNCTIONAL_COMPOSITE]: {
+      [GeroEndpointsClaim.AGING_AS_INDICATION]: {
+        // Sweden follows EMA. EMA recognises sarcopenia and frailty as aging-adjacent indications.
+        // Systemic aging not an indication. No approved geroprotector with aging as primary target. Score: 2.
         score: 2,
-        text: 'EMA has some precedent for functional composites in geriatric indications. TLV HTA considers functional outcomes. Not yet systematically applied to geroprotectors.',
-        links: [],
+        text: 'Sweden follows EMA regulatory framework. EMA recognises sarcopenia and frailty as aging-adjacent indications and has approved drugs for osteoporosis and muscle wasting, but aging per se is not a primary indication. No systemic aging pathway under active EMA development. EMA Geriatric Expert Group advises on age-related conditions but not a geroscience-specific indication category. Score: 2 (organ-specific aging-adjacent indications recognised; no systemic aging pathway).',
+        links: [
+          { label: 'EMA Geriatric Expert Group', url: 'https://www.ema.europa.eu/en/committees/working-parties-other-groups/chmp/geriatric-expert-group', comment: 'EMA advisory group on age-related medicines' },
+        ],
       },
-      [GeroEndpointsClaim.HTA_FRAMEWORK_UPDATED]: {
+      [GeroEndpointsClaim.ENDPOINT_ACCEPTANCE]: {
+        // EMA accepts SPPB, 6MWT, gait speed in geriatric indications (e.g., muscle wasting, frailty).
+        // Multi-domain functional composites used in some EMA approvals. No biological age surrogate precedent. Score: 2.
         score: 2,
-        text: 'TLV (HTA body) uses QALY framework. No specific adaptation for aging or healthspan outcomes. QALY framework can in principle capture healthspan but has not been applied to longevity interventions.',
-        links: [{ label: 'TLV', url: 'https://www.tlv.se/en/', comment: 'Swedish HTA — QALY framework, no aging adaptation' }],
+        text: 'EMA accepts single functional endpoints (SPPB, 6-minute walk test, gait speed, grip strength) in geriatric and neuromuscular indications — several approvals in muscle wasting and frailty use these. Multi-domain functional composites have precedent in some EMA approvals. No biological age surrogate (epigenetic clock, proteomic age, organ functional composite) has been accepted as a regulatory endpoint under EMA or MPA. Score: 2 (multi-domain functional composite accepted as primary in some geriatric indications).',
+        links: [
+          { label: 'EMA Guideline on Frailty', url: 'https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-frailty-geroscience-aspects-clinical-trials_en.pdf', comment: 'EMA guidance on clinical endpoints in frailty and geroscience trials' },
+        ],
       },
-      [GeroEndpointsClaim.REIMBURSEMENT_LINKED]: {
+      [GeroEndpointsClaim.HEALTHSPAN_VALUATION]: {
+        // TLV uses QALY. EUnetHTA (EU HTA body) acknowledges functional outcomes beyond QALY in principle.
+        // No published framework for valuing compression of morbidity or healthspan. Score: 2.
+        score: 2,
+        text: 'TLV (Swedish HTA body) uses a QALY-based framework. EUnetHTA 21 (EU-level joint HTA from 2025) mentions "relative effectiveness" and quality of life outcomes, and guidance acknowledges that standard QALY may undervalue prevention and compression of morbidity. No published methodology specifically for aging-prevention interventions. Healthspan acknowledged as relevant but not operationalised. Score: 2 (HTA guidance explicitly acknowledges healthspan as relevant; no specific framework yet).',
+        links: [
+          { label: 'TLV', url: 'https://www.tlv.se/en/', comment: 'Swedish HTA body — QALY framework' },
+          { label: 'EUnetHTA 21', url: 'https://www.eunethta.eu/', comment: 'EU joint HTA body from 2025 — broader outcome framework in development' },
+        ],
+      },
+      [GeroEndpointsClaim.COVERAGE_PATHWAY]: {
+        // No approved geroprotectors. TLV reimburses per QALY assessment for approved indications.
+        // Off-label prescribing possible but not reimbursed for aging. Score: 1.
         score: 1,
-        text: 'No reimbursement linked to aging-specific endpoints. Standard QALY-based reimbursement decisions apply.',
-        links: [],
+        text: 'No reimbursement pathway for aging-prevention agents in Sweden. TLV reimburses medicines based on QALY cost-effectiveness for approved indications only. Off-label prescribing of metformin or rapamycin for aging is possible but not covered by Swedish public insurance (Försäkringskassan). No pilot or conditional coverage pathway has been defined. Score: 1 (off-label coverage theoretically possible; no funded pathway).',
+        links: [
+          { label: 'TLV Reimbursement Process', url: 'https://www.tlv.se/beslut-och-regelverk/lakemedel.html', comment: 'TLV pharmaceutical reimbursement framework' },
+        ],
+      },
+      [GeroEndpointsClaim.EXPEDITED_PATHWAY_ACCESS]: {
+        // EMA PRIME designation available. Some geroscience-adjacent drugs have received PRIME for disease indications.
+        // No EMA aging-specific expedited pathway. Score: 2.
+        score: 2,
+        text: 'Sweden follows EMA. EMA\'s PRIME (PRIority MEdicines) scheme provides early support for drugs targeting unmet medical needs — some geroscience-adjacent agents (e.g., drugs for rare progeria-like conditions, IPF) have received PRIME designation for disease indications. No aging-specific expedited pathway exists at EMA level. EMA has not published guidance on geroscience as a category for PRIME. Score: 2 (some aging-adjacent agents received PRIME for disease indications; no aging-specific framework).',
+        links: [
+          { label: 'EMA PRIME Scheme', url: 'https://www.ema.europa.eu/en/human-regulatory-overview/research-development/prime-priority-medicines', comment: 'EMA expedited pathway for medicines with major therapeutic advantage' },
+        ],
       },
     },
   },
