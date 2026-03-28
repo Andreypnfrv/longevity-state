@@ -23,6 +23,9 @@ export enum Country {
   GEORGIA = 'georgia',
   CHINA = 'china',
   ISRAEL = 'israel',
+  SINGAPORE   = 'singapore',
+  JAPAN       = 'japan',
+  SWITZERLAND = 'switzerland',
 }
 
 // ------------------------------------------------------------

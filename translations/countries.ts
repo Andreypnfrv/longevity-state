@@ -17,8 +17,11 @@ export const countryFlags: Record<Country, string> = {
   [Country.MEXICO]: '🇲🇽',
   [Country.VENEZUELA]: '🇻🇪',
   [Country.GEORGIA]: '🇬🇪',
-  [Country.CHINA]:   '🇨🇳',
-  [Country.ISRAEL]:  '🇮🇱',
+  [Country.CHINA]:       '🇨🇳',
+  [Country.ISRAEL]:      '🇮🇱',
+  [Country.SINGAPORE]:   '🇸🇬',
+  [Country.JAPAN]:       '🇯🇵',
+  [Country.SWITZERLAND]: '🇨🇭',
 }
 
 export const countryLabels: Record<Country, Record<Locale, string>> = {
@@ -39,4 +42,7 @@ export const countryLabels: Record<Country, Record<Locale, string>> = {
   [Country.GEORGIA]:        { [Locale.EN]: 'Georgia' },
   [Country.CHINA]:          { [Locale.EN]: 'China' },
   [Country.ISRAEL]:         { [Locale.EN]: 'Israel' },
+  [Country.SINGAPORE]:      { [Locale.EN]: 'Singapore' },
+  [Country.JAPAN]:          { [Locale.EN]: 'Japan' },
+  [Country.SWITZERLAND]:    { [Locale.EN]: 'Switzerland' },
 }

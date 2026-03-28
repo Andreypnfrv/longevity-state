@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import {
   Country,
   PolicyGroup,
@@ -350,13 +350,22 @@ const stickyFirstCol: React.CSSProperties = {
   boxShadow: 'var(--shadow-sticky)',
 }
 
-const stickyCornerStyle: React.CSSProperties = {
+const stickyCornerHeaderCol: React.CSSProperties = {
   position: 'sticky',
   left: 0,
-  top: 0,
   zIndex: 30,
   background: 'var(--cell-bg)',
   boxShadow: 'var(--shadow-corner)',
+}
+
+function stickyLeadersHeaderCol(): React.CSSProperties {
+  return {
+    position: 'sticky',
+    left: FIELD_COL,
+    zIndex: 29,
+    background: 'var(--cell-bg)',
+    boxShadow: 'var(--shadow-sticky)',
+  }
 }
 
 const stickyGroupFirstCol: React.CSSProperties = {
@@ -486,14 +495,51 @@ export default function App() {
     0,
   )
 
+  const tableHeadScrollRef = useRef<HTMLDivElement>(null)
+  const tableBodyScrollRef = useRef<HTMLDivElement>(null)
+  const syncScrollLock = useRef(false)
+
+  const onTableHeadScroll = useCallback(() => {
+    const h = tableHeadScrollRef.current
+    const b = tableBodyScrollRef.current
+    if (!h || !b || syncScrollLock.current) return
+    if (b.scrollLeft === h.scrollLeft) return
+    syncScrollLock.current = true
+    b.scrollLeft = h.scrollLeft
+    syncScrollLock.current = false
+  }, [])
+
+  const onTableBodyScroll = useCallback(() => {
+    const h = tableHeadScrollRef.current
+    const b = tableBodyScrollRef.current
+    if (!h || !b || syncScrollLock.current) return
+    if (h.scrollLeft === b.scrollLeft) return
+    syncScrollLock.current = true
+    h.scrollLeft = b.scrollLeft
+    syncScrollLock.current = false
+  }, [])
+
+  useLayoutEffect(() => {
+    const h = tableHeadScrollRef.current
+    const b = tableBodyScrollRef.current
+    if (!h || !b) return
+    const left = Math.min(h.scrollLeft, b.scrollLeft)
+    h.scrollLeft = left
+    b.scrollLeft = left
+  }, [gridCols, tableMinWidth, showLeaders, countries.length])
+
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-      <div style={{
-        flex: 1,
-        minHeight: 0,
-        overflowY: 'auto',
-        overflowX: 'hidden',
-      }}>
+    <div style={{ flex: 1, minHeight: 0, minWidth: 0, width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          minWidth: 0,
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+        }}
+      >
         <div style={{ padding: '40px 32px 0' }}>
           <header style={{ marginBottom: 36, maxWidth: 700 }}>
             <h1 style={{
@@ -525,59 +571,75 @@ export default function App() {
 
         <div style={{
           margin: '24px 32px 0',
-          overflowX: 'auto',
-          overflowY: 'clip',
           background: 'var(--cell-bg)',
           border: '1px solid var(--border)',
           borderRadius: 8,
         }}>
-          <div style={{ minWidth: tableMinWidth, padding: GRID_GAP }}>
-
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: gridCols,
-              gap: GRID_GAP,
-              paddingBottom: 8,
-            }}>
-              <div style={{ ...stickyCornerStyle, minHeight: 1 }} />
-
-              {showLeaders && (
+          <div style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 25,
+            background: 'var(--cell-bg)',
+            borderRadius: '8px 8px 0 0',
+          }}>
+            <div
+              ref={tableHeadScrollRef}
+              className="hide-scrollbar"
+              onScroll={onTableHeadScroll}
+              style={{ overflowX: 'auto', overflowY: 'hidden' }}
+            >
+              <div style={{ minWidth: tableMinWidth, padding: GRID_GAP, paddingBottom: 8, boxSizing: 'border-box' }}>
                 <div style={{
-                  ...stickyLeadersCol(),
-                  top: 0,
-                  zIndex: 29,
-                  padding: '8px 10px 8px 0',
-                  borderBottom: '2px solid var(--accent)',
-                  alignSelf: 'stretch',
+                  display: 'grid',
+                  gridTemplateColumns: gridCols,
+                  gap: GRID_GAP,
                 }}>
-                  <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
-                    Leaders
-                  </span>
-                </div>
-              )}
+                  <div style={{ ...stickyCornerHeaderCol, minHeight: 1 }} />
 
-              {countries.map(c => (
-                <div
-                  key={c.country}
-                  style={{
-                    padding: '8px 12px',
-                    borderBottom: '2px solid var(--accent)',
-                    position: 'sticky',
-                    top: 0,
-                    zIndex: 12,
-                    background: 'var(--cell-bg)',
-                  }}
-                >
-                  <div style={{ fontSize: 15, fontWeight: 400, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--cell-text)' }}>
-                    <span aria-hidden>{countryFlags[c.country]}</span>
-                    <span>{countryLabels[c.country][Locale.EN]}</span>
-                  </div>
+                  {showLeaders && (
+                    <div style={{
+                      ...stickyLeadersHeaderCol(),
+                      padding: '8px 10px 8px 0',
+                      borderBottom: '2px solid var(--accent)',
+                      alignSelf: 'stretch',
+                    }}>
+                      <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
+                        Leaders
+                      </span>
+                    </div>
+                  )}
+
+                  {countries.map(c => (
+                    <div
+                      key={c.country}
+                      style={{
+                        padding: '8px 12px',
+                        borderBottom: '2px solid var(--accent)',
+                        background: 'var(--cell-bg)',
+                      }}
+                    >
+                      <div style={{ fontSize: 15, fontWeight: 400, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--cell-text)' }}>
+                        <span aria-hidden>{countryFlags[c.country]}</span>
+                        <span>{countryLabels[c.country][Locale.EN]}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
+          </div>
 
-            {groupsFiltered.map(({ group, fields, accessor }: GroupDef) => (
-              <div key={group} style={{ marginTop: 28 }}>
+          <div
+            ref={tableBodyScrollRef}
+            onScroll={onTableBodyScroll}
+            style={{ overflowX: 'auto', overflowY: 'visible' }}
+          >
+            <div style={{ minWidth: tableMinWidth, padding: GRID_GAP, paddingTop: 0, boxSizing: 'border-box' }}>
+
+            {groupsFiltered.map(({ group, fields, accessor }: GroupDef, gi: number) => {
+              const headerBand = gi % 2 === 0 ? 'var(--group-tone-a)' : 'var(--group-tone-b)'
+              return (
+              <div key={group} style={{ marginTop: gi === 0 ? 12 : 28 }}>
 
                 <div style={{
                   display: 'grid',
@@ -585,14 +647,40 @@ export default function App() {
                   gap: GRID_GAP,
                   marginBottom: 6,
                 }}>
-                  <div style={{ ...stickyGroupFirstCol, paddingBottom: 4, paddingRight: 12 }}>
-                    <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
-                      {groupLabels[group][Locale.EN]}
-                    </span>
+                  <div style={{
+                    ...stickyGroupFirstCol,
+                    background: headerBand,
+                    paddingTop: 10,
+                    paddingRight: 20,
+                    paddingBottom: 8,
+                    borderTop: gi > 0 ? '1px solid var(--border)' : undefined,
+                    borderBottom: '1px solid var(--group-outline)',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                      <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0, marginTop: 2, visibility: 'hidden', userSelect: 'none' }} aria-hidden>▼</span>
+                      <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
+                        {groupLabels[group][Locale.EN]}
+                      </span>
+                    </div>
                   </div>
-                  {showLeaders && <div style={{ ...stickyLeadersCol(), paddingBottom: 4 }} />}
+                  {showLeaders && (
+                    <div style={{
+                      ...stickyLeadersCol(),
+                      background: headerBand,
+                      padding: '10px 10px 8px 0',
+                      borderTop: gi > 0 ? '1px solid var(--border)' : undefined,
+                      borderBottom: '1px solid var(--group-outline)',
+                    }} />
+                  )}
                   {countries.map(c => (
-                    <div key={c.country} style={{ borderTop: '1px solid var(--border)' }} />
+                    <div
+                      key={c.country}
+                      style={{
+                        background: headerBand,
+                        borderTop: gi > 0 ? '1px solid var(--border)' : undefined,
+                        borderBottom: '1px solid var(--group-outline)',
+                      }}
+                    />
                   ))}
                 </div>
 
@@ -737,7 +825,9 @@ export default function App() {
                   )
                 })}
               </div>
-            ))}
+              )
+            })}
+            </div>
           </div>
         </div>
 
