@@ -178,6 +178,11 @@ const singapore: CountryData = {
         text: 'RIE is structured in 5-year cycles (RIE2015, RIE2020, RIE2025) with multi-year committed envelopes — insulating researchers from annual budget volatility. A*STAR research institutes are funded institutionally on long-term budgets, not grant-by-grant. NRF Investigatorship grants provide 5-year independent investigator support. Centre-level grants at NUS CHL and Duke-NUS provide 5–7 year programme stability.',
         links: [{ label: 'NRF Investigatorship', url: 'https://www.nrf.gov.sg/programmes/nrf-investigatorship', comment: 'NRF — 5-year investigatorship grants; long-term career support for top researchers' }],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 3,
+        text: 'NUS, NTU, and A*STAR typically own IP from publicly funded research; InnovationQ and Exploit Technologies run structured licensing and spinout paths with defined inventor royalty sharing. Individual PIs do not own IP by default — the institution does — but practice is relatively fast and template-driven versus many peers.',
+        links: [{ label: 'Exploit Technologies A*STAR', url: 'https://www.etpl.sg/', comment: 'A*STAR TTO — licensing and spinouts' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 3,
         text: 'Singapore\'s biomedical VC ecosystem is growing: Temasek, GIC-backed funds, and international longevity VCs (Longevity Vision Fund) have Singapore portfolio companies. Hummingbird Biosciences, Gero.ai (Singapore operations), and several stealth longevity biotechs are HQ\'d or have R&D in Singapore. Industry presence (Novartis, Roche, MSD Asia hubs) creates some co-funding. Ecosystem is smaller than Israel or the US but growing rapidly from a significant base.',
@@ -239,10 +244,10 @@ const singapore: CountryData = {
         text: 'The Healthy Longevity Catalyst Awards are non-dilutive prize grants — developers retain full IP. NRF exploratory research grants are non-dilutive with no IP encumbrance. A*STAR Industry Alignment Fund provides non-dilutive co-investment for industry partnerships with IP terms negotiated but generally favourable to developers. Singapore does not require IP sharing as a condition of public funding, unlike many European national funders.',
         links: [{ label: 'Healthy Longevity Catalyst Awards Criteria', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity-catalyst-awards', comment: 'Non-dilutive prize grants — developer retains IP; no government equity stake required' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
-        score: 3,
-        text: 'Singapore\'s IP regime is Bayh-Dole-adjacent but not identical — universities and A*STAR research institutes retain IP from publicly funded research, with technology transfer offices (InnovationQ NUS, Exploit Technologies A*STAR) managing commercialisation. Fast-track commercialisation pathways exist for spinout formation. Royalty sharing with inventors is structured. The main limitation vs. full Bayh-Dole is that individual researchers do not retain IP by default — the institution does.',
-        links: [{ label: 'Exploit Technologies A*STAR', url: 'https://www.etpl.sg/', comment: 'A*STAR TTO — technology licensing and spinout from A*STAR research; aging biology portfolio active' }],
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
+        score: 5,
+        text: 'Healthy Longevity Catalyst Awards and NRF exploratory grants are non-dilutive with published intent that developers retain foreground IP; no government equity in prize structures. Agency-style instruments align with performer retention and narrow sponsor rights.',
+        links: [{ label: 'Healthy Longevity Catalyst Awards', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity-catalyst-awards', comment: 'Prize grants — developer retains IP' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 4,

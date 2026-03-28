@@ -178,6 +178,11 @@ const switzerland: CountryData = {
         text: 'ETH Zurich and EPFL receive multi-year federal block grants (CHF 3.7B over 4-year federal contribution periods) providing structural stability independent of annual SNF cycles. ETH\'s institutional budget and EPFL strategic plans create long-term commitments for aging research groups. Individual SNF grants run 3–4 years with competitive renewal. The ETH Domain institutional funding provides a stable base that insulates top aging labs from annual grant cycle risk.',
         links: [{ label: 'ETH Domain Federal Contribution', url: 'https://www.ethrat.ch/en/eth-domain/federal-contribution', comment: 'ETH Domain — 4-year federal block grants; structural stability for ETH Zurich and EPFL aging research programmes' }],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 3,
+        text: 'Employee inventions at ETH/EPFL and other employers generally vest with the university under employment law; ETH transfer and EPFL TTO provide professional licensing and spinout deals with published frameworks. Spinouts often license or acquire IP from the university — clearer than weak TTO systems but not PI-owned title; transaction cost can be material for cash-poor founders.',
+        links: [{ label: 'ETH Transfer', url: 'https://ethz.ch/en/industry/transfer.html', comment: 'ETH technology transfer — licensing and spinout' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 5,
         text: 'Switzerland is home to the world\'s highest concentration of major pharmaceutical companies with aging pipelines: Novartis (senolytic compounds, rapamycin analogues), Roche (neurodegeneration, sarcopenia), Lonza (cell therapy manufacturing), and dozens of longevity-adjacent biotechs (Juvena Therapeutics, Insilico Medicine Zurich). The Basel-Zurich-Geneva axis is the world\'s most pharma-dense longevity research corridor per square kilometer. Private investment in aging science dwarfs public SNF funding.',
@@ -236,10 +241,10 @@ const switzerland: CountryData = {
         text: 'Swiss breakthrough funding for aging comes primarily through ETH Domain block grants (institutional, stable), SNF project grants (competitive, 3–4 years), and Innosuisse co-funded industry-academia projects (matched, applied). This funding mix is diversified and substantial in scale, though lacking the mission-driven challenge grant model of ARPA-H. Novartis and Roche\'s internal R&D budgets represent a parallel private-sector funding type at enormous scale.',
         links: [{ label: 'SNF Funding Types Overview', url: 'https://www.snf.ch/en/tV5L2PvqXPEFJAV7/topic/funding', comment: 'SNF — diversified funding types: project grants, programme grants, centres of excellence; no challenge grant model' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
-        score: 4,
-        text: 'Switzerland has strong IP protection for biotech and pharma innovations. ETH Zurich and EPFL have active technology transfer offices (ETH transfer, EPFL Technology Transfer) with well-developed IP assignment and licensing frameworks. The Swiss patent system is aligned with European Patent Convention. Novartis and Roche\'s strong IP management culture diffuses into the academic ecosystem. Switzerland ranks among the world\'s most IP-protective environments for life sciences innovation.',
-        links: [{ label: 'ETH Transfer Technology Licensing', url: 'https://ethz.ch/en/industry/transfer.html', comment: 'ETH Transfer — strong IP framework; licensing and spinout support; longevity-adjacent patents well-managed' }],
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
+        score: 2,
+        text: 'Innosuisse projects are co-funded applied partnerships — IP is negotiated per consortium agreement rather than following a single national PM-agency template. There is no Swiss ARPA-H analogue with statutory performer-first foreground IP; agency-like instruments are thin relative to ETH/SNF core funding.',
+        links: [{ label: 'Innosuisse', url: 'https://www.innosuisse.ch/inno/en/home.html', comment: 'Co-innovation funding — IP terms project-specific' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 2,

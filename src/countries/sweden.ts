@@ -178,6 +178,11 @@ const sweden: CountryData = {
         text: 'Wallenberg programme grants run 10+ years — among the longest-horizon funding structures in Europe. VR grants typically 4 years. NEAR population cohort infrastructure funded on sustained multi-year basis. Better structural stability than most EU peers.',
         links: [{ label: 'Wallenberg Foundations', url: 'https://www.wallenberg.com/en', comment: 'Long-term programme grants — 10+ year commitments, endowment-backed' }],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 5,
+        text: 'Professor\'s privilege (lärarundantaget): researchers typically hold rights to academic inventions rather than the university — a statutory outlier in Europe. Universities still support patenting and spinouts via contracts where agreed; inventor-led spinouts avoid classic employer buyout friction.',
+        links: [{ label: 'Vinnova IP overview', url: 'https://www.vinnova.se/en/m/research-and-innovation/innovation-and-entrepreneurship/intellectual-property/', comment: 'Teacher exemption — individual researcher IP default' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 3,
         text: 'Wallenberg Foundations are the dominant private actors (~SEK 2B/year across all science). Swedish Longevity Cluster emerging as coordination hub. AstraZeneca co-funds select KI projects. Limited longevity VC concentration compared to US hubs.',
@@ -236,10 +241,10 @@ const sweden: CountryData = {
         text: 'VR grants, Vinnova grants, and Swelife are fully non-dilutive. Strong public grant base covers early-stage research. No co-investment or match-grant mechanisms pairing public funding with VC at scale. Horizon Europe participation adds additional non-dilutive access.',
         links: [{ label: 'VR Funding', url: 'https://www.vr.se/english/applying-for-funding.html', comment: 'Swedish Research Council — fully non-dilutive grants' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
-        score: 4,
-        text: 'Swedish "Professor\'s Privilege" (lärarundantaget) — unlike most EU countries, individual researchers (not universities) retain IP from their research. Strong IP protection for individual inventors. Universities cannot claim IP on academic inventions — competitive advantage for recruiting and retaining entrepreneurial scientists.',
-        links: [{ label: 'Swedish Teacher\'s Exception', url: 'https://www.vinnova.se/en/m/research-and-innovation/innovation-and-entrepreneurship/intellectual-property/', comment: 'Individual researchers retain IP from publicly funded research — rare globally' }],
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
+        score: 2,
+        text: 'Vinnova and similar calls are largely standard grants to companies and consortia — not a dedicated PM-agency OT layer. Foreground IP terms follow general public procurement and grant rules without the published performer-first templates seen at ARPA-H or ARIA; little distinct "agency instrument" beyond generic non-dilutive support.',
+        links: [{ label: 'Vinnova', url: 'https://www.vinnova.se/en/', comment: 'Innovation grants — conventional IP clauses, not ARPA-class OT' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 1,

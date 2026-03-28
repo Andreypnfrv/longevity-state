@@ -178,6 +178,11 @@ const israel: CountryData = {
         text: 'ISF provides 3–5 year grants with renewal pathways — moderate stability. Weizmann Institute core funding is endowment-based (stable). ERC (European Research Council) grants are now available to Israeli researchers under Horizon Europe association, providing 5-year grants with strong stability. Israel Innovation Authority provides multi-year industrial research support. Budget stability is adequate but research programmes are more sensitive to annual ISF cycles than those funded through large national institutes.',
         links: [{ label: 'Israel ERC Association', url: 'https://erc.europa.eu/news-events/news/erc-extends-association-israel', comment: 'Israel-ERC association — Israeli researchers eligible for ERC grants; 5-year stability for top investigators' }],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 5,
+        text: 'World-class university TTOs (Yeda, Ramot, T3, BIRAD) monetise academic science at high per-researcher rates; Israeli employment and funding practice generally supports company retention of IP when commercialising with IIA support. University-owned background IP is licensed on active commercial terms with meaningful inventor upside.',
+        links: [{ label: 'Yeda', url: 'https://www.yeda.org/', comment: 'Weizmann TTO — reference Israeli academic commercialisation' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 4,
         text: 'Yeda Research and Development (Weizmann TTO) has generated over $2B in cumulative licensing revenue — reinvested in Weizmann research. Major philanthropic donors include the Azrieli Foundation, Morris Kahn, and international Jewish diaspora philanthropy channelled through American Friends of Weizmann and similar. Israeli biotech VC (JVP, Pitango, Magma) is active in longevity-adjacent sectors. TEVA\'s research partnership with Hebrew University provides additional leverage. Private-to-public funding ratio in Israel is among the highest globally.',
@@ -236,10 +241,10 @@ const israel: CountryData = {
         text: 'IIA provides non-dilutive grants and matching grants for industrial R&D. The R&D Grant Programme provides non-dilutive support covering up to 50% of approved R&D costs for biotech companies. MAGNET consortia (industry-academia) are funded with non-dilutive grants for pre-competitive research. BSF and BIRD Foundations provide non-dilutive bilateral grants with the US. Compared to EU or UK innovation funding, the non-dilutive envelope specifically for longevity is moderate.',
         links: [{ label: 'IIA R&D Grant Programme', url: 'https://www.innovationisrael.org.il/en/programs', comment: 'IIA — non-dilutive R&D grants for biotech; up to 50% of approved costs; longevity companies eligible' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
-        score: 5,
-        text: 'Israel has one of the world\'s most effective university IP commercialisation ecosystems. Yeda (Weizmann), Ramot (Tel Aviv), and T3 (Technion) are globally among the most productive TTOs by royalty revenue per researcher. Yeda\'s licensing of Copaxone (glatiramer acetate, peak $4B revenue) and multiple other Weizmann discoveries demonstrates the system\'s commercial potency. Israeli IP law (R&D Law) allows full IP retention by developing companies with government R&D support, incentivising startup formation. The TTO ecosystem is a structural competitive advantage.',
-        links: [{ label: 'Yeda Research Development', url: 'https://www.yeda.org/', comment: 'Yeda — Weizmann TTO; one of world\'s most productive per researcher; Copaxone and multiple aging-adjacent drugs licensed' }],
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
+        score: 4,
+        text: 'IIA R&D grants and Magnet consortia are non-dilutive for the academic side; the R&D Law framework lets developing companies retain IP when using government R&D support — strong performer-friendly terms versus many European innovation agencies. Challenge structure is more industrial than ARPA-H but encumbrance on foreground IP is typically manageable.',
+        links: [{ label: 'IIA programmes', url: 'https://www.innovationisrael.org.il/en/programs', comment: 'Industrial R&D support — company IP retention under R&D Law' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 2,

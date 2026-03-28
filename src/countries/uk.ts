@@ -178,6 +178,11 @@ const uk: CountryData = {
         text: 'UKRI Healthy Ageing Challenge Programme (£98M, 5-year); MRC Centres (5–10 year commitments); Wellcome Trust endowment-funded grants (multi-year stability). Sanger Institute and Babraham Institute have core-funded aging research with guaranteed institutional baseline. UK government\'s 2.5% GDP R&D target (2025) provides statutory stability signal. Budget uncertainty post-Brexit has been partially compensated by UKRI ring-fencing of key programmes.',
         links: [{ label: 'UKRI Healthy Ageing Challenge', url: 'https://www.ukri.org/our-work/our-main-funds-and-areas-of-support/industrial-strategy-challenge-fund/healthy-ageing/', comment: '£98M Healthy Ageing Challenge — 5-year funded programme; industry-academia co-design' }],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 4,
+        text: 'UK universities generally own employee inventions under contract; Lambert Agreement templates (UKRI) standardise academic–industry IP splits and speed negotiations. Strong TTOs (Oxford, Cambridge, UCL, Imperial) run predictable spinout licensing with defined inventor shares. Not identical to US Bayh-Dole but comparable grantee–institution dynamics for most UKRI/MRC-funded work.',
+        links: [{ label: 'Lambert Agreements', url: 'https://www.gov.uk/guidance/lambert-toolkit', comment: 'UKRI-standard IP sharing templates for collaboration and spinout paths' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 5,
         text: 'Wellcome Trust (~£37B endowment) is the world\'s second-largest private biomedical funder after Gates Foundation. Actively co-invests with BBSRC and MRC in aging biology. Garry Weston Foundation, Gatsby Charitable Foundation, and CRUK supplement. Cambridge biotech cluster (Abcam, Bicycle Therapeutics, Kymab, Immunocore) and Oxford cluster (multiple spinouts from Weatherall Institute, NDM) are substantial industry partners. LifeArc, a charity commercialising MRC science, provides a unique public-private bridge. UK longevity VC (Juvenescence, formerly) has funded age-reverse biotechs.',
@@ -236,10 +241,10 @@ const uk: CountryData = {
         text: 'ARIA uses milestone-based non-dilutive contracts (not grants) — developers retain IP. Innovate UK grants are non-dilutive for SMEs. SBRI (Small Business Research Initiative) provides 100% non-dilutive challenge contracts to health biotech companies. UKRI\'s Healthy Ageing Challenge used non-dilutive co-development contracts as standard. Post-Brexit Horizon exclusion created pressure to increase domestic non-dilutive industrial R&D support, which the government has responded to.',
         links: [{ label: 'ARIA Funding Model', url: 'https://www.aria.org.uk/our-approach/', comment: 'ARIA programme model — milestone-based contracts, not grants; full IP retention for developers' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
-        score: 4,
-        text: 'Lambert Agreement templates (UKRI-managed) are the standard for academic-industry IP sharing — providing a fast-track framework that removes negotiation friction. UK universities retain IP under Bayh-Dole-equivalent provisions but have strong TTO infrastructure (Oxford Technology and Innovation, Cambridge Enterprise, UCL Business). MHRA\'s Innovation Office facilitates IP-strategy alignment for drug regulatory submissions. ARIA contracts explicitly leave IP with developers.',
-        links: [{ label: 'Lambert Agreements', url: 'https://www.gov.uk/guidance/lambert-toolkit', comment: 'Lambert toolkit — UKRI-standard IP sharing agreements for academic-industry collaboration' }],
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
+        score: 5,
+        text: 'ARIA uses milestone-based non-dilutive contracts with IP left to the performer. Innovate UK SBRI and similar challenge contracts are designed so developers retain foreground IP subject to standard reporting — aligned with published agency practice rather than ad hoc crown capture.',
+        links: [{ label: 'ARIA approach', url: 'https://www.aria.org.uk/our-approach/', comment: 'Milestone contracts; performer retains IP' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 3,

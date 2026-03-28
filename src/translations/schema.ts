@@ -72,7 +72,7 @@ export const fieldLabels: Record<string, Record<Locale, FieldTranslation>> = {
   [ScienceField.RESEARCH_FUNDING]: {
     [Locale.EN]: {
       title: 'Fundamental Research Funding',
-      description: 'Dedicated, long-term public funding specifically earmarked for basic aging research — independent of disease-specific budget cycles.',
+      description: 'Dedicated, long-term public funding for basic aging research — scale, portfolio, stability, university/public R&D IP rules for spinouts, private leverage, and risk appetite.',
     },
   },
   [ScienceField.GENE_EDITING_REGULATION]: {
@@ -86,7 +86,7 @@ export const fieldLabels: Record<string, Record<Locale, FieldTranslation>> = {
   [TranslationField.BIOTECH_BREAKTHROUGH_AGENCIES]: {
     [Locale.EN]: {
       title: 'Biotech Breakthrough Agencies (ARPA model)',
-      description: 'Dedicated longevity funding agencies modeled on DARPA/ARPA-H: directed challenges, competitive execution, non-dilutive funding, IP retained by developers.',
+      description: 'ARPA-style agencies: directed challenges, non-dilutive funding, and foreground IP terms on agency contracts and prizes (university grant IP is under Science / research funding).',
     },
   },
   [TranslationField.ADAPTIVE_LICENSING]: {

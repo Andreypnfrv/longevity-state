@@ -153,6 +153,10 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
       title: 'Funding stability & horizon',
       description: 'Whether researchers can access long-term, structurally protected funding — from annual discretionary grants to decade-long institutional commitments immune to political cycles.',
     }},
+    [ResearchFundingClaim.IP_FRAMEWORK]: { [Locale.EN]: {
+      title: 'University & public R&D IP',
+      description: 'How a PI or founder can move inventions from classic public grants and university employment into a company — default ownership, TTO speed and templates, inventor upside, and exit from dead patents.',
+    }},
     [ResearchFundingClaim.PRIVATE_LEVERAGE]: { [Locale.EN]: {
       title: 'Private capital leverage',
       description: 'The degree to which public funding attracts and coordinates private investment — philanthropy, longevity biotech venture capital, and industry co-funding.',
@@ -201,9 +205,9 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
       title: 'Funding type',
       description: 'Whether public innovation funding is truly non-dilutive and challenge-based — or only co-investment and match-grants with private sector.',
     }},
-    [BreakthroughAgencyClaim.IP_FRAMEWORK]: { [Locale.EN]: {
-      title: 'IP framework for funded research',
-      description: 'Whether developers or individual researchers retain IP from publicly funded longevity research — vs. university or crown ownership.',
+    [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: { [Locale.EN]: {
+      title: 'Agency foreground IP',
+      description: 'Who holds IP from breakthrough-agency instruments (PM contracts, challenge funding, prizes) — performer retention, sponsor licences, and predictability of spinout clearance vs state claw-back.',
     }},
     [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: { [Locale.EN]: {
       title: 'Challenge specificity',

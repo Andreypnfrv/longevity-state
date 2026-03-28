@@ -51,7 +51,8 @@ html, body {
   --group-tone-b:    color-mix(in srgb, #6b8cc9 12%, var(--surface));
   --group-outline:   color-mix(in srgb, var(--border) 85%, var(--accent));
   --cell-max-highlight-bg: color-mix(in srgb, var(--dot-5) 7%, var(--cell-bg));
-  --claim-row-hover-bg: color-mix(in srgb, var(--border-hi) 35%, var(--cell-bg));
+  --claim-row-hover-bg: color-mix(in srgb, var(--border-hi) 21%, var(--cell-bg));
+  --cell-max-with-row-hover-bg: color-mix(in srgb, var(--claim-row-hover-bg) 38%, var(--cell-max-highlight-bg));
 }
 
 html { font-size: 14px; }
@@ -83,7 +84,7 @@ details > summary { list-style: none; }
 details > summary::-webkit-details-marker { display: none; }
 
 :root[data-theme="light"] {
-  --bg:         #f0f1f4;
+  --bg:         #ffffff;
   --surface:    #ffffff;
   --border:     #d8dce6;
   --border-hi:  #b8bfd2;
@@ -102,11 +103,12 @@ details > summary::-webkit-details-marker { display: none; }
   --group-tone-a:    color-mix(in srgb, var(--accent) 14%, var(--surface));
   --group-tone-b:    color-mix(in srgb, #8aa8d4 18%, var(--surface));
   --group-outline:   color-mix(in srgb, var(--border) 92%, var(--accent));
-  --dot-1:      #d32f2f;
-  --dot-2:      #ef6c00;
-  --dot-3:      #f9a825;
-  --dot-4:      #43a047;
+  --dot-1:      #ff5252;
+  --dot-2:      #ff9100;
+  --dot-3:      #ffb300;
+  --dot-4:      #00e676;
   --dot-5:      #00c853;
   --cell-max-highlight-bg: color-mix(in srgb, var(--dot-5) 9%, var(--cell-bg));
-  --claim-row-hover-bg: color-mix(in srgb, var(--border-hi) 28%, var(--cell-bg));
+  --claim-row-hover-bg: color-mix(in srgb, var(--border-hi) 26%, var(--cell-bg));
+  --cell-max-with-row-hover-bg: color-mix(in srgb, var(--claim-row-hover-bg) 38%, var(--cell-max-highlight-bg));
 }

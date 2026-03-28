@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, Dispatch, SetStateAction, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import React, { Fragment, useCallback, Dispatch, SetStateAction, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   Country,
@@ -31,36 +31,17 @@ import { GROUPS, type GroupDef } from '../schema/policyGroups'
 import { allCountries } from '../countries'
 import { groupLabels, fieldLabels, claimLabels, countryLabels, countryFlags, SCREENING_SCALE, Locale } from '../translations'
 import { Filters } from '../ui/filters'
+import { useTableExpansion } from '../table/useTableExpansion'
+import { useRowHoverHighlight, rowHoverGridSurfaceStyle, rowHoverStickyColStyle } from '../table/useRowHoverHighlight'
+import { TableScrollRegion } from '../table/ui/TableScrollRegion'
+import { TableGridRow } from '../table/ui/TableGridRow'
+import { detailCellStopOuterPropagation } from '../table/rowActivation'
 
 export const FIELD_COL = 260
 export const LEADERS_COL = 200
 const COUNTRY_COL = 300
 export const GRID_GAP = 6
 export const CELL_PAD = '10px 12px'
-
-export function useExpandRowHoverHighlight() {
-  const [hoveredKey, setHoveredKey] = useState<string | null>(null)
-  return useCallback((rowKey: string) => {
-    const isHovered = hoveredKey === rowKey
-    return {
-      onMouseEnter: () => setHoveredKey(rowKey),
-      onMouseLeave: () => setHoveredKey(h => (h === rowKey ? null : h)),
-      isHovered,
-    }
-  }, [hoveredKey])
-}
-
-export function claimRowGridStyle(isHovered: boolean): CSSProperties {
-  return {
-    ...(isHovered ? { background: 'var(--claim-row-hover-bg)' } : {}),
-    borderRadius: 6,
-    transition: 'background 0.12s ease',
-  }
-}
-
-export function claimRowStickyColStyle(isHovered: boolean): Pick<CSSProperties, 'background'> {
-  return { background: isHovered ? 'var(--claim-row-hover-bg)' : 'var(--cell-bg)' }
-}
 
 export type IndexPageProps = {
   theme: 'night' | 'day'
@@ -423,6 +404,7 @@ function ClaimRow({
   detailExpanded,
   onDetailToggle,
   hideChevron,
+  hideTitle,
   detailToggleOnClick = true,
 }: {
   fieldKey: string
@@ -433,6 +415,7 @@ function ClaimRow({
   detailExpanded?: boolean
   onDetailToggle?: () => void
   hideChevron?: boolean
+  hideTitle?: boolean
   detailToggleOnClick?: boolean
 }) {
   const [localDetailOpen, setLocalDetailOpen] = useState(false)
@@ -449,18 +432,24 @@ function ClaimRow({
         else setLocalDetailOpen(o => !o)
       }}
       style={{
-        borderTop: noTopBorder ? undefined : '1px solid var(--border)',
+        marginTop: noTopBorder ? 0 : 8,
         padding: '8px 0',
         cursor: detailToggleOnClick ? 'pointer' : 'default',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+      <div style={{
+        display: 'flex',
+        alignItems: hideTitle && hideChevron ? 'center' : 'flex-start',
+        gap: 8,
+      }}>
         <Tooltip text={getScaleLevelText(fieldKey, claimKey, data.score)}>
           <ScoreDots score={data.score} maxScore={maxScore} size={6} />
         </Tooltip>
-        <span style={{ fontSize: 11, color: 'var(--cell-text)', flex: 1, lineHeight: 1.4, opacity: 0.92 }}>
-          {t?.title ?? claimKey}
-        </span>
+        {!hideTitle && (
+          <span style={{ fontSize: 11, color: 'var(--cell-text)', flex: 1, lineHeight: 1.4, opacity: 0.92 }}>
+            {t?.title ?? claimKey}
+          </span>
+        )}
         {!hideChevron && (
           <span style={{ color: 'var(--cell-muted)', fontSize: 9, flexShrink: 0 }}>
             {open ? '▲' : '▼'}
@@ -469,7 +458,7 @@ function ClaimRow({
       </div>
 
       {open && (
-        <div style={{ marginTop: 6, paddingLeft: 18 }}>
+        <div style={{ marginTop: 6 }}>
           {data.text && (
             <p style={{ fontSize: 11, color: 'var(--cell-muted)', lineHeight: 1.6, marginBottom: 6 }}>
               {data.text}
@@ -508,7 +497,8 @@ export function SingleClaimCell({
   maxScore = 5,
   detailExpanded,
   onDetailToggle,
-  hideChevron,
+  hideChevron = true,
+  hideTitle = true,
   detailToggleOnClick = true,
   rowHoverHighlight,
   stopOuterClickPropagation = true,
@@ -520,13 +510,16 @@ export function SingleClaimCell({
   detailExpanded: boolean
   onDetailToggle: () => void
   hideChevron?: boolean
+  hideTitle?: boolean
   detailToggleOnClick?: boolean
   rowHoverHighlight?: boolean
   stopOuterClickPropagation?: boolean
 }) {
   const maxHi = isMaxScoreHighlight(data.score, maxScore)
   const fill = rowHoverHighlight
-    ? 'transparent'
+    ? maxHi
+      ? 'var(--cell-max-with-row-hover-bg)'
+      : 'transparent'
     : maxHi
       ? 'var(--cell-max-highlight-bg)'
       : 'var(--cell-bg)'
@@ -535,12 +528,10 @@ export function SingleClaimCell({
       onClick={stopOuterClickPropagation ? e => e.stopPropagation() : undefined}
       style={{
         background: fill,
-        border: '1px solid var(--border)',
         borderRadius: 6,
         padding: '6px 10px',
         minHeight: 44,
         boxSizing: 'border-box',
-        transition: 'background 0.12s ease',
       }}
     >
       <ClaimRow
@@ -552,6 +543,7 @@ export function SingleClaimCell({
         detailExpanded={detailExpanded}
         onDetailToggle={onDetailToggle}
         hideChevron={hideChevron}
+        hideTitle={hideTitle}
         detailToggleOnClick={detailToggleOnClick}
       />
     </div>
@@ -568,7 +560,7 @@ export function FieldCell({
   fieldRowKey,
   expandedClaimDetails,
   onToggleClaimDetail,
-  hideInlineClaimChevrons,
+  rowHoverHighlight,
 }: {
   fieldKey: string
   claims: Record<string, ClaimData>
@@ -579,7 +571,7 @@ export function FieldCell({
   fieldRowKey?: string
   expandedClaimDetails?: Set<string>
   onToggleClaimDetail?: (detailKey: string) => void
-  hideInlineClaimChevrons?: boolean
+  rowHoverHighlight?: boolean
 }) {
   const score = avgScore(claims)
   const claimKeys = Object.keys(claims)
@@ -587,16 +579,21 @@ export function FieldCell({
     ? getScaleLevelText(fieldKey, claimKeys[0]!, score)
     : (STANDARD_SCALE_LABELS[Math.round(score)] ?? null)
   const maxHi = isMaxScoreHighlight(score, maxScore)
+  const fill = rowHoverHighlight
+    ? maxHi
+      ? 'var(--cell-max-with-row-hover-bg)'
+      : 'transparent'
+    : maxHi
+      ? 'var(--cell-max-highlight-bg)'
+      : 'var(--cell-bg)'
 
   return (
     <div
       onClick={onToggleRow}
       style={{
-        background: maxHi ? 'var(--cell-max-highlight-bg)' : 'var(--cell-bg)',
-        border: '1px solid var(--border)',
+        background: fill,
         borderRadius: 6,
         padding: CELL_PAD,
-        transition: 'border-color 0.15s',
         minHeight: 44,
         height: '100%',
         cursor: 'pointer',
@@ -604,8 +601,6 @@ export function FieldCell({
         flexDirection: 'column',
         boxSizing: 'border-box',
       }}
-      onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hi)')}
-      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
         <Tooltip text={cellTooltip}>
@@ -627,7 +622,8 @@ export function FieldCell({
                 noTopBorder={i === 0}
                 detailExpanded={dk !== undefined ? expandedClaimDetails?.has(dk) : undefined}
                 onDetailToggle={dk !== undefined ? () => onToggleClaimDetail!(dk) : undefined}
-                hideChevron={hideInlineClaimChevrons}
+                hideChevron
+                hideTitle
               />
             )
           })}
@@ -706,6 +702,10 @@ export function LeaderBadge({ countryKey }: { countryKey: CountryData['country']
   )
 }
 
+/**
+ * Id for one policy field row. Nested/detail row ids are `${rowKey(group, field)}::${segment}`
+ * (e.g. claim key); collapsing the parent row drops every stored id with that prefix.
+ */
 export function rowKey(group: PolicyGroup, field: string) {
   return `${group}::${field}`
 }
@@ -755,38 +755,17 @@ export default function IndexPage({
   const tableMinWidth =
     FIELD_COL + (showLeaders ? LEADERS_COL : 0) + countries.length * COUNTRY_COL + gapTotal
 
-  const [expandedRows, setExpandedRows] = useState<Set<string>>(() => new Set())
-  const [expandedClaimDetails, setExpandedClaimDetails] = useState<Set<string>>(() => new Set())
-  const bindClaimRowHover = useExpandRowHoverHighlight()
-
-  const toggleRow = (key: string) => {
-    setExpandedRows(prev => {
-      const next = new Set(prev)
-      if (next.has(key)) {
-        next.delete(key)
-        setExpandedClaimDetails(prevD => {
-          const n = new Set(prevD)
-          const prefix = `${key}::`
-          for (const k of prevD) {
-            if (k.startsWith(prefix)) n.delete(k)
-          }
-          return n
-        })
-      } else {
-        next.add(key)
-      }
-      return next
-    })
-  }
-
-  const toggleClaimDetail = useCallback((detailKey: string) => {
-    setExpandedClaimDetails(prev => {
-      const next = new Set(prev)
-      if (next.has(detailKey)) next.delete(detailKey)
-      else next.add(detailKey)
-      return next
-    })
-  }, [])
+  const expansion = useTableExpansion({
+    allParentIds: allRowKeys,
+    allDetailIds: allDetailKeys,
+  })
+  const expandedRows = expansion.expandedParents
+  const expandedClaimDetails = expansion.expandedDetails
+  const toggleRow = expansion.toggleParent
+  const toggleClaimDetail = expansion.toggleDetail
+  const onExpandAll = expansion.expandAll
+  const onCollapseAll = expansion.collapseAll
+  const bindRowHover = useRowHoverHighlight()
 
   const everythingExpanded =
     allRowKeys.length > 0 &&
@@ -794,16 +773,6 @@ export default function IndexPage({
     allDetailKeys.every(dk => expandedClaimDetails.has(dk))
   const showExpandAll = allRowKeys.length > 0 && !everythingExpanded
   const showCollapseAll = expandedRows.size > 0 || expandedClaimDetails.size > 0
-
-  const onExpandAll = useCallback(() => {
-    setExpandedRows(new Set(allRowKeys))
-    setExpandedClaimDetails(new Set(allDetailKeys))
-  }, [allRowKeys, allDetailKeys])
-
-  const onCollapseAll = useCallback(() => {
-    setExpandedRows(new Set())
-    setExpandedClaimDetails(new Set())
-  }, [])
 
   const totalFields = groupsFiltered.reduce((n: number, g: GroupDef) => n + g.fields.length, 0)
   const totalClaims = countries.reduce(
@@ -886,7 +855,6 @@ export default function IndexPage({
         <div style={{
           margin: '24px 32px 0',
           background: 'var(--cell-bg)',
-          border: '1px solid var(--border)',
           borderRadius: 8,
         }}>
           <div style={{
@@ -896,13 +864,16 @@ export default function IndexPage({
             background: 'var(--cell-bg)',
             borderRadius: '8px 8px 0 0',
           }}>
-            <div
-              ref={tableHeadScrollRef}
-              className="hide-scrollbar"
+            <TableScrollRegion
+              scrollRef={tableHeadScrollRef}
               onScroll={onTableHeadScroll}
-              style={{ overflowX: 'auto', overflowY: 'hidden' }}
+              hideScrollbar
+              overflowY="hidden"
+              minWidth={tableMinWidth}
+              innerPaddingTop={GRID_GAP}
+              innerPaddingBottom={8}
+              innerPaddingX={GRID_GAP}
             >
-              <div style={{ minWidth: tableMinWidth, padding: GRID_GAP, paddingBottom: 8, boxSizing: 'border-box' }}>
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: gridCols,
@@ -950,16 +921,18 @@ export default function IndexPage({
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
+            </TableScrollRegion>
           </div>
 
-          <div
-            ref={tableBodyScrollRef}
+          <TableScrollRegion
+            scrollRef={tableBodyScrollRef}
             onScroll={onTableBodyScroll}
-            style={{ overflowX: 'auto', overflowY: 'visible' }}
+            overflowY="visible"
+            minWidth={tableMinWidth}
+            innerPaddingTop={0}
+            innerPaddingBottom={GRID_GAP}
+            innerPaddingX={GRID_GAP}
           >
-            <div style={{ minWidth: tableMinWidth, padding: GRID_GAP, paddingTop: 0, boxSizing: 'border-box' }}>
 
             {([
               { key: 'le', label: 'Life expectancy at birth (years)', pick: (m: CountryData['metrics']) => m.lifeExpectancy, fmt: 'dec' as const },
@@ -1064,7 +1037,7 @@ export default function IndexPage({
                   ))}
                 </div>
 
-                {fields.map(field => {
+                {fields.map((field, fi) => {
                   const ft = fieldLabels[field]?.[Locale.EN]
                   const maxScore = ft?.maxScore ?? 5
                   const rk = rowKey(group, field)
@@ -1078,13 +1051,21 @@ export default function IndexPage({
 
                   return (
                     <Fragment key={field}>
+                      {(() => {
+                        const fh = bindRowHover(rk)
+                        const fhh = fh.isHovered
+                        return (
                       <div
+                        onMouseEnter={fh.onMouseEnter}
+                        onMouseLeave={fh.onMouseLeave}
                         style={{
                           display: 'grid',
                           gridTemplateColumns: gridCols,
                           gap: GRID_GAP,
                           marginBottom: 6,
                           alignItems: 'stretch',
+                          ...(fi > 0 ? { borderTop: '1px solid var(--border)', paddingTop: 10, marginTop: 4 } : {}),
+                          ...rowHoverGridSurfaceStyle(fhh),
                         }}
                       >
                         <div
@@ -1097,7 +1078,7 @@ export default function IndexPage({
                               toggleRow(rk)
                             }
                           }}
-                          style={{ ...stickyFirstCol, paddingTop: 10, paddingRight: 20, cursor: 'pointer' }}
+                          style={{ ...stickyFirstCol, ...rowHoverStickyColStyle(fhh), paddingTop: fi > 0 ? 0 : 10, paddingRight: 20, cursor: 'pointer' }}
                         >
                           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
                             <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0, marginTop: 2 }}>
@@ -1134,7 +1115,8 @@ export default function IndexPage({
                             }}
                             style={{
                               ...stickyLeadersCol(),
-                              paddingTop: 10,
+                              ...rowHoverStickyColStyle(fhh),
+                              paddingTop: fi > 0 ? 0 : 10,
                               paddingRight: 8,
                               cursor: 'pointer',
                               minHeight: 44,
@@ -1176,8 +1158,7 @@ export default function IndexPage({
                                   }
                                 }}
                                 style={{
-                                  background: 'var(--cell-bg)',
-                                  border: '1px dashed var(--border)',
+                                  background: fhh ? 'transparent' : 'var(--cell-bg)',
                                   borderRadius: 6,
                                   minHeight: 44,
                                   height: '100%',
@@ -1203,33 +1184,35 @@ export default function IndexPage({
                               expandedClaimDetails={expandedClaimDetails}
                               onToggleClaimDetail={toggleClaimDetail}
                               onToggleRow={() => toggleRow(rk)}
+                              rowHoverHighlight={fhh}
                             />
                           )
                         })}
                       </div>
+                        )
+                      })()}
 
                       {open && claimKeysOrdered.map(claimKey => {
                         const claimDetailKey = `${rk}::${claimKey}`
                         const claimDetailOpen = expandedClaimDetails.has(claimDetailKey)
                         const claimLeaders = leadersForClaim(countries, accessor, field, claimKey)
                         const ct = claimLabels[field]?.[claimKey]?.[Locale.EN]
-                        const rowHover = bindClaimRowHover(claimDetailKey)
+                        const rowHover = bindRowHover(claimDetailKey)
                         const rh = rowHover.isHovered
                         return (
-                          <div
+                          <TableGridRow
                             key={claimKey}
+                            gridTemplateColumns={gridCols}
+                            gap={GRID_GAP}
                             onMouseEnter={rowHover.onMouseEnter}
                             onMouseLeave={rowHover.onMouseLeave}
                             style={{
-                              display: 'grid',
-                              gridTemplateColumns: gridCols,
-                              gap: GRID_GAP,
                               marginBottom: 6,
                               alignItems: 'stretch',
-                              ...claimRowGridStyle(rh),
+                              ...rowHoverGridSurfaceStyle(rh),
                             }}
                           >
-                            <div style={{ ...stickyFirstCol, ...claimRowStickyColStyle(rh), paddingTop: 8, paddingRight: 20, paddingLeft: 10 }}>
+                            <div style={{ ...stickyFirstCol, ...rowHoverStickyColStyle(rh), paddingTop: 8, paddingRight: 20, paddingLeft: 10 }}>
                               <div
                                 role="button"
                                 tabIndex={0}
@@ -1272,7 +1255,7 @@ export default function IndexPage({
                               <div
                                 style={{
                                   ...stickyLeadersCol(),
-                                  ...claimRowStickyColStyle(rh),
+                                  ...rowHoverStickyColStyle(rh),
                                   paddingTop: 8,
                                   paddingRight: 8,
                                   minHeight: 44,
@@ -1308,14 +1291,12 @@ export default function IndexPage({
                                     key={c.country}
                                     style={{
                                       background: rh ? 'transparent' : 'var(--cell-bg)',
-                                      border: '1px dashed var(--border)',
                                       borderRadius: 6,
                                       minHeight: 44,
                                       height: '100%',
                                       display: 'flex',
                                       alignItems: 'center',
                                       justifyContent: 'center',
-                                      transition: 'background 0.12s ease',
                                     }}
                                     onClick={e => e.stopPropagation()}
                                   >
@@ -1333,10 +1314,11 @@ export default function IndexPage({
                                   detailExpanded={expandedClaimDetails.has(claimDetailKey)}
                                   onDetailToggle={() => toggleClaimDetail(claimDetailKey)}
                                   rowHoverHighlight={rh}
+                                  stopOuterClickPropagation={detailCellStopOuterPropagation('matrix')}
                                 />
                               )
                             })}
-                          </div>
+                          </TableGridRow>
                         )
                       })}
                     </Fragment>
@@ -1345,8 +1327,7 @@ export default function IndexPage({
               </div>
               )
             })}
-            </div>
-          </div>
+          </TableScrollRegion>
         </div>
 
     </>

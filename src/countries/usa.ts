@@ -178,6 +178,11 @@ const usa: CountryData = {
         text: 'NIH R01 grants run 5 years, renewable. P01 programme projects can extend 10+ years. However, 20% funding rates and annual Congressional appropriations uncertainty create meaningful short-termism. Political variance in NIH appropriations has grown.',
         links: [],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 4,
+        text: 'Bayh-Dole (1980): universities, non-profits, and small businesses may elect to retain title to inventions from federally funded research; standard practice assigns rights to the grantee institution with inventor royalty-sharing policies. Strong TTO ecosystem and predictable licensing to spinouts. Does not mean individual faculty hold patents personally — the grantee institution is the default assignee.',
+        links: [{ label: 'Bayh-Dole Act', url: 'https://www.nist.gov/tpo/bayh-dole-act', comment: 'Grantee may retain title; typical university policy assigns to institution with inventor share' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 4,
         text: 'Strong private ecosystem: Glenn Foundation (~$100M/year aging), Bezos-backed Altos Labs ($3B), Milner-backed Arc Institute. Dense longevity VC cluster in Bay Area and Boston (Calico, Unity, Ora, NewLimit). NIH public-private partnership mechanisms active.',
@@ -236,10 +241,10 @@ const usa: CountryData = {
         text: 'ARPA-H contracts are fully non-dilutive (no equity). NIH grants and SBIR/STTR are non-dilutive. Strong non-dilutive funding ecosystem for all company sizes. Some ARPA-H OT (Other Transaction) mechanisms provide even greater flexibility.',
         links: [{ label: 'NIH SBIR/STTR', url: 'https://seed.nih.gov/', comment: 'Non-dilutive funding for small biotech — $1B+/year' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
         score: 5,
-        text: 'Bayh-Dole Act (1980): universities, non-profits, and small businesses retain IP rights from all federally funded research. Individual inventors also retain patent rights. The global gold standard for public research IP policy.',
-        links: [{ label: 'Bayh-Dole Act', url: 'https://www.nist.gov/tpo/bayh-dole-act', comment: 'Landmark 1980 law — IP rights to developers for publicly funded inventions' }],
+        text: 'ARPA-H uses Other Transaction (OT) agreements and milestone-based contracts where performers typically retain foreground IP with narrow government-purpose rights — no agency equity. NIH grants are a separate instrument (see Science / university IP). This is close to the global benchmark for PM-agency biomedical funding.',
+        links: [{ label: 'ARPA-H', url: 'https://arpa-h.gov/', comment: 'OT and milestone contracts; performer foreground IP; federal march-in rarely used in practice' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 2,

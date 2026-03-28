@@ -21,11 +21,14 @@ import {
   stickyFirstCol,
   stickyGroupFirstCol,
   getClaimScaleLegendLines,
-  useExpandRowHoverHighlight,
-  claimRowGridStyle,
-  claimRowStickyColStyle,
   claimTodoModel,
 } from './index'
+import { useTableExpansion } from '../table/useTableExpansion'
+import { useRowHoverHighlight, rowHoverGridSurfaceStyle, rowHoverStickyColStyle } from '../table/useRowHoverHighlight'
+import { removeKeysWithPrefix } from '../table/keys'
+import { detailRowRootHandlers, detailCellStopOuterPropagation } from '../table/rowActivation'
+import { TableScrollRegion } from '../table/ui/TableScrollRegion'
+import { TableGridRow } from '../table/ui/TableGridRow'
 
 function isCountryParam(id: string | undefined): id is Country {
   if (!id) return false
@@ -33,7 +36,6 @@ function isCountryParam(id: string | undefined): id is Country {
 }
 
 const leadersCellWrap: CSSProperties = {
-  border: '1px solid var(--border)',
   borderRadius: 6,
   padding: '6px 10px',
   boxSizing: 'border-box',
@@ -41,12 +43,10 @@ const leadersCellWrap: CSSProperties = {
   minWidth: 0,
   width: '100%',
   background: 'var(--cell-bg)',
-  transition: 'border-color 0.15s',
 }
 
 function todoCellShell(rh: boolean | undefined): CSSProperties {
   return {
-    border: '1px solid var(--border)',
     borderRadius: 6,
     padding: '8px 10px',
     minHeight: 44,
@@ -54,7 +54,6 @@ function todoCellShell(rh: boolean | undefined): CSSProperties {
     minWidth: 0,
     width: '100%',
     background: rh ? 'transparent' : 'var(--cell-bg)',
-    transition: 'background 0.12s ease',
   }
 }
 
@@ -140,6 +139,11 @@ function formatScoreDelta(leaderScore: number, baseline: number | null): string 
   return `-${body}`
 }
 
+/** Leader evidence snippets use ids under the field row; closing the field clears `${fieldRowKey}::__snippet__::`. */
+function leaderSnippetRowKey(fieldRowKey: string, leaderCountry: Country): string {
+  return `${fieldRowKey}::__snippet__::${leaderCountry}`
+}
+
 function LeadersEvidenceColumn({
   filtered,
   accessor,
@@ -149,6 +153,9 @@ function LeadersEvidenceColumn({
   selectedBaseline,
   claimDetailOpen,
   onToggleClaimDetail,
+  fieldRowKey,
+  leaderSnippetKeys,
+  onToggleLeaderSnippetKey,
 }: {
   filtered: { data: CountryData; score: number }[]
   accessor: (c: CountryData) => Record<string, Record<string, ClaimData>>
@@ -158,17 +165,11 @@ function LeadersEvidenceColumn({
   selectedBaseline: number | null
   claimDetailOpen?: boolean
   onToggleClaimDetail?: () => void
+  fieldRowKey?: string
+  leaderSnippetKeys?: Set<string>
+  onToggleLeaderSnippetKey?: (snippetRowId: string) => void
 }) {
   const isClaimRow = claimKey != null
-  const [snippetOpen, setSnippetOpen] = useState<Set<Country>>(() => new Set())
-  const toggleSnippet = useCallback((c: Country) => {
-    setSnippetOpen(prev => {
-      const n = new Set(prev)
-      if (n.has(c)) n.delete(c)
-      else n.add(c)
-      return n
-    })
-  }, [])
 
   const hi = maxScore != null && maxScore > 0 ? maxScore : 5
   if (filtered.length === 0) {
@@ -194,10 +195,15 @@ function LeadersEvidenceColumn({
           ? snippetFromClaimData(accessor(data)[field]?.[claimKey])
           : snippetFromLeaderField(accessor, field, data)
         const deltaStr = formatScoreDelta(score, selectedBaseline)
-        const snipExpanded = isClaimRow ? Boolean(claimDetailOpen) : snippetOpen.has(data.country)
+        const snippetId = fieldRowKey != null ? leaderSnippetRowKey(fieldRowKey, data.country) : ''
+        const snipExpanded = isClaimRow
+          ? Boolean(claimDetailOpen)
+          : Boolean(fieldRowKey && leaderSnippetKeys?.has(snippetId))
         const toggleSnip = isClaimRow && onToggleClaimDetail
           ? onToggleClaimDetail
-          : () => toggleSnippet(data.country)
+          : fieldRowKey && onToggleLeaderSnippetKey
+            ? () => onToggleLeaderSnippetKey(snippetId)
+            : undefined
         return (
           <div
             key={data.country}
@@ -214,18 +220,18 @@ function LeadersEvidenceColumn({
             }}
           >
             <div
-              role={snip ? 'button' : undefined}
-              tabIndex={snip ? 0 : undefined}
-              aria-expanded={snip ? snipExpanded : undefined}
-              aria-label={snip ? `${countryLabels[data.country][Locale.EN]} evidence` : undefined}
-              onClick={snip ? () => toggleSnip() : undefined}
-              onKeyDown={snip ? e => {
+              role={snip && toggleSnip ? 'button' : undefined}
+              tabIndex={snip && toggleSnip ? 0 : undefined}
+              aria-expanded={snip && toggleSnip ? snipExpanded : undefined}
+              aria-label={snip && toggleSnip ? `${countryLabels[data.country][Locale.EN]} evidence` : undefined}
+              onClick={snip && toggleSnip ? () => toggleSnip() : undefined}
+              onKeyDown={snip && toggleSnip ? e => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
                   toggleSnip()
                 }
               } : undefined}
-              style={{ cursor: snip ? 'pointer' : 'default', flexShrink: 0 }}
+              style={{ cursor: snip && toggleSnip ? 'pointer' : 'default', flexShrink: 0 }}
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, flexWrap: 'wrap' }}>
                 <span style={{ flexShrink: 0, lineHeight: 1, paddingTop: 1 }}>
@@ -308,38 +314,39 @@ export default function CountryPage(props: IndexPageProps) {
   const gapTotal = GRID_GAP * Math.max(0, numCols - 1)
   const tableMinWidth = FIELD_COL + countryColMin + (showLeaders ? leadersColWidth : 0) + todoColMin + gapTotal
 
-  const [expandedRows, setExpandedRows] = useState<Set<string>>(() => new Set())
-  const [expandedClaimDetails, setExpandedClaimDetails] = useState<Set<string>>(() => new Set())
-  const bindClaimRowHover = useExpandRowHoverHighlight()
-
-  const toggleRow = (key: string) => {
-    setExpandedRows(prev => {
-      const next = new Set(prev)
-      if (next.has(key)) {
-        next.delete(key)
-        setExpandedClaimDetails(prevD => {
-          const n = new Set(prevD)
-          const prefix = `${key}::`
-          for (const k of prevD) {
-            if (k.startsWith(prefix)) n.delete(k)
-          }
-          return n
-        })
-      } else {
-        next.add(key)
-      }
-      return next
-    })
-  }
-
-  const toggleClaimDetail = useCallback((detailKey: string) => {
-    setExpandedClaimDetails(prev => {
-      const next = new Set(prev)
-      if (next.has(detailKey)) next.delete(detailKey)
-      else next.add(detailKey)
-      return next
+  const [leaderSnippetOpen, setLeaderSnippetOpen] = useState<Set<string>>(() => new Set())
+  const toggleLeaderSnippetKey = useCallback((id: string) => {
+    setLeaderSnippetOpen(prev => {
+      const n = new Set(prev)
+      if (n.has(id)) n.delete(id)
+      else n.add(id)
+      return n
     })
   }, [])
+
+  const onAfterFieldRowCollapse = useCallback((parentRowId: string) => {
+    setLeaderSnippetOpen(prev => removeKeysWithPrefix(prev, `${parentRowId}::__snippet__::`))
+  }, [])
+
+  const expansion = useTableExpansion({
+    onAfterParentCollapse: onAfterFieldRowCollapse,
+  })
+  const expandedRows = expansion.expandedParents
+  const expandedClaimDetails = expansion.expandedDetails
+  const toggleRow = expansion.toggleParent
+  const toggleClaimDetail = expansion.toggleDetail
+  const ensureDetailOpen = expansion.ensureDetailOpen
+  const ensureParentOpen = expansion.ensureParentOpen
+  const bindRowHover = useRowHoverHighlight()
+
+  const activateLeaderSnippet = useCallback((snippetId: string) => {
+    const sep = '::__snippet__::'
+    const i = snippetId.indexOf(sep)
+    const rk = i >= 0 ? snippetId.slice(0, i) : ''
+    const opening = !leaderSnippetOpen.has(snippetId)
+    if (opening && rk && !expandedRows.has(rk)) ensureParentOpen(rk)
+    toggleLeaderSnippetKey(snippetId)
+  }, [leaderSnippetOpen, expandedRows, ensureParentOpen, toggleLeaderSnippetKey])
 
   if (!countryIdParam || !isCountryParam(countryIdParam)) {
     return <Navigate to={{ pathname: '/', search: locationSearch }} replace />
@@ -356,6 +363,7 @@ export default function CountryPage(props: IndexPageProps) {
     field: string,
     rk: string,
     open: boolean,
+    rowHoverHighlight = false,
   ) => {
     const fieldData = accessor(selected)[field]
     if (!fieldData) {
@@ -371,8 +379,7 @@ export default function CountryPage(props: IndexPageProps) {
             }
           }}
           style={{
-            background: 'var(--cell-bg)',
-            border: '1px dashed var(--border)',
+            background: rowHoverHighlight ? 'transparent' : 'var(--cell-bg)',
             borderRadius: 6,
             minHeight: 44,
             height: '100%',
@@ -397,7 +404,7 @@ export default function CountryPage(props: IndexPageProps) {
         expandedClaimDetails={expandedClaimDetails}
         onToggleClaimDetail={toggleClaimDetail}
         onToggleRow={() => toggleRow(rk)}
-        hideInlineClaimChevrons
+        rowHoverHighlight={rowHoverHighlight}
       />
     )
   }
@@ -417,8 +424,6 @@ export default function CountryPage(props: IndexPageProps) {
         width: '100%',
         boxSizing: 'border-box',
         background: 'var(--cell-bg)',
-        borderTop: '1px solid var(--border)',
-        borderBottom: '1px solid var(--border)',
       }}>
         <div style={{
           position: 'sticky',
@@ -427,8 +432,14 @@ export default function CountryPage(props: IndexPageProps) {
           background: 'var(--cell-bg)',
           borderRadius: 0,
         }}>
-          <div className="hide-scrollbar" style={{ overflowX: 'auto', overflowY: 'hidden', padding: '0 32px' }}>
-            <div style={{ minWidth: tableMinWidth, padding: `${GRID_GAP}px 0`, paddingBottom: 8, boxSizing: 'border-box' }}>
+          <TableScrollRegion
+            hideScrollbar
+            overflowY="hidden"
+            horizontalPadding={32}
+            minWidth={tableMinWidth}
+            innerPaddingTop={GRID_GAP}
+            innerPaddingBottom={8}
+          >
               <div style={{ display: 'grid', gridTemplateColumns: gridCols, gap: GRID_GAP }}>
                 <div style={{ ...stickyCornerHeaderCol, minHeight: 1 }} />
                 <div style={{
@@ -463,12 +474,16 @@ export default function CountryPage(props: IndexPageProps) {
                   </span>
                 </div>
               </div>
-            </div>
-          </div>
+          </TableScrollRegion>
         </div>
 
-        <div style={{ overflowX: 'auto', overflowY: 'visible', padding: '0 32px' }}>
-          <div style={{ minWidth: tableMinWidth, padding: `${GRID_GAP}px 0`, paddingTop: 0, boxSizing: 'border-box' }}>
+        <TableScrollRegion
+          overflowY="visible"
+          horizontalPadding={32}
+          minWidth={tableMinWidth}
+          innerPaddingTop={0}
+          innerPaddingBottom={GRID_GAP}
+        >
             {groupsFiltered.map(({ group, fields, accessor }: GroupDef, gi: number) => {
               const headerBand = gi % 2 === 0 ? 'var(--group-tone-a)' : 'var(--group-tone-b)'
               return (
@@ -511,7 +526,7 @@ export default function CountryPage(props: IndexPageProps) {
                     }} />
                   </div>
 
-                  {fields.map(field => {
+                  {fields.map((field, fi) => {
                     const ft = fieldLabels[field]?.[Locale.EN]
                     const maxScore = ft?.maxScore ?? 5
                     const rk = rowKey(group, field)
@@ -538,13 +553,23 @@ export default function CountryPage(props: IndexPageProps) {
 
                     return (
                       <Fragment key={field}>
-                        <div style={{
-                          display: 'grid',
-                          gridTemplateColumns: gridCols,
-                          gap: GRID_GAP,
-                          marginBottom: 6,
-                          alignItems: 'stretch',
-                        }}>
+                        {(() => {
+                          const fh = bindRowHover(rk)
+                          const fhh = fh.isHovered
+                          return (
+                        <div
+                          onMouseEnter={fh.onMouseEnter}
+                          onMouseLeave={fh.onMouseLeave}
+                          style={{
+                            display: 'grid',
+                            gridTemplateColumns: gridCols,
+                            gap: GRID_GAP,
+                            marginBottom: 6,
+                            alignItems: 'stretch',
+                            ...(fi > 0 ? { borderTop: '1px solid var(--border)', paddingTop: 10, marginTop: 4 } : {}),
+                            ...rowHoverGridSurfaceStyle(fhh),
+                          }}
+                        >
                           <div
                             role="button"
                             tabIndex={0}
@@ -555,7 +580,7 @@ export default function CountryPage(props: IndexPageProps) {
                                 toggleRow(rk)
                               }
                             }}
-                            style={{ ...stickyFirstCol, paddingTop: 10, paddingRight: 20, cursor: 'pointer' }}
+                            style={{ ...stickyFirstCol, ...rowHoverStickyColStyle(fhh), paddingTop: fi > 0 ? 0 : 10, paddingRight: 20, cursor: 'pointer' }}
                           >
                             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
                               <div style={{ minWidth: 0 }}>
@@ -565,15 +590,6 @@ export default function CountryPage(props: IndexPageProps) {
                                 {!open && claimCountMax > 0 && (
                                   <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 4 }}>
                                     {claimCountMax} claims
-                                  </div>
-                                )}
-                                {fieldPendingTodos > 0 && (
-                                  <div style={{
-                                    fontSize: 10,
-                                    color: 'var(--muted)',
-                                    marginTop: !open && claimCountMax > 0 ? 2 : 4,
-                                  }}>
-                                    {fieldPendingTodos} todo{fieldPendingTodos === 1 ? '' : 's'}
                                   </div>
                                 )}
                                 {open && ft?.description && (
@@ -586,7 +602,7 @@ export default function CountryPage(props: IndexPageProps) {
                           </div>
 
                           <div style={{ minHeight: 44, alignSelf: 'stretch' }}>
-                            {renderSelectedCell(accessor, field, rk, open)}
+                            {renderSelectedCell(accessor, field, rk, open, fhh)}
                           </div>
 
                           {showLeaders && (
@@ -608,9 +624,10 @@ export default function CountryPage(props: IndexPageProps) {
                               }}
                             >
                               <div
-                                style={leadersCellWrap}
-                                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hi)' }}
-                                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)' }}
+                                style={{
+                                  ...leadersCellWrap,
+                                  ...(fhh ? { background: 'transparent' } : {}),
+                                }}
                               >
                                 <LeadersEvidenceColumn
                                   filtered={leaders}
@@ -618,12 +635,15 @@ export default function CountryPage(props: IndexPageProps) {
                                   field={field}
                                   maxScore={maxScore}
                                   selectedBaseline={selectedFieldBaseline}
+                                  fieldRowKey={rk}
+                                  leaderSnippetKeys={leaderSnippetOpen}
+                                  onToggleLeaderSnippetKey={activateLeaderSnippet}
                                 />
                               </div>
                             </div>
                           )}
                           <div style={{ alignSelf: 'stretch', paddingTop: 4 }}>
-                            <div style={todoCellShell(undefined)}>
+                            <div style={todoCellShell(fhh)}>
                               {fieldPendingTodos > 0 ? (
                                 <span style={{
                                   fontSize: 11,
@@ -631,7 +651,7 @@ export default function CountryPage(props: IndexPageProps) {
                                   color: 'var(--text)',
                                   fontFamily: 'var(--font-mono)',
                                 }}>
-                                  {fieldPendingTodos}
+                                  {fieldPendingTodos} {fieldPendingTodos === 1 ? 'todo' : 'todos'}
                                 </span>
                               ) : fieldTodoAllDone ? (
                                 <span style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 600 }}>Done</span>
@@ -641,6 +661,8 @@ export default function CountryPage(props: IndexPageProps) {
                             </div>
                           </div>
                         </div>
+                          )
+                        })()}
 
                         {open && claimKeysOrdered.map(claimKey => {
                           const claimDetailKey = `${rk}::${claimKey}`
@@ -654,34 +676,27 @@ export default function CountryPage(props: IndexPageProps) {
                           const data = fieldData?.[claimKey]
                           const selectedClaimBaseline = data != null ? Number(data.score) : null
                           const countryLv = data != null ? countryLevelFloor(data.score, maxScore) : null
-                          const rowHover = bindClaimRowHover(claimDetailKey)
+                          const rowHover = bindRowHover(claimDetailKey)
                           const rh = rowHover.isHovered
                           const claimTodo = claimTodoModel(field, claimKey, data?.score ?? null, maxScore)
+                          const detailRoot = detailRowRootHandlers('countryPage', claimDetailKey, toggleClaimDetail)
 
                           return (
-                            <div
+                            <TableGridRow
                               key={claimKey}
-                              tabIndex={0}
-                              onClick={() => toggleClaimDetail(claimDetailKey)}
-                              onKeyDown={e => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  toggleClaimDetail(claimDetailKey)
-                                }
-                              }}
+                              gridTemplateColumns={gridCols}
+                              gap={GRID_GAP}
+                              {...detailRoot}
                               onMouseEnter={rowHover.onMouseEnter}
                               onMouseLeave={rowHover.onMouseLeave}
                               style={{
-                                display: 'grid',
-                                gridTemplateColumns: gridCols,
-                                gap: GRID_GAP,
                                 marginBottom: 6,
                                 alignItems: 'stretch',
                                 cursor: 'pointer',
-                                ...claimRowGridStyle(rh),
+                                ...rowHoverGridSurfaceStyle(rh),
                               }}
                             >
-                              <div style={{ ...stickyFirstCol, ...claimRowStickyColStyle(rh), paddingTop: 8, paddingRight: 20, paddingLeft: 10 }}>
+                              <div style={{ ...stickyFirstCol, ...rowHoverStickyColStyle(rh), paddingTop: 8, paddingRight: 20, paddingLeft: 10 }}>
                                 <div style={{ marginLeft: 16 }}>
                                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                                     <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--text)', lineHeight: 1.4 }}>
@@ -730,13 +745,11 @@ export default function CountryPage(props: IndexPageProps) {
                                 {!data ? (
                                   <div style={{
                                     background: rh ? 'transparent' : 'var(--cell-bg)',
-                                    border: '1px dashed var(--border)',
                                     borderRadius: 6,
                                     minHeight: 44,
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    transition: 'background 0.12s ease',
                                   }}>
                                     <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
                                   </div>
@@ -749,9 +762,8 @@ export default function CountryPage(props: IndexPageProps) {
                                     detailExpanded={expandedClaimDetails.has(claimDetailKey)}
                                     onDetailToggle={() => toggleClaimDetail(claimDetailKey)}
                                     rowHoverHighlight={rh}
-                                    hideChevron
                                     detailToggleOnClick={false}
-                                    stopOuterClickPropagation={false}
+                                    stopOuterClickPropagation={detailCellStopOuterPropagation('countryPage')}
                                   />
                                 )}
                               </div>
@@ -762,10 +774,7 @@ export default function CountryPage(props: IndexPageProps) {
                                     style={{
                                       ...leadersCellWrap,
                                       ...(rh ? { background: 'transparent' } : {}),
-                                      transition: 'background 0.12s ease, border-color 0.15s',
                                     }}
-                                    onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hi)' }}
-                                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)' }}
                                   >
                                     <LeadersEvidenceColumn
                                       filtered={claimLeaders}
@@ -775,7 +784,7 @@ export default function CountryPage(props: IndexPageProps) {
                                       maxScore={maxScore}
                                       selectedBaseline={selectedClaimBaseline}
                                       claimDetailOpen={claimDetailOpen}
-                                      onToggleClaimDetail={() => toggleClaimDetail(claimDetailKey)}
+                                      onToggleClaimDetail={() => ensureDetailOpen(claimDetailKey)}
                                     />
                                   </div>
                                 </div>
@@ -802,7 +811,7 @@ export default function CountryPage(props: IndexPageProps) {
                                   )}
                                 </div>
                               </div>
-                            </div>
+                            </TableGridRow>
                           )
                         })}
                       </Fragment>
@@ -811,8 +820,7 @@ export default function CountryPage(props: IndexPageProps) {
                 </div>
               )
             })}
-          </div>
-        </div>
+        </TableScrollRegion>
       </div>
     </>
   )

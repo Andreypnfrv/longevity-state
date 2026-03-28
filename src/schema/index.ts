@@ -361,6 +361,7 @@ export enum ResearchFundingClaim {
   FUNDING_SCALE     = 'funding_scale',
   PORTFOLIO_BREADTH = 'portfolio_breadth',
   FUNDING_STABILITY = 'funding_stability',
+  IP_FRAMEWORK      = 'ip_framework',
   PRIVATE_LEVERAGE  = 'private_leverage',
   RISK_APPETITE     = 'risk_appetite',
 }
@@ -377,7 +378,7 @@ export enum BreakthroughAgencyClaim {
   AGENCY_MODEL           = 'agency_model',
   LONGEVITY_MANDATE      = 'longevity_mandate',
   FUNDING_TYPE           = 'funding_type',
-  IP_FRAMEWORK           = 'ip_framework',
+  AGENCY_FOREGROUND_IP   = 'agency_foreground_ip',
   CHALLENGE_SPECIFICITY  = 'challenge_specificity',
 }
 
@@ -500,16 +501,16 @@ export const BREAKTHROUGH_AGENCY_CLAIM_SCALES: Record<BreakthroughAgencyClaim, R
     1: 'Only co-investment or match-grants with private sector; no pure non-dilutive challenge funding',
     2: 'Non-dilutive grants available but competitive and general; no longevity specificity',
     3: 'Non-dilutive challenge contracts available for aging-adjacent areas; some longevity specificity',
-    4: 'Non-dilutive contracts for longevity-specific challenges; IP encumbrance absent',
-    5: 'Fully non-dilutive, challenge-based funding with full IP retained by developers for longevity research',
+    4: 'Non-dilutive contracts for longevity-specific challenges; typical agency-style terms',
+    5: 'Fully non-dilutive, challenge-based longevity funding; foreground IP terms align with top agency practice (see agency foreground IP)',
   },
-  [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
-    0: 'University or crown retains all IP from publicly funded research; no transfer mechanism',
-    1: 'IP can be licensed but not assigned to developers; negotiation slow (12–24 months)',
-    2: 'IP transfer possible via tech transfer office; standard process but slow (6–18 months)',
-    3: 'IP retained by university; fast-transfer mechanism (< 6 months); spinout pathway clear',
-    4: 'Developers retain IP from publicly funded research under defined conditions (Bayh-Dole model)',
-    5: 'Full Bayh-Dole or equivalent; individual researchers retain IP; fast commercialisation pipeline',
+  [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
+    0: 'Foreground IP vests with state/agency or assignment is mandatory; commercial use blocked or requires discretionary approval',
+    1: 'Commercialisation possible in theory but heavy encumbrances (broad government licence, revenue share, long approvals) make typical spinouts impractical',
+    2: 'Standard government/sponsor-purpose licence and reporting; outcome depends on contract and host; no published exit terms',
+    3: 'Agency programme terms published: title with performer/consortium, narrow sponsor rights, spinout clearance typically within ~6 months in standard cases',
+    4: 'Dominant PM-agency practice: milestone-based, non-dilutive, no agency equity; foreground IP with performer; sponsor rights within industry-narrow set',
+    5: 'Statute/policy clearly assigns performer retention for this instrument class; prizes without IP claw-back; march-in rare in practice; rules predictable across programmes',
   },
   [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
     0: 'No measurable challenge objectives; general "improve health" framing',
@@ -520,6 +521,14 @@ export const BREAKTHROUGH_AGENCY_CLAIM_SCALES: Record<BreakthroughAgencyClaim, R
     5: 'National longevity challenge with measurable biological age targets, independent validation, and prize mechanism',
   },
 }
+
+export const BREAKTHROUGH_AGENCY_CLAIM_ORDER: readonly BreakthroughAgencyClaim[] = [
+  BreakthroughAgencyClaim.AGENCY_MODEL,
+  BreakthroughAgencyClaim.LONGEVITY_MANDATE,
+  BreakthroughAgencyClaim.FUNDING_TYPE,
+  BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP,
+  BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY,
+]
 
 export const ADAPTIVE_LICENSING_CLAIM_SCALES: Record<AdaptiveLicensingClaim, Record<number, string>> = {
   [AdaptiveLicensingClaim.CONDITIONAL_APPROVAL]: {
@@ -718,6 +727,14 @@ export const RESEARCH_FUNDING_CLAIM_SCALES: Record<ResearchFundingClaim, Record<
     4: 'Long-term institutional commitments (10-year centres or endowments); immune to annual budget cycles',
     5: 'Permanent institutional infrastructure with guaranteed baseline; politically insulated from annual appropriations',
   },
+  [ResearchFundingClaim.IP_FRAMEWORK]: {
+    0: 'Default title with employer/state; no realistic licence or assignment path to spinout; inventor share opaque or effectively zero',
+    1: 'Licensing possible but 12–24+ months of opaque negotiation; no standard terms; outcome depends on administration',
+    2: 'Working TTO but 6–18 months and wide variance across institutions; spinouts possible but high transaction cost',
+    3: 'Published spinout option or licence templates, upfront/royalty bands, defined inventor share after costs; typical standard cases close within ~6 months',
+    4: 'Strong ecosystem: institution usually holds title where customary, but grantee-election norms (Bayh-Dole-type) plus high inventor-share norms and steady startup licensing as the rule',
+    5: 'Best class: either statutory PI/researcher title with viable patenting and licensing support, or institutional title with world-class transparent spinout licensing, meaningful inventor upside, and clear abandonment or transfer rules',
+  },
   [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
     0: 'No meaningful private investment in aging research; no philanthropy or industry co-funding',
     1: 'Scattered private donations; no strategic coordination with public funding',
@@ -735,6 +752,15 @@ export const RESEARCH_FUNDING_CLAIM_SCALES: Record<ResearchFundingClaim, Record<
     5: 'National programme for transformative longevity research; unconventional targets strategically supported at scale',
   },
 }
+
+export const RESEARCH_FUNDING_CLAIM_ORDER: readonly ResearchFundingClaim[] = [
+  ResearchFundingClaim.FUNDING_SCALE,
+  ResearchFundingClaim.PORTFOLIO_BREADTH,
+  ResearchFundingClaim.FUNDING_STABILITY,
+  ResearchFundingClaim.IP_FRAMEWORK,
+  ResearchFundingClaim.PRIVATE_LEVERAGE,
+  ResearchFundingClaim.RISK_APPETITE,
+]
 
 export const GENE_EDITING_CLAIM_SCALES: Record<GeneEditingClaim, Record<number, string>> = {
   [GeneEditingClaim.SOMATIC_PERMISSIVENESS]: {

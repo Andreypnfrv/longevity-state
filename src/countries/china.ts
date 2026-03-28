@@ -178,6 +178,11 @@ const china: CountryData = {
         text: 'Five-Year Plan funding cycles provide multi-year stability for national priority areas including aging. Key Research Institutes (CAS, National Geriatrics Centers) receive rolling base funding. However, geopolitical risks and government priority shifts can redirect funding rapidly. The demographic urgency of aging provides institutional protection for this funding stream.',
         links: [],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 2,
+        text: 'Universities and CAS institutes typically hold IP from public grants; rules have clarified (Patent Law 2021) but enforcement and cross-institution consistency still vary. Spinout licensing is improving yet often slow and relationship-dependent. Inventor reward policies exist but are not as standardised as top-tier US/UK TTO norms.',
+        links: [{ label: 'CNIPA', url: 'https://www.cnipa.gov.cn/', comment: 'Patent law and university IP practice evolving' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 4,
         text: 'Major Chinese tech companies (Tencent, Alibaba/Alibaba Health, Bytedance/Xiaohe Health) and pharma (Fosun Pharma, BeiGene, Zai Lab) invest heavily in health and longevity-adjacent research. Tencent invested in Insilico Medicine; Alibaba Health runs preventive medicine platforms. Private longevity-specific investment is growing rapidly though still nascent vs. public funding.',
@@ -236,10 +241,10 @@ const china: CountryData = {
         text: 'NSFC grants and MOST national programs are fully non-dilutive. State-guided funds (政府引导基金) co-invest with VC but involve government equity stakes. No clean separation between non-dilutive grant and state equity investment — state often takes equity in companies it funds through industrial policy programs. Strong non-dilutive base for academic research; mixed for commercial biotech.',
         links: [{ label: 'NSFC Grants', url: 'https://www.nsfc.gov.cn/english/site_1/index.html', comment: 'Fully non-dilutive for academic researchers — equity models apply to commercial R&D programs' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
         score: 2,
-        text: 'IP framework is improving but remains a significant concern for longevity research translation. China\'s IP protection has strengthened (IP courts, Patent Law Amendment 2021) but enforcement gaps and state-owned enterprise IP complications persist. Foreign companies worry about compulsory licensing and technology transfer requirements. University IP ownership rules are clearer than before but inconsistent.',
-        links: [{ label: 'China Patent Law 2021', url: 'https://www.cnipa.gov.cn/', comment: 'CNIPA — 2021 Patent Law amendment strengthened IP protection' }],
+        text: 'MOST National Key R&D and similar directed programmes attach government interest in foreground results: licensing, export review, and SOE involvement can encumber performer freedom compared with ARPA-style OT contracts. Prize and local innovation calls vary by programme — less uniformly published performer retention than US/UK PM agencies.',
+        links: [{ label: 'MOST', url: 'https://www.most.gov.cn/eng/', comment: 'Directed programmes — IP and tech-transfer conditions programme-specific' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 2,

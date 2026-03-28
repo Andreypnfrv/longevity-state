@@ -178,6 +178,11 @@ const japan: CountryData = {
         text: 'KAKENHI grants provide 3–5 year research support, with renewal pathways. AMED programmes run in 5–7 year cycles. Moonshot goal funding is a 9-year commitment (2021–2030). However, Japanese R&D budgets have been relatively stagnant in real terms over the past decade. Fixed-term academic contracts create career instability that undermines long-term institutional commitment to researchers.',
         links: [{ label: 'JSPS KAKENHI Programmes', url: 'https://www.jsps.go.jp/english/e-grants/', comment: 'KAKENHI — 3–5 year research grants; structured renewal pathway; stagnant real-terms budget trend' }],
       },
+      [ResearchFundingClaim.IP_FRAMEWORK]: {
+        score: 2,
+        text: 'Universities and national institutes (e.g. RIKEN) typically hold title to employee inventions from public funding; 2015 and 2018 reforms improved TTO licensing and spinout paths but average time to deal remains 6–18 months and varies by institution. Individual researcher ownership is not the default.',
+        links: [{ label: 'JST technology transfer', url: 'https://www.jst.go.jp/tt/en/', comment: 'National TTO support; university retains IP in typical case' }],
+      },
       [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
         score: 3,
         text: 'Japan\'s pharmaceutical industry (Takeda, Astellas, Eisai, Daiichi Sankyo, Shionogi) invests substantially in aging-related R&D — Eisai\'s lecanemab investment alone represents billions. Industry-academic collaboration in aging is growing through JST open innovation programmes. Japan-based longevity VC ecosystem is modest; major private leverage comes from established pharma rather than early-stage longevity biotech.',
@@ -233,13 +238,13 @@ const japan: CountryData = {
       },
       [BreakthroughAgencyClaim.FUNDING_TYPE]: {
         score: 3,
-        text: 'AMED Moonshot provides non-dilutive grants with no IP encumbrance for public researchers. JST Bridge programme and INC provide co-investment for spinouts. Research grants are non-dilutive; commercialisation vehicles involve equity. Japan does not have a Bayh-Dole equivalent — universities and research institutes historically retained IP with negotiated licensing, though reforms since 2015 are improving developer IP access.',
+        text: 'AMED Moonshot provides non-dilutive grants with no IP encumbrance for public researchers. JST Bridge programme and INC provide co-investment for spinouts. Research grants are non-dilutive; commercialisation vehicles involve equity. University grant IP and spinout licensing are scored under Science / research funding.',
         links: [{ label: 'JST Technology Transfer', url: 'https://www.jst.go.jp/tt/en/', comment: 'JST — technology licensing and transfer; non-dilutive research funding; IP retained by institution with licensing pathway' }],
       },
-      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
-        score: 2,
-        text: 'Japan does not have a Bayh-Dole equivalent — universities historically retained IP from publicly funded research. Reform efforts (2015 University Reform Law, 2018 Open Innovation Act) have improved but not fully matched the US model. IP transfer from university to spinout is possible but takes 6–18 months. RIKEN has a more efficient IP transfer model. Individual researcher IP retention is not the default.',
-        links: [{ label: 'JST Technology Transfer Programme', url: 'https://www.jst.go.jp/tt/en/', comment: 'JST — IP transfer programme; university retains IP; licensing pathways improving but slower than Bayh-Dole' }],
+      [BreakthroughAgencyClaim.AGENCY_FOREGROUND_IP]: {
+        score: 4,
+        text: 'AMED Moonshot and JST directed programmes use non-dilutive project funding with foreground IP generally retained by the performing institution or company consortium under standard government-purpose licence terms — closer to PM-mission funding than classical SNSF-style grants alone. Encumbrance is narrower than systems with mandatory state assignment.',
+        links: [{ label: 'AMED', url: 'https://www.amed.go.jp/en/', comment: 'Project-based funding; performer-side retention typical' }],
       },
       [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
         score: 4,
