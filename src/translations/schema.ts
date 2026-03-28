@@ -55,6 +55,12 @@ export const fieldLabels: Record<string, Record<Locale, FieldTranslation>> = {
       description: 'Whether the country builds its own longevity research talent — from undergraduate exposure to aging biology through PhD programmes, postdoc ecosystems, public funding coverage, and industry-academia training links.',
     },
   },
+  [TalentsField.CLINICIAN_AGING_TRAINING]: {
+    [Locale.EN]: {
+      title: 'Clinician Aging Training',
+      description: 'How well clinicians are trained to work with aging — geriatrics as a recognised and well-resourced specialty, integration of aging biology in medical school, residency quality, longevity-specific CME, and national workforce planning.',
+    },
+  },
   [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
     [Locale.EN]: {
       title: 'Clinician-Scientist Pathway',

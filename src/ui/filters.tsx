@@ -164,6 +164,12 @@ const checkboxLabel: React.CSSProperties = {
   cursor: 'pointer',
 }
 
+const toolbarBtn: React.CSSProperties = {
+  ...selectBase,
+  padding: '4px 8px',
+  fontSize: 11,
+}
+
 export function Filters({
   theme,
   onThemeChange,
@@ -173,6 +179,10 @@ export function Filters({
   setVisibleCountries,
   showLeaders,
   setShowLeaders,
+  showExpandAll,
+  showCollapseAll,
+  onExpandAll,
+  onCollapseAll,
 }: {
   theme: 'night' | 'day'
   onThemeChange: (t: 'night' | 'day') => void
@@ -182,6 +192,10 @@ export function Filters({
   setVisibleCountries: React.Dispatch<React.SetStateAction<Set<Country>>>
   showLeaders: boolean
   setShowLeaders: React.Dispatch<React.SetStateAction<boolean>>
+  showExpandAll: boolean
+  showCollapseAll: boolean
+  onExpandAll: () => void
+  onCollapseAll: () => void
 }) {
   const [toolbarMenuOpen, setToolbarMenuOpen] = useState<string | null>(null)
 
@@ -281,6 +295,17 @@ export function Filters({
         <option value="yes">Leaders: on</option>
         <option value="no">Leaders: off</option>
       </select>
+
+      {showExpandAll && (
+        <button type="button" style={toolbarBtn} onClick={() => { onExpandAll(); setToolbarMenuOpen(null) }}>
+          Expand all
+        </button>
+      )}
+      {showCollapseAll && (
+        <button type="button" style={toolbarBtn} onClick={() => { onCollapseAll(); setToolbarMenuOpen(null) }}>
+          Collapse all
+        </button>
+      )}
     </nav>
   )
 }

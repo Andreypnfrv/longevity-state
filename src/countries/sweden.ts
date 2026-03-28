@@ -1,7 +1,7 @@
 import {
   Country, CountryData, ScreeningLevel,
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
-  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianScientistClaim,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
   BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
@@ -95,6 +95,34 @@ const sweden: CountryData = {
         score: 3,
         text: 'Swedish Longevity Cluster connects KI, SciLifeLab, and industry (AstraZeneca, Hansa Biopharma). ALF system links clinical and academic training. Industry-academia mobility growing but smaller scale and fewer dual-track positions than US hubs.',
         links: [{ label: 'Swedish Longevity Cluster', url: 'https://swedishlongevitycluster.se/', comment: 'Industry-academia consortium for longevity research coordination' }],
+      },
+    },
+
+    [TalentsField.CLINICIAN_AGING_TRAINING]: {
+      [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
+        score: 4,
+        text: 'Geriatrics (geriatrik) is a recognised, well-resourced medical specialty in Sweden. National workforce well above OECD median per capita. Longevity medicine increasingly visible as a sub-focus within geriatrics at KI and Uppsala.',
+        links: [],
+      },
+      [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
+        score: 3,
+        text: 'Aging biology and geriatric medicine integrated across clinical years at Swedish medical schools. KI curriculum includes longevity science exposure. Not fully longitudinal — basic mechanistic geroscience still underrepresented in preclinical years.',
+        links: [{ label: 'KI Medical Programme', url: 'https://ki.se/en/education/programmes-and-courses/medical-programme', comment: 'Karolinska Institutet medical education with aging integration' }],
+      },
+      [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
+        score: 4,
+        text: 'Geriatrics residency (ST-tjänst) is well-structured and nationally standardised. Longevity prevention exposure present at academic centres. Research components standard at KI-affiliated hospitals.',
+        links: [],
+      },
+      [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
+        score: 3,
+        text: 'SFAM and Swedish Geriatric Society offer CME in aging medicine. Longevity-specific content (preventive geroscience, biomarkers) growing within national CME catalogue, though not yet mandated across non-geriatric specialties.',
+        links: [],
+      },
+      [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
+        score: 3,
+        text: 'National healthcare commission (Socialstyrelsen) tracks geriatrics workforce and publishes shortage projections. Funded training expansion programmes in place. Regional distribution planning active, though rural-urban gaps remain.',
+        links: [{ label: 'Socialstyrelsen Workforce', url: 'https://www.socialstyrelsen.se/en/statistics-and-data/statistics/statistical-databases/healthcare-personnel/', comment: 'Swedish healthcare workforce statistics and planning' }],
       },
     },
 
@@ -428,26 +456,23 @@ const sweden: CountryData = {
           { label: 'SciLifeLab – Precision Medicine', url: 'https://www.scilifelab.se/capabilities/precision-medicine/', comment: 'Research infrastructure — not accessible as population screening' },
         ],
       },
+
       [PopulationScreeningClaim.SARCOPENIA_MUSCLE_MASS]: {
         score: 2,
-        text: 'No national sarcopenia screening programme. DEXA is available via referral for osteoporosis indication (Socialstyrelsen-funded for women 65+ and men 70+). BIA available in some rehabilitation and geriatric settings. The Swedish National Board of Health and Welfare does not have a sarcopenia screening recommendation. Opportunistic assessment occurs in geriatric medicine. Score: 2 (available but not funded proactively; osteoporosis-only indication for DEXA).',
-        links: [
-          { label: 'Socialstyrelsen – Osteoporosis Screening', url: 'https://www.socialstyrelsen.se/globalassets/sharepoint-dokument/artikelkatalog/nationella-riktlinjer/2012-5-3.pdf', comment: 'DEXA funded for osteoporosis — not sarcopenia' },
-        ],
+        text: 'No national sarcopenia screening programme. DEXA is available via referral for osteoporosis indication. BIA available in some rehabilitation and geriatric settings. The Swedish National Board of Health and Welfare does not have a sarcopenia screening recommendation. Opportunistic assessment occurs in geriatric medicine.',
+        links: [{ label: 'Socialstyrelsen – Osteoporosis Screening', url: 'https://www.socialstyrelsen.se/', comment: 'DEXA funded for osteoporosis — not sarcopenia' }],
       },
       [PopulationScreeningClaim.SLEEP_APNEA]: {
         score: 2,
-        text: 'No national screening programme for sleep apnoea. High-risk groups (e.g. drivers, patients with treatment-resistant hypertension) are typically screened by specialist referral. Home sleep testing (polygraphy) is available but requires clinical indication. No universal population offer. Significant underdiagnosis in primary care. Score: 2 (available on clinical indication; no proactive population-level programme; partial in selected risk groups).',
-        links: [
-          { label: 'Swedish Sleep Society – Guidelines', url: 'https://www.sosf.se/', comment: 'Swedish professional society for sleep disorders' },
-        ],
+        text: 'No national screening programme for sleep apnoea. High-risk groups (e.g. drivers, patients with treatment-resistant hypertension) are typically screened by specialist referral. Home sleep testing (polygraphy) is available but requires clinical indication. No universal population offer.',
+        links: [{ label: 'Swedish Sleep Society', url: 'https://www.sosf.se/', comment: 'Swedish professional society for sleep disorders' }],
       },
       [PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY]: {
         score: 4,
-        text: 'The Swedish health system has strong regional commissioning flexibility, and Socialstyrelsen publishes National Guidelines that can update on a 2–3 year basis. Sweden participates in EU Best Practice Portal and IAEA/WHO screening evaluations. Regional health technology assessment bodies (HTA-o, TLV for diagnostics) can conduct rapid evidence reviews. Pilots are routinely funded through SBU or regional research arms. Score: 4 (systematic horizon-scanning; evidence reviews within 12–18 months for priority questions; pilots well-funded).',
+        text: 'Socialstyrelsen publishes National Guidelines that can update on a 2–3 year basis. Regional HTA bodies (SBU) conduct rapid evidence reviews. Pilots are routinely funded through SBU or regional research arms. Sweden participates in EU Best Practice Portal and IAEA/WHO screening evaluations.',
         links: [
-          { label: 'Socialstyrelsen – National Guidelines Process', url: 'https://www.socialstyrelsen.se/regler-och-riktlinjer/nationella-riktlinjer/', comment: 'Swedish national clinical guidelines — update process' },
-          { label: 'SBU – Swedish Agency for Health Technology Assessment', url: 'https://www.sbu.se/en/', comment: 'HTA body producing rapid and full evidence reviews' },
+          { label: 'Socialstyrelsen – National Guidelines', url: 'https://www.socialstyrelsen.se/regler-och-riktlinjer/nationella-riktlinjer/', comment: 'Swedish national clinical guidelines — update process' },
+          { label: 'SBU – Swedish Agency for HTA', url: 'https://www.sbu.se/en/', comment: 'HTA body producing rapid and full evidence reviews' },
         ],
       },
     },
@@ -553,10 +578,9 @@ const sweden: CountryData = {
       },
       [PreventiveTrialsClaim.PATIENT_TRIAL_ACCESS]: {
         score: 3,
-        text: 'Sweden has no centralised national patient-facing trial matching portal, but the infrastructure for EHR-based identification is world-class. Register-based RCTs (e.g. DAPA-HF, TITRATION) demonstrate that the national registers can identify and contact eligible patients. Uppsala CRC and NEAR provide eligibility matching tools for researchers. No systematic nationwide proactive patient notification. Score: 3 (automated EHR-based eligibility matching in register-based trial model; patients notified of selected open trials via UCR infrastructure).',
+        text: 'Sweden has no centralised national patient-facing trial matching portal, but the infrastructure for EHR-based identification is world-class. Register-based RCTs demonstrate that national registers can identify and contact eligible patients. Uppsala CRC and NEAR provide eligibility matching tools for researchers. No systematic nationwide proactive patient notification.',
         links: [
-          { label: 'Uppsala Clinical Research Center – Recruitment', url: 'https://www.ucr.uu.se/en/services/data-management/patient-recruitment', comment: 'EHR-based patient identification for trials' },
-          { label: 'EU Clinical Trials Register', url: 'https://www.clinicaltrialsregister.eu/', comment: 'EMA registry used by Swedish trials' },
+          { label: 'Uppsala Clinical Research Center – Recruitment', url: 'https://www.ucr.uu.se/en/', comment: 'EHR-based patient identification for trials' },
         ],
       },
     },
@@ -805,10 +829,10 @@ const sweden: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
-        text: 'Läkemedelsverket (Swedish Medical Products Agency) enforces EU cosmetics regulations strictly, and cosmetics cannot carry medicinal/systemic anti-aging claims without reclassification as drugs. The Swedish Advertising Standards Authority (Reklamombudsmannen) proactively reviews and removes unsubstantiated anti-aging claims. The Swedish Medical Association (Läkarförbundet) has issued guidelines against members promoting unproven interventions, and Inspektionen för vård och omsorg (IVO) can sanction healthcare providers for pseudoscientific practice. The supplement and "biohacking" market is smaller and less aggressive than in the US or UK. No pre-market biomarker requirement for anti-aging claims. Score: 3 (substantiated-claims standard enforced; professional sanctions possible; A4M-type pseudo-certifications not recognised as clinical qualifications in Sweden).',
+        text: 'Läkemedelsverket (Swedish MPA) enforces EU cosmetics regulations strictly — cosmetics cannot carry systemic anti-aging claims without reclassification as drugs. Reklamombudsmannen proactively reviews and removes unsubstantiated anti-aging claims. The Swedish Medical Association has issued guidelines against members promoting unproven interventions, and IVO can sanction healthcare providers for pseudoscientific practice. The supplement and "biohacking" market is smaller and less aggressive than in the US or UK.',
         links: [
-          { label: 'Läkemedelsverket – Cosmetics Regulation', url: 'https://www.lakemedelsverket.se/en/cosmetics', comment: 'Swedish MPA — cosmetics cannot carry medicinal/systemic anti-aging claims; drug borderline enforced' },
-          { label: 'Reklamombudsmannen', url: 'https://www.reklamombudsmannen.se/', comment: 'Swedish advertising standards — proactive review; removes unsubstantiated health/anti-aging claims' },
+          { label: 'Läkemedelsverket – Cosmetics Regulation', url: 'https://www.lakemedelsverket.se/en/cosmetics', comment: 'Swedish MPA — systemic anti-aging claims trigger drug classification' },
+          { label: 'Reklamombudsmannen', url: 'https://www.reklamombudsmannen.se/', comment: 'Swedish advertising standards — proactive review; removes unsubstantiated claims' },
         ],
       },
     },

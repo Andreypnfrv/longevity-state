@@ -112,6 +112,12 @@ function achievedFillDotVar(score: number, maxScore: number): string {
   return `var(--dot-${level})`
 }
 
+function isMaxScoreHighlight(score: number, maxScore: number): boolean {
+  if (maxScore <= 0) return false
+  if (maxScore <= 5) return score >= 4.999
+  return score >= maxScore - 0.01
+}
+
 const STANDARD_SCALE_LABELS: Record<number, string> = {
   1: 'Absent',
   2: 'Weak',
@@ -445,11 +451,12 @@ function SingleClaimCell({
   detailExpanded: boolean
   onDetailToggle: () => void
 }) {
+  const maxHi = isMaxScoreHighlight(data.score, maxScore)
   return (
     <div
       onClick={e => e.stopPropagation()}
       style={{
-        background: 'var(--cell-bg)',
+        background: maxHi ? 'var(--cell-max-highlight-bg)' : 'var(--cell-bg)',
         border: '1px solid var(--border)',
         borderRadius: 6,
         padding: '6px 10px',
@@ -496,12 +503,13 @@ function FieldCell({
   const cellTooltip = claimKeys.length === 1
     ? getScaleLevelText(fieldKey, claimKeys[0]!, score)
     : (STANDARD_SCALE_LABELS[Math.round(score)] ?? null)
+  const maxHi = isMaxScoreHighlight(score, maxScore)
 
   return (
     <div
       onClick={onToggleRow}
       style={{
-        background: 'var(--cell-bg)',
+        background: maxHi ? 'var(--cell-max-highlight-bg)' : 'var(--cell-bg)',
         border: '1px solid var(--border)',
         borderRadius: 6,
         padding: CELL_PAD,
@@ -669,6 +677,21 @@ export default function App() {
     [visibleCountries],
   )
 
+  const { allRowKeys, allDetailKeys } = useMemo(() => {
+    const rowKeys: string[] = []
+    const detailKeys: string[] = []
+    for (const g of groupsFiltered) {
+      for (const field of g.fields) {
+        const rk = rowKey(g.group, field)
+        rowKeys.push(rk)
+        for (const ck of orderedClaimKeys(countries, g.accessor, field)) {
+          detailKeys.push(`${rk}::${ck}`)
+        }
+      }
+    }
+    return { allRowKeys: rowKeys, allDetailKeys: detailKeys }
+  }, [groupsFiltered, countries])
+
   const gridCols = showLeaders
     ? `${FIELD_COL}px ${LEADERS_COL}px repeat(${countries.length}, ${COUNTRY_COL}px)`
     : `${FIELD_COL}px repeat(${countries.length}, ${COUNTRY_COL}px)`
@@ -708,6 +731,23 @@ export default function App() {
       else next.add(detailKey)
       return next
     })
+  }, [])
+
+  const everythingExpanded =
+    allRowKeys.length > 0 &&
+    allRowKeys.every(rk => expandedRows.has(rk)) &&
+    allDetailKeys.every(dk => expandedClaimDetails.has(dk))
+  const showExpandAll = allRowKeys.length > 0 && !everythingExpanded
+  const showCollapseAll = expandedRows.size > 0 || expandedClaimDetails.size > 0
+
+  const onExpandAll = useCallback(() => {
+    setExpandedRows(new Set(allRowKeys))
+    setExpandedClaimDetails(new Set(allDetailKeys))
+  }, [allRowKeys, allDetailKeys])
+
+  const onCollapseAll = useCallback(() => {
+    setExpandedRows(new Set())
+    setExpandedClaimDetails(new Set())
   }, [])
 
   const totalFields = groupsFiltered.reduce((n: number, g: GroupDef) => n + g.fields.length, 0)
@@ -796,6 +836,10 @@ export default function App() {
             setVisibleCountries={setVisibleCountries}
             showLeaders={showLeaders}
             setShowLeaders={setShowLeaders}
+            showExpandAll={showExpandAll}
+            showCollapseAll={showCollapseAll}
+            onExpandAll={onExpandAll}
+            onCollapseAll={onCollapseAll}
           />
         </div>
 

@@ -23,6 +23,9 @@ export enum Country {
   GEORGIA = 'georgia',
   CHINA = 'china',
   ISRAEL = 'israel',
+  SINGAPORE   = 'singapore',
+  JAPAN       = 'japan',
+  SWITZERLAND = 'switzerland',
 }
 
 // ------------------------------------------------------------
@@ -45,6 +48,7 @@ export enum TalentsField {
   RESEARCHER_IMMIGRATION      = 'researcher_immigration',
   CLINICIAN_IMMIGRATION       = 'clinician_immigration',
   RESEARCH_TRAINING_PIPELINE  = 'research_training_pipeline',
+  CLINICIAN_AGING_TRAINING    = 'clinician_aging_training',
   CLINICIAN_SCIENTIST_PATHWAY = 'clinician_scientist_pathway',
 }
 
@@ -114,6 +118,14 @@ export enum ResearchTrainingClaim {
   INDUSTRY_ACADEMIA_BRIDGE = 'industry_academia_bridge',
 }
 
+export enum ClinicianAgingTrainingClaim {
+  GERIATRICS_AS_SPECIALTY    = 'geriatrics_as_specialty',
+  MEDICAL_SCHOOL_INTEGRATION = 'medical_school_integration',
+  RESIDENCY_QUALITY          = 'residency_quality',
+  LONGEVITY_CME              = 'longevity_cme',
+  WORKFORCE_PLANNING         = 'workforce_planning',
+}
+
 export enum ClinicianScientistClaim {
   COMBINED_DEGREE_EXISTS  = 'combined_degree_exists',
   PUBLIC_FUNDING          = 'public_funding',
@@ -126,6 +138,7 @@ export const TALENTS_CLAIM_SCALES: {
   [TalentsField.RESEARCHER_IMMIGRATION]:      Record<ResearcherImmigrationClaim, Record<number, string>>
   [TalentsField.CLINICIAN_IMMIGRATION]:       Record<ClinicianImmigrationClaim, Record<number, string>>
   [TalentsField.RESEARCH_TRAINING_PIPELINE]:  Record<ResearchTrainingClaim, Record<number, string>>
+  [TalentsField.CLINICIAN_AGING_TRAINING]:    Record<ClinicianAgingTrainingClaim, Record<number, string>>
   [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: Record<ClinicianScientistClaim, Record<number, string>>
 } = {
   [TalentsField.RESEARCHER_IMMIGRATION]: {
@@ -257,6 +270,49 @@ export const TALENTS_CLAIM_SCALES: {
     },
   },
 
+  [TalentsField.CLINICIAN_AGING_TRAINING]: {
+    [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
+      0: 'Geriatrics not recognised as a specialty; aging care embedded in internal medicine without dedicated training',
+      1: 'Geriatrics recognised but underfunded and low-prestige; few training positions',
+      2: 'Geriatrics as established specialty with residency programme; moderate national workforce',
+      3: 'Well-resourced geriatrics specialty; competitive positions; adequate workforce planning',
+      4: 'High-prestige, well-compensated geriatrics; longevity medicine emerging as sub-specialisation',
+      5: 'Aging medicine as mainstream prestigious specialty; longevity medicine formally recognised; pipeline fully funded',
+    },
+    [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
+      0: 'Aging biology not systematically taught in medical school',
+      1: 'Brief geriatrics rotation in final year only; no mechanistic aging biology taught',
+      2: 'Aging biology in basic science years; geriatrics clinical rotation required',
+      3: 'Aging integrated across multiple clinical rotations; longevity prevention in curriculum',
+      4: 'Comprehensive aging medicine curriculum; biological mechanisms taught alongside pathology',
+      5: 'Aging as a through-line across all years; graduating doctors competent in longevity interventions',
+    },
+    [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
+      0: 'No geriatrics residency; aging care managed by generalists without specific training',
+      1: 'Short geriatrics rotation within internal medicine; not a standalone residency',
+      2: 'Standalone geriatrics residency (1–2 years) at academic centres',
+      3: 'Well-structured geriatrics residency with longevity medicine exposure; multiple national centres',
+      4: 'Residency includes aging biology, preventive longevity, and research components',
+      5: 'World-class aging medicine residency with longevity sub-specialisation; clinical research integrated',
+    },
+    [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
+      0: 'No CME in longevity or aging medicine; not in national CME framework',
+      1: 'Occasional conference-based education; no structured longevity CME track',
+      2: 'CME modules in geriatrics available; not specific to longevity interventions',
+      3: 'Dedicated longevity medicine CME accessible to clinicians across all specialties',
+      4: 'Required CME in aging medicine for specialties seeing older patients; longevity interventions included',
+      5: 'National longevity medicine CPD framework; all practising clinicians updated on aging science advances',
+    },
+    [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
+      0: 'No national geriatrics workforce plan; workforce left to market forces',
+      1: 'Workforce shortage acknowledged; no coordinated response',
+      2: 'National plan exists; training capacity modestly expanded',
+      3: 'Funded expansion of geriatrics training; supply-demand gap actively tracked and published',
+      4: 'National aging medicine workforce strategy with 10-year targets; shortfall systematically addressed',
+      5: 'Fully coordinated plan; supply meets projected demand; regional distribution actively managed',
+    },
+  },
+
   [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
     [ClinicianScientistClaim.COMBINED_DEGREE_EXISTS]: {
       0: 'No combined MD-PhD or equivalent; impossible to pursue both in a structured way',
@@ -383,6 +439,26 @@ export const SCREENING_SCALE: Record<number, { label: string; description: strin
   [ScreeningLevel.ACTIONABLE_LOOP]: { label: 'Actionable loop', description: 'Results trigger automated follow-up care pathway' },
 }
 
+// ── Established (strong RCT / USPSTF A–B / EU equivalent) ─────────────────
+// ── Longevity-frontier (growing evidence; score reflects current clinical integration) ──
+// → Add new targets below as national guidance solidifies
+export enum PopulationScreeningClaim {
+  CARDIOVASCULAR_RISK  = 'cardiovascular_risk',
+  BREAST_CANCER        = 'breast_cancer',
+  COLORECTAL_CANCER    = 'colorectal_cancer',    // FIT stool test or colonoscopy
+  CERVICAL_CANCER_HPV  = 'cervical_cancer_hpv',  // HPV primary testing
+  AAA_ULTRASOUND       = 'aaa_ultrasound',        // abdominal aortic aneurysm, men 65–75 ever-smokers
+  DIABETES_METABOLIC   = 'diabetes_metabolic',    // HbA1c / fasting glucose + lifestyle offer
+  OSTEOPOROSIS_DEXA    = 'osteoporosis_dexa',     // DEXA scan, women 65+, men 70+
+  LUNG_CANCER_CT       = 'lung_cancer_ct',        // low-dose CT, heavy smokers only
+  ATRIAL_FIBRILLATION  = 'atrial_fibrillation',   // ECG / pulse; early AF → anticoagulation reduces stroke
+  COGNITIVE_DECLINE    = 'cognitive_decline',     // pending scalable disease-modifying treatments
+  POLYGENIC_RISK              = 'polygenic_risk',              // genome-wide PRS-based risk stratification
+  SARCOPENIA_MUSCLE_MASS      = 'sarcopenia_muscle_mass',      // DEXA/BIA muscle mass; independent mortality predictor
+  SLEEP_APNEA                 = 'sleep_apnea',                 // 10–15% adults undiagnosed; strong dementia/CVD predictor
+  SCREENING_PROGRAMME_AGILITY = 'screening_programme_agility', // meta: how fast can new screenings be added/piloted/removed
+}
+
 // Separate 0–5 scale for SCREENING_PROGRAMME_AGILITY — measures system meta-capability,
 // not presence of a specific screening; cannot use ScreeningLevel.
 export const SCREENING_PROGRAMME_AGILITY_SCALE: Record<number, string> = {
@@ -392,26 +468,6 @@ export const SCREENING_PROGRAMME_AGILITY_SCALE: Record<number, string> = {
   3: 'Formal rapid evaluation pathway; evidence review leading to policy within 12–18 months',
   4: 'Systematic horizon-scanning; pilots funded by default; commissioning authority for promising screenings',
   5: 'Adaptive commissioning model; new screenings added/removed in 6–12 months; continuous programme evaluation built in',
-}
-
-// ── Established (strong RCT / USPSTF A–B / EU equivalent) ─────────────────
-// ── Longevity-frontier (growing evidence; score reflects current clinical integration) ──
-// → Add new targets below as national guidance solidifies
-export enum PopulationScreeningClaim {
-  CARDIOVASCULAR_RISK        = 'cardiovascular_risk',
-  BREAST_CANCER              = 'breast_cancer',
-  COLORECTAL_CANCER          = 'colorectal_cancer',          // FIT stool test or colonoscopy
-  CERVICAL_CANCER_HPV        = 'cervical_cancer_hpv',        // HPV primary testing
-  AAA_ULTRASOUND             = 'aaa_ultrasound',             // abdominal aortic aneurysm, men 65–75 ever-smokers
-  DIABETES_METABOLIC         = 'diabetes_metabolic',         // HbA1c / fasting glucose + lifestyle offer
-  OSTEOPOROSIS_DEXA          = 'osteoporosis_dexa',          // DEXA scan, women 65+, men 70+
-  LUNG_CANCER_CT             = 'lung_cancer_ct',             // low-dose CT, heavy smokers only
-  ATRIAL_FIBRILLATION        = 'atrial_fibrillation',        // ECG / pulse; early AF → anticoagulation reduces stroke
-  COGNITIVE_DECLINE          = 'cognitive_decline',          // pending scalable disease-modifying treatments
-  POLYGENIC_RISK             = 'polygenic_risk',             // genome-wide PRS-based risk stratification
-  SARCOPENIA_MUSCLE_MASS     = 'sarcopenia_muscle_mass',     // DEXA/BIA muscle mass; independent mortality predictor
-  SLEEP_APNEA                = 'sleep_apnea',                // 10–15% adults undiagnosed; strong dementia/CVD predictor
-  SCREENING_PROGRAMME_AGILITY = 'screening_programme_agility', // meta: how fast can new screenings be added/piloted/removed
 }
 
 export enum BiomarkerCollectionClaim {
@@ -1228,7 +1284,7 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
     2: 'Advertising regulator has issued domain-specific guidance on anti-aging claims; unsubstantiated "anti-aging" and "reverses aging" claims in cosmetics and supplements are routinely challenged and removed. Professional medical associations have published position statements against specific pseudo-practices (A4M-style, IV drip clinics, hormone optimisation without indication). No pre-market requirement; enforcement remains complaint-driven.',
     3: 'Products cannot carry "anti-aging" or equivalent systemic claims without substantiated clinical data on file with the regulator. Medical licensing boards have explicit rules: members endorsing unproven anti-aging interventions face disciplinary proceedings. A4M-type certifications are explicitly listed as insufficient clinical qualification; practitioners using them to justify prescribing unlicensed agents can be sanctioned.',
     4: 'Systemic anti-aging effect claims require biomarker evidence reviewed by the regulator before marketing is permitted. Advertising regulator proactively monitors and issues removal orders on non-compliant claims. Public registry distinguishes validated from non-validated anti-aging claims. Practitioners at dedicated "longevity clinics" promoting disproven regimens face license review.',
-    5: 'Anti-aging effect claims require the same evidence standard as drug efficacy claims — validated biomarker endpoints from a regulator-approved list must be demonstrated. Pseudo-certification bodies that grant clinical authority without recognised medical training are banned from doing so. Regulatory science body maintains and updates the accepted evidence standards for longevity claims. Country is a global reference for evidence-based consumer protection in the longevity space.',
+    5: 'Anti-aging effect claims require the same evidence standard as drug efficacy claims — validated biomarker endpoints from a regulator-approved list must be demonstrated. Pseudo-certification bodies that grant clinical authority without recognised medical training are banned from doing so. Country is a global reference for evidence-based consumer protection in the longevity space.',
   },
 }
 
@@ -1261,6 +1317,7 @@ export interface CountryData {
     [TalentsField.RESEARCHER_IMMIGRATION]:      Record<ResearcherImmigrationClaim, ClaimData>
     [TalentsField.CLINICIAN_IMMIGRATION]:       Record<ClinicianImmigrationClaim, ClaimData>
     [TalentsField.RESEARCH_TRAINING_PIPELINE]:  Record<ResearchTrainingClaim, ClaimData>
+    [TalentsField.CLINICIAN_AGING_TRAINING]:    Record<ClinicianAgingTrainingClaim, ClaimData>
     [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: Record<ClinicianScientistClaim, ClaimData>
   }
 

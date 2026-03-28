@@ -12,7 +12,7 @@ Build: `npm run build`. Preview static: `npm run preview`.
 
 ## Code
 
-- `schema.ts` — types, enums, scoring rules.
-- `countries/*.ts` — `CountryData` per country; register in `countries/index.ts`.
-- `translations/` — labels for UI.
+- `src/schema/` — types, enums, scoring rules (`index.ts`, `policyGroups.ts`).
+- `src/countries/*.ts` — `CountryData` per country; register in `src/countries/index.ts`.
+- `src/translations/` — labels for UI.
 - `src/App.tsx` — view.
