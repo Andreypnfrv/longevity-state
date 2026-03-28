@@ -179,7 +179,6 @@ function LeadersEvidenceColumn({
   const more = filtered.length - shown.length
   return (
     <div
-      onClick={e => e.stopPropagation()}
       style={{
         display: 'flex',
         flexDirection: 'row',
@@ -224,10 +223,14 @@ function LeadersEvidenceColumn({
               tabIndex={snip && toggleSnip ? 0 : undefined}
               aria-expanded={snip && toggleSnip ? snipExpanded : undefined}
               aria-label={snip && toggleSnip ? `${countryLabels[data.country][Locale.EN]} evidence` : undefined}
-              onClick={snip && toggleSnip ? () => toggleSnip() : undefined}
+              onClick={snip && toggleSnip ? e => {
+                e.stopPropagation()
+                toggleSnip()
+              } : undefined}
               onKeyDown={snip && toggleSnip ? e => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
+                  e.stopPropagation()
                   toggleSnip()
                 }
               } : undefined}
@@ -258,14 +261,17 @@ function LeadersEvidenceColumn({
               </div>
             </div>
             {snip && snipExpanded ? (
-              <div style={{
-                flex: '1 1 200px',
-                minWidth: 140,
-                fontSize: 11,
-                color: 'var(--cell-muted)',
-                lineHeight: 1.55,
-                wordBreak: 'break-word',
-              }}>
+              <div
+                onClick={e => e.stopPropagation()}
+                style={{
+                  flex: '1 1 200px',
+                  minWidth: 140,
+                  fontSize: 11,
+                  color: 'var(--cell-muted)',
+                  lineHeight: 1.55,
+                  wordBreak: 'break-word',
+                }}
+              >
                 {snip}
               </div>
             ) : null}
@@ -470,7 +476,7 @@ export default function CountryPage(props: IndexPageProps) {
                   background: 'var(--cell-bg)',
                 }}>
                   <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
-                    Todo
+                    Todo for {countryLabels[selected.country][Locale.EN]}
                   </span>
                 </div>
               </div>

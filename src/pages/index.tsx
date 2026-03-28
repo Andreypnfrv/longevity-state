@@ -1,4 +1,5 @@
-import React, { Fragment, useCallback, Dispatch, SetStateAction, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, { Fragment, useCallback, Dispatch, SetStateAction, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import {
   Country,
@@ -36,6 +37,7 @@ import { useRowHoverHighlight, rowHoverGridSurfaceStyle, rowHoverStickyColStyle 
 import { TableScrollRegion } from '../table/ui/TableScrollRegion'
 import { TableGridRow } from '../table/ui/TableGridRow'
 import { detailCellStopOuterPropagation } from '../table/rowActivation'
+import { Clipboard } from 'lucide-react'
 
 export const FIELD_COL = 260
 export const LEADERS_COL = 200
@@ -395,6 +397,21 @@ export function ScoreDots({ score, maxScore = 5, size = 7 }: { score: number; ma
   )
 }
 
+function formatClaimClipboardCopy(data: ClaimData): string {
+  const parts: string[] = []
+  const t = data.text?.trim()
+  if (t) parts.push(t)
+  for (const l of data.links) {
+    const label = l.label?.trim()
+    const url = l.url?.trim() ?? ''
+    const comment = l.comment?.trim()
+    let line = label ? `${label}\n${url}` : url
+    if (comment) line += `\n${comment}`
+    parts.push(line)
+  }
+  return parts.join('\n\n')
+}
+
 function ClaimRow({
   fieldKey,
   claimKey,
@@ -419,11 +436,27 @@ function ClaimRow({
   detailToggleOnClick?: boolean
 }) {
   const [localDetailOpen, setLocalDetailOpen] = useState(false)
+  const [copyToast, setCopyToast] = useState(false)
+  const copyToastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const controlled = onDetailToggle !== undefined
   const open = controlled ? Boolean(detailExpanded) : localDetailOpen
   const t = claimLabels[fieldKey]?.[claimKey]?.[Locale.EN]
 
+  useEffect(() => () => {
+    if (copyToastTimer.current) clearTimeout(copyToastTimer.current)
+  }, [])
+
+  const showCopyToast = useCallback(() => {
+    if (copyToastTimer.current) clearTimeout(copyToastTimer.current)
+    setCopyToast(true)
+    copyToastTimer.current = setTimeout(() => {
+      setCopyToast(false)
+      copyToastTimer.current = null
+    }, 2200)
+  }, [])
+
   return (
+    <>
     <div
       onClick={e => {
         e.stopPropagation()
@@ -439,21 +472,59 @@ function ClaimRow({
     >
       <div style={{
         display: 'flex',
-        alignItems: hideTitle && hideChevron ? 'center' : 'flex-start',
+        alignItems: 'center',
         gap: 8,
+        width: '100%',
+        minWidth: 0,
       }}>
-        <Tooltip text={getScaleLevelText(fieldKey, claimKey, data.score)}>
-          <ScoreDots score={data.score} maxScore={maxScore} size={6} />
-        </Tooltip>
-        {!hideTitle && (
-          <span style={{ fontSize: 11, color: 'var(--cell-text)', flex: 1, lineHeight: 1.4, opacity: 0.92 }}>
-            {t?.title ?? claimKey}
-          </span>
-        )}
-        {!hideChevron && (
-          <span style={{ color: 'var(--cell-muted)', fontSize: 9, flexShrink: 0 }}>
-            {open ? '▲' : '▼'}
-          </span>
+        <div style={{
+          display: 'flex',
+          alignItems: hideTitle && hideChevron ? 'center' : 'flex-start',
+          gap: 8,
+          flex: 1,
+          minWidth: 0,
+        }}>
+          <Tooltip text={getScaleLevelText(fieldKey, claimKey, data.score)}>
+            <ScoreDots score={data.score} maxScore={maxScore} size={6} />
+          </Tooltip>
+          {!hideTitle && (
+            <span style={{ fontSize: 11, color: 'var(--cell-text)', flex: 1, lineHeight: 1.4, opacity: 0.92 }}>
+              {t?.title ?? claimKey}
+            </span>
+          )}
+          {!hideChevron && (
+            <span style={{ color: 'var(--cell-muted)', fontSize: 9, flexShrink: 0 }}>
+              {open ? '▲' : '▼'}
+            </span>
+          )}
+        </div>
+        {open && (
+          <button
+            type="button"
+            aria-label="Copy evidence to clipboard"
+            onClick={e => {
+              e.stopPropagation()
+              const w = navigator.clipboard?.writeText(formatClaimClipboardCopy(data))
+              if (w) void w.then(() => showCopyToast()).catch(() => {})
+            }}
+            style={{
+              flexShrink: 0,
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 2,
+              margin: 0,
+              border: 'none',
+              background: 'transparent',
+              color: 'var(--muted)',
+              cursor: 'pointer',
+              borderRadius: 4,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)' }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)' }}
+          >
+            <Clipboard size={15} strokeWidth={2} aria-hidden />
+          </button>
         )}
       </div>
 
@@ -487,6 +558,32 @@ function ClaimRow({
         </div>
       )}
     </div>
+    {copyToast && createPortal(
+      <div
+        role="status"
+        aria-live="polite"
+        style={{
+          position: 'fixed',
+          bottom: 28,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 9999,
+          padding: '10px 16px',
+          borderRadius: 8,
+          fontSize: 12,
+          fontWeight: 500,
+          color: 'var(--text)',
+          background: 'var(--surface)',
+          border: '1px solid var(--border-hi)',
+          boxShadow: 'var(--shadow-dropdown)',
+          pointerEvents: 'none',
+        }}
+      >
+        Copied
+      </div>,
+      document.body,
+    )}
+    </>
   )
 }
 

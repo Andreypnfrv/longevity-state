@@ -2,13 +2,16 @@
   "name": "longevity-state",
   "private": true,
   "version": "0.1.0",
+  "author": "Andrei Panferov",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
+    "lucide-react": "^1.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"
@@ -17,6 +20,7 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.1",
+    "firebase-tools": "^14.0.0",
     "typescript": "^5.5.3",
     "vite": "^5.4.1"
   }
