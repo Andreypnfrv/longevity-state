@@ -13,6 +13,7 @@ import { Locale } from './index'
 export interface ClaimTranslation {
   title: string
   description: string
+  maxScore?: number
 }
 
 // Nested: claimLabels[fieldKey][claimKey][locale]
@@ -608,19 +609,28 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
   [SocietalField.SOCIETAL_READINESS]: {
     [SocietalReadinessClaim.PUBLIC_TRUST]: { [Locale.EN]: {
       title: 'Public trust in science & medicine',
-      description: 'Measured public trust in scientific and medical institutions — the baseline social contract on which longevity research acceptance depends.',
+      description: 'Representative-survey trust in clinicians, biomedical science, and public-health institutions — scored by the weakest link that would constrain longevity-relevant uptake (novel therapies, trials, data sharing). Not the same as quackery resistance (alternative medicine markets can thrive even when institutional trust is high).',
     }},
-    [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: { [Locale.EN]: {
-      title: 'Societal longevity acceptance',
-      description: 'How broadly society accepts longevity extension — not just disease treatment — as a legitimate and desirable goal for science and policy.',
+    [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: { [Locale.EN]: {
+      title: 'Aging media framing',
+      description: 'At what level of ambition does mainstream media frame aging — from fatalism and elder care through healthy-aging lifestyle, up to geroscience (hallmarks, biological age reversal, senolytics) and indefinite healthspan as a cultural goal. The score reflects the highest ambition level with sustained mainstream presence, not fringe coverage.',
     }},
-    [SocietalReadinessClaim.POLITICAL_WILL]: { [Locale.EN]: {
-      title: 'Political will for longevity',
-      description: 'Whether there is sustained political commitment — funded programmes, dedicated agencies, or cross-party consensus — to advance longevity science and policy.',
+    [SocietalReadinessClaim.POLICY_COMMITMENT]: { [Locale.EN]: {
+      title: 'Policy commitment',
+      description: 'What the state actually funds and locks in — ring-fenced budgets, agencies, statute, and survival across elections. This is institutional follow-through, not how often politicians talk about aging (see legislative salience).',
+    }},
+    [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: { [Locale.EN]: {
+      title: 'Legislative salience',
+      description: 'At what ambition level MPs, party leaders, and heads of state publicly discuss aging: from pensions-only speech (0) through economic demographic burden (1), healthy aging and disease-of-aging agendas (2), geroscience with a documentary record (3), to longevity as a competing electoral and executive mandate (4). Scored 0–4.',
+      maxScore: 4,
     }},
     [SocietalReadinessClaim.QUACKERY_RESISTANCE]: { [Locale.EN]: {
       title: 'Anti-aging quackery resistance',
       description: 'How well the regulatory and professional environment protects people from unproven anti-aging products and pseudo-specialist claims. Ranges from an unregulated "anti-aging" marketing free-for-all (0) to a system where any anti-aging effect claim requires validated biomarker evidence and pseudo-certification bodies cannot confer clinical authority (5).',
     }},
   },
+}
+
+export function claimMaxScore(fieldKey: string, claimKey: string, fieldDefault: number): number {
+  return claimLabels[fieldKey]?.[claimKey]?.[Locale.EN]?.maxScore ?? fieldDefault
 }

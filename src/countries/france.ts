@@ -709,15 +709,26 @@ const france: CountryData = {
         text: 'France has significant vaccine hesitancy historically — among the highest in Western Europe — and a culturally embedded méfiance toward institutions. Trust in medicine itself is reasonable but trust in government-directed health interventions is lower than in Scandinavia or Germany. Science communication is a political priority but baseline scepticism persists.',
         links: [],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
-        text: 'Vieillir bien (aging well) is a positive cultural framing in France; preventive medicine is respected. Radical life extension is less culturally salient than in the US or Singapore. CCNE (Comité Consultatif National d\'Éthique) tends toward ethical precaution on life-extension technologies. Longevity science is not a mainstream political topic.',
-        links: [],
+        text: 'Vieillir bien and prevention are respectable frames; ethics bodies (CCNE) lean cautious on life-extension tech. Mainstream press treats longevity mostly as demography, healthy life expectancy, and exceptional age — not geroscience (hallmarks, senolytics, biological age) as everyday vocabulary. Radical life extension is less salient than in the US.',
+        links: [
+          { label: 'Le Monde — supercentenarians and extreme longevity', url: 'https://www.lemonde.fr/m-perso/article/2024/06/30/110-ans-et-plus-la-longevite-extreme-des-supercentenaires_6245479_4497916.html', date: 'Jun 2024', comment: 'Major daily — demographic and health framing of very old age' },
+          { label: 'Le Monde — healthy life expectancy after 65 (Drees)', url: 'https://www.lemonde.fr/societe/article/2024/12/31/apres-65-ans-il-vous-reste-entre-dix-et-douze-annees-en-bonne-en-sante-en-moyenne-selon-la-drees_6475172_3224.html', date: 'Dec 2024', comment: 'Society desk — disability-free life expectancy; prevention and chronic disease context' },
+        ],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
-        score: 2,
-        text: 'France 2030 Plan includes health and aging research as investment priorities — €7.5B for health innovation. Plan Maladies Neurodégénératives and national Alzheimer strategy demonstrate political engagement with aging disease. However, no dedicated longevity science programme with measurable healthspan targets exists at the national level.',
-        links: [{ label: 'France 2030 Santé', url: 'https://www.gouvernement.fr/france-2030', comment: 'France 2030 plan — includes health innovation investment but not longevity-specific mandate' }],
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 3,
+        text: 'France 2030 is a genuine multi-year investment plan (€54B total, €7.5B for health innovation) endorsed by the Élysée and backed by programme law — providing more structural durability than a simple budget line. The Plan Maladies Neurodégénératives and national Alzheimer strategy represent cross-ministry sustained commitments. INSERM\'s Institut du Vieillissement and the France Biotech ecosystem give longevity-adjacent science institutional anchoring. France 2030 has survived multiple prime ministers under Macron, demonstrating presidential-level commitment resilience — though its aging-specific budget line lacks quantified healthspan targets.',
+        links: [{ label: 'France 2030 Santé', url: 'https://www.gouvernement.fr/france-2030', comment: 'France 2030 — multi-year presidential programme; health innovation including aging, without explicit longevity-science mandate' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'The Sénat and Assemblée foreground Ehpad financing, autonomie branch experiments, and dependency ratios — September 2024 registered reports on residential care deficits illustrate fiscal and capacity framing. Party competition in 2024–2025 cycles does not centre geroscience, biological aging targets, or longevity medicine; discourse stays in social insurance and care-system reform (rung 1: economic/social burden of aging).',
+        links: [
+          { label: 'Sénat — Information report on Ehpad situation', url: 'https://www.senat.fr/rap/r23-778/r23-77818.html', date: 'Sep 2024', comment: 'Registered report — eldercare homes, demographic and financial pressure' },
+          { label: 'Gouvernement — Stratégie « Bien vieillir »', url: 'https://solidarites.gouv.fr/preparer-la-france-de-demain-ajouter-de-la-vie-aux-annees-strategie-bien-vieillir', date: 'Nov 2023', comment: 'Interministerial strategy — autonomy, care, generations (not geroscience)' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,

@@ -671,15 +671,28 @@ const uk: CountryData = {
         text: 'NHS is the most trusted public institution in the UK (Ipsos Veracity Index consistently ranks NHS nurses #1). Trust in science is high: UK Science Media Centre and Wellcome Monitor (2023) report 77% of UK adults say they trust scientists. COVID vaccine rollout — UK\'s fastest among large nations — demonstrated public willingness to participate in national health programmes. However, trust in government handling of health data has been eroded by GPDPR (GP Data programme) controversy (2021) — requiring careful re-building for data access programmes.',
         links: [{ label: 'Wellcome Global Monitor 2023', url: 'https://wellcome.org/reports/wellcome-global-monitor/2020', comment: 'Wellcome Monitor — 77% of UK adults trust scientists; NHS trust scores consistently highest among institutions' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 4,
-        text: 'UK public and media discourse on longevity science is sophisticated and broadly positive. BBC, Guardian, and Times Science sections regularly cover aging biology research as aspirational rather than dystopian. UK Biobank\'s 500k participants are arguably the world\'s largest single expression of public willingness to contribute to longevity research. The Longevity Science Panel\'s prominence in public discourse signals political mainstream acceptance. Religious and ethical objections to life extension are a minority position in UK discourse.',
-        links: [{ label: 'UK Longevity Science Panel Public Reports', url: 'https://www.longevitysciencepanel.co.uk/', comment: 'UK Longevity Science Panel — publicly prominent, mainstream political coverage; signals government and public acceptance' }],
-      },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
-        text: 'UK government has established the Longevity Science Panel (2022), published an Ageing Society Grand Challenge, and committed to the Healthy Ageing Industrial Strategy. UKRI Healthy Ageing priority has cross-party support. However, unlike China\'s explicit Five-Year Plan targets or Singapore\'s Healthy Longevity Initiative, UK political will is not yet expressed in quantified biological age or healthy lifespan targets. NHS Long Term Plan mentions healthy ageing as a priority but lacks specific longevity science milestones. The political infrastructure is present; the ambition level falls short of world-leading.',
-        links: [{ label: 'UK Ageing Society Grand Challenge', url: 'https://www.gov.uk/government/publications/ageing-society-grand-challenge-industry-forum', comment: 'UK government Ageing Society Grand Challenge — includes healthy ageing as an industrial strategy priority' }],
+        text: 'UK public service and broadsheet science desks regularly explain organ- and molecule-level ageing, biological age, and related trials to a general audience — aging-as-biology is not confined to lifestyle columns. Government-advisory visibility (Longevity Science Panel) reinforces that frame in policy-adjacent discussion. This matches rung 3 (geroscience in mainstream discourse), not rung 4 (indefinite healthspan as default cultural aspiration).',
+        links: [
+          { label: 'BBC News — blood test and organ ageing', url: 'https://www.bbc.co.uk/news/health-67588640', date: 'Dec 2024', comment: 'PSB — protein signatures and differential organ ageing for lay readers' },
+          { label: 'UK Longevity Science Panel', url: 'https://www.longevitysciencepanel.co.uk/', comment: 'Government-commissioned expert publications — ageing biology in policy-facing form' },
+        ],
+      },
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 4,
+        text: 'UKRI\'s Healthy Ageing Challenge (£98M, 2018–2024) survived the transition from May to Johnson to Sunak governments. ARIA (Advanced Research + Invention Agency, 2022) has a longevity-adjacent remit and DARPA-style PM model with statutory independence. The Longevity Science Panel (2022) is a formal government advisory body. MRC has funded aging research continuously for four decades — a structural commitment comparable to NIA in durability. The NHS Long Term Plan explicitly includes healthy ageing prevention milestones. No quantified biological age target has been adopted, preventing a score of 5, but the breadth and multi-cycle durability of commitment is among the strongest in Europe.',
+        links: [{ label: 'UKRI Healthy Ageing Challenge', url: 'https://www.ukri.org/what-we-offer/browse-our-areas-of-investment-and-support/healthy-ageing/', comment: 'UKRI £98M multi-year Healthy Ageing Challenge — cross-party durability across three governments' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2.5,
+        text: 'The All-Party Parliamentary Group for Longevity wound up under parliamentary rules in Jan 2023, so there is no longer a dedicated cross-party longevity forum. A documentary record of science-led framing remains: the Lords Science and Technology Committee report "Ageing: Science, Technology and Healthy Living" (2021) explicitly considered research on underlying aging processes; POST published a 2024 horizon scan on healthy ageing and older people\'s care; a Commons committee ran an inquiry on healthy ageing and physical activity (2024–). Manifesto competition still does not turn geroscience into an electoral battleground — between band 2 (healthy ageing / care) and band 3 (science mission in Hansard/Lords output).',
+        links: [
+          { label: 'APPG Longevity (archived — disbanded)', url: 'https://www.appg-longevity.org/', date: 'Jan 2023', comment: 'Parliamentary closure; prior publications e.g. Health of the Nation (Feb 2020)' },
+          { label: 'Lords S&T — ageing inquiry news', url: 'https://committees.parliament.uk/committee/193/science-and-technology-committee-lords/news/138469/concerted-government-effort-could-improve-health-in-old-age-finds-lords-committee', date: 'Jan 2021', comment: 'Committee output on science, technology and healthy ageing' },
+          { label: 'POST — Healthy ageing and care for older populations', url: 'https://post.parliament.uk/healthy-ageing-and-care-for-older-populations/', date: '2024', comment: 'Parliamentary Office of Science & Technology horizon scan' },
+          { label: 'Commons — Healthy ageing: physical activity inquiry', url: 'https://committees.parliament.uk/work/9230/healthy-ageing-physical-activity-in-an-ageing-society/', date: 'from 2024', comment: 'Committee work ongoing' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,

@@ -709,15 +709,26 @@ const switzerland: CountryData = {
         text: 'Switzerland has consistently high institutional trust — OECD Better Life Index shows ~65–70% trust in national government, and Edelman shows ~70% in science/medicine. Direct democracy (initiative and referendum) reinforces citizen-institution dialogue. Trust in healthcare and research institutions is high; the pharmaceutical industry (home of Novartis, Roche) enjoys relatively positive public perception compared to other countries.',
         links: [{ label: 'OECD Government at a Glance – Switzerland', url: 'https://www.oecd.org/gov/switzerland-government-at-a-glance.htm', comment: 'OECD — Switzerland institutional trust indicators; government and science trust above OECD average; pharma sector perceived well' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 3,
-        text: 'Switzerland has a rapidly aging population (20%+ over 65 by 2030) and "Healthy Aging Switzerland" (Gesundes Altern) is a recognised policy topic. Public discourse on longevity science is beginning to emerge, driven partly by pharma industry communications. However, cultural emphasis on quality of life and dignified aging (rather than maximum lifespan extension) creates some ambivalence. The Swiss assisted dying law (Exit International) reflects cultural acceptance of death as a quality-controlled outcome.',
-        links: [{ label: 'Swiss Strategy Healthy Aging', url: 'https://www.bag.admin.ch/bag/en/home/strategie-und-politik/nationale-gesundheitsstrategien/gesundes-altern.html', comment: 'FOPH — Healthy Aging strategy; quality-of-life focus; longevity science awareness growing but not dominant; assisted dying cultural context' }],
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+        score: 2,
+        text: 'Public discourse treats ageing as demographics, dignity, and care — plus lifestyle and prevention. Swiss PSB and English-language national media report population ageing and how people experience old age; pharmaceutical R&D on age-related disease does not translate into geroscience as ambient popular culture. End-of-life autonomy debates sit alongside pragmatic health reporting, not longevity escape velocity.',
+        links: [
+          { label: 'SWI swissinfo.ch — more older people in Switzerland', url: 'https://www.swissinfo.ch/eng/demographics/more-and-more-older-people-are-living-in-switzerland/87414790', comment: 'National PSB affiliate — statistics and social framing' },
+          { label: 'SWI swissinfo.ch — when Swiss people "feel old"', url: 'https://www.swissinfo.ch/eng/demographics/swiss-people-only-feel-old-from-the-age-of-80/87438761', comment: 'Survey coverage — quality of life and perceptions of age' },
+        ],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
-        score: 3,
-        text: 'No explicit national longevity science programme exists in Switzerland. The FOPH Healthy Aging strategy focuses on healthy aging services and care quality, not longevity research mandates. SNF does not have a dedicated longevity research call. Political will is present for eldercare quality; it has not yet translated into longevity science as a national R&D priority comparable to Singapore, Japan, or the UK.',
-        links: [{ label: 'FOPH Healthy Aging Switzerland', url: 'https://www.bag.admin.ch/bag/en/home/strategie-und-politik/nationale-gesundheitsstrategien/gesundes-altern.html', comment: 'FOPH — healthy aging strategy focuses on care quality; no dedicated longevity science funding mandate; political priority is service not science' }],
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 2,
+        text: 'FOPH\'s Stratégie nationale sur les soins palliatifs and Politique de la vieillesse framework address eldercare quality but not longevity science. SNF\'s NRP (National Research Programme) 74 addressed "smarter healthcare" with some aging components, but it completed in 2021 without a dedicated longevity science successor. Switzerland\'s federal structure (cantons control much health policy) fragments any national commitment. The Federal Council has not adopted a longevity science mandate. InnoSuisse supports health tech including aging-adjacent startups, but without a ring-fenced longevity programme. The private sector (Nestlé, Roche) makes the scientific investment that the government has not committed to publicly.',
+        links: [{ label: 'FOPH Healthy Aging Strategy', url: 'https://www.bag.admin.ch/bag/en/home/strategie-und-politik/nationale-gesundheitsstrategien/gesundes-altern.html', comment: 'FOPH — eldercare quality focus; no longevity science mandate' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'Federal Assembly and Federal Council decisions in 2024–2025 focused on implementing the 13th AHV pension payment and financing (Ständerat approval Dec 2024; VAT/contribution options) — pension-system and fiscal-demography framing. Palliative and eldercare strategy (BAG) remains social-protection led. No major-party or parliamentary line treats biological aging research or geroscience as a competing national mission.',
+        links: [
+          { label: 'Federal Assembly — news on 13th AHV implementation', url: 'https://www.parlament.ch/de/services/news/Seiten/2024/20241204090540715194158159026_bsd038.aspx', date: 'Dec 2024', comment: 'Council of States vote — 13th AHV-Rente timetable' },
+          { label: 'Federal Social Insurance Office — 13th AHV implementation', url: 'https://www.bsv.admin.ch/bsv/de/home/sozialversicherungen/ahv/reformen-revisionen/umsetzung-13-ahv-rente.html', date: 'from Oct 2024', comment: 'BSV — implementation and financing of 13th pension payment' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 4,

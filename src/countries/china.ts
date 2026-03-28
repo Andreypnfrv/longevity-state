@@ -710,15 +710,26 @@ const china: CountryData = {
         text: 'Edelman Trust Barometer (2023) shows China with among the highest institutional trust globally — ~89% trust in government, ~82% trust in science/medicine. Confucian cultural values around respect for authority and collective welfare reinforce institutional trust. COVID-19 response maintained, not damaged, trust in health institutions by government messaging. Very high baseline — enables rapid adoption of health programmes.',
         links: [{ label: 'Edelman Trust Barometer 2023', url: 'https://www.edelman.com/trust/2023/trust-barometer', comment: 'China among highest globally for trust in government and science — ~89%' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 4,
-        text: 'Longevity and healthy aging are deeply embedded in Chinese culture — traditional medicine (TCM) has millennia-long focus on longevity enhancement (百岁). Confucian filial piety creates strong cultural motivation for extending healthy life. Rapid aging of the population (超老龄社会) has made longevity a mainstream social and political concern. Public acceptance of longevity research is high; "Jian Kang Zhong Guo 2030" makes it explicit policy.',
-        links: [{ label: 'Healthy China 2030 Action Plan', url: 'https://www.gov.cn/xinwen/2016-10/25/content_5124174.htm', comment: 'National strategy — health as core national goal; aging explicitly addressed' }],
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+        score: 2,
+        text: 'Longevity aspiration is embedded in culture (养生, filial elder care), and rapid aging (超老龄社会) is a mainstream social concern. State and popular health discourse centre disease burdens, care expansion, and healthy life years — not a unified public narrative of aging as a single biological target (hallmarks, clocks, reversal). Geroscience at rung 3 remains confined to specialist and academic channels relative to general media.',
+        links: [
+          { label: 'China Daily — elderly care and population ageing', url: 'https://www.chinadaily.com.cn/a/202412/31/WS6772ce3ba310f1265a1d5b39.html', date: 'Dec 2024', comment: 'National English-language daily — ageing population, care initiatives' },
+          { label: 'China Daily — addressing population ageing', url: 'https://www.chinadaily.com.cn/a/202410/26/WS671c4476a310f1265a1c9c70.html', date: 'Oct 2024', comment: 'National English-language daily — demographic challenge and care angles' },
+        ],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 5,
-        text: 'Longevity and healthy aging are among China\'s most explicitly political health priorities. The 14th Five-Year Plan (2021–2025) includes dedicated chapters on aging population management and healthy aging R&D. "Healthy China 2030" is a top-level national strategy. Specific targets: life expectancy to 79 by 2030, healthy life expectancy extended significantly. Multiple ministry coordination (NHC, MOST, NDRC, MCA) with dedicated funding streams. China\'s political system enables sustained multi-decade commitment unavailable in electoral democracies.',
-        links: [{ label: '14th Five-Year Plan — Aging', url: 'http://www.gov.cn/xinwen/2021-03/13/content_5592681.htm', comment: 'National plan — explicit aging population management and healthy aging R&D targets' }],
+        text: 'China\'s aging policy commitment is encoded directly in Five-Year Plan law — plan-law status means it cannot be overturned by any individual political actor. The 14th FYP (2021–2025) contains dedicated chapters on aging population management with quantified life expectancy targets (LE 79 by 2030). "Healthy China 2030" coordinates NHC, MOST, NDRC, and MCA with ring-fenced funding streams for healthy aging R&D. The Moonshot-equivalent 科技创新2030 programme includes aging biology. The one-party system eliminates the electoral reversal risk that limits Western democracies\' programme durability; a central leadership commitment to longevity is structurally permanent until explicitly rescinded at the same level.',
+        links: [{ label: '14th Five-Year Plan — Aging', url: 'http://www.gov.cn/xinwen/2021-03/13/content_5592681.htm', comment: 'National plan-law with quantified healthy aging targets — maximum policy durability' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 3,
+        text: 'Under CPC and State Council direction, "actively responding to population aging" is a named national strategy with public documentation (policy interpretation in Qiushi; implementation pieces on elderly-care systems and fiscal inputs). The NPC system publicly covers pension/retirement-age reform as a demographic-economy measure. Official discourse links aging to health capacity and modernisation more than to multiparty electoral competition, so the score reflects documented top-level strategic language and Two Sessions/NPC process, not a Western-style mandate rung 4.',
+        links: [
+          { label: 'Qiushi (English) — national strategy on population aging', url: 'http://en.qstheory.cn/2024-12/26/c_1059363.htm', date: 'Dec 2024', comment: 'CPC theory journal — implementing the national aging strategy' },
+          { label: 'NPC (English) — retirement age and aging society', url: 'http://en.npc.gov.cn/2024-09/11/c_1020969.htm', date: 'Sep 2024', comment: 'NPC English site — gradual retirement-age reform' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 1,

@@ -712,15 +712,27 @@ const japan: CountryData = {
         text: 'Japan has high institutional trust in healthcare — trust in physicians and hospitals is consistently above 80% in surveys. Science and government trust are moderate (~55–65% in Edelman measures), somewhat lowered by post-Fukushima regulatory credibility questions and the HPV vaccine suspension controversy (2013–2022). Trust in the national health insurance system is very high. Overall, Japan\'s public trust environment is favourable for health research and preventive programmes.',
         links: [{ label: 'Edelman Trust Barometer – Japan', url: 'https://www.edelman.com/trust', comment: 'Japan: moderate government trust (~60%); high healthcare system trust; HPV saga historically reduced vaccine confidence' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 5,
-        text: 'Japan\'s society is the world\'s most demographically aged (30%+ over 65) and has uniquely high cultural acceptance of longevity science. "Healthy aging" is a national cultural goal (健康寿命 — healthy lifespan) with government campaigns stretching back decades. Japanese cultural values (ikigai, hara hachi bu, strong social ties) are globally cited as longevity factors. Public demand for aging research and preventive medicine is structurally embedded in Japanese society.',
-        links: [{ label: 'Ministry of Health Healthy Japan 21', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kenkounippon21.html', comment: 'Healthy Japan 21 — multi-decade national healthy aging campaign; healthy lifespan extension as public goal' }],
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+        score: 2,
+        text: 'Japan\'s society is the world\'s most demographically aged (30%+ over 65) and healthy aging is a deeply embedded national ambition. The concept of 健康寿命 (kenkou jumyou — healthy lifespan) is a mainstream political and cultural goal, and Healthy Japan 21 has run for decades. Japanese cultural values (ikigai, hara hachi bu, strong community ties) are globally cited as longevity factors. Mainstream outlets emphasise lifestyle, prevention, and care; the scientific target in public discourse is typically specific diseases of old age (dementia, frailty, metabolic disease) rather than aging biology as a unified, reversible process. Geroscience concepts (hallmarks, senolytics, epigenetic clocks as a popular vocabulary) are not ambient in general-audience framing — consistent with rung 2, not rung 3.',
+        links: [
+          { label: 'NHK WORLD-JAPAN — Long Lived Japan', url: 'https://www3.nhk.or.jp/nhkworld/en/shows/6122154/', comment: 'PSB series — lifestyle, diet, activity, and social context of longevity' },
+          { label: 'The Japan Times — life expectancy data', url: 'https://www.japantimes.co.jp/news/2025/07/25/japan/science-health/life-expectancy-average-flat/', date: 'Jul 2025', comment: 'English daily — vital statistics and public-health framing of ageing' },
+        ],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 5,
+        text: 'Japan\'s healthy aging policy commitment is the most durably institutionalised of any democracy. The Kaigo Hoken (Long-Term Care Insurance) system, enacted 2000 and continuously expanded, has survived LDP and DPJ governments alike — structural permanence comparable to Medicare. AMED (Japan Agency for Medical Research and Development), established 2015, has sustained JPY 100B+/year health research budget. Moonshot Goal 7 ("Realise a society in which people can be free from limitations on physical and cognitive functions by 2050") is PM-office statutory with JPY 50B dedicated funding. The 5th Science and Technology Basic Plan explicitly includes healthy longevity as a quantified national target. This is commitment durability matched only by China and Singapore.',
+        links: [{ label: 'Japan Moonshot R&D Goal 7', url: 'https://www.jst.go.jp/moonshot/en/program/goal7/', comment: 'PM-endorsed statutory moonshot — quantified healthy longevity target to 2050; JPY 50B commitment' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 4,
-        text: 'Japan has among the strongest political commitment to healthy aging of any government — driven by demographic necessity. The Moonshot Goal 7 is a PM-office endorsed commitment with JPY 50B funding. MHLW\'s comprehensive long-term care and prevention programmes have had sustained cross-party political support for three decades. Japan\'s healthcare spending and aging research investment are explicitly framed as a national security and economic growth issue.',
-        links: [{ label: 'Japan Moonshot R&D Programme', url: 'https://www.jst.go.jp/moonshot/en/', comment: 'PM-office endorsed Moonshot — JPY 50B for healthy aging by 2050; cross-party political support for three decades' }],
+        text: 'Aging and extended healthy life are a persistent electoral and Diet theme; cabinet-level science programmes (Moonshot Goal 7 via AMED — explicit 100-year healthy-life R&D mission, senescence/mitochondria/dementia streams, public symposia through 2024–2025) and Cabinet Office healthy-longevity reporting give a recurring documentary trail in law, budget, and oversight. Major parties compete on care, prevention, and innovation; executive speeches treat demographic aging as a strategic national challenge with biomedical content — fits the top rung (mandate + flagship documents), with fiscal care debate still alongside science framing.',
+        links: [
+          { label: 'AMED — Moonshot Goal 7 programme', url: 'https://www.amed.go.jp/en/program/list/18/03/001_01.html', date: 'from 2021', comment: 'Statutory moonshot R&D goal on healthy life to advanced age' },
+          { label: 'AMED — Moonshot Goal 7 symposium (report)', url: 'https://www.amed.go.jp/en/news/events/2025_moonshot.html', date: '2024–2025', comment: 'Agency event page — 2024 symposium; report Mar 2025' },
+          { label: 'Cabinet Office — healthy longevity policy materials', url: 'https://www.cao.go.jp/houkoku/document/health_longevity.html', comment: 'CAO annual strategy and reporting' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,

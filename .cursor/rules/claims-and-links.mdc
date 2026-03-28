@@ -1,0 +1,52 @@
+---
+description: How to populate country claim scores, narrative text, and source links
+globs: src/countries/**/*.ts
+alwaysApply: false
+---
+
+# Country claims and links
+
+## Where definitions live
+
+- **Ordinal meaning of each score** — `src/schema/index.ts` (`*_CLAIM_SCALES`, e.g. `SOCIETAL_READINESS_CLAIM_SCALES`). Do not drift from these rungs when assigning numbers.
+- **Per-claim UI copy (title/description)** — `src/translations/claims.ts`. Field-level blurbs — `src/translations/schema.ts`.
+- **Country evidence** — `src/countries/<country>.ts`: `ClaimData` per claim key — `score`, `text`, `links`.
+
+## Scores
+
+- Pick the **highest rung the evidence clearly supports**; use half-points only when the scale allows and the write-up justifies a borderline.
+- Respect the parameters in narrative and when comparing to other claims’ dots.
+- If evidence is weak or outdated, **lower the score** or refresh sources — do not keep a high score on stale rhetoric.
+
+## Narrative (`text`)
+
+- **English**, concise, tied to the **rubric level** (what politicians/media/funders actually do or say).
+- Prefer **time-bounded** claims (“through 2025”, “2024 debate”) and refresh when doing a **new research pass**.
+- Do not duplicate the whole bibliography in prose; **links carry sources**.
+
+## Links (`links[]`)
+
+Shape (`src/schema/index.ts` — `Link`):
+
+- **`label`** — short human title (no need to repeat the full date if `date` is set).
+- **`url`** — **primary** source where possible: government, parliament, regulator, official programme page, gazette. Avoid bare homepages when a deep link exists.
+- **`comment`** — what the page **substantiates** (issuer, topic). Do not bury the reference period here if it belongs in **`date`**.
+- **`date`** (optional) — **reference period or publication date** (e.g. `Sep 2024`, `2024–2025`, `from 2021`). Shown next to the comment in the UI; keeps dating visible without cluttering `comment`.
+
+Use **2+ independent links** for heavily contested or high scores when practical. Mark **secondary** sources in `comment` (e.g. “NGO summary — primary: MOH”).
+
+## Research workflow
+
+1. Read the **claim scale** for that key in `schema/index.ts`.
+2. **Search official sites** and recent parliamentary/government pages; note dates.
+3. Assign **score** from evidence strength vs rubric.
+4. Write **`text`** aligned with that level; avoid contradictions with links.
+5. Add **`links`** with `date` split out where relevant; verify URLs load or swap for canonical equivalents.
+
+## Aging media framing (`AGING_MEDIA_FRAMING`)
+
+Evidence is **national mainstream media and mass science communication**, not parliament minutes or ministry strategy pages (those belong under **legislative salience** / **policy commitment**).
+
+- Prefer **major newspapers**, **public broadcasters** (BBC, NHK World, NOS, SR, etc.), and **named science desks**; link the **article or programme page**, not only homepages.
+- **Rung 2** — lifestyle, prevention, dependency/care, demography, and disease targets (dementia, CVD) without aging-as-unified-biology as a recurring frame.
+- **Rung 3+** — repeated **popular** treatment of **biological aging** (clocks, hallmarks, senolytics, organ/biological age) in outlets with general audiences; outreach NGOs or podcasts count only if the URL is a **stable, citable** page.

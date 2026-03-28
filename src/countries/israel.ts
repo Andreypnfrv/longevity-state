@@ -668,15 +668,27 @@ const israel: CountryData = {
         text: 'Israel\'s COVID-19 vaccination campaign — the world\'s fastest proportional rollout (60% of population fully vaccinated within 3 months of programme start) — demonstrated exceptionally high public trust in the healthcare system and medical science. Edelman Trust Barometer consistently shows Israeli trust in science and healthcare institutions above the global average. The Weizmann Institute has 80%+ public recognition and trust. Post-2021 political polarisation has dented some institutional trust, and anti-vaccine movements have grown modestly, but scientific institutions retain high credibility.',
         links: [{ label: 'Israel COVID Vaccination Rate', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'Our World in Data — Israel COVID vaccination rate; world\'s fastest proportional rollout; demonstrates public health trust' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 4,
-        text: 'Jewish cultural and religious tradition places extraordinarily high value on preserving human life (Pikuach Nefesh — the commandment to save life overrides almost all other religious obligations). This cultural foundation makes life-extension science culturally resonant in a way that is not present in most Western societies. Israeli public discourse on longevity research is positive — Weizmann Institute communicates aging science effectively to the public. Israel\'s rapidly aging population (with 12%+ over 65 growing to 20%+ by 2040) creates personal relevance for longevity science across the population.',
-        links: [{ label: 'Weizmann Institute Public Science', url: 'https://davidson.weizmann.ac.il/', comment: 'Davidson Institute — Weizmann\'s science education arm; aging science communicated positively and accessibly to Israeli public' }],
-      },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
-        text: 'Israeli government has created the Ministry of Innovation, Science, and Technology (2020), which explicitly supports digital health and precision medicine. National Digital Health Strategy includes longevity-adjacent priorities. The National Biobank and Israeli Genome Project are government-funded and politically supported. However, Israel lacks an explicit quantified longevity policy with biological age targets or healthspan milestones. Political instability (multiple elections, coalition changes) has created uncertainty for sustained long-term health policy. The political infrastructure is present; sustained political commitment to longevity science as a national priority remains to be demonstrated.',
-        links: [{ label: 'Israeli Ministry of Innovation Science Technology', url: 'https://www.gov.il/en/departments/ministry_of_innovation', comment: 'Israeli Ministry of Innovation, Science and Technology — responsible for national digital health and precision medicine strategy' }],
+        text: 'Pikuach Nefesh and high regard for medical innovation help life-extension research land as a respectable topic. Major English-language outlets cover Israeli aging biology (senescent cells, immunotherapy, healthspan) for a general readership — biological aging as a research object appears beyond a pure lifestyle or pensions frame. It is not yet ambient "longevity escape velocity" culture (rung 4), but geroscience-adjacent reporting is visible in mainstream media.',
+        links: [
+          { label: 'The Times of Israel — senescent cells and ageing research', url: 'https://www.timesofisrael.com/medical-holy-grail-israeli-researchers-isolate-elusive-cells-that-may-slow-down-aging/', comment: 'National daily — senescent cells and immune clearance; popular science frame' },
+          { label: 'Davidson Institute (Weizmann)', url: 'https://davidson.weizmann.ac.il/', comment: 'Science education arm — ageing and biology outreach to the Israeli public' },
+        ],
+      },
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 2,
+        text: 'Israel\'s Ministry of Innovation, Science and Technology (MIST, 2020) and the Israel Innovation Authority explicitly support digital health and precision medicine with some longevity-adjacent programmes. The National Biobank and Israeli Genome Project have sustained government funding. However, five elections in four years (2019\u20132022) and resulting coalition instability have made multi-cycle programme commitment structurally difficult -- the MoST portfolio changed substantially with each coalition. No dedicated longevity science programme with ring-fenced budget and quantified healthspan targets has been established; existing commitments are vulnerable to government reshuffling.',
+        links: [{ label: 'Israel Innovation Authority', url: 'https://innovationisrael.org.il/en/', comment: 'Israel Innovation Authority -- supports digital health including longevity-adjacent programmes' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2,
+        text: 'National policy on dementia and older people\'s health has a documented Knesset and ministry lineage: the National Dementia Program (MOH, adopted 2013) was developed with expert groups and parliamentary Health Committee engagement; welfare and special committees still hear dementia, carers, and older-adult care. National campaigns and coalition politics remain dominated by security and judicial issues — there is no party competition on geroscience or biological longevity — but Alzheimer\'s/dementia and elder care meet the "disease-of-aging / healthy-aging programme" parliamentary band, not rung 1 (pensions-only).',
+        links: [
+          { label: 'Israel MOH — Dementia overview (older adults)', url: 'https://me.health.gov.il/en/older-adult/keep-me-healthy/common-conditions/dementia-and-alzheimer/did-you-know/dementia-overview/', comment: 'MOH English site — clinical context and epidemiology' },
+          { label: 'Brookdale — Israeli national dementia strategy (expert summary)', url: 'https://brookdale.jdc.org.il/en/publication/addressing-alzheimers-types-dementiaisraeli-national-strategy-summary-document-interdisciplinary-inter-organizational-group-of-experts/', date: '2013–', comment: 'JDC/Brookdale — expert summary informing national programme adoption' },
+          { label: 'Alzheimer Europe — Israel policy note', url: 'https://www.alzheimer-europe.org/policy/national-dementia-strategies/israel', comment: 'European NGO file — Knesset committee context (secondary)' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,

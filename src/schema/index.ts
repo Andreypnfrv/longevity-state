@@ -1144,10 +1144,11 @@ export enum IntlResearchNetworkClaim {
 }
 
 export enum SocietalReadinessClaim {
-  PUBLIC_TRUST         = 'public_trust',
-  LONGEVITY_ACCEPTANCE = 'longevity_acceptance',
-  POLITICAL_WILL       = 'political_will',
-  QUACKERY_RESISTANCE  = 'quackery_resistance', // protection against unproven anti-aging claims: supplements, cosmetics, pseudo-specialists
+  AGING_MEDIA_FRAMING   = 'aging_media_framing',   // at what ambition level does mainstream media frame aging — from fatalism to indefinite healthspan
+  PUBLIC_TRUST          = 'public_trust',
+  POLICY_COMMITMENT     = 'policy_commitment',     // funded and statutory institutional commitment — not the same as rhetorical salience
+  LEGISLATIVE_SALIENCE  = 'legislative_salience',  // ambition level at which political elites publicly discuss aging (0–4 scale)
+  QUACKERY_RESISTANCE   = 'quackery_resistance',   // protection against unproven anti-aging claims: supplements, cosmetics, pseudo-specialists
 }
 
 export const REGULATORY_HARMONIZATION_CLAIM_SCALES: Record<RegulatoryHarmonizationClaim, Record<number, string>> = {
@@ -1280,29 +1281,43 @@ export const INTL_RESEARCH_NETWORK_CLAIM_SCALES: Record<IntlResearchNetworkClaim
 }
 
 export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Record<number, string>> = {
+  // Single score compresses trust in clinicians, biomedical science, and state health agencies — use the weakest
+  // pillar that would plausibly constrain longevity-relevant adoption (novel therapies, trials, data programmes).
+  // Prefer repeated representative surveys (Wellcome, Eurobarometer, national panels) over one-off polls.
   [SocietalReadinessClaim.PUBLIC_TRUST]: {
-    0: 'Very low public trust in science and medicine; widespread scepticism or active anti-science movement',
-    1: 'Below-average trust; significant scepticism about medical institutions; vaccine hesitancy or similar',
-    2: 'Moderate trust; general acceptance of medicine but notable scepticism toward emerging technologies',
-    3: 'Good general trust in science and medicine; above-average acceptance of biotechnology and clinical research',
-    4: 'High institutional trust; strong public support for medical research funding; low anti-science sentiment',
-    5: 'Exceptional trust; among the highest globally; strong social contract around science and public health',
+    0: 'Legitimacy crisis for science-led health policy: large refusal blocks or active anti-science coalitions on high-salience medical consensus; institutions cannot run population programmes without major backlash',
+    1: 'Clearly below peer-country benchmarks on doctors, scientists, or national health authorities; chronic prevention hesitancy (e.g. vaccines, screening) beyond access or supply gaps',
+    2: 'Average or split signals: routine care and established prevention broadly accepted, but sharp caution on novel regulated biotech, trial participation, government health-data use, or acute political polarisation on science',
+    3: 'Stable majorities trust medical institutions and scientists; regulated innovation and clinical research are socially legitimate; polarisation exists but no blocking minority on core public-health and research norms',
+    4: 'Very high trust on standard measures; strong fiscal/social support for biomedical research; organised anti-science influence on national policy is marginal',
+    5: 'Top-decile internationally on comparable trust indicators; durable norm that science and public health are part of the social contract across the main partisan or cultural cleavages that matter for health policy',
   },
-  [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-    0: 'Longevity extension widely viewed as unnatural or unethical; strong cultural/religious resistance',
-    1: 'Longevity research accepted for disease treatment but not healthspan extension; life extension seen as fringe',
-    2: 'Growing acceptance of preventive medicine; longevity framing uncommon; seen as aspirational, not political',
-    3: 'Mainstream acceptance of healthy aging as policy goal; longevity research positively covered in media',
-    4: 'Longevity extension widely discussed and positively received; public figures advocate for healthspan policy',
-    5: 'Strong public mandate for longevity science; political parties compete on aging policy; national priority',
+  // Ordinal ladder for the *level of ambition* at which mainstream media frames aging.
+  // The question is the highest ambition level that has achieved sustained mainstream presence — not fringe coverage.
+  // Key discontinuity: between fighting aging's *consequences* (0–2) and fighting aging *itself* (3–4).
+  // Political mandates and policy decisions belong to POLICY_COMMITMENT, not here.
+  [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+    0: 'Invisible or fatalist: aging appears in media only as a social welfare burden (pensions, nursing homes); no biomedical framing whatsoever; no coverage of aging science',
+    1: 'Elder care framing: media covers aging primarily as a care and dependency challenge; scientific research on aging is not part of mainstream coverage; aging-related decline is treated as inevitable',
+    2: 'Healthy aging dominant: mainstream media frame is lifestyle and preventive medicine — diet, exercise, social engagement; defeating specific diseases (Alzheimer\'s, cancer, CVD) is also accepted as a scientific goal; the shared premise is staying healthy in old age, whether through lifestyle or medicine',
+    3: 'Geroscience in mainstream discourse: aging itself — as a biological process with hallmarks, epigenetic clocks, and potential reversibility — is covered in mainstream press, bestselling books, and mass-audience podcasts; popular science communicators reach millions with concepts like biological age and senolytics; discussing 100–120 as a realistic target is not fringe',
+    4: 'Indefinite healthspan as cultural aspiration: aging is framed as an engineering problem to be solved, not a biological limit to be managed; mainstream discourse includes concepts like longevity escape velocity; the goal is not a fixed target lifespan but the elimination of aging-driven decline regardless of mechanism',
+    5: 'Global reference-point framing: the national media ecosystem is cited abroad as the benchmark for serious, accessible longevity coverage; prime-time documentary and fiction routinely treat biological age reversal and longevity escape velocity as plausible without apology; geroscience is ambient background culture, not a movement — skepticism is proportionate to other mature science debates, not dismissed as science fiction',
   },
-  [SocietalReadinessClaim.POLITICAL_WILL]: {
-    0: 'No political attention to longevity; aging policy limited to pension and social care',
-    1: 'Aging mentioned in health policy but no longevity-specific programmes or dedicated funding',
-    2: 'Some research investment in aging; occasional political statements but no sustained programme',
-    3: 'Dedicated longevity or healthy aging strategy with funded programme; cross-ministry coordination',
-    4: 'Longevity as explicit national priority; multi-year funded programme; dedicated agency or mandate',
-    5: 'Longevity is defining national policy axis; largest-in-class per-capita investment; global leadership role',
+  [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+    0: 'Active legislative obstruction — statutes block longevity-relevant research without a review pathway; or the state funds only social care with no science mandate on aging biology',
+    1: 'No dedicated budget line; longevity appears only inside generic health strategies; no ring-fenced programme — announcements do not convert to durable fiscal commitment',
+    2: 'Ring-fenced aging or longevity funding exists but is tied to one government term; weak cross-party renewal; modest per-capita spend; easily reversed after an election',
+    3: 'Multi-year programme that has survived at least one change of government; cross-ministry coordination is routine; moderate per-capita investment with a visible continuity record',
+    4: 'Longevity is an explicit funded priority — dedicated agency or statutory mandate, politically insulated baseline budget, multi-decade flagship programmes, large per-capita commitment',
+    5: 'Plan-law or equivalent statutory anchor with quantified healthy lifespan targets; world-leading per-capita longevity spend; reversing course requires a formal high-level political decision',
+  },
+  [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+    0: 'Aging is not a scientific topic in political speech — only pensions and social protection',
+    1: 'Demographic burden framing: politicians discuss aging as an economic problem (labour market, pension deficits, care spending) — not as a biomedical research agenda',
+    2: 'Healthy aging as a policy goal: party programmes, parliamentary hearings on Alzheimer\'s / healthy aging / national plans on diseases of aging — fighting the consequences of aging, not aging as a unified biological target',
+    3: 'Geroscience in political language: leaders or parties describe extending healthy life as a scientific mission, name biological targets, treat 100+ as a political goal — documentary record (Hansard, manifestos, flagship speeches)',
+    4: 'Longevity as a political mandate: parties compete on this terrain; the head of state publicly makes it a core goal; the theme recurs in flagship state speeches and national strategic documents',
   },
   [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
     0: '"Anti-aging" is an unregulated marketing term. Supplements and cosmetics may freely claim to reverse aging without evidence. A4M-style pseudo-specialist certifications are unchallenged by professional licensing bodies and can be used to claim clinical authority. No enforcement mechanism specific to anti-aging pseudoscience.',
@@ -1325,6 +1340,8 @@ export interface Link {
   label: string
   url: string
   comment: string
+  /** Reference period or publication date; shown next to the comment in the UI. */
+  date?: string
 }
 
 export interface ClaimData {

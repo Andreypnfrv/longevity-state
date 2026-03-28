@@ -30,7 +30,7 @@ import {
 } from '../schema'
 import { GROUPS, type GroupDef } from '../schema/policyGroups'
 import { allCountries } from '../countries'
-import { groupLabels, fieldLabels, claimLabels, countryLabels, countryFlags, SCREENING_SCALE, Locale } from '../translations'
+import { groupLabels, fieldLabels, claimLabels, claimMaxScore, countryLabels, countryFlags, SCREENING_SCALE, Locale } from '../translations'
 import { Filters } from '../ui/filters'
 import { useTableExpansion } from '../table/useTableExpansion'
 import { useRowHoverHighlight, rowHoverGridSurfaceStyle, rowHoverStickyColStyle } from '../table/useRowHoverHighlight'
@@ -127,7 +127,6 @@ function achievedFillDotVar(score: number, maxScore: number): string {
 
 function isMaxScoreHighlight(score: number, maxScore: number): boolean {
   if (maxScore <= 0) return false
-  if (maxScore <= 5) return score >= 4.999
   return score >= maxScore - 0.01
 }
 
@@ -332,15 +331,17 @@ export function claimTodoModel(
   if (entries.length === 0) return { kind: 'none' }
   const maxLv = Math.max(...entries.map(e => e.level))
   if (score == null || !Number.isFinite(Number(score))) return { kind: 'none' }
-  const cur = Math.min(maxScore, Math.max(1, Math.floor(Number(score))))
+  const minLv = Math.min(...entries.map(e => e.level))
+  const cur = Math.min(maxScore, Math.max(minLv, Math.floor(Number(score))))
   if (cur >= maxLv) return { kind: 'done' }
   const items = entries.filter(e => e.level > cur).map(e => `${e.level} — ${e.text}`)
   return items.length > 0 ? { kind: 'next', items } : { kind: 'done' }
 }
 
-function Tooltip({ text, children }: { text: string | null; children: React.ReactNode }) {
+function Tooltip({ text, children, widthPx }: { text: string | null; children: React.ReactNode; widthPx?: number }) {
   const [visible, setVisible] = useState(false)
   if (!text) return <>{children}</>
+  const w = widthPx != null && widthPx > 0 ? widthPx : undefined
   return (
     <span
       style={{ position: 'relative', display: 'inline-flex', cursor: 'default' }}
@@ -360,7 +361,8 @@ function Tooltip({ text, children }: { text: string | null; children: React.Reac
           fontSize: 10,
           color: 'var(--tooltip-fg)',
           whiteSpace: 'normal',
-          maxWidth: 260,
+          boxSizing: 'border-box',
+          ...(w != null ? { width: w, maxWidth: w } : { maxWidth: 260 }),
           zIndex: 200,
           lineHeight: 1.55,
           pointerEvents: 'none',
@@ -404,9 +406,12 @@ function formatClaimClipboardCopy(data: ClaimData): string {
   for (const l of data.links) {
     const label = l.label?.trim()
     const url = l.url?.trim() ?? ''
+    const date = l.date?.trim()
     const comment = l.comment?.trim()
     let line = label ? `${label}\n${url}` : url
-    if (comment) line += `\n${comment}`
+    if (date && comment) line += `\n${date} — ${comment}`
+    else if (date) line += `\n${date}`
+    else if (comment) line += `\n${comment}`
     parts.push(line)
   }
   return parts.join('\n\n')
@@ -484,7 +489,7 @@ function ClaimRow({
           flex: 1,
           minWidth: 0,
         }}>
-          <Tooltip text={getScaleLevelText(fieldKey, claimKey, data.score)}>
+          <Tooltip text={getScaleLevelText(fieldKey, claimKey, data.score)} widthPx={200}>
             <ScoreDots score={data.score} maxScore={maxScore} size={6} />
           </Tooltip>
           {!hideTitle && (
@@ -536,22 +541,44 @@ function ClaimRow({
             </p>
           )}
           {data.links.map((l, i) => (
-            <div key={i} style={{ marginBottom: 3 }}>
+            <div key={i} style={{ marginBottom: 6, fontSize: 11, lineHeight: 1.6 }}>
               <a
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={e => e.stopPropagation()}
-                style={{ color: 'var(--accent)', fontSize: 11, textDecoration: 'none' }}
+                style={{
+                  color: 'var(--accent)',
+                  fontSize: 'inherit',
+                  lineHeight: 'inherit',
+                  textDecoration: 'none',
+                  display: 'block',
+                }}
                 onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
                 onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
               >
                 ↗ {l.label}
               </a>
-              {l.comment && (
-                <span style={{ color: 'var(--cell-muted)', fontSize: 10, marginLeft: 6 }}>
-                  — {l.comment}
-                </span>
+              {(l.date?.trim() || l.comment?.trim()) && (
+                <div style={{
+                  marginLeft: 14,
+                  marginTop: 2,
+                  fontSize: 'inherit',
+                  lineHeight: 'inherit',
+                  color: 'var(--cell-muted)',
+                }}>
+                  {l.date?.trim() && (
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      color: 'var(--text)',
+                      marginRight: 6,
+                      fontSize: 'inherit',
+                      lineHeight: 'inherit',
+                    }}>{l.date.trim()}</span>
+                  )}
+                  {l.date?.trim() && l.comment?.trim() ? '— ' : ''}
+                  {l.comment?.trim() ?? ''}
+                </div>
               )}
             </div>
           ))}
@@ -700,7 +727,7 @@ export function FieldCell({
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-        <Tooltip text={cellTooltip}>
+        <Tooltip text={cellTooltip} widthPx={200}>
           <ScoreDots score={score} maxScore={maxScore} />
         </Tooltip>
       </div>
@@ -709,13 +736,14 @@ export function FieldCell({
         <div style={{ marginTop: 8, flex: 1, minHeight: 0 }} onClick={e => e.stopPropagation()}>
           {Object.entries(claims).map(([key, data], i) => {
             const dk = fieldRowKey && onToggleClaimDetail ? `${fieldRowKey}::${key}` : undefined
+            const cm = claimMaxScore(fieldKey, key, maxScore)
             return (
               <ClaimRow
                 key={key}
                 fieldKey={fieldKey}
                 claimKey={key}
                 data={data}
-                maxScore={maxScore}
+                maxScore={cm}
                 noTopBorder={i === 0}
                 detailExpanded={dk !== undefined ? expandedClaimDetails?.has(dk) : undefined}
                 onDetailToggle={dk !== undefined ? () => onToggleClaimDetail!(dk) : undefined}
@@ -1407,7 +1435,7 @@ export default function IndexPage({
                                   fieldKey={field}
                                   claimKey={claimKey}
                                   data={data}
-                                  maxScore={maxScore}
+                                  maxScore={claimMaxScore(field, claimKey, maxScore)}
                                   detailExpanded={expandedClaimDetails.has(claimDetailKey)}
                                   onDetailToggle={() => toggleClaimDetail(claimDetailKey)}
                                   rowHoverHighlight={rh}

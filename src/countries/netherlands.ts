@@ -803,15 +803,26 @@ const netherlands: CountryData = {
           { label: 'Eurobarometer Science Trust 2021', url: 'https://europa.eu/eurobarometer/surveys/detail/2237', comment: 'EU survey placing NL among highest-trust nations for science and medicine' },
         ],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+        score: 2,
+        text: 'Healthy aging (gezond oud worden) is a familiar phrase in policy and public life. Public broadcast and national press foreground demography, care pressure, and prevention — not biological aging as a unified popular science theme. Speculative life-extension claims get limited traction in mainstream outlets; geroscience vocabulary has not crossed into general consciousness the way lifestyle and disease frames have.',
+        links: [
+          { label: 'NOS — greying population outnumbers youth', url: 'https://nos.nl/artikel/2594782-vergrijzing-zet-door-voor-het-eerst-meer-ouderen-dan-jongeren-in-nederland', date: '2024', comment: 'Public broadcaster — demographic milestone; care and society framing' },
+          { label: 'NOS Nieuwsuur — greying and hard choices in care', url: 'https://nos.nl/nieuwsuur/artikel/2505083-vergrijzing-dwingt-tot-harde-keuzes-in-de-zorg-niet-alleen-arbeidsmigratie', comment: 'Current affairs — workforce, prevention, technology; burden-of-ageing narrative' },
+        ],
+      },
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 3,
-        text: 'Healthy aging (gezond oud worden) is mainstream in Dutch public and political discourse, supported by the Nationaal Programma Ouderenzorg and the National Prevention Agreement. The idea of extending healthy lifespan through lifestyle and preventive medicine is widely accepted. Explicit longevity extension or biological age reversal framing is less mainstream — it is seen as aspirational but somewhat speculative in public discourse. Dutch media covers aging science positively but without the high-profile longevity movement intensity seen in the USA or Israel.',
+        text: 'ZonMw\'s Healthy Ageing programme is a multi-year government-funded commitment that has survived multiple coalition governments (VVD-PvdA, VVD-CDA, Rutte III, IV, and the Schoof cabinet). The Deltaplan Dementie (2012, renewed 2018, 2023) demonstrates cross-party renewal capacity for an aging disease programme over a decade. NWO Gravitation grants (10-year commitments) provide institutionalised aging science funding independent of annual budget cycles. The National Prevention Agreement is coalition-signed. However, no ring-fenced longevity science budget with quantified healthspan targets exists; framing remains disease prevention and social care quality.',
         links: [],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
-        score: 3,
-        text: 'The Dutch government has a National Prevention Agreement (Nationaal Preventieakkoord) targeting obesity, smoking, and alcohol — indirectly addressing aging risk factors. The Deltaplan Dementie is a coordinated government-society effort on dementia. ZonMw\'s Healthy Ageing programme is government-funded. However, explicit political will directed at longevity science, biological aging interventions, or healthy lifespan extension as a national priority is not yet present. The framing is disease prevention rather than longevity extension; no political party platform positions around longevity medicine.',
-        links: [],
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2,
+        text: 'The Tweede Kamer treats Wonen, Ondersteuning en Zorg voor Ouderen (WOZO) and eldercare as a standing theme (dossier ouderenzorg); government letters to Parliament in 2024 report implementation (e.g. WOZO workstreams, local dialogue on gezond ouder worden). This is ministerial and parliamentary process on healthy aging, care technology, and housing — not party competition on geroscience or biological longevity.',
+        links: [
+          { label: 'Tweede Kamer — dossier Ouderenzorg', url: 'https://www.tweedekamer.nl/debat_en_vergadering/uitgelicht/ouderenzorg', comment: 'House of Representatives — debates and documents on older people\'s care' },
+          { label: 'Rijksoverheid — Kamerbrief WOZO programme', url: 'https://www.rijksoverheid.nl/documenten/kamerstukken/2024/12/20/kamerbrief-over-programma-wonen-ondersteuning-en-zorg-voor-ouderen', date: 'Dec 2024', comment: 'Government letter to Parliament — WOZO follow-up' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,

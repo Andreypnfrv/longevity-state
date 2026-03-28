@@ -709,15 +709,26 @@ const spain: CountryData = {
         text: 'Spain had among the highest COVID-19 vaccination uptake in the EU (>80%), demonstrating strong public trust in health authorities relative to regional neighbours. General institutional trust in medicine is good. Anti-science movements are present but not dominant. Trust in public health guidance is higher than in France or Eastern Europe.',
         links: [],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 3,
-        text: 'Mediterranean culture places high value on quality of life in old age — "envejecer bien" is a mainstream aspiration. "Envejecimiento activo" is an established political concept in Spain. Longevity extension as a policy goal has moderate mainstream acceptance, and healthy aging receives cross-party political attention through pension and care policy.',
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+        score: 2,
+        text: 'Mediterranean culture values "envejecer bien"; active ageing is a familiar policy phrase. Leading newspapers cover brain ageing, dementia risk, and lifestyle with solid science reporting, but the dominant popular frame is healthy habits and disease outcomes — not geroscience (hallmarks, senolytics, biological age) as mass vocabulary. Pensions and dependency remain the political face of ageing.',
+        links: [
+          { label: 'El País — patterns of brain ageing (imaging study)', url: 'https://elpais.com/salud-y-bienestar/2024-09-03/un-estudio-identifica-cinco-formas-distintas-de-envejecer-gracias-a-los-datos-de-50000-escaneres-cerebrales.html', date: 'Sep 2024', comment: 'Major daily — individual variation in how the brain ages; disease-risk framing' },
+          { label: 'El País — Ana María Cuervo on autophagy and ageing', url: 'https://elpais.com/salud-y-bienestar/2024-05-17/ana-maria-cuervo-biologa-la-vejez-es-como-una-enfermedad-que-aun-no-se-ha-manifestado-si-no-haces-nada-se-manifestara.html', date: 'May 2024', comment: 'Interview — cellular ageing and lifestyle; still healthspan/prevention led for a general reader' },
+        ],
+      },
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 2,
+        text: 'The Estrategia Nacional para el Envejecimiento Activo y Saludable provides a policy framework, and the 2022 Ley de la Ciencia included some aging research provisions. IMSERSO channels significant social care funding toward older adults. However, dedicated longevity science funding with ring-fenced budget and multi-year commitment is absent; the 17-CCAA structure makes national coordination difficult; and coalition instability (Spain has had five governments since 2018) works against long-cycle programme commitments. No longevity agency or statutory healthspan target exists.',
         links: [],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
-        score: 2,
-        text: 'Estrategia Nacional para el Envejecimiento Activo y Saludable exists and is periodically updated. IMSERSO funds elderly social services. The 2022 Ley de la Ciencia included aging research provisions. However, dedicated longevity science funding with healthspan-specific metrics and multi-year commitment is absent. Political attention is on social care, not geroscience.',
-        links: [],
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'National political energy on aging concentrates on pension sustainability (revalorisation, MEI/solidarity contributions, contribution bases) and dependency-system financing — demographic and social-protection framing in Congreso/Budget law. The Ministry of Health maintains an active and healthy ageing promotion stream under the SNS, but Cortes salience and party platforms do not treat geroscience or biological longevity as a competing electoral mandate.',
+        links: [
+          { label: 'Ministerio de Sanidad — Envejecimiento activo y saludable', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/envejecimientoSaludable/activo/home.htm', comment: 'National healthy/active ageing framework (executive; not party geroscience)' },
+          { label: 'BOE — consolidated legal text (pensions / social security)', url: 'https://www.boe.es/buscar/pdf/2024/BOE-A-2024-1691-consolidado.pdf', date: '2024', comment: 'State gazette PDF — pension / social-security architecture' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,

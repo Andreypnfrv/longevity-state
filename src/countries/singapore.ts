@@ -712,17 +712,29 @@ const singapore: CountryData = {
         text: 'Singapore consistently ranks among the world\'s highest for institutional trust. Edelman Trust Barometer (2024) shows Singapore at ~85% trust in government and ~80% in science/medicine — among the highest globally. The government\'s competence track record (pandemic management, economic development, healthcare quality) has generated unusually high public confidence in state-directed health programmes. This enables rapid uptake of national screening and preventive interventions.',
         links: [{ label: 'Edelman Trust Barometer 2024 – Singapore', url: 'https://www.edelman.com/trust/2024/trust-barometer', comment: 'Singapore: ~85% government trust, ~80% science/medicine trust — among world\'s highest' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 4,
-        text: 'Singapore\'s rapidly aging population (target: 20%+ over 65 by 2030) makes longevity science personally relevant to a large and growing segment. The government\'s Action Plan for Successful Ageing frames longevity as a national priority with cross-party support. Media coverage of longevity science is positive and sophisticated. "Healthy aging" has cross-generational resonance in Singapore\'s Confucian-influenced culture that values elder care and longevity.',
-        links: [{ label: 'Action Plan for Successful Ageing', url: 'https://www.moh.gov.sg/our-healthcare-system/action-plan-for-successful-ageing', comment: 'MOH — national successful ageing action plan; frames longevity as a public good and national priority' }],
-      },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
-        score: 5,
-        text: 'Singapore\'s government has made healthy longevity one of the most explicit national priorities of any government in the world. The Healthy Longevity national programme is PM-office endorsed. NRF co-founded the Global Healthy Longevity Challenge. The Catalyst Awards (USD 1.5M per award) demonstrate commitment at the level of prize-funded breakthrough science. No country has more explicitly made longevity a government agenda item at this level relative to its size.',
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+        score: 2,
+        text: 'Rapid ageing and "successful ageing" make elder health a routine news theme. National newspapers report life tables, system capacity, and prevention programmes in accessible language; the dominant frame is high life expectancy, active ageing, and care — not geroscience as everyday vocabulary. University research on biology of ageing remains specialist relative to mainstream outlets.',
         links: [
-          { label: 'NRF Healthy Longevity National Programme', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity', comment: 'NRF — PM-office endorsed national healthy longevity programme; catalyst prize awards' },
-          { label: 'Global Healthy Longevity Challenge', url: 'https://www.healthylongevitychallenge.org/', comment: 'Singapore co-founded global longevity challenge; USD 25M prize pool across jurisdictions' },
+          { label: 'The Straits Times — life expectancy 2024 (DOS)', url: 'https://www.straitstimes.com/singapore/life-expectancy-of-singapores-population-rises-in-2024-marking-improvement-over-covid-19-years', date: 'May 2025', comment: 'Flagship daily — vital statistics and public-health context' },
+          { label: 'The Straits Times — super-aged society and health system', url: 'https://www.straitstimes.com/opinion/singapore-crosses-the-super-aged-threshold-in-2026-can-its-health-system-cope', comment: 'Opinion — demographic transition and care/prevention framing' },
+        ],
+      },
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 5,
+        text: 'Singapore\'s Healthy Longevity National Programme is PM-office endorsed and carries the structural permanence of Singapore\'s planning model — the PAP government\'s unbroken 60-year tenure means commitment does not face electoral reversal risk. NRF committed SGD 25M for the Global Healthy Longevity Challenge. The Ministry of Health\'s Action Plan for Successful Ageing 2023–2030 is a multi-ministry statutory framework with quantified targets. The Catalyst Awards (USD 1.5M per award) demonstrate prize-funded commitment at the level of breakthrough science funding. Relative to population and GDP, Singapore\'s per-capita longevity commitment is the highest of any government globally.',
+        links: [
+          { label: 'NRF Healthy Longevity National Programme', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity', comment: 'NRF — PM-office endorsed national healthy longevity programme with multi-year commitment' },
+          { label: 'MOH Action Plan for Successful Ageing 2023', url: 'https://www.moh.gov.sg/others/resources-and-statistics/action-plan-for-successful-ageing', comment: 'Multi-ministry action plan with quantified healthy aging targets to 2030' },
+        ],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 3,
+        text: 'Government and statutory research funders treat "healthy longevity" as a named national R&D line (NMRC Healthy Longevity Global Grand Challenge through 2025; NRF ecosystem initiative on Human Health and Potential; MOH Action Plan for Successful Ageing). PM-level National Day Rally 2024 acknowledged demographic ageing and family-size trends as national context. Parliament is not a competitive multi-party arena, so the rung-4 "parties compete" criterion is weak; the score reflects documented elite and agency mission language plus budgetary follow-through, not electoral bidding wars.',
+        links: [
+          { label: 'NMRC — Healthy Longevity Global Grand Challenge', url: 'https://www.nmrc.gov.sg/grants/competitive-research-grants/healthy-longevity-global-grand-challenge/', date: 'through 2025', comment: 'Research council programme scope and timeline' },
+          { label: 'NRF — Human Health and Potential (RIE)', url: 'https://www.nrf.gov.sg/rie-ecosystem/ecosystem-wide-fis/hhp-fis', comment: 'NRF ecosystem funding initiative including longevity-relevant framing' },
+          { label: 'PMO — National Day Rally 2024', url: 'https://www.pmo.gov.sg/Newsroom/National-Day-Rally-2024', date: 'Aug 2024', comment: 'Official PMO page — demographic ageing in national narrative' },
         ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {

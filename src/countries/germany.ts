@@ -709,15 +709,26 @@ const germany: CountryData = {
         text: 'Germany has above-average trust in medical institutions by European standards. The Robert Koch Institut commands high institutional credibility for health guidance. Post-COVID, vaccine hesitancy remains more significant than in Scandinavia. General scientific trust is good; trust in biotech and gene technology is more contested historically.',
         links: [],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
-        text: 'Healthy aging is positively framed in German public discourse, but radical life extension is culturally unfamiliar. Germany\'s dominant healthcare narrative centres on Krankheit (disease) management rather than proactive healthspan extension. Longevity medicine as a consumer movement is growing but remains niche. Political attention is minimal.',
-        links: [],
+        text: 'Healthy aging and prevention are respectable; radical life extension is culturally marginal. Mass media treat ageing as demography, life expectancy, care strain, and diseases of old age (e.g. dementia) — not a unified popular narrative of targeting aging biology. Longevity medicine as a consumer subculture remains niche.',
+        links: [
+          { label: 'Der Spiegel — life expectancy vs Western Europe', url: 'https://www.spiegel.de/wissenschaft/mensch/neue-studie-deutschland-faellt-bei-lebenserwartung-zurueck-a-6cd7cc03-291d-41bc-a0dd-33537afaa603', comment: 'Mainstream weekly — mortality trends, prevention, ageing society' },
+          { label: 'Der Spiegel — Alzheimer / early detection', url: 'https://www.spiegel.de/gesundheit/diagnose/demenz-bluttest-spuert-alzheimer-jahre-vor-den-ersten-symptomen-auf-a-1280544.html', comment: 'Health desk — disease-of-ageing frame typical of general press' },
+        ],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 2,
-        text: 'BMBF\'s health research framework (Rahmenprogramm Gesundheitsforschung) includes aging as one of several themes. The National Dementia Strategy (Nationale Demenzstrategie 2020) is the most concrete aging-specific political commitment. No dedicated longevity science programme with healthspan targets exists at the federal level.',
-        links: [{ label: 'BMBF Gesundheitsforschung', url: 'https://www.bmbf.de/bmbf/de/forschung/gesundheit-ernaehrung-umwelt/gesundheitsforschung/gesundheitsforschung_node.html', comment: 'German health research framework — includes aging as a theme' }],
+        text: 'BMBF\'s Rahmenprogramm Gesundheitsforschung allocates aging research funding as one of several themes without a dedicated longevity mandate. The Nationale Demenzstrategie 2020–2022 is the most concrete aging-specific commitment, but it was time-limited and renewal is uncertain. Notably, ESchG (the Embryo Protection Act) represents active legislative obstruction of germline longevity research — enacted 1990 and never seriously revised despite advances in the field. No multi-year ring-fenced programme for healthy lifespan extension exists at federal level; the coalition system makes sustained commitment across election cycles structurally difficult.',
+        links: [{ label: 'BMBF Gesundheitsforschung', url: 'https://www.bmbf.de/bmbf/de/forschung/gesundheit-ernaehrung-umwelt/gesundheitsforschung/gesundheitsforschung_node.html', comment: 'German health research framework — aging as one of several themes, no longevity-specific mandate' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'Bundestag plenary and commissions in 2024 centred Pflegeversicherung financing, demographic pressure on social insurance, and prevention in care — classic "demographic burden" debate (Statistisches Bundesamt projections cited in federal press). Occasional health-research mentions do not produce cross-party geroscience language, manifesto competition on longevity biotechnology, or a head-of-government mission framed as biological healthy-life extension.',
+        links: [
+          { label: 'Deutscher Bundestag — Aktuelle Stunde Pflegeversicherung', url: 'https://www.bundestag.de/dokumente/textarchiv/2024/kw41-de-aktuelle-stunde-pflegeversicherung-1023348', date: 'Oct 2024', comment: 'Plenary debate — long-term care insurance financing and demography' },
+          { label: 'Deutscher Bundestag — Plenary debate on prevention in care', url: 'https://www.bundestag.de/dokumente/textarchiv/2024/kw20-de-pflegebeduerftigkeit-1000384', date: 'May 2024', comment: 'Motion/debate — demography and prevention in nursing care' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,

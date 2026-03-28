@@ -811,15 +811,26 @@ const usa: CountryData = {
         text: 'Pew Research (2022) shows ~55% of Americans trust scientists "a lot" — moderate and declining. Trust is politically polarised: Republicans significantly less trusting of scientists and medical institutions post-COVID. Vaccine hesitancy and anti-establishment health movements are measurable factors. Above average globally but below Scandinavian norms.',
         links: [{ label: 'Pew Research on Science Trust', url: 'https://www.pewresearch.org/science/2022/02/15/americans-trust-in-scientists-other-groups-declines/', comment: 'Pew 2022 — 55% trust scientists "a lot", declining trend, politically polarised' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
-        text: 'US public increasingly receptive to "healthy aging" and preventive medicine framing. Longevity biotech has significant mainstream media coverage. However, "billionaire longevity" framing creates class-equity concerns. Religious and cultural resistance to life extension exists but is not dominant. Growing acceptance among educated urban demographics.',
-        links: [{ label: 'AFAR Public Outreach', url: 'https://www.afar.org/', comment: 'American Federation for Aging Research — building public acceptance of longevity science' }],
+        text: 'The US has the deepest mainstream geroscience discourse among large democracies: bestsellers, podcasts, and national newspapers routinely treat biological age, organ-specific ageing, NAD+/metabolism, and related trials as consumer-relevant science — not science fiction. Biological-age products and "longevity" as a category are culturally visible. Coverage falls short of rung 4 (indefinite healthspan as a default cultural goal) but clearly exceeds healthy-ageing lifestyle-only framing.',
+        links: [
+          { label: 'The Washington Post — organ ageing and disease risk', url: 'https://www.washingtonpost.com/wellness/2024/11/25/longevity-organ-aging-disease/', date: 'Nov 2024', comment: 'National daily wellness desk — differential organ ageing for a general audience' },
+          { label: 'AFAR — public engagement on ageing research', url: 'https://www.afar.org/', comment: 'NGO — longevity and ageing biology in public-facing programmes' },
+        ],
       },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 3,
+        text: 'NIA, established by statute in 1974, has sustained a $4B+ annual budget across 50+ years and administrations from both parties — the strongest evidence of policy durability in aging science globally. The bipartisan National Alzheimer\'s Project Act (NAPA, 2011) and its multi-year successors demonstrate cross-party funding continuity for an aging disease. ARPA-H (2022) includes longevity-adjacent health moonshot programmes. However, no explicit statutory mandate for healthy lifespan extension as a distinct policy goal exists — all major commitments are disease-framed (Alzheimer\'s, cancer) rather than geroscience-framed, and no quantified healthspan target has been adopted.',
+        links: [{ label: 'NIA Strategic Directions 2020–2025', url: 'https://www.nia.nih.gov/about/aging-strategic-directions-research', comment: 'NIA — 50-year statutory institute; largest aging science budget globally' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 2,
-        text: 'No explicit national longevity strategy. ARPA-H and NIA fund relevant research but without longevity mandates. Political attention focuses on Alzheimer\'s (bipartisan), Medicare cost containment, and cancer. No major party platform includes longevity as a distinct policy axis. Congressional Longevity Caucus exists but has limited legislative output.',
-        links: [{ label: 'Congressional Longevity Caucus', url: 'https://www.agingresearch.org/programs/congressional-longevity-caucus/', comment: 'Bipartisan caucus on aging policy — limited legislative activity' }],
+        text: 'Federal politics remain dominated by Medicare, Social Security solvency, and NIH/NIA Alzheimer\'s and cancer lines — fiscal and disease-of-aging framing in budgets and oversight hearings. The bipartisan Congressional Longevity Science Caucus (launched Feb 2023) educates members on aging and longevity biotechnology but does not make geroscience a general-election wedge; platform competition still centres on entitlements and specific diseases, not biological aging as a unified mandate.',
+        links: [
+          { label: 'House press release — Longevity Science Caucus launch', url: 'https://bilirakis.house.gov/media/press-releases/bilirakis-and-tonko-kick-longevity-science-caucus', date: 'Feb 2023', comment: 'Official launch statement (Bilirakis/Tonko)' },
+          { label: 'Alliance for Longevity Initiatives — caucus page', url: 'https://a4li.org/longevity-science-caucus/', comment: 'Caucus description and stated mission (third-sector reference)' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,

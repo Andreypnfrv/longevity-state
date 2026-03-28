@@ -828,15 +828,27 @@ const sweden: CountryData = {
         text: 'Sweden consistently ranks among the top countries globally for trust in science and public institutions. Eurobarometer surveys show ~75–80% of Swedes trust scientists. Trust in healthcare, government, and research institutions is a defining feature of Swedish civil society. High baseline makes longevity science acceptance substantially easier.',
         links: [{ label: 'Eurobarometer Science Trust', url: 'https://europa.eu/eurobarometer/surveys/detail/2237', comment: 'Sweden among highest EU countries for institutional and scientific trust' }],
       },
-      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 3,
-        text: 'Sweden\'s welfare state tradition frames healthy aging as a public good — not a luxury. Preventive medicine is mainstream; longevity research is increasingly visible through the Swedish Longevity Cluster and KI outreach. However, longevity extension as a distinct societal goal (beyond disease prevention) is not yet a mainstream political or cultural concept in Sweden.',
-        links: [{ label: 'Swedish Longevity Cluster', url: 'https://swedishlongevitycluster.se/', comment: 'Industry-academia longevity cluster — raising public awareness of longevity research' }],
-      },
-      [SocietalReadinessClaim.POLITICAL_WILL]: {
+      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
-        text: 'No explicit national longevity strategy or dedicated programme. Healthy aging features in broader welfare and eldercare policy but is not elevated as a longevity science priority. VR and Vinnova fund aging-adjacent research without longevity mandates. No cross-party political momentum for longevity as a distinct policy axis.',
-        links: [{ label: 'Swedish Life Science Strategy', url: 'https://www.government.se/government-policy/life-science/', comment: 'National life science strategy — mentions aging but no longevity-specific mandate' }],
+        text: 'The welfare state frames good health in old age as collective provision. Public service media cover training, lifestyle, and disease in older adults in an evidence-minded way; the dominant story is not geroscience as mass culture (clocks, hallmarks, senolytics). The Swedish Longevity Cluster reaches industry and specialists more than the general public.',
+        links: [
+          { label: 'Sveriges Radio — exercise and memory in older adults', url: 'https://www.sverigesradio.se/avsnitt/intensiv-traning-for-aldre-gav-battre-korttidsminne-r--2', date: 'Sep 2024', comment: 'Vetenskapsradion Hälsa — prevention and cognition; disease/healthspan frame' },
+          { label: 'Swedish Longevity Cluster', url: 'https://swedishlongevitycluster.se/', comment: 'National cluster site — stakeholder visibility (secondary to general press)' },
+        ],
+      },
+      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 3,
+        text: 'Sweden\'s welfare state provides structurally stable aging research funding through VR, Vinnova, and Forte — not as explicit longevity commitments but as part of health and social science budgets that have survived decades of Social Democrat and centre-right governments alike. The Swedish Life Science Strategy (2019, updated 2023) includes aging as one of several priority areas with industry co-investment ambitions. The elderly care system (äldreomsorgen) commands large sustained budgets with cross-party consensus, providing an indirect stable floor. However, no ring-fenced longevity science programme with healthspan targets has been legislated.',
+        links: [{ label: 'Swedish Life Science Strategy', url: 'https://www.government.se/government-policy/life-science/', comment: 'National life science strategy — aging as a priority area; no standalone longevity mandate' }],
+      },
+      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2,
+        text: 'Government and Riksdag process centre äldreomsorg quality, staffing, and dementia: a new national dementia strategy (2025–2028) was adopted with ministerial communication in 2025; motions and agency underlag in 2024–2025 keep cognitive decline and elder services in the legislative record. Parties compete on care access and resources, not on geroscience or biological longevity as an electoral brand.',
+        links: [
+          { label: 'Regeringen — Nationell demensstrategi (PDF)', url: 'https://www.regeringen.se/globalassets/regeringen/dokument/socialdepartementet/aldreomsorg/varje-dag-raknas---nationell-demensstrategi-20242028.pdf', date: '2025–2028', comment: 'Official strategy (Every Day Counts)' },
+          { label: 'Regeringen — press article on national dementia strategy', url: 'https://www.regeringen.se/artiklar/2025/02/aldre--och-socialforsakringsministern-om-ny-nationell-demensstrategi/', date: 'Feb 2025', comment: 'Ministerial announcement' },
+          { label: 'Socialstyrelsen — underlag demensstrategi', url: 'https://www.socialstyrelsen.se/publikationer/underlag-for-en-utvecklad-nationell-demensstrategi--en-strategi-for-lindrig-kognitiv-storning-och-demenssjukdom-2024-2-8957/', date: '2024', comment: 'Evidence report feeding strategy update' },
+        ],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,

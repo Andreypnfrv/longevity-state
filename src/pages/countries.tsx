@@ -3,7 +3,7 @@ import { Navigate, useLocation, useParams } from 'react-router-dom'
 import { Country, PolicyGroup, type ClaimData, type CountryData } from '../schema'
 import { GROUPS, type GroupDef } from '../schema/policyGroups'
 import { allCountries } from '../countries'
-import { groupLabels, fieldLabels, claimLabels, countryLabels, Locale } from '../translations'
+import { groupLabels, fieldLabels, claimLabels, claimMaxScore, countryLabels, Locale } from '../translations'
 import type { IndexPageProps } from './index'
 import {
   FIELD_COL,
@@ -22,6 +22,7 @@ import {
   stickyGroupFirstCol,
   getClaimScaleLegendLines,
   claimTodoModel,
+  parseScaleLegendEntries,
 } from './index'
 import { useTableExpansion } from '../table/useTableExpansion'
 import { useRowHoverHighlight, rowHoverGridSurfaceStyle, rowHoverStickyColStyle } from '../table/useRowHoverHighlight'
@@ -62,8 +63,10 @@ function legendLineLeadingLevel(line: string): number | null {
   return m ? Number(m[1]) : null
 }
 
-function countryLevelFloor(score: number, maxScore: number): number {
-  return Math.min(maxScore, Math.max(1, Math.floor(Number(score))))
+function countryLevelFloor(score: number, maxScore: number, field: string, claimKey: string): number {
+  const es = parseScaleLegendEntries(field, claimKey)
+  const minLv = es.length ? Math.min(...es.map(e => e.level)) : 1
+  return Math.min(maxScore, Math.max(minLv, Math.floor(Number(score))))
 }
 
 function fieldTodoAggregate(
@@ -80,7 +83,7 @@ function fieldTodoAggregate(
     const d = selectedFieldRec[ck]
     if (!d) continue
     hasData = true
-    const m = claimTodoModel(field, ck, d.score ?? null, maxScore)
+    const m = claimTodoModel(field, ck, d.score ?? null, claimMaxScore(field, ck, maxScore))
     if (m.kind === 'next') {
       pending += m.items.length
       allDone = false
@@ -708,13 +711,14 @@ export default function CountryPage(props: IndexPageProps) {
                             countryId,
                           )
                           const ct = claimLabels[field]?.[claimKey]?.[Locale.EN]
+                          const claimMax = claimMaxScore(field, claimKey, maxScore)
                           const fieldData = accessor(selected)[field]
                           const data = fieldData?.[claimKey]
                           const selectedClaimBaseline = data != null ? Number(data.score) : null
-                          const countryLv = data != null ? countryLevelFloor(data.score, maxScore) : null
+                          const countryLv = data != null ? countryLevelFloor(data.score, claimMax, field, claimKey) : null
                           const rowHover = bindRowHover(claimDetailKey)
                           const rh = rowHover.isHovered
-                          const claimTodo = claimTodoModel(field, claimKey, data?.score ?? null, maxScore)
+                          const claimTodo = claimTodoModel(field, claimKey, data?.score ?? null, claimMax)
                           const detailRoot = detailRowRootHandlers('countryPage', claimDetailKey, toggleClaimDetail)
 
                           return (
@@ -740,7 +744,7 @@ export default function CountryPage(props: IndexPageProps) {
                                     </span>
                                     {data != null && (
                                       <span style={{ display: 'inline-flex', alignItems: 'center' }} aria-hidden>
-                                        <ScoreDots score={data.score} maxScore={maxScore} size={5} />
+                                        <ScoreDots score={data.score} maxScore={claimMax} size={5} />
                                       </span>
                                     )}
                                   </div>
@@ -794,7 +798,7 @@ export default function CountryPage(props: IndexPageProps) {
                                     fieldKey={field}
                                     claimKey={claimKey}
                                     data={data}
-                                    maxScore={maxScore}
+                                    maxScore={claimMax}
                                     detailExpanded={expandedClaimDetails.has(claimDetailKey)}
                                     onDetailToggle={() => toggleClaimDetail(claimDetailKey)}
                                     rowHoverHighlight={rh}
@@ -817,7 +821,7 @@ export default function CountryPage(props: IndexPageProps) {
                                       accessor={accessor}
                                       field={field}
                                       claimKey={claimKey}
-                                      maxScore={maxScore}
+                                      maxScore={claimMax}
                                       selectedBaseline={selectedClaimBaseline}
                                       claimDetailOpen={claimDetailOpen}
                                       onToggleClaimDetail={() => ensureDetailOpen(claimDetailKey)}

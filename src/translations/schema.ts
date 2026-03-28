@@ -185,7 +185,7 @@ export const fieldLabels: Record<string, Record<Locale, FieldTranslation>> = {
   [SocietalField.SOCIETAL_READINESS]: {
     [Locale.EN]: {
       title: 'Societal Readiness',
-      description: 'Public trust in science and medicine, societal acceptance of longevity extension as a legitimate goal, and political will to fund and prioritize longevity policy.',
+      description: 'Public trust, media framing of aging, anti-quackery safeguards, institutional policy commitment (budget and statute), and legislative salience (how elites publicly talk about aging — 0–4).',
     },
   },
 }
