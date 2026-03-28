@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useMemo, useState, type CSSProperties } from 'react'
 import { Navigate, useLocation, useParams } from 'react-router-dom'
-import { Country, type ClaimData, type CountryData } from '../schema'
+import { Country, PolicyGroup, type ClaimData, type CountryData } from '../schema'
 import { GROUPS, type GroupDef } from '../schema/policyGroups'
 import { allCountries } from '../countries'
 import { groupLabels, fieldLabels, claimLabels, countryLabels, Locale } from '../translations'
@@ -345,14 +345,44 @@ export default function CountryPage(props: IndexPageProps) {
   const ensureParentOpen = expansion.ensureParentOpen
   const bindRowHover = useRowHoverHighlight()
 
+  const openAllLeaderSnippetsForRow = useCallback((rk: string) => {
+    if (!countryIdParam || !isCountryParam(countryIdParam)) return
+    const self = countryIdParam
+    const idx = rk.indexOf('::')
+    if (idx < 0) return
+    const groupId = rk.slice(0, idx) as PolicyGroup
+    const field = rk.slice(idx + 2)
+    const gd = groupsFiltered.find((g: GroupDef) => g.group === groupId)
+    if (!gd) return
+    const raw = leadersForField(countries, gd.accessor, field)
+    const leaders = filterLeadersExcludingSelf(raw, self)
+    setLeaderSnippetOpen(prev => {
+      const n = new Set(prev)
+      for (const { data } of leaders) {
+        const sn = snippetFromLeaderField(gd.accessor, field, data)
+        if (sn) n.add(leaderSnippetRowKey(rk, data.country))
+      }
+      return n
+    })
+  }, [countryIdParam, groupsFiltered, countries])
+
+  const toggleFieldRow = useCallback((rk: string) => {
+    const opening = !expandedRows.has(rk)
+    toggleRow(rk)
+    if (opening) openAllLeaderSnippetsForRow(rk)
+  }, [expandedRows, toggleRow, openAllLeaderSnippetsForRow])
+
   const activateLeaderSnippet = useCallback((snippetId: string) => {
     const sep = '::__snippet__::'
     const i = snippetId.indexOf(sep)
     const rk = i >= 0 ? snippetId.slice(0, i) : ''
-    const opening = !leaderSnippetOpen.has(snippetId)
-    if (opening && rk && !expandedRows.has(rk)) ensureParentOpen(rk)
+    if (rk && !expandedRows.has(rk)) {
+      ensureParentOpen(rk)
+      openAllLeaderSnippetsForRow(rk)
+      return
+    }
     toggleLeaderSnippetKey(snippetId)
-  }, [leaderSnippetOpen, expandedRows, ensureParentOpen, toggleLeaderSnippetKey])
+  }, [expandedRows, ensureParentOpen, openAllLeaderSnippetsForRow, toggleLeaderSnippetKey])
 
   if (!countryIdParam || !isCountryParam(countryIdParam)) {
     return <Navigate to={{ pathname: '/', search: locationSearch }} replace />
@@ -377,11 +407,11 @@ export default function CountryPage(props: IndexPageProps) {
         <div
           role="button"
           tabIndex={0}
-          onClick={() => toggleRow(rk)}
+          onClick={() => toggleFieldRow(rk)}
           onKeyDown={e => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault()
-              toggleRow(rk)
+              toggleFieldRow(rk)
             }
           }}
           style={{
@@ -409,7 +439,7 @@ export default function CountryPage(props: IndexPageProps) {
         fieldRowKey={rk}
         expandedClaimDetails={expandedClaimDetails}
         onToggleClaimDetail={toggleClaimDetail}
-        onToggleRow={() => toggleRow(rk)}
+        onToggleRow={() => toggleFieldRow(rk)}
         rowHoverHighlight={rowHoverHighlight}
       />
     )
@@ -579,11 +609,11 @@ export default function CountryPage(props: IndexPageProps) {
                           <div
                             role="button"
                             tabIndex={0}
-                            onClick={() => toggleRow(rk)}
+                            onClick={() => toggleFieldRow(rk)}
                             onKeyDown={e => {
                               if (e.key === 'Enter' || e.key === ' ') {
                                 e.preventDefault()
-                                toggleRow(rk)
+                                toggleFieldRow(rk)
                               }
                             }}
                             style={{ ...stickyFirstCol, ...rowHoverStickyColStyle(fhh), paddingTop: fi > 0 ? 0 : 10, paddingRight: 20, cursor: 'pointer' }}
@@ -615,11 +645,11 @@ export default function CountryPage(props: IndexPageProps) {
                             <div
                               role="button"
                               tabIndex={0}
-                              onClick={() => toggleRow(rk)}
+                              onClick={() => toggleFieldRow(rk)}
                               onKeyDown={e => {
                                 if (e.key === 'Enter' || e.key === ' ') {
                                   e.preventDefault()
-                                  toggleRow(rk)
+                                  toggleFieldRow(rk)
                                 }
                               }}
                               style={{
