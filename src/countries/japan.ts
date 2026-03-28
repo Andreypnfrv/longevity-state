@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const japan: CountryData = {
@@ -707,28 +707,29 @@ const japan: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
         text: 'Trust in physicians and hospitals stays very high in repeated cross-national barometer readings; bedside legitimacy remains a national asset.',
         links: [
           { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Japan market report; fieldwork Oct 25–Nov 16, 2025' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 4,
         text: 'Science and university-led authority still score below bedside medicine; 2026 global report highlights Japan among the most “insular” markets on trusting unlike others — a headwind for cross-border scientific legitimacy even when domestic research institutions score well.',
         links: [
           { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Insularity and trust-brokering themes; Japan country breakout' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 4,
         text: 'National health insurance and MHLW-led programmes retain strong structural legitimacy; HPV episode (2013–2022) remains the textbook case where vaccine-specific trust lagged system trust.',
         links: [
           { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Government and health-institution trust — Japan local report' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Japan\'s society is the world\'s most demographically aged (30%+ over 65) and healthy aging is a deeply embedded national ambition. The concept of 健康寿命 (kenkou jumyou — healthy lifespan) is a mainstream political and cultural goal, and Healthy Japan 21 has run for decades. Japanese cultural values (ikigai, hara hachi bu, strong community ties) are globally cited as longevity factors. Mainstream outlets emphasise lifestyle, prevention, and care; the scientific target in public discourse is typically specific diseases of old age (dementia, frailty, metabolic disease) rather than aging biology as a unified, reversible process. Geroscience concepts (hallmarks, senolytics, epigenetic clocks as a popular vocabulary) are not ambient in general-audience framing — consistent with rung 2, not rung 3.',
         links: [
@@ -736,25 +737,7 @@ const japan: CountryData = {
           { label: 'The Japan Times — life expectancy data', url: 'https://www.japantimes.co.jp/news/2025/07/25/japan/science-health/life-expectancy-average-flat/', date: 'Jul 2025', comment: 'English daily — vital statistics and public-health framing of ageing' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 4,
-        text: 'R: AMED Moonshot Goal 7 and cabinet/S&T Basic Plan lines provide named, funded healthy-life-span R&D to 2050 (L+B). P: Healthy Japan 21 (MHLW) is a long-running national prevention and health-promotion programme with statutory policy backing — P bucket, not LTCI. I: MHLW Healthcare DX (national platform, My Number integration, secondary use of health data) is official L for digital health infrastructure serving the whole system including older adults. LTCI (Kaigo) fiscal scale is out of scope for this claim. Score 4: strong R+P+I in primary documents and cross-ministry execution, but rung 5 is not applied without a single plan-law instrument showing protected multi-cycle B for all three buckets with explicit ageing-health KPIs in annexed appropriations.',
-        links: [
-          { label: 'JST — Moonshot Goal 7 (English)', url: 'https://www.jst.go.jp/moonshot/en/program/goal7/', date: 'from 2021', comment: 'R+L — PM-endorsed programme; healthy life / function goals to 2050' },
-          { label: 'MHLW — Healthy Japan 21', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kenkounippon21.html', comment: 'P+L — national health promotion / prevention framework' },
-          { label: 'MHLW — Healthcare DX (English)', url: 'https://www.mhlw.go.jp/english/policy/health-medical/healthcare-dx/index.html', comment: 'I+L — national digital health / data platform policy' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 4,
-        text: 'Aging and extended healthy life are a persistent electoral and Diet theme; cabinet-level science programmes (Moonshot Goal 7 via AMED — explicit 100-year healthy-life R&D mission, senescence/mitochondria/dementia streams, public symposia through 2024–2025) and Cabinet Office healthy-longevity reporting give a recurring documentary trail in law, budget, and oversight. Major parties compete on care, prevention, and innovation; executive speeches treat demographic aging as a strategic national challenge with biomedical content — fits the top rung (mandate + flagship documents), with fiscal care debate still alongside science framing.',
-        links: [
-          { label: 'AMED — Moonshot Goal 7 programme', url: 'https://www.amed.go.jp/en/program/list/18/03/001_01.html', date: 'from 2021', comment: 'Statutory moonshot R&D goal on healthy life to advanced age' },
-          { label: 'AMED — Moonshot Goal 7 symposium (report)', url: 'https://www.amed.go.jp/en/news/events/2025_moonshot.html', date: '2024–2025', comment: 'Agency event page — 2024 symposium; report Mar 2025' },
-          { label: 'Cabinet Office — healthy longevity policy materials', url: 'https://www.cao.go.jp/houkoku/document/health_longevity.html', comment: 'CAO annual strategy and reporting' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
         text: 'FOSHU/FCCP-style systems require scientific review for registered functional claims; CAA/MHLW guidance applies the Premiums and Representations Act and Health Promotion Act to “health food” exaggeration and disease-flavoured copy. Large retail and cosmetic “anti-aging” marketing still pushes borderline beauty and vitality claims; Kampo and general foods sit in a grey band — composite rung 2 (law + guidance; not pre-market drug-level proof for all longevity marketing).',
         links: [
@@ -763,6 +746,27 @@ const japan: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 4,
+        text: 'R: AMED Moonshot Goal 7 and cabinet/S&T Basic Plan lines provide named, funded healthy-life-span R&D to 2050 (L+B). P: Healthy Japan 21 (MHLW) is a long-running national prevention and health-promotion programme with statutory policy backing — P bucket, not LTCI. I: MHLW Healthcare DX (national platform, My Number integration, secondary use of health data) is official L for digital health infrastructure serving the whole system including older adults. LTCI (Kaigo) fiscal scale is out of scope for this claim. Score 4: strong R+P+I in primary documents and cross-ministry execution, but rung 5 is not applied without a single plan-law instrument showing protected multi-cycle B for all three buckets with explicit ageing-health KPIs in annexed appropriations.',
+        links: [
+          { label: 'JST — Moonshot Goal 7 (English)', url: 'https://www.jst.go.jp/moonshot/en/program/goal7/', date: 'from 2021', comment: 'R+L — PM-endorsed programme; healthy life / function goals to 2050' },
+          { label: 'MHLW — Healthy Japan 21', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kenkounippon21.html', comment: 'P+L — national health promotion / prevention framework' },
+          { label: 'MHLW — Healthcare DX (English)', url: 'https://www.mhlw.go.jp/english/policy/health-medical/healthcare-dx/index.html', comment: 'I+L — national digital health / data platform policy' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 4,
+        text: 'Aging and extended healthy life are a persistent electoral and Diet theme; cabinet-level science programmes (Moonshot Goal 7 via AMED — explicit 100-year healthy-life R&D mission, senescence/mitochondria/dementia streams, public symposia through 2024–2025) and Cabinet Office healthy-longevity reporting give a recurring documentary trail in law, budget, and oversight. Major parties compete on care, prevention, and innovation; executive speeches treat demographic aging as a strategic national challenge with biomedical content — fits the top rung (mandate + flagship documents), with fiscal care debate still alongside science framing.',
+        links: [
+          { label: 'AMED — Moonshot Goal 7 programme', url: 'https://www.amed.go.jp/en/program/list/18/03/001_01.html', date: 'from 2021', comment: 'Statutory moonshot R&D goal on healthy life to advanced age' },
+          { label: 'AMED — Moonshot Goal 7 symposium (report)', url: 'https://www.amed.go.jp/en/news/events/2025_moonshot.html', date: '2024–2025', comment: 'Agency event page — 2024 symposium; report Mar 2025' },
+          { label: 'Cabinet Office — healthy longevity policy materials', url: 'https://www.cao.go.jp/houkoku/document/health_longevity.html', comment: 'CAO annual strategy and reporting' },
+        ],
+      },
+    },
+
   },
 }
 

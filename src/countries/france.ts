@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const france: CountryData = {
@@ -704,28 +704,29 @@ const france: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 3.5,
         text: 'Doctors and hospitals remain more trusted than politicians; interpersonal clinical trust is middling-to-good vs northern peers.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep–Oct 2024 — France EU comparator' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 3,
         text: 'State promotes science literacy but baseline scepticism toward expert health claims runs above Nordics; EU-wide 2024-field wave still shows majority pro-science sentiment with equity and rights caveats.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Feb 2025 EC release — attitudes to S&T (EU27+)' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 2.5,
         text: 'Historically higher vaccine hesitancy and méfiance toward central health campaigns than Germany or Scandinavia; national agencies face recurring legitimacy tests in media and politics.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Cross-national context wave Sep–Oct 2024' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Vieillir bien and prevention are respectable frames; ethics bodies (CCNE) lean cautious on life-extension tech. Mainstream press treats longevity mostly as demography, healthy life expectancy, and exceptional age — not geroscience (hallmarks, senolytics, biological age) as everyday vocabulary. Radical life extension is less salient than in the US.',
         links: [
@@ -733,24 +734,7 @@ const france: CountryData = {
           { label: 'Le Monde — healthy life expectancy after 65 (Drees)', url: 'https://www.lemonde.fr/societe/article/2024/12/31/apres-65-ans-il-vous-reste-entre-dix-et-douze-annees-en-bonne-en-sante-en-moyenne-selon-la-drees_6475172_3224.html', date: 'Dec 2024', comment: 'Society desk — disability-free life expectancy; prevention and chronic disease context' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 3,
-        text: 'R: France 2030 (programme law) channels multi-year health-innovation and biomedical investment — L+B with presidential continuity (C) across premiers. P: national prevention policy (stratégie de prévention santé) and dementia / neurodegeneration plans supply population-health and older-age disease-prevention L, with ministry-of-health execution. I: Ségur du numérique en santé and Mon espace santé deliver statutory digital-health infrastructure — I bucket tied to care pathways. Score 3: clear multi-year R and cross-cutting P/I at national level; not 4 because ageing-longevity is not isolated in a single ring-fenced appropriation line comparable to peers and flagship L explicitly naming healthy longevity / geroscience is thinner than rung-4 bar.',
-        links: [
-          { label: 'Gouvernement — France 2030', url: 'https://www.gouvernement.fr/france-2030', comment: 'R+L+B — programme-law-backed innovation investment including santé' },
-          { label: 'Santé publique France — Stratégie de prévention santé', url: 'https://www.santepubliquefrance.fr/determinants-de-sante/promotion-de-la-sante/strategie-nationale-de-sante', comment: 'P+L — national prevention strategy (population health)' },
-          { label: 'Ministère de la Santé — Mon espace santé / dossier numérique', url: 'https://esante.gouv.fr/mon-espace-sante', comment: 'I+L — national shared health record / digital health (Ségur suite)' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 1,
-        text: 'The Sénat and Assemblée foreground Ehpad financing, autonomie branch experiments, and dependency ratios — September 2024 registered reports on residential care deficits illustrate fiscal and capacity framing. Party competition in 2024–2025 cycles does not centre geroscience, biological aging targets, or longevity medicine; discourse stays in social insurance and care-system reform (rung 1: economic/social burden of aging).',
-        links: [
-          { label: 'Sénat — Information report on Ehpad situation', url: 'https://www.senat.fr/rap/r23-778/r23-77818.html', date: 'Sep 2024', comment: 'Registered report — eldercare homes, demographic and financial pressure' },
-          { label: 'Gouvernement — Stratégie « Bien vieillir »', url: 'https://solidarites.gouv.fr/preparer-la-france-de-demain-ajouter-de-la-vie-aux-annees-strategie-bien-vieillir', date: 'Nov 2023', comment: 'Interministerial strategy — autonomy, care, generations (not geroscience)' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
         text: 'ANSM controls medicine advertising formats and obligations; EU nutrition and health-claim rules (EFSA register) bound food-supplement messaging — therapeutic or disease claims without MA remain off-limits. CNOM has published national concern on unconventional practices and illegal exercise risks (2023–2025 materials). No Heilpraktiker-equivalent class. Wellness and online longevity marketing still stress complaint-led enforcement — composite rung 3.',
         links: [
@@ -759,6 +743,26 @@ const france: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 3,
+        text: 'R: France 2030 (programme law) channels multi-year health-innovation and biomedical investment — L+B with presidential continuity (C) across premiers. P: national prevention policy (stratégie de prévention santé) and dementia / neurodegeneration plans supply population-health and older-age disease-prevention L, with ministry-of-health execution. I: Ségur du numérique en santé and Mon espace santé deliver statutory digital-health infrastructure — I bucket tied to care pathways. Score 3: clear multi-year R and cross-cutting P/I at national level; not 4 because ageing-longevity is not isolated in a single ring-fenced appropriation line comparable to peers and flagship L explicitly naming healthy longevity / geroscience is thinner than rung-4 bar.',
+        links: [
+          { label: 'Gouvernement — France 2030', url: 'https://www.gouvernement.fr/france-2030', comment: 'R+L+B — programme-law-backed innovation investment including santé' },
+          { label: 'Santé publique France — Stratégie de prévention santé', url: 'https://www.santepubliquefrance.fr/determinants-de-sante/promotion-de-la-sante/strategie-nationale-de-sante', comment: 'P+L — national prevention strategy (population health)' },
+          { label: 'Ministère de la Santé — Mon espace santé / dossier numérique', url: 'https://esante.gouv.fr/mon-espace-sante', comment: 'I+L — national shared health record / digital health (Ségur suite)' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'The Sénat and Assemblée foreground Ehpad financing, autonomie branch experiments, and dependency ratios — September 2024 registered reports on residential care deficits illustrate fiscal and capacity framing. Party competition in 2024–2025 cycles does not centre geroscience, biological aging targets, or longevity medicine; discourse stays in social insurance and care-system reform (rung 1: economic/social burden of aging).',
+        links: [
+          { label: 'Sénat — Information report on Ehpad situation', url: 'https://www.senat.fr/rap/r23-778/r23-77818.html', date: 'Sep 2024', comment: 'Registered report — eldercare homes, demographic and financial pressure' },
+          { label: 'Gouvernement — Stratégie « Bien vieillir »', url: 'https://solidarites.gouv.fr/preparer-la-france-de-demain-ajouter-de-la-vie-aux-annees-strategie-bien-vieillir', date: 'Nov 2023', comment: 'Interministerial strategy — autonomy, care, generations (not geroscience)' },
+        ],
+      },
+    },
+
   },
 }
 

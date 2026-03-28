@@ -6,7 +6,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 import { Locale } from './index'
 
@@ -607,25 +607,38 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
     }},
   },
 
-  // ── Societal: Societal Readiness ──────────────────────────────────────────
+  // ── Societal: Societal Readiness (public / media / market) ─────────────────
   [SocietalField.SOCIETAL_READINESS]: {
-    [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: { [Locale.EN]: {
+    [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: { [Locale.EN]: {
       title: 'Public trust — clinical system',
       description: 'Pillar A: trust in physicians, nurses, hospitals, and “medicine in general” in representative surveys (e.g. Eurobarometer health, national health barometers). Independent from science-in-the-lab and from trust in national health agencies.',
     }},
-    [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: { [Locale.EN]: {
+    [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: { [Locale.EN]: {
       title: 'Public trust — biomedical science',
       description: 'Pillar B: trust in scientists, universities, and medical research as a basis for health — trial participation, novel therapy legitimacy, research uses of data (e.g. Wellcome Global Monitor, Eurobarometer S&T).',
     }},
-    [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: { [Locale.EN]: {
+    [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: { [Locale.EN]: {
       title: 'Public trust — national health authority',
       description: 'Pillar C: trust in the ministry of health, public-health institute (CDC-style), and regulator as source of official guidance and population programmes — not the same as generic “trust in government”.',
     }},
-    [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: { [Locale.EN]: {
+    [SocialReadinessClaim.AGING_MEDIA_FRAMING]: { [Locale.EN]: {
       title: 'Aging media framing',
       description: 'At what level of ambition does mainstream media frame aging — from fatalism and elder care through healthy-aging lifestyle, up to geroscience (hallmarks, biological age reversal, senolytics) and indefinite healthspan as a cultural goal. The score reflects the highest ambition level with sustained mainstream presence, not fringe coverage.',
     }},
-    [SocietalReadinessClaim.POLICY_COMMITMENT]: { [Locale.EN]: {
+    [SocialReadinessClaim.QUACKERY_RESISTANCE]: { [Locale.EN]: {
+      title: 'Anti-aging quackery resistance',
+      description: 'Single composite score: how strongly law, regulators, and professional discipline constrain unproven anti-aging marketing (cosmetics, supplements, ads), borderline health products, and clinical "longevity" practice. Not the same as public trust in science. Expand the left column for methodology.',
+      methodology: `One axis — the weakest link among (1) marketing and advertising enforcement for systemic / whole-body "anti-aging" or rejuvenation claims, (2) how borderline products are classified and controlled (cosmetic vs drug vs procedure), and (3) whether medical licensing credibly sanctions clinicians who sell unproven longevity protocols or rely on non-recognised "anti-aging" credentials. Public trust surveys do not set this score.
+
+Evidence: primary regulator guidance, statutes, published enforcement or rulings (e.g. advertising authority case law), and medical-board conduct codes — not media sentiment. Where law is federal but enforcement is regional, the score reflects the effective national regime; narrative should mention gaps (e.g. cross-border e-commerce, traditional-medicine carve-outs) if they cap the rung.
+
+Scoring: assign the highest rung (0–5) fully supported by documentary evidence. Detailed rung text is under Scale.`,
+    }},
+  },
+
+  // ── Societal: Political Readiness (state + elite discourse) ────────────────
+  [SocietalField.POLITICAL_READINESS]: {
+    [PoliticalReadinessClaim.POLICY_COMMITMENT]: { [Locale.EN]: {
       title: 'Policy commitment',
       description: 'State follow-through for research (R), prevention (P), and AI/data for ageing-related health (I) — statute plus budget where named; long-term care alone is out of scope. Expand the left column for methodology and rubric.',
       methodology: `Scope: state-backed commitment in three buckets only — (R) Research: aging biology, geroscience, translation and trials infrastructure with an explicit aging/longevity R&D mandate (not generic hospital spend). (P) Prevention: national programmes — screening, healthy ageing, NCD risk reduction for older adults — with a named line and appropriation. (I) AI / data / digital: national AI-in-health, biobanks, digital tools for early detection or monitoring, explicitly tied to health and ageing/longevity (not a generic national AI strategy without health linkage).
@@ -636,19 +649,10 @@ Evidence codes (primary documents in country links): L = statute / plan-law / ca
 
 Scoring: assign the highest rung (0–5) whose conditions are met using only R/P/I commitments. Ring-fence means traceable in L+B, not press-only announcements. Country narrative should name which bucket(s) anchor the score. Detailed rung definitions are listed below under Scale.`,
     }},
-    [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: { [Locale.EN]: {
+    [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: { [Locale.EN]: {
       title: 'Legislative salience',
       description: 'At what ambition level MPs, party leaders, and heads of state publicly discuss aging: from pensions-only speech (0) through economic demographic burden (1), healthy aging and disease-of-aging agendas (2), geroscience with a documentary record (3), to longevity as a competing electoral and executive mandate (4). Scored 0–4.',
       maxScore: 4,
-    }},
-    [SocietalReadinessClaim.QUACKERY_RESISTANCE]: { [Locale.EN]: {
-      title: 'Anti-aging quackery resistance',
-      description: 'Single composite score: how strongly law, regulators, and professional discipline constrain unproven anti-aging marketing (cosmetics, supplements, ads), borderline health products, and clinical "longevity" practice. Not the same as public trust in science. Expand the left column for methodology.',
-      methodology: `One axis — the weakest link among (1) marketing and advertising enforcement for systemic / whole-body "anti-aging" or rejuvenation claims, (2) how borderline products are classified and controlled (cosmetic vs drug vs procedure), and (3) whether medical licensing credibly sanctions clinicians who sell unproven longevity protocols or rely on non-recognised "anti-aging" credentials. Public trust surveys do not set this score.
-
-Evidence: primary regulator guidance, statutes, published enforcement or rulings (e.g. advertising authority case law), and medical-board conduct codes — not media sentiment. Where law is federal but enforcement is regional, the score reflects the effective national regime; narrative should mention gaps (e.g. cross-border e-commerce, traditional-medicine carve-outs) if they cap the rung.
-
-Scoring: assign the highest rung (0–5) fully supported by documentary evidence. Detailed rung text is under Scale.`,
     }},
   },
 }

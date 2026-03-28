@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const switzerland: CountryData = {
@@ -704,7 +704,8 @@ const switzerland: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 4,
         text: 'Strong confidence in medical quality and access; Swiss residents cluster with high-trust neighbours on routine care and prevention.',
         links: [
@@ -712,14 +713,14 @@ const switzerland: CountryData = {
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Regional comparator — EU fieldwork Sep–Oct 2024' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 4,
         text: 'Domestic pharma and research culture support high science credibility; EU-wide 2024-field S&T barometer (Feb 2025 release) underscores a still broadly pro-science European public opinion environment around Switzerland.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU27+ science attitudes — regional benchmark' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 4,
         text: 'Federal and cantonal health governance (FOPH/BAG) retain comparatively high legitimacy; direct-democratic fights on single issues are normal politics, not PHA collapse.',
         links: [
@@ -727,7 +728,7 @@ const switzerland: CountryData = {
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Neighbouring EU sentiment on institutions and S&T' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Public discourse treats ageing as demographics, dignity, and care — plus lifestyle and prevention. Swiss PSB and English-language national media report population ageing and how people experience old age; pharmaceutical R&D on age-related disease does not translate into geroscience as ambient popular culture. End-of-life autonomy debates sit alongside pragmatic health reporting, not longevity escape velocity.',
         links: [
@@ -735,24 +736,7 @@ const switzerland: CountryData = {
           { label: 'SWI swissinfo.ch — when Swiss people "feel old"', url: 'https://www.swissinfo.ch/eng/demographics/swiss-people-only-feel-old-from-the-age-of-80/87438761', comment: 'Survey coverage — quality of life and perceptions of age' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 2,
-        text: 'R: SNSF (SNF) funds biomedical and public-health research including ageing and chronic disease through competitive project grants (L+B at programme level) but without a federal ring-fenced “healthy longevity” line — typical rung-2 breadth. P: FOPH prevention and NCD strategy elements touch population health; national “healthy ageing” strategy text is primarily care-system and quality framing — only the parts that are prevention/NCD policy count toward P, not LTCI capacity. I: federal digital-health / interoperability policy (eHealth Suisse, EPR law) supplies I; cantonal execution fragments a single national B line. No multi-year federal flagship tying R+P+I for ageing in one statute. Private pharma R&D does not substitute for L+B here.',
-        links: [
-          { label: 'SNSF — funding areas (life sciences / medicine)', url: 'https://www.snf.ch/en/2BpF5JUPdEymO2mx/funding/funding-instruments', comment: 'R+B — federal research foundation; competitive grants' },
-          { label: 'FOPH — Non-communicable diseases strategy', url: 'https://www.bag.admin.ch/bag/en/home/strategie-und-politik/nationale-gesundheitsstrategien/nicht-uebertragbare-krankheiten.html', comment: 'P+L — federal NCD / prevention strategy' },
-          { label: 'eHealth Suisse', url: 'https://www.e-health-suisse.ch/en/', comment: 'I+L — national eHealth coordination' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 1,
-        text: 'Federal Assembly and Federal Council decisions in 2024–2025 focused on implementing the 13th AHV pension payment and financing (Ständerat approval Dec 2024; VAT/contribution options) — pension-system and fiscal-demography framing. Palliative and eldercare strategy (BAG) remains social-protection led. No major-party or parliamentary line treats biological aging research or geroscience as a competing national mission.',
-        links: [
-          { label: 'Federal Assembly — news on 13th AHV implementation', url: 'https://www.parlament.ch/de/services/news/Seiten/2024/20241204090540715194158159026_bsd038.aspx', date: 'Dec 2024', comment: 'Council of States vote — 13th AHV-Rente timetable' },
-          { label: 'Federal Social Insurance Office — 13th AHV implementation', url: 'https://www.bsv.admin.ch/bsv/de/home/sozialversicherungen/ahv/reformen-revisionen/umsetzung-13-ahv-rente.html', date: 'from Oct 2024', comment: 'BSV — implementation and financing of 13th pension payment' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 4,
         text: 'Swissmedic borderline guidance centres on presentation and pharmacological claims: products marketed with therapeutic or systemic rejuvenation claims fall under medicinal authorisation. SWK/Lauterkeitscode sets unfairness rules for health advertising. Supplement and cosmetic sectors are less aggressive than US/UK peers; rung 4 reflects strong borderline and advertising discipline — not asserted as global “drug-parity biomarker list” rung 5.',
         links: [
@@ -761,6 +745,26 @@ const switzerland: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 2,
+        text: 'R: SNSF (SNF) funds biomedical and public-health research including ageing and chronic disease through competitive project grants (L+B at programme level) but without a federal ring-fenced “healthy longevity” line — typical rung-2 breadth. P: FOPH prevention and NCD strategy elements touch population health; national “healthy ageing” strategy text is primarily care-system and quality framing — only the parts that are prevention/NCD policy count toward P, not LTCI capacity. I: federal digital-health / interoperability policy (eHealth Suisse, EPR law) supplies I; cantonal execution fragments a single national B line. No multi-year federal flagship tying R+P+I for ageing in one statute. Private pharma R&D does not substitute for L+B here.',
+        links: [
+          { label: 'SNSF — funding areas (life sciences / medicine)', url: 'https://www.snf.ch/en/2BpF5JUPdEymO2mx/funding/funding-instruments', comment: 'R+B — federal research foundation; competitive grants' },
+          { label: 'FOPH — Non-communicable diseases strategy', url: 'https://www.bag.admin.ch/bag/en/home/strategie-und-politik/nationale-gesundheitsstrategien/nicht-uebertragbare-krankheiten.html', comment: 'P+L — federal NCD / prevention strategy' },
+          { label: 'eHealth Suisse', url: 'https://www.e-health-suisse.ch/en/', comment: 'I+L — national eHealth coordination' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'Federal Assembly and Federal Council decisions in 2024–2025 focused on implementing the 13th AHV pension payment and financing (Ständerat approval Dec 2024; VAT/contribution options) — pension-system and fiscal-demography framing. Palliative and eldercare strategy (BAG) remains social-protection led. No major-party or parliamentary line treats biological aging research or geroscience as a competing national mission.',
+        links: [
+          { label: 'Federal Assembly — news on 13th AHV implementation', url: 'https://www.parlament.ch/de/services/news/Seiten/2024/20241204090540715194158159026_bsd038.aspx', date: 'Dec 2024', comment: 'Council of States vote — 13th AHV-Rente timetable' },
+          { label: 'Federal Social Insurance Office — 13th AHV implementation', url: 'https://www.bsv.admin.ch/bsv/de/home/sozialversicherungen/ahv/reformen-revisionen/umsetzung-13-ahv-rente.html', date: 'from Oct 2024', comment: 'BSV — implementation and financing of 13th pension payment' },
+        ],
+      },
+    },
+
   },
 }
 

@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const usa: CountryData = {
@@ -806,28 +806,29 @@ const usa: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 3,
         text: 'Gallup honesty/ethics (Dec 2025): nurses 75% and medical doctors 57% high/very high — still top-tier professions but far below pandemic peaks and with a 16-point partisan gap on doctors. Clinical trust is uneven vs Nordic benchmarks.',
         links: [
           { label: 'Gallup — Honesty and ethics of professions', url: 'https://news.gallup.com/poll/700736/nurses-continue-lead-honesty-ethics-ratings.aspx', date: 'Jan 2026', comment: 'Survey Dec 1–15, 2025 — nurses 75%, doctors 57% high/very high ethics' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 3.5,
         text: 'Pew ATP Oct 21–27, 2024: 76% have a great deal or fair amount of confidence in scientists to act in the public interest (up from 73% Oct 2023); 88% Democrats vs 66% Republicans — wide gap, GOP up 5 pts year-on-year. Still below April 2020 (87%) aggregate confidence.',
         links: [
           { label: 'Pew Research — Public trust in scientists', url: 'https://www.pewresearch.org/science/2024/11/14/public-trust-in-scientists-and-views-on-their-role-in-policymaking/', date: 'Nov 2024', comment: 'Fieldwork Oct 21–27, 2024 — confidence in scientists; partisan breakdown' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 2,
         text: 'KFF Health Information and Trust (Jan 13–20, 2026): 47% trust CDC at least a fair amount for reliable vaccine information — near series low; sharp erosion from 2020 baselines, with recent decline concentrated among Democrats after schedule politics.',
         links: [
           { label: 'KFF — Trust and confidence in the CDC', url: 'https://www.kff.org/health-information-trust/poll-trust-and-confidence-in-the-cdc-remain-at-low-point-after-changes-to-recommended-childhood-vaccines-more-say-the-changes-will-hurt-than-help-childrens-health/', date: 'Feb 2026', comment: 'National poll Jan 13–20, 2026 — 47% trust CDC on vaccine information' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
         text: 'The US has the deepest mainstream geroscience discourse among large democracies: bestsellers, podcasts, and national newspapers routinely treat biological age, organ-specific ageing, NAD+/metabolism, and related trials as consumer-relevant science — not science fiction. Biological-age products and "longevity" as a category are culturally visible. Coverage falls short of rung 4 (indefinite healthspan as a default cultural goal) but clearly exceeds healthy-ageing lifestyle-only framing.',
         links: [
@@ -835,24 +836,7 @@ const usa: CountryData = {
           { label: 'AFAR — public engagement on ageing research', url: 'https://www.afar.org/', comment: 'NGO — longevity and ageing biology in public-facing programmes' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 3,
-        text: 'R: NIA is a statutory institute with annual congressional appropriation (CJ/budget justification) — clear L+B for ageing research. P: Older Americans Act and HHS ACL programmes, plus CDC healthy-ageing work, give named federal prevention and services lines for older adults — P bucket, not Medicare acute-care generality. I: NIH Common Fund Bridge2AI and related data/AI initiatives support health-relevant AI and datasets; linkage to ageing-specific KPIs in one appropriation table is weaker than R. No single plan-law quantifying national healthspan ties all three. Score 3: multi-year R with documented C across administrations; P and I present but not at rung-4 dual-bucket scale with flagship ageing-digital statute.',
-        links: [
-          { label: 'NIA — FY 2024 budget (Congressional justification)', url: 'https://www.nia.nih.gov/about/budget/fiscal-year-2024-budget', date: 'FY 2024', comment: 'R+B — appropriated ageing research institute; primary budget artefact' },
-          { label: 'ACL — Older Americans Act overview', url: 'https://acl.gov/about-acl/authorizing-statutes/older-americans-act', comment: 'P+L — statutory authorisation for federal ageing services and prevention supports' },
-          { label: 'NIH — Bridge2AI programme', url: 'https://commonfund.nih.gov/bridge2ai', comment: 'I — NIH Common Fund for ethical AI-ready health datasets (health-linked I bucket)' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 2,
-        text: 'Federal politics remain dominated by Medicare, Social Security solvency, and NIH/NIA Alzheimer\'s and cancer lines — fiscal and disease-of-aging framing in budgets and oversight hearings. The bipartisan Congressional Longevity Science Caucus (launched Feb 2023) educates members on aging and longevity biotechnology but does not make geroscience a general-election wedge; platform competition still centres on entitlements and specific diseases, not biological aging as a unified mandate.',
-        links: [
-          { label: 'House press release — Longevity Science Caucus launch', url: 'https://bilirakis.house.gov/media/press-releases/bilirakis-and-tonko-kick-longevity-science-caucus', date: 'Feb 2023', comment: 'Official launch statement (Bilirakis/Tonko)' },
-          { label: 'Alliance for Longevity Initiatives — caucus page', url: 'https://a4li.org/longevity-science-caucus/', comment: 'Caucus description and stated mission (third-sector reference)' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
         text: 'FTC health-claims enforcement and Health Products Compliance Guidance require competent and reliable scientific evidence for anti-aging and disease-style supplement/OTC marketing; public cases through 2020–2024 targeted “reverses aging”–style cure claims. Remains reactive and case-driven — no pre-market bar for supplement claims. DSHEA leaves dietary supplements without FDA pre-approval for claims. Non-recognised “longevity” credentials and state-by-state medical-board practice vary — structural gap vs rung 3.',
         links: [
@@ -862,6 +846,26 @@ const usa: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 3,
+        text: 'R: NIA is a statutory institute with annual congressional appropriation (CJ/budget justification) — clear L+B for ageing research. P: Older Americans Act and HHS ACL programmes, plus CDC healthy-ageing work, give named federal prevention and services lines for older adults — P bucket, not Medicare acute-care generality. I: NIH Common Fund Bridge2AI and related data/AI initiatives support health-relevant AI and datasets; linkage to ageing-specific KPIs in one appropriation table is weaker than R. No single plan-law quantifying national healthspan ties all three. Score 3: multi-year R with documented C across administrations; P and I present but not at rung-4 dual-bucket scale with flagship ageing-digital statute.',
+        links: [
+          { label: 'NIA — FY 2024 budget (Congressional justification)', url: 'https://www.nia.nih.gov/about/budget/fiscal-year-2024-budget', date: 'FY 2024', comment: 'R+B — appropriated ageing research institute; primary budget artefact' },
+          { label: 'ACL — Older Americans Act overview', url: 'https://acl.gov/about-acl/authorizing-statutes/older-americans-act', comment: 'P+L — statutory authorisation for federal ageing services and prevention supports' },
+          { label: 'NIH — Bridge2AI programme', url: 'https://commonfund.nih.gov/bridge2ai', comment: 'I — NIH Common Fund for ethical AI-ready health datasets (health-linked I bucket)' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2,
+        text: 'Federal politics remain dominated by Medicare, Social Security solvency, and NIH/NIA Alzheimer\'s and cancer lines — fiscal and disease-of-aging framing in budgets and oversight hearings. The bipartisan Congressional Longevity Science Caucus (launched Feb 2023) educates members on aging and longevity biotechnology but does not make geroscience a general-election wedge; platform competition still centres on entitlements and specific diseases, not biological aging as a unified mandate.',
+        links: [
+          { label: 'House press release — Longevity Science Caucus launch', url: 'https://bilirakis.house.gov/media/press-releases/bilirakis-and-tonko-kick-longevity-science-caucus', date: 'Feb 2023', comment: 'Official launch statement (Bilirakis/Tonko)' },
+          { label: 'Alliance for Longevity Initiatives — caucus page', url: 'https://a4li.org/longevity-science-caucus/', comment: 'Caucus description and stated mission (third-sector reference)' },
+        ],
+      },
+    },
+
   },
 }
 

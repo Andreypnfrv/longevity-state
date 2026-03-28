@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const netherlands: CountryData = {
@@ -796,28 +796,29 @@ const netherlands: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
         text: 'Very high routine vaccination and screening uptake; care system remains a trusted channel for national prevention advice — consistent with NL’s long-standing top band in EU science-and-health attitude surveys.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Special Eurobarometer science & technology; fieldwork Sep 12–Oct 10, 2024 (EU27+)' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 5,
         text: 'Same 2024-field Eurobarometer wave: EU aggregate 83% see S&T influence as positive; NL historically clusters at the top on trust-in-science items vs EU average.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU27+ fieldwork Sep–Oct 2024 — trust and attitudes to science' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 5,
         text: 'RIVM and Gezondheidsraad retain high technical credibility; national PHA communication remains a reference model within the EU.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Context wave Sep–Oct 2024 — NL public-health trust in EU top tier' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Healthy aging (gezond oud worden) is a familiar phrase in policy and public life. Public broadcast and national press foreground demography, care pressure, and prevention — not biological aging as a unified popular science theme. Speculative life-extension claims get limited traction in mainstream outlets; geroscience vocabulary has not crossed into general consciousness the way lifestyle and disease frames have.',
         links: [
@@ -825,24 +826,7 @@ const netherlands: CountryData = {
           { label: 'NOS Nieuwsuur — greying and hard choices in care', url: 'https://nos.nl/nieuwsuur/artikel/2505083-vergrijzing-dwingt-tot-harde-keuzes-in-de-zorg-niet-alleen-arbeidsmigratie', comment: 'Current affairs — workforce, prevention, technology; burden-of-ageing narrative' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 3,
-        text: 'R+P: ZonMw Healthy Ageing programme is a multi-year, government-commissioned research funding line with calls and budgets published (L+B) and continuity across coalitions (C). National Prevention Agreement and dementia (Deltaplan) tracks add P bucket ministry and parliamentary follow-through. I: national e-health / data exchange policy (Ministry of VWS, MedMij, EHR standards) supplies digital-health L; explicit ageing-KPI linkage in one budget annex is moderate vs peers. WOZO/elder housing-care letters support system reform but are not scored as LTCI-style care commitment here. Meets rung 3 (multi-year R/P with C + cross-ministry signals); not 4 without second bucket at flagship statute level.',
-        links: [
-          { label: 'ZonMw — JPI More Years Better Lives / gezond ouder worden', url: 'https://www.zonmw.nl/nl/programma/jpi-more-years-better-lives-j-age-2', comment: 'R+L+B — national participation / knowledge agenda on healthy ageing research' },
-          { label: 'Rijksoverheid — Nationaal Preventieakkoord', url: 'https://www.rijksoverheid.nl/onderwerpen/gezonde-leefstijl/presentatie-aanpak-van-de-rijksoverheid', comment: 'P+L — national prevention agreement (government sites)' },
-          { label: 'Ministerie van VWS — Elektronische gegevensuitwisseling in de zorg', url: 'https://www.rijksoverheid.nl/onderwerpen/electronische-gegevensuitwisseling', comment: 'I+L — national e-health / data exchange policy' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 2,
-        text: 'The Tweede Kamer treats Wonen, Ondersteuning en Zorg voor Ouderen (WOZO) and eldercare as a standing theme (dossier ouderenzorg); government letters to Parliament in 2024 report implementation (e.g. WOZO workstreams, local dialogue on gezond ouder worden). This is ministerial and parliamentary process on healthy aging, care technology, and housing — not party competition on geroscience or biological longevity.',
-        links: [
-          { label: 'Tweede Kamer — dossier Ouderenzorg', url: 'https://www.tweedekamer.nl/debat_en_vergadering/uitgelicht/ouderenzorg', comment: 'House of Representatives — debates and documents on older people\'s care' },
-          { label: 'Rijksoverheid — Kamerbrief WOZO programme', url: 'https://www.rijksoverheid.nl/documenten/kamerstukken/2024/12/20/kamerbrief-over-programma-wonen-ondersteuning-en-zorg-voor-ouderen', date: 'Dec 2024', comment: 'Government letter to Parliament — WOZO follow-up' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
         text: 'IGJ monitors medicine advertising and inducement rules (including influencer and online channels) with administrative fines in scope. Keuringsraad KOAG/KAG pre-clears much public advertising for medicines and health products under the CAG. No Heilpraktiker-equivalent. Direct-to-consumer longevity and supplement marketing still outpaces inspection capacity in places — composite rung 3.',
         links: [
@@ -851,6 +835,26 @@ const netherlands: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 3,
+        text: 'R+P: ZonMw Healthy Ageing programme is a multi-year, government-commissioned research funding line with calls and budgets published (L+B) and continuity across coalitions (C). National Prevention Agreement and dementia (Deltaplan) tracks add P bucket ministry and parliamentary follow-through. I: national e-health / data exchange policy (Ministry of VWS, MedMij, EHR standards) supplies digital-health L; explicit ageing-KPI linkage in one budget annex is moderate vs peers. WOZO/elder housing-care letters support system reform but are not scored as LTCI-style care commitment here. Meets rung 3 (multi-year R/P with C + cross-ministry signals); not 4 without second bucket at flagship statute level.',
+        links: [
+          { label: 'ZonMw — JPI More Years Better Lives / gezond ouder worden', url: 'https://www.zonmw.nl/nl/programma/jpi-more-years-better-lives-j-age-2', comment: 'R+L+B — national participation / knowledge agenda on healthy ageing research' },
+          { label: 'Rijksoverheid — Nationaal Preventieakkoord', url: 'https://www.rijksoverheid.nl/onderwerpen/gezonde-leefstijl/presentatie-aanpak-van-de-rijksoverheid', comment: 'P+L — national prevention agreement (government sites)' },
+          { label: 'Ministerie van VWS — Elektronische gegevensuitwisseling in de zorg', url: 'https://www.rijksoverheid.nl/onderwerpen/electronische-gegevensuitwisseling', comment: 'I+L — national e-health / data exchange policy' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2,
+        text: 'The Tweede Kamer treats Wonen, Ondersteuning en Zorg voor Ouderen (WOZO) and eldercare as a standing theme (dossier ouderenzorg); government letters to Parliament in 2024 report implementation (e.g. WOZO workstreams, local dialogue on gezond ouder worden). This is ministerial and parliamentary process on healthy aging, care technology, and housing — not party competition on geroscience or biological longevity.',
+        links: [
+          { label: 'Tweede Kamer — dossier Ouderenzorg', url: 'https://www.tweedekamer.nl/debat_en_vergadering/uitgelicht/ouderenzorg', comment: 'House of Representatives — debates and documents on older people\'s care' },
+          { label: 'Rijksoverheid — Kamerbrief WOZO programme', url: 'https://www.rijksoverheid.nl/documenten/kamerstukken/2024/12/20/kamerbrief-over-programma-wonen-ondersteuning-en-zorg-voor-ouderen', date: 'Dec 2024', comment: 'Government letter to Parliament — WOZO follow-up' },
+        ],
+      },
+    },
+
   },
 }
 

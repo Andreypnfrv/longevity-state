@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const spain: CountryData = {
@@ -704,28 +704,29 @@ const spain: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 3,
         text: 'Trust in doctors and SNS routine care is sound by southern-European standards — adequate for everyday use, below Nordic ceiling.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep–Oct 2024 — Spain EU comparator' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 3,
         text: 'Anti-science politics visible but not dominant; biomedical research stays mainstream-legitimate. Latest EU S&T barometer wave (2024 field) shows broad majority positive on science with standard equity worries.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU27+ science attitudes — Feb 2025 publication' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 4,
         text: 'COVID-era vaccination uptake was among the EU’s highest — strong revealed trust in national vaccine guidance vs several neighbours; post-pandemic tracking should be refreshed in national panels.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Institutional/S&T trust context Sep–Oct 2024 fieldwork' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Mediterranean culture values "envejecer bien"; active ageing is a familiar policy phrase. Leading newspapers cover brain ageing, dementia risk, and lifestyle with solid science reporting, but the dominant popular frame is healthy habits and disease outcomes — not geroscience (hallmarks, senolytics, biological age) as mass vocabulary. Pensions and dependency remain the political face of ageing.',
         links: [
@@ -733,23 +734,7 @@ const spain: CountryData = {
           { label: 'El País — Ana María Cuervo on autophagy and ageing', url: 'https://elpais.com/salud-y-bienestar/2024-05-17/ana-maria-cuervo-biologa-la-vejez-es-como-una-enfermedad-que-aun-no-se-ha-manifestado-si-no-haces-nada-se-manifestara.html', date: 'May 2024', comment: 'Interview — cellular ageing and lifestyle; still healthspan/prevention led for a general reader' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 2,
-        text: 'P: Ministry of Health national strategy for active and healthy ageing provides executive L for population-level prevention framing. R: Ley de la Ciencia and national R&D plans reference health and ageing-capacity building but without a ring-fenced, multi-year federal line equivalent to methodology rung 3. I: national digital health (Historia Clínica Digital / SNS digital agenda) advances I-shaped infrastructure but L+B explicitly for ageing cohorts is weaker. IMSERSO social-care spend is out of scope for raising this claim. Coalition churn limits documented C for single named R/P/I lines — score 2.',
-        links: [
-          { label: 'Ministerio de Sanidad — Envejecimiento activo y saludable', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/envejecimientoSaludable/activo/home.htm', comment: 'P+L — national active and healthy ageing framework' },
-          { label: 'BOE — Ley 17/2022 de la ciencia y la tecnología', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2022-15291', date: '2022', comment: 'R+L — science law (research system; ageing not isolated budget line)' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 1,
-        text: 'National political energy on aging concentrates on pension sustainability (revalorisation, MEI/solidarity contributions, contribution bases) and dependency-system financing — demographic and social-protection framing in Congreso/Budget law. The Ministry of Health maintains an active and healthy ageing promotion stream under the SNS, but Cortes salience and party platforms do not treat geroscience or biological longevity as a competing electoral mandate.',
-        links: [
-          { label: 'Ministerio de Sanidad — Envejecimiento activo y saludable', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/envejecimientoSaludable/activo/home.htm', comment: 'National healthy/active ageing framework (executive; not party geroscience)' },
-          { label: 'BOE — consolidated legal text (pensions / social security)', url: 'https://www.boe.es/buscar/pdf/2024/BOE-A-2024-1691-consolidado.pdf', date: '2024', comment: 'State gazette PDF — pension / social-security architecture' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
         text: 'AEMPS publishes the legal framework for human-medicine advertising (RD 1416/1994 suite). CGCOM’s Observatorio OPPISS coordinates medical-college action against pseudotherapies and misleading health offers. Unproven wellness, naturopathy-adjacent, and IV/longevity-style services remain common; autonomous-community variation and reactive enforcement keep the composite below rung 3.',
         links: [
@@ -758,6 +743,25 @@ const spain: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 2,
+        text: 'P: Ministry of Health national strategy for active and healthy ageing provides executive L for population-level prevention framing. R: Ley de la Ciencia and national R&D plans reference health and ageing-capacity building but without a ring-fenced, multi-year federal line equivalent to methodology rung 3. I: national digital health (Historia Clínica Digital / SNS digital agenda) advances I-shaped infrastructure but L+B explicitly for ageing cohorts is weaker. IMSERSO social-care spend is out of scope for raising this claim. Coalition churn limits documented C for single named R/P/I lines — score 2.',
+        links: [
+          { label: 'Ministerio de Sanidad — Envejecimiento activo y saludable', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/envejecimientoSaludable/activo/home.htm', comment: 'P+L — national active and healthy ageing framework' },
+          { label: 'BOE — Ley 17/2022 de la ciencia y la tecnología', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2022-15291', date: '2022', comment: 'R+L — science law (research system; ageing not isolated budget line)' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'National political energy on aging concentrates on pension sustainability (revalorisation, MEI/solidarity contributions, contribution bases) and dependency-system financing — demographic and social-protection framing in Congreso/Budget law. The Ministry of Health maintains an active and healthy ageing promotion stream under the SNS, but Cortes salience and party platforms do not treat geroscience or biological longevity as a competing electoral mandate.',
+        links: [
+          { label: 'Ministerio de Sanidad — Envejecimiento activo y saludable', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/envejecimientoSaludable/activo/home.htm', comment: 'National healthy/active ageing framework (executive; not party geroscience)' },
+          { label: 'BOE — consolidated legal text (pensions / social security)', url: 'https://www.boe.es/buscar/pdf/2024/BOE-A-2024-1691-consolidado.pdf', date: '2024', comment: 'State gazette PDF — pension / social-security architecture' },
+        ],
+      },
+    },
+
   },
 }
 

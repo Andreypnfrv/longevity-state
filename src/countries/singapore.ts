@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const singapore: CountryData = {
@@ -707,7 +707,8 @@ const singapore: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
         text: 'MOH-led delivery and hospital quality still enjoy very strong confidence; Healthier SG uptake remains consistent with a high-trust clinical system despite broader economic-anxiety and insularity themes in 2026 barometer commentary.',
         links: [
@@ -715,14 +716,14 @@ const singapore: CountryData = {
           { label: 'The Straits Times — Edelman trust survey (Singapore)', url: 'https://www.straitstimes.com/singapore/growing-insularity-in-spore-amid-economic-anxiety-worries-about-the-future-edelman-trust-survey', date: '2026', comment: 'National press — Edelman 2026 domestic headlines' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 5,
         text: 'Edelman national trust remains in the top global band for institutions; science- and health-innovation narratives still draw on high baseline credibility even as insularity and economic-worry indicators rise.',
         links: [
           { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Methodology: Oct 25–Nov 16, 2025 fieldwork' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 4.5,
         text: 'Government remains highly trusted vs most democracies, but Edelman 2026 reports modest erosion (e.g. national trust in the mid-60s % range in headline coverage) alongside insularity and future-pessimism — still enough for aggressive MOH programmes, with less margin than mid-2020s peaks.',
         links: [
@@ -730,7 +731,7 @@ const singapore: CountryData = {
           { label: 'The Straits Times — Edelman trust survey (Singapore)', url: 'https://www.straitstimes.com/singapore/growing-insularity-in-spore-amid-economic-anxiety-worries-about-the-future-edelman-trust-survey', date: '2026', comment: 'Domestic reporting on 2026 barometer' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Rapid ageing and "successful ageing" make elder health a routine news theme. National newspapers report life tables, system capacity, and prevention programmes in accessible language; the dominant frame is high life expectancy, active ageing, and care — not geroscience as everyday vocabulary. University research on biology of ageing remains specialist relative to mainstream outlets.',
         links: [
@@ -738,25 +739,7 @@ const singapore: CountryData = {
           { label: 'The Straits Times — super-aged society and health system', url: 'https://www.straitstimes.com/opinion/singapore-crosses-the-super-aged-threshold-in-2026-can-its-health-system-cope', comment: 'Opinion — demographic transition and care/prevention framing' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 4,
-        text: 'R: NRF Healthy Longevity programme and NMRC Healthy Longevity Grand Challenge provide named research funding lines (L+B). P: MOH Action Plan for Successful Ageing and Healthier SG are executive-led national programmes with quantified service and population-health targets — P. I: National AI strategy and Smart Nation / health IT (GovTech, MOH digital services under Healthier SG) supply the I bucket with L tied to health delivery. Inter-ministry coordination (MOH, NRF, GovTech) supports rung-3-style breadth. Cap at 4: rung 5 would require plan-law-level statutory KPI plus protected baseline appropriations for R, P, and I evidenced together across two political cycles in primary budget law — Singapore\'s model is strong but not scored 5 under that bar.',
-        links: [
-          { label: 'NRF — Healthy Longevity National Programme', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity', comment: 'R+L+B — national research programme (NRF)' },
-          { label: 'MOH — Action Plan for Successful Ageing', url: 'https://www.moh.gov.sg/our-healthcare-system/action-plan-for-successful-ageing', comment: 'P+L — cross-agency plan; quantified targets to 2030' },
-          { label: 'MOH — Healthier SG', url: 'https://www.moh.gov.sg/healthier-sg', date: 'from 2023', comment: 'P+I — national preventive care enrolment; digital and primary-care infrastructure' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 3,
-        text: 'Government and statutory research funders treat "healthy longevity" as a named national R&D line (NMRC Healthy Longevity Global Grand Challenge through 2025; NRF ecosystem initiative on Human Health and Potential; MOH Action Plan for Successful Ageing). PM-level National Day Rally 2024 acknowledged demographic ageing and family-size trends as national context. Parliament is not a competitive multi-party arena, so the rung-4 "parties compete" criterion is weak; the score reflects documented elite and agency mission language plus budgetary follow-through, not electoral bidding wars.',
-        links: [
-          { label: 'NMRC — Healthy Longevity Global Grand Challenge', url: 'https://www.nmrc.gov.sg/grants/competitive-research-grants/healthy-longevity-global-grand-challenge/', date: 'through 2025', comment: 'Research council programme scope and timeline' },
-          { label: 'NRF — Human Health and Potential (RIE)', url: 'https://www.nrf.gov.sg/rie-ecosystem/ecosystem-wide-fis/hhp-fis', comment: 'NRF ecosystem funding initiative including longevity-relevant framing' },
-          { label: 'PMO — National Day Rally 2024', url: 'https://www.pmo.gov.sg/Newsroom/National-Day-Rally-2024', date: 'Aug 2024', comment: 'Official PMO page — demographic ageing in national narrative' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
         text: 'HSA bars therapeutic and disease claims on health supplements and requires substantiation on request; dealer guidelines list impermissible endocrine and “anti-aging”-adjacent claims. Health products regulation includes removal orders for non-compliant articles. SMC ethical codes restrict unjustified treatment claims and advertising. TCM practice is separately licensed; general wellness/longevity e-commerce still creates enforcement lag — composite rung 3.',
         links: [
@@ -766,6 +749,27 @@ const singapore: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 4,
+        text: 'R: NRF Healthy Longevity programme and NMRC Healthy Longevity Grand Challenge provide named research funding lines (L+B). P: MOH Action Plan for Successful Ageing and Healthier SG are executive-led national programmes with quantified service and population-health targets — P. I: National AI strategy and Smart Nation / health IT (GovTech, MOH digital services under Healthier SG) supply the I bucket with L tied to health delivery. Inter-ministry coordination (MOH, NRF, GovTech) supports rung-3-style breadth. Cap at 4: rung 5 would require plan-law-level statutory KPI plus protected baseline appropriations for R, P, and I evidenced together across two political cycles in primary budget law — Singapore\'s model is strong but not scored 5 under that bar.',
+        links: [
+          { label: 'NRF — Healthy Longevity National Programme', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity', comment: 'R+L+B — national research programme (NRF)' },
+          { label: 'MOH — Action Plan for Successful Ageing', url: 'https://www.moh.gov.sg/our-healthcare-system/action-plan-for-successful-ageing', comment: 'P+L — cross-agency plan; quantified targets to 2030' },
+          { label: 'MOH — Healthier SG', url: 'https://www.moh.gov.sg/healthier-sg', date: 'from 2023', comment: 'P+I — national preventive care enrolment; digital and primary-care infrastructure' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 3,
+        text: 'Government and statutory research funders treat "healthy longevity" as a named national R&D line (NMRC Healthy Longevity Global Grand Challenge through 2025; NRF ecosystem initiative on Human Health and Potential; MOH Action Plan for Successful Ageing). PM-level National Day Rally 2024 acknowledged demographic ageing and family-size trends as national context. Parliament is not a competitive multi-party arena, so the rung-4 "parties compete" criterion is weak; the score reflects documented elite and agency mission language plus budgetary follow-through, not electoral bidding wars.',
+        links: [
+          { label: 'NMRC — Healthy Longevity Global Grand Challenge', url: 'https://www.nmrc.gov.sg/grants/competitive-research-grants/healthy-longevity-global-grand-challenge/', date: 'through 2025', comment: 'Research council programme scope and timeline' },
+          { label: 'NRF — Human Health and Potential (RIE)', url: 'https://www.nrf.gov.sg/rie-ecosystem/ecosystem-wide-fis/hhp-fis', comment: 'NRF ecosystem funding initiative including longevity-relevant framing' },
+          { label: 'PMO — National Day Rally 2024', url: 'https://www.pmo.gov.sg/Newsroom/National-Day-Rally-2024', date: 'Aug 2024', comment: 'Official PMO page — demographic ageing in national narrative' },
+        ],
+      },
+    },
+
   },
 }
 

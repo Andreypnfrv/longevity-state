@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const sweden: CountryData = {
@@ -823,28 +823,29 @@ const sweden: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
         text: 'Healthcare delivery and medical professions sit in Sweden’s high institutional-trust cluster alongside other public services.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep 12–Oct 10, 2024 — Sweden in EU high-trust band' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 5,
         text: 'Same wave: Sweden remains among the EU’s strongest on trust in science and scientific institutions (historically ~75–80%+ on comparable items).',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Sep–Oct 2024 fieldwork — EU comparative release Feb 2025' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 5,
         text: 'Folkhälsomyndigheten benefits from durable baseline trust in national institutions; COVID strategy fights did not erase long-run PHA legitimacy.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Institutional trust context — EU survey Sep–Oct 2024' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'The welfare state frames good health in old age as collective provision. Public service media cover training, lifestyle, and disease in older adults in an evidence-minded way; the dominant story is not geroscience as mass culture (clocks, hallmarks, senolytics). The Swedish Longevity Cluster reaches industry and specialists more than the general public.',
         links: [
@@ -852,25 +853,7 @@ const sweden: CountryData = {
           { label: 'Swedish Longevity Cluster', url: 'https://swedishlongevitycluster.se/', comment: 'National cluster site — stakeholder visibility (secondary to general press)' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 3,
-        text: 'R: VR, Forte, and Vinnova fund ageing and health research through open and thematic calls with multi-year agency budgets (L+B) and long-run political continuity (C) across governments — R bucket without a single “longevity” statute. P: national public-health and regional prevention programmes (NCD, physical activity) support P; national dementia strategy documents add older-age P. I: national digitalisation of health and welfare (välfärdsdatalagen, 1177, e-health agency mandates) provides I infrastructure used across ages. Äldreomsorg spend is out of scope for this claim\'s score. Rung 3: durable agency-funded R plus national P/I policy lines; not 4 without two clearly ring-fenced buckets with named appropriations in one flagship law.',
-        links: [
-          { label: 'Regeringen — Life science strategy', url: 'https://www.government.se/government-policy/life-science/', date: '2019–', comment: 'R+L — government policy; ageing as priority area among others' },
-          { label: 'Forte — research on health and welfare', url: 'https://forte.se/en/', comment: 'R+B — Swedish research council for health, working life, welfare' },
-          { label: 'Socialstyrelsen — Nationell e-hälsostrategi (overview)', url: 'https://www.socialstyrelsen.se/en/health-and-social-care/e-health/', comment: 'I+L — national e-health guidance and regulation' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 2,
-        text: 'Government and Riksdag process centre äldreomsorg quality, staffing, and dementia: a new national dementia strategy (2025–2028) was adopted with ministerial communication in 2025; motions and agency underlag in 2024–2025 keep cognitive decline and elder services in the legislative record. Parties compete on care access and resources, not on geroscience or biological longevity as an electoral brand.',
-        links: [
-          { label: 'Regeringen — Nationell demensstrategi (PDF)', url: 'https://www.regeringen.se/globalassets/regeringen/dokument/socialdepartementet/aldreomsorg/varje-dag-raknas---nationell-demensstrategi-20242028.pdf', date: '2025–2028', comment: 'Official strategy (Every Day Counts)' },
-          { label: 'Regeringen — press article on national dementia strategy', url: 'https://www.regeringen.se/artiklar/2025/02/aldre--och-socialforsakringsministern-om-ny-nationell-demensstrategi/', date: 'Feb 2025', comment: 'Ministerial announcement' },
-          { label: 'Socialstyrelsen — underlag demensstrategi', url: 'https://www.socialstyrelsen.se/publikationer/underlag-for-en-utvecklad-nationell-demensstrategi--en-strategi-for-lindrig-kognitiv-storning-och-demenssjukdom-2024-2-8957/', date: '2024', comment: 'Evidence report feeding strategy update' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
         text: 'Läkemedelsverket applies EU borderline logic: cosmetics must not claim medicinal effects or systemic “anti-aging” in ways that trigger medicinal status. Reklamombudsmannen (self-regulatory advertising jury) issues decisions on misleading health and beauty claims. Medical profession and IVO can intervene on dangerous or misleading clinical promotion. Nordic supplement/biohacking volume is lower than Anglo markets but online longevity ads still appear — composite rung 3.',
         links: [
@@ -879,6 +862,27 @@ const sweden: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 3,
+        text: 'R: VR, Forte, and Vinnova fund ageing and health research through open and thematic calls with multi-year agency budgets (L+B) and long-run political continuity (C) across governments — R bucket without a single “longevity” statute. P: national public-health and regional prevention programmes (NCD, physical activity) support P; national dementia strategy documents add older-age P. I: national digitalisation of health and welfare (välfärdsdatalagen, 1177, e-health agency mandates) provides I infrastructure used across ages. Äldreomsorg spend is out of scope for this claim\'s score. Rung 3: durable agency-funded R plus national P/I policy lines; not 4 without two clearly ring-fenced buckets with named appropriations in one flagship law.',
+        links: [
+          { label: 'Regeringen — Life science strategy', url: 'https://www.government.se/government-policy/life-science/', date: '2019–', comment: 'R+L — government policy; ageing as priority area among others' },
+          { label: 'Forte — research on health and welfare', url: 'https://forte.se/en/', comment: 'R+B — Swedish research council for health, working life, welfare' },
+          { label: 'Socialstyrelsen — Nationell e-hälsostrategi (overview)', url: 'https://www.socialstyrelsen.se/en/health-and-social-care/e-health/', comment: 'I+L — national e-health guidance and regulation' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2,
+        text: 'Government and Riksdag process centre äldreomsorg quality, staffing, and dementia: a new national dementia strategy (2025–2028) was adopted with ministerial communication in 2025; motions and agency underlag in 2024–2025 keep cognitive decline and elder services in the legislative record. Parties compete on care access and resources, not on geroscience or biological longevity as an electoral brand.',
+        links: [
+          { label: 'Regeringen — Nationell demensstrategi (PDF)', url: 'https://www.regeringen.se/globalassets/regeringen/dokument/socialdepartementet/aldreomsorg/varje-dag-raknas---nationell-demensstrategi-20242028.pdf', date: '2025–2028', comment: 'Official strategy (Every Day Counts)' },
+          { label: 'Regeringen — press article on national dementia strategy', url: 'https://www.regeringen.se/artiklar/2025/02/aldre--och-socialforsakringsministern-om-ny-nationell-demensstrategi/', date: 'Feb 2025', comment: 'Ministerial announcement' },
+          { label: 'Socialstyrelsen — underlag demensstrategi', url: 'https://www.socialstyrelsen.se/publikationer/underlag-for-en-utvecklad-nationell-demensstrategi--en-strategi-for-lindrig-kognitiv-storning-och-demenssjukdom-2024-2-8957/', date: '2024', comment: 'Evidence report feeding strategy update' },
+        ],
+      },
+    },
+
   },
 }
 

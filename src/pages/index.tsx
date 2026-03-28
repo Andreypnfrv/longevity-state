@@ -23,7 +23,8 @@ import {
   RegulatoryHarmonizationClaim, REGULATORY_HARMONIZATION_CLAIM_SCALES,
   SharedPhysicalInfraClaim, SHARED_PHYSICAL_INFRA_CLAIM_SCALES,
   IntlResearchNetworkClaim, INTL_RESEARCH_NETWORK_CLAIM_SCALES,
-  SocietalReadinessClaim, SOCIETAL_READINESS_CLAIM_SCALES,
+  SocialReadinessClaim, PoliticalReadinessClaim,
+  SOCIAL_READINESS_CLAIM_SCALES, POLITICAL_READINESS_CLAIM_SCALES,
   PopulationScreeningClaim,
   SCREENING_PROGRAMME_AGILITY_SCALE,
   type CountryData, type ClaimData,
@@ -216,7 +217,10 @@ function getScaleLevelText(fieldKey: string, claimKey: string, score: number): s
     return INTL_RESEARCH_NETWORK_CLAIM_SCALES[claimKey as IntlResearchNetworkClaim]?.[level] ?? null
   }
   if (fieldKey === SocietalField.SOCIETAL_READINESS) {
-    return SOCIETAL_READINESS_CLAIM_SCALES[claimKey as SocietalReadinessClaim]?.[level] ?? null
+    return SOCIAL_READINESS_CLAIM_SCALES[claimKey as SocialReadinessClaim]?.[level] ?? null
+  }
+  if (fieldKey === SocietalField.POLITICAL_READINESS) {
+    return POLITICAL_READINESS_CLAIM_SCALES[claimKey as PoliticalReadinessClaim]?.[level] ?? null
   }
   return STANDARD_SCALE_LABELS[Math.round(score)] ?? null
 }
@@ -316,7 +320,10 @@ export function getClaimScaleLegendLines(fieldKey: string, claimKey: string): st
     return from(INTL_RESEARCH_NETWORK_CLAIM_SCALES[claimKey as IntlResearchNetworkClaim]) ?? standardScaleLegendLines()
   }
   if (fieldKey === SocietalField.SOCIETAL_READINESS) {
-    return from(SOCIETAL_READINESS_CLAIM_SCALES[claimKey as SocietalReadinessClaim]) ?? standardScaleLegendLines()
+    return from(SOCIAL_READINESS_CLAIM_SCALES[claimKey as SocialReadinessClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === SocietalField.POLITICAL_READINESS) {
+    return from(POLITICAL_READINESS_CLAIM_SCALES[claimKey as PoliticalReadinessClaim]) ?? standardScaleLegendLines()
   }
   return standardScaleLegendLines()
 }

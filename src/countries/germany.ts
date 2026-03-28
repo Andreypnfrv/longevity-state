@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const germany: CountryData = {
@@ -704,28 +704,29 @@ const germany: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 4,
         text: 'Hospitals and physicians above EU averages; residual vaccine and system-stress debates post-COVID but front-line care retains majority confidence.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep–Oct 2024 — Germany vs EU aggregate S&T attitudes' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 3,
         text: 'Feb 2025 Eurobarometer (science & tech) release on Sep–Oct 2024 fieldwork: EU-average enthusiasm for S&T softened vs the prior comparable wave in commission reporting; Germany remains broadly pro-science but gene tech and some novel biotech frames stay more contested than in Nordics.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Special EB — EU27+ attitudes to science and technology' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 4,
         text: 'RKI remains the default credible source for outbreak science; federal–Länder fragmentation caps a single “national voice” but technical PHA trust stayed high through COVID.',
         links: [
           { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU institutional-trust context wave Sep–Oct 2024' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Healthy aging and prevention are respectable; radical life extension is culturally marginal. Mass media treat ageing as demography, life expectancy, care strain, and diseases of old age (e.g. dementia) — not a unified popular narrative of targeting aging biology. Longevity medicine as a consumer subculture remains niche.',
         links: [
@@ -733,23 +734,7 @@ const germany: CountryData = {
           { label: 'Der Spiegel — Alzheimer / early detection', url: 'https://www.spiegel.de/gesundheit/diagnose/demenz-bluttest-spuert-alzheimer-jahre-vor-den-ersten-symptomen-auf-a-1280544.html', comment: 'Health desk — disease-of-ageing frame typical of general press' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 2,
-        text: 'R: BMBF health-research framework (Rahmenprogramm Gesundheitsforschung) funds ageing-related biomedical work as one theme — L with budget pool but not a standalone longevity line; typical rung-2 single-bucket horizon before coalition renegotiation. P: federal dementia strategy and prevention discourse exist but the last national dementia strategy window was time-bounded; renewal is not treated here as multi-cycle C in primary law. I: Gematik / electronic health record law and hospital digitisation provide digital-health L, but explicit L+B tying AI/data programmes to ageing-health KPIs in one appropriation document is thin vs methodology rung 3. ESchG still constrains embryo research (germline-relevant), not general ageing biology — not rung 0. LTCI (Pflege) financing is out of scope for this score.',
-        links: [
-          { label: 'BMBF — Gesundheitsforschung', url: 'https://www.bmbf.de/bmbf/de/forschung/gesundheit-ernaehrung-umwelt/gesundheitsforschung/gesundheitsforschung_node.html', comment: 'R+L+B — federal health research programme (thematic funding)' },
-          { label: 'Bundesgesundheitsministerium — Nationale Demenzstrategie', url: 'https://www.bundesgesundheitsministerium.de/themen/pflege/unsere-politik-fuer-menschen-mit-demenz.html', comment: 'P+L — federal dementia / older-age brain-health policy context' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 1,
-        text: 'Bundestag plenary and commissions in 2024 centred Pflegeversicherung financing, demographic pressure on social insurance, and prevention in care — classic "demographic burden" debate (Statistisches Bundesamt projections cited in federal press). Occasional health-research mentions do not produce cross-party geroscience language, manifesto competition on longevity biotechnology, or a head-of-government mission framed as biological healthy-life extension.',
-        links: [
-          { label: 'Deutscher Bundestag — Aktuelle Stunde Pflegeversicherung', url: 'https://www.bundestag.de/dokumente/textarchiv/2024/kw41-de-aktuelle-stunde-pflegeversicherung-1023348', date: 'Oct 2024', comment: 'Plenary debate — long-term care insurance financing and demography' },
-          { label: 'Deutscher Bundestag — Plenary debate on prevention in care', url: 'https://www.bundestag.de/dokumente/textarchiv/2024/kw20-de-pflegebeduerftigkeit-1000384', date: 'May 2024', comment: 'Motion/debate — demography and prevention in nursing care' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
         text: 'HWG (Heilmittelwerbegesetz) tightly constrains advertising for medicines, devices, and many health-related offers in the mainstream economy. The Heilpraktiker statute still authorises a parallel non-medical practitioner class that can diagnose and treat within its scope — IV “wellness”, ozone, and hormone-style anti-aging offers often route through that channel and cap the composite vs peers. Composite rung 2: strong ad law for classical health products alongside a structural carve-out.',
         links: [
@@ -758,6 +743,25 @@ const germany: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 2,
+        text: 'R: BMBF health-research framework (Rahmenprogramm Gesundheitsforschung) funds ageing-related biomedical work as one theme — L with budget pool but not a standalone longevity line; typical rung-2 single-bucket horizon before coalition renegotiation. P: federal dementia strategy and prevention discourse exist but the last national dementia strategy window was time-bounded; renewal is not treated here as multi-cycle C in primary law. I: Gematik / electronic health record law and hospital digitisation provide digital-health L, but explicit L+B tying AI/data programmes to ageing-health KPIs in one appropriation document is thin vs methodology rung 3. ESchG still constrains embryo research (germline-relevant), not general ageing biology — not rung 0. LTCI (Pflege) financing is out of scope for this score.',
+        links: [
+          { label: 'BMBF — Gesundheitsforschung', url: 'https://www.bmbf.de/bmbf/de/forschung/gesundheit-ernaehrung-umwelt/gesundheitsforschung/gesundheitsforschung_node.html', comment: 'R+L+B — federal health research programme (thematic funding)' },
+          { label: 'Bundesgesundheitsministerium — Nationale Demenzstrategie', url: 'https://www.bundesgesundheitsministerium.de/themen/pflege/unsere-politik-fuer-menschen-mit-demenz.html', comment: 'P+L — federal dementia / older-age brain-health policy context' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 1,
+        text: 'Bundestag plenary and commissions in 2024 centred Pflegeversicherung financing, demographic pressure on social insurance, and prevention in care — classic "demographic burden" debate (Statistisches Bundesamt projections cited in federal press). Occasional health-research mentions do not produce cross-party geroscience language, manifesto competition on longevity biotechnology, or a head-of-government mission framed as biological healthy-life extension.',
+        links: [
+          { label: 'Deutscher Bundestag — Aktuelle Stunde Pflegeversicherung', url: 'https://www.bundestag.de/dokumente/textarchiv/2024/kw41-de-aktuelle-stunde-pflegeversicherung-1023348', date: 'Oct 2024', comment: 'Plenary debate — long-term care insurance financing and demography' },
+          { label: 'Deutscher Bundestag — Plenary debate on prevention in care', url: 'https://www.bundestag.de/dokumente/textarchiv/2024/kw20-de-pflegebeduerftigkeit-1000384', date: 'May 2024', comment: 'Motion/debate — demography and prevention in nursing care' },
+        ],
+      },
+    },
+
   },
 }
 

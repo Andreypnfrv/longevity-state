@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const uk: CountryData = {
@@ -666,7 +666,8 @@ const uk: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 4,
         text: 'Ipsos Veracity Index (Nov 5–11, 2025): nurses, engineers and doctors still lead trusted professions. British Social Attitudes 2025 (Aug 26–Oct 6, 2025): only 26% satisfied with how the NHS runs (up from 2024 but historically low); 37% satisfied with hospital inpatient care — strong interpersonal trust in clinicians coexists with system-level strain.',
         links: [
@@ -674,7 +675,7 @@ const uk: CountryData = {
           { label: 'The King\'s Fund — BSA NHS satisfaction 2025', url: 'https://www.kingsfund.org.uk/insight-and-analysis/reports/public-satisfaction-nhs-social-care-2025-bsa', date: 'Mar 2026', comment: 'BSA fieldwork Aug–Oct 2025 — 26% satisfied NHS overall; 37% hospital care' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 4,
         text: 'Ipsos PAS 2025 for UKRI/BSA (Feb–July 2025, n=5,281): 82% agree scientists make a valuable contribution; 87% trust university-based scientists a great deal/fair amount to follow rules — but trust in government-employed scientists fell to 69% (from 76% in 2019) and private-sector scientists to 48%, with more neutral/uncertain responses than pre-pandemic waves.',
         links: [
@@ -682,14 +683,14 @@ const uk: CountryData = {
           { label: 'Ipsos PAS — Chapter 2 (scientists)', url: 'https://pas.ipsos.com/chapter-2_views-on-scientists-and-researchers/', comment: 'Trust to follow rules: universities 87%, government 69%, private companies 48%' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 3,
         text: 'National data-stewardship remains sensitive after GP Data for Planning and Research (2021). BSA 2025 shows majority still back NHS founding principles but low satisfaction with how the system runs — pressure on confidence in national delivery and policy stewardship, not only local care.',
         links: [
           { label: 'The King\'s Fund — BSA NHS satisfaction 2025', url: 'https://www.kingsfund.org.uk/insight-and-analysis/reports/public-satisfaction-nhs-social-care-2025-bsa', date: 'Mar 2026', comment: 'National barometer on NHS running — context for NHSE/system legitimacy' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
         text: 'UK public service and broadsheet science desks regularly explain organ- and molecule-level ageing, biological age, and related trials to a general audience — aging-as-biology is not confined to lifestyle columns. Government-advisory visibility (Longevity Science Panel) reinforces that frame in policy-adjacent discussion. This matches rung 3 (geroscience in mainstream discourse), not rung 4 (indefinite healthspan as default cultural aspiration).',
         links: [
@@ -697,26 +698,7 @@ const uk: CountryData = {
           { label: 'UK Longevity Science Panel', url: 'https://www.longevitysciencepanel.co.uk/', comment: 'Government-commissioned expert publications — ageing biology in policy-facing form' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 4,
-        text: 'R+P: UKRI Healthy Ageing Challenge and related innovation ageing portfolio provide named multi-year funding (L+B) with continuity across governments (C). NHS Long Term Plan embeds prevention and older-age care redesign targets — P bucket (system-level prevention, not social-care capacity scored here). I: NHS England digital transformation and federated data (GP data for planning and research, NHS App) supply national digital-health L relevant to monitoring older cohorts. UKRI acts as durable funding agency (A-like). Rung 4: ≥2 buckets with primary L+B plus agency-scale R delivery; not 5 without plan-law quantified population healthspan KPI and all three buckets locked in one statutory appropriation cycle.',
-        links: [
-          { label: 'UKRI — Healthy Ageing', url: 'https://www.ukri.org/what-we-offer/browse-our-areas-of-investment-and-support/healthy-ageing/', comment: 'R+P+L+B — challenge fund and ageing innovation mission' },
-          { label: 'NHS — Long Term Plan (ageing and prevention sections)', url: 'https://www.longtermplan.nhs.uk/', date: '2019', comment: 'P+L — operational plan targets for prevention and older people\'s care' },
-          { label: 'NHS England — Digital transformation', url: 'https://www.england.nhs.uk/digitaltechnology/', comment: 'I+L — national digital health delivery and data infrastructure' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 2.5,
-        text: 'The All-Party Parliamentary Group for Longevity wound up under parliamentary rules in Jan 2023, so there is no longer a dedicated cross-party longevity forum. A documentary record of science-led framing remains: the Lords Science and Technology Committee report "Ageing: Science, Technology and Healthy Living" (2021) explicitly considered research on underlying aging processes; POST published a 2024 horizon scan on healthy ageing and older people\'s care; a Commons committee ran an inquiry on healthy ageing and physical activity (2024–). Manifesto competition still does not turn geroscience into an electoral battleground — between band 2 (healthy ageing / care) and band 3 (science mission in Hansard/Lords output).',
-        links: [
-          { label: 'APPG Longevity (archived — disbanded)', url: 'https://www.appg-longevity.org/', date: 'Jan 2023', comment: 'Parliamentary closure; prior publications e.g. Health of the Nation (Feb 2020)' },
-          { label: 'Lords S&T — ageing inquiry news', url: 'https://committees.parliament.uk/committee/193/science-and-technology-committee-lords/news/138469/concerted-government-effort-could-improve-health-in-old-age-finds-lords-committee', date: 'Jan 2021', comment: 'Committee output on science, technology and healthy ageing' },
-          { label: 'POST — Healthy ageing and care for older populations', url: 'https://post.parliament.uk/healthy-ageing-and-care-for-older-populations/', date: '2024', comment: 'Parliamentary Office of Science & Technology horizon scan' },
-          { label: 'Commons — Healthy ageing: physical activity inquiry', url: 'https://committees.parliament.uk/work/9230/healthy-ageing-physical-activity-in-an-ageing-society/', date: 'from 2024', comment: 'Committee work ongoing' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
         text: 'ASA publishes sector advice (e.g. IV nutritional therapy) and upholds complaints removing unsubstantiated clinic, cosmetic, and supplement health claims through 2023–2025. MHRA borderline guidance treats presentation and claims (including implied rejuvenation) as core tests for medicinal classification. GMC ethical hub requires factual, verifiable advertising for doctors. IV/longevity wellness remains commercially active — fits rung 3 (documented substantiation and borderline rules; not economy-wide pre-market biomarker clearance for anti-aging marketing).',
         links: [
@@ -726,6 +708,28 @@ const uk: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 4,
+        text: 'R+P: UKRI Healthy Ageing Challenge and related innovation ageing portfolio provide named multi-year funding (L+B) with continuity across governments (C). NHS Long Term Plan embeds prevention and older-age care redesign targets — P bucket (system-level prevention, not social-care capacity scored here). I: NHS England digital transformation and federated data (GP data for planning and research, NHS App) supply national digital-health L relevant to monitoring older cohorts. UKRI acts as durable funding agency (A-like). Rung 4: ≥2 buckets with primary L+B plus agency-scale R delivery; not 5 without plan-law quantified population healthspan KPI and all three buckets locked in one statutory appropriation cycle.',
+        links: [
+          { label: 'UKRI — Healthy Ageing', url: 'https://www.ukri.org/what-we-offer/browse-our-areas-of-investment-and-support/healthy-ageing/', comment: 'R+P+L+B — challenge fund and ageing innovation mission' },
+          { label: 'NHS — Long Term Plan (ageing and prevention sections)', url: 'https://www.longtermplan.nhs.uk/', date: '2019', comment: 'P+L — operational plan targets for prevention and older people\'s care' },
+          { label: 'NHS England — Digital transformation', url: 'https://www.england.nhs.uk/digitaltechnology/', comment: 'I+L — national digital health delivery and data infrastructure' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2.5,
+        text: 'The All-Party Parliamentary Group for Longevity wound up under parliamentary rules in Jan 2023, so there is no longer a dedicated cross-party longevity forum. A documentary record of science-led framing remains: the Lords Science and Technology Committee report "Ageing: Science, Technology and Healthy Living" (2021) explicitly considered research on underlying aging processes; POST published a 2024 horizon scan on healthy ageing and older people\'s care; a Commons committee ran an inquiry on healthy ageing and physical activity (2024–). Manifesto competition still does not turn geroscience into an electoral battleground — between band 2 (healthy ageing / care) and band 3 (science mission in Hansard/Lords output).',
+        links: [
+          { label: 'APPG Longevity (archived — disbanded)', url: 'https://www.appg-longevity.org/', date: 'Jan 2023', comment: 'Parliamentary closure; prior publications e.g. Health of the Nation (Feb 2020)' },
+          { label: 'Lords S&T — ageing inquiry news', url: 'https://committees.parliament.uk/committee/193/science-and-technology-committee-lords/news/138469/concerted-government-effort-could-improve-health-in-old-age-finds-lords-committee', date: 'Jan 2021', comment: 'Committee output on science, technology and healthy ageing' },
+          { label: 'POST — Healthy ageing and care for older populations', url: 'https://post.parliament.uk/healthy-ageing-and-care-for-older-populations/', date: '2024', comment: 'Parliamentary Office of Science & Technology horizon scan' },
+          { label: 'Commons — Healthy ageing: physical activity inquiry', url: 'https://committees.parliament.uk/work/9230/healthy-ageing-physical-activity-in-an-ageing-society/', date: 'from 2024', comment: 'Committee work ongoing' },
+        ],
+      },
+    },
+
   },
 }
 

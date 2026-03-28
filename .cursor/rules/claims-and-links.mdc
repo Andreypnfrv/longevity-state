@@ -8,7 +8,7 @@ alwaysApply: false
 
 ## Where definitions live
 
-- **Ordinal meaning of each score** — `src/schema/index.ts` (`*_CLAIM_SCALES`, e.g. `SOCIETAL_READINESS_CLAIM_SCALES`). Do not drift from these rungs when assigning numbers.
+- **Ordinal meaning of each score** — `src/schema/index.ts` (`*_CLAIM_SCALES`, e.g. `SOCIAL_READINESS_CLAIM_SCALES`, `POLITICAL_READINESS_CLAIM_SCALES`). Do not drift from these rungs when assigning numbers.
 - **Per-claim UI copy (title/description)** — `src/translations/claims.ts`. Field-level blurbs — `src/translations/schema.ts`.
 - **Country evidence** — `src/countries/<country>.ts`: `ClaimData` per claim key — `score`, `text`, `links`.
 

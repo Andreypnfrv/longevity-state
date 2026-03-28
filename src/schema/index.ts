@@ -86,6 +86,7 @@ export enum InternationalField {
 
 export enum SocietalField {
   SOCIETAL_READINESS = 'societal_readiness',
+  POLITICAL_READINESS = 'political_readiness',
 }
 
 // ------------------------------------------------------------
@@ -1143,17 +1144,19 @@ export enum IntlResearchNetworkClaim {
   PATENT_COOPERATION       = 'patent_cooperation',
 }
 
-export enum SocietalReadinessClaim {
-  AGING_MEDIA_FRAMING   = 'aging_media_framing',   // at what ambition level does mainstream media frame aging — from fatalism to indefinite healthspan
-  /** A — doctors, hospitals, “medicine in general” (Eurobarometer health, national health barometers). */
+/** Public opinion, media, consumer protection — under SocietalField.SOCIETAL_READINESS. */
+export enum SocialReadinessClaim {
+  AGING_MEDIA_FRAMING   = 'aging_media_framing',
   PUBLIC_TRUST_CLINICAL_SYSTEM = 'public_trust_clinical_system',
-  /** B — scientists, biomedical research, universities in a health context (Wellcome, science-attitude surveys). */
   PUBLIC_TRUST_SCIENCE_RESEARCH = 'public_trust_science_research',
-  /** C — ministry of health, CDC/PHI equivalent, regulator as source of official guidance. */
   PUBLIC_TRUST_STATE_HEALTH = 'public_trust_state_health',
-  POLICY_COMMITMENT     = 'policy_commitment',     // funded and statutory institutional commitment — not the same as rhetorical salience
-  LEGISLATIVE_SALIENCE  = 'legislative_salience',  // ambition level at which political elites publicly discuss aging (0–4 scale)
-  QUACKERY_RESISTANCE   = 'quackery_resistance',   // protection against unproven anti-aging claims: supplements, cosmetics, pseudo-specialists
+  QUACKERY_RESISTANCE   = 'quackery_resistance',
+}
+
+/** Statute, budget, elite discourse — under SocietalField.POLITICAL_READINESS. */
+export enum PoliticalReadinessClaim {
+  POLICY_COMMITMENT    = 'policy_commitment',
+  LEGISLATIVE_SALIENCE = 'legislative_salience',
 }
 
 export const REGULATORY_HARMONIZATION_CLAIM_SCALES: Record<RegulatoryHarmonizationClaim, Record<number, string>> = {
@@ -1285,8 +1288,8 @@ export const INTL_RESEARCH_NETWORK_CLAIM_SCALES: Record<IntlResearchNetworkClaim
   },
 }
 
-export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Record<number, string>> = {
-  [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+export const SOCIAL_READINESS_CLAIM_SCALES: Record<SocialReadinessClaim, Record<number, string>> = {
+  [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
     0: 'Legitimacy crisis for front-line medicine: large-scale refusal of routine care guidance or collapsing trust in the medical profession as a whole',
     1: 'Clearly below peer benchmarks on trust in physicians, nurses, or hospitals/clinics in representative surveys',
     2: 'Routine care broadly accepted, but sharp inequality or polarisation in trust in medical institutions by group or region',
@@ -1294,7 +1297,7 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
     4: 'Very high trust in the medical profession and hospitals on standard national or international measures',
     5: 'Top-decile internationally; trust in front-line medicine holds across the main political or cultural cleavages that affect health behaviour',
   },
-  [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+  [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
     0: 'Biomedical science rejected as a basis for health policy at scale; major anti-research coalitions on salient medical issues',
     1: 'Clearly below peers on trust in scientists, universities, or medical research for health decisions',
     2: 'Established science accepted for familiar interventions; sharp caution on novel regulated biotech, trial participation, or research use of health data',
@@ -1302,7 +1305,7 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
     4: 'Very high trust and fiscal/social support for medical science; organised science scepticism has marginal influence on national health-research policy',
     5: 'Top-decile internationally; durable norm that biomedical research is part of the social contract on health across main cleavages',
   },
-  [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+  [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
     0: 'National public-health bodies lack legitimacy to recommend or run population programmes; central guidance ignored or actively opposed at scale',
     1: 'Clearly below peers on trust in the ministry of health, CDC/PHI equivalent, or medicines regulator as source of official health guidance',
     2: 'Personal or local care trusted more than national health agencies; polarisation or scandal episodically undermines central guidance',
@@ -1314,7 +1317,7 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
   // The question is the highest ambition level that has achieved sustained mainstream presence — not fringe coverage.
   // Key discontinuity: between fighting aging's *consequences* (0–2) and fighting aging *itself* (3–4).
   // Political mandates and policy decisions belong to POLICY_COMMITMENT, not here.
-  [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+  [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
     0: 'Invisible or fatalist: aging appears in media only as a social welfare burden (pensions, nursing homes); no biomedical framing whatsoever; no coverage of aging science',
     1: 'Elder care framing: media covers aging primarily as a care and dependency challenge; scientific research on aging is not part of mainstream coverage; aging-related decline is treated as inevitable',
     2: 'Healthy aging dominant: mainstream media frame is lifestyle and preventive medicine — diet, exercise, social engagement; defeating specific diseases (Alzheimer\'s, cancer, CVD) is also accepted as a scientific goal; the shared premise is staying healthy in old age, whether through lifestyle or medicine',
@@ -1322,24 +1325,8 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
     4: 'Indefinite healthspan as cultural aspiration: aging is framed as an engineering problem to be solved, not a biological limit to be managed; mainstream discourse includes concepts like longevity escape velocity; the goal is not a fixed target lifespan but the elimination of aging-driven decline regardless of mechanism',
     5: 'Global reference-point framing: the national media ecosystem is cited abroad as the benchmark for serious, accessible longevity coverage; prime-time documentary and fiction routinely treat biological age reversal and longevity escape velocity as plausible without apology; geroscience is ambient background culture, not a movement — skepticism is proportionate to other mature science debates, not dismissed as science fiction',
   },
-  // Scored on research (R), prevention (P), and AI/data-for-ageing-health (I) only — see methodology on claim. LTCI / care / pensions do not raise the score without qualifying L+B in R/P/I.
-  [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-    0: 'Statute blocks longevity-relevant research without a review pathway; or no primary L+B (and no A+B) in any of R, P, or I — large long-term care spend alone does not lift this rung',
-    1: 'Executive strategy or law mentions health/ageing/digital direction but no appropriation with a named line and amount in official budget or programme annex for R, P, or I',
-    2: 'L+B in exactly one of R / P / I for at most one typical political cycle (annual line or no multi-year lock-in in primary documents); continuity after government/plan change not demonstrated',
-    3: 'L+B with ≥3-year horizon (or equivalent year-on-year same line) in ≥1 bucket; documented continuity (C) after a cabinet/plan/coalition change (or plan-cycle analogue); ≥2 ministries or a formal inter-ministerial instrument',
-    4: 'All rung-3 conditions plus L+B in ≥2 buckets; and either a permanent agency/centre (A) with budget attribution or flagship L naming healthy longevity / aging biology / national digital health for ageing; spend is large vs peer countries in narrative',
-    5: 'Plan-law-level L with a quantitative population health anchor (LE, DFLE, HLY, or explicit national R/P/I KPIs) plus protected baseline B; C across ≥2 political/plan cycles or repeal only by high act; L+B closes all three buckets — R, P, and I — otherwise cap at 4',
-  },
-  [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-    0: 'Aging is not a scientific topic in political speech — only pensions and social protection',
-    1: 'Demographic burden framing: politicians discuss aging as an economic problem (labour market, pension deficits, care spending) — not as a biomedical research agenda',
-    2: 'Healthy aging as a policy goal: party programmes, parliamentary hearings on Alzheimer\'s / healthy aging / national plans on diseases of aging — fighting the consequences of aging, not aging as a unified biological target',
-    3: 'Geroscience in political language: leaders or parties describe extending healthy life as a scientific mission, name biological targets, treat 100+ as a political goal — documentary record (Hansard, manifestos, flagship speeches)',
-    4: 'Longevity as a political mandate: parties compete on this terrain; the head of state publicly makes it a core goal; the theme recurs in flagship state speeches and national strategic documents',
-  },
   // One composite score: marketing (cosmetics, supplements, ads), product borderlines, and professional discipline — not public opinion (see public trust pillars).
-  [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+  [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
     0: '"Anti-aging" / "reverses aging" are effectively unregulated for marketing: cosmetics, foods, and supplements can imply systemic rejuvenation without evidence; non-recognised "longevity" or anti-aging certifications are used to imply clinical authority without challenge from licensing bodies; no anti-aging-specific enforcement pathway',
     1: 'Only generic consumer protection and advertising law applies; anti-aging claims are addressed reactively if complained; no proactive monitoring; medical regulators do not treat promotion of unproven longevity interventions as a distinct disciplinary offence',
     2: 'Advertising or health-product regulator has issued guidance targeting anti-aging / systemic rejuvenation claims; unsubstantiated cosmetic and supplement claims are routinely removed in practice; professional associations have position statements against named pseudo-practices (e.g. IV "wellness" clinics, hormone optimisation without indication, reliance on non-recognised anti-aging credentials); still largely complaint-driven, no pre-market anti-aging bar',
@@ -1347,6 +1334,30 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
     4: 'Systemic anti-aging marketing claims require pre-market review with biomarker or clinical evidence acceptable to the regulator; advertising authority proactively monitors and removes non-compliant longevity claims; optional or de-facto public distinction between validated and hype claims; dedicated longevity or anti-aging clinics pushing disproven regimens face credible license review',
     5: 'Anti-aging or systemic rejuvenation effect claims meet essentially the same evidence standard as medicinal efficacy for marketing purposes; bodies that confer "clinical" or prescribing authority without recognised medical training cannot legally support commercial longevity practice; jurisdiction is cited internationally as a reference for evidence-based longevity consumer protection',
   },
+}
+
+export const POLITICAL_READINESS_CLAIM_SCALES: Record<PoliticalReadinessClaim, Record<number, string>> = {
+  [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+    0: 'Statute blocks longevity-relevant research without a review pathway; or no primary L+B (and no A+B) in any of R, P, or I — large long-term care spend alone does not lift this rung',
+    1: 'Executive strategy or law mentions health/ageing/digital direction but no appropriation with a named line and amount in official budget or programme annex for R, P, or I',
+    2: 'L+B in exactly one of R / P / I for at most one typical political cycle (annual line or no multi-year lock-in in primary documents); continuity after government/plan change not demonstrated',
+    3: 'L+B with ≥3-year horizon (or equivalent year-on-year same line) in ≥1 bucket; documented continuity (C) after a cabinet/plan/coalition change (or plan-cycle analogue); ≥2 ministries or a formal inter-ministerial instrument',
+    4: 'All rung-3 conditions plus L+B in ≥2 buckets; and either a permanent agency/centre (A) with budget attribution or flagship L naming healthy longevity / aging biology / national digital health for ageing; spend is large vs peer countries in narrative',
+    5: 'Plan-law-level L with a quantitative population health anchor (LE, DFLE, HLY, or explicit national R/P/I KPIs) plus protected baseline B; C across ≥2 political/plan cycles or repeal only by high act; L+B closes all three buckets — R, P, and I — otherwise cap at 4',
+  },
+  [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+    0: 'Aging is not a scientific topic in political speech — only pensions and social protection',
+    1: 'Demographic burden framing: politicians discuss aging as an economic problem (labour market, pension deficits, care spending) — not as a biomedical research agenda',
+    2: 'Healthy aging as a policy goal: party programmes, parliamentary hearings on Alzheimer\'s / healthy aging / national plans on diseases of aging — fighting the consequences of aging, not aging as a unified biological target',
+    3: 'Geroscience in political language: leaders or parties describe extending healthy life as a scientific mission, name biological targets, treat 100+ as a political goal — documentary record (Hansard, manifestos, flagship speeches)',
+    4: 'Longevity as a political mandate: parties compete on this terrain; the head of state publicly makes it a core goal; the theme recurs in flagship state speeches and national strategic documents',
+  },
+}
+
+/** Merged map for tooling; prefer SOCIAL_READINESS_CLAIM_SCALES / POLITICAL_READINESS_CLAIM_SCALES per field. */
+export const SOCIETAL_READINESS_CLAIM_SCALES: Record<string, Record<number, string>> = {
+  ...SOCIAL_READINESS_CLAIM_SCALES,
+  ...POLITICAL_READINESS_CLAIM_SCALES,
 }
 
 // ------------------------------------------------------------
@@ -1421,6 +1432,7 @@ export interface CountryData {
   }
 
   societal: {
-    [SocietalField.SOCIETAL_READINESS]: Record<SocietalReadinessClaim, ClaimData>
+    [SocietalField.SOCIETAL_READINESS]: Record<SocialReadinessClaim, ClaimData>,
+    [SocietalField.POLITICAL_READINESS]: Record<PoliticalReadinessClaim, ClaimData>,
   }
 }

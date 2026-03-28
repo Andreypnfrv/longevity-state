@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const israel: CountryData = {
@@ -663,21 +663,22 @@ const israel: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
         text: '2020–2021 COVID campaign: fastest proportional full-vaccination rollout globally — a hard benchmark of mass trust in the health system and front-line delivery.',
         links: [
           { label: 'Our World in Data — COVID-19 vaccinations', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'National time series — Dec 2020–2021 rollout vs population (historical benchmark)' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 4,
         text: 'Weizmann and peer institutions retain very high public recognition; science-led vaccination messaging worked at scale in 2021 even though wider political polarisation later stressed other institutions.',
         links: [
           { label: 'Our World in Data — COVID-19 vaccinations', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'Proxy for acceptance of biomedical guidance during 2021 campaign' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 3.5,
         text: 'MOH operational credibility during COVID was high; Israeli Democracy Index 2025 (May + Nov 2025 waves) documents persistently low trust in most state institutions — a cooler long-run ceiling for “national government” legitimacy than the pandemic peak, even where healthcare delivery still works.',
         links: [
@@ -685,7 +686,7 @@ const israel: CountryData = {
           { label: 'Our World in Data — COVID-19 vaccinations', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'Historical MOH-led programme performance (2020–21)' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
         text: 'Pikuach Nefesh and high regard for medical innovation help life-extension research land as a respectable topic. Major English-language outlets cover Israeli aging biology (senescent cells, immunotherapy, healthspan) for a general readership — biological aging as a research object appears beyond a pure lifestyle or pensions frame. It is not yet ambient "longevity escape velocity" culture (rung 4), but geroscience-adjacent reporting is visible in mainstream media.',
         links: [
@@ -693,24 +694,7 @@ const israel: CountryData = {
           { label: 'Davidson Institute (Weizmann)', url: 'https://davidson.weizmann.ac.il/', comment: 'Science education arm — ageing and biology outreach to the Israeli public' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 2,
-        text: 'I+R: Israel Innovation Authority and national digital-health / biotech programmes provide L+B for digital health, genomics, and data infrastructure (I) with applied research leverage (partial R). P: MOH prevention and screening frameworks exist but federal L+B lines are less visible as multi-year, named appropriations vs methodology rung 3. Coalition churn through 2019–2022 weakens documented C for single flagship lines. No statutory quantified national healthspan target tying R+P+I. Score 2: real I+R activity with public money; P and durability below rung 3.',
-        links: [
-          { label: 'Israel Innovation Authority', url: 'https://innovationisrael.org.il/en/', comment: 'I+R+L — government tech funding; digital health and life-science programmes' },
-          { label: 'Israel MOH — Digital health (English hub)', url: 'https://www.health.gov.il/English/Topics/DigitalHealth/Pages/default.aspx', comment: 'I+L — ministry digital-health policy and programmes' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 2,
-        text: 'National policy on dementia and older people\'s health has a documented Knesset and ministry lineage: the National Dementia Program (MOH, adopted 2013) was developed with expert groups and parliamentary Health Committee engagement; welfare and special committees still hear dementia, carers, and older-adult care. National campaigns and coalition politics remain dominated by security and judicial issues — there is no party competition on geroscience or biological longevity — but Alzheimer\'s/dementia and elder care meet the "disease-of-aging / healthy-aging programme" parliamentary band, not rung 1 (pensions-only).',
-        links: [
-          { label: 'Israel MOH — Dementia overview (older adults)', url: 'https://me.health.gov.il/en/older-adult/keep-me-healthy/common-conditions/dementia-and-alzheimer/did-you-know/dementia-overview/', comment: 'MOH English site — clinical context and epidemiology' },
-          { label: 'Brookdale — Israeli national dementia strategy (expert summary)', url: 'https://brookdale.jdc.org.il/en/publication/addressing-alzheimers-types-dementiaisraeli-national-strategy-summary-document-interdisciplinary-inter-organizational-group-of-experts/', date: '2013–', comment: 'JDC/Brookdale — expert summary informing national programme adoption' },
-          { label: 'Alzheimer Europe — Israel policy note', url: 'https://www.alzheimer-europe.org/policy/national-dementia-strategies/israel', comment: 'European NGO file — Knesset committee context (secondary)' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
         text: 'MOH pre-approves OTC pharmaceutical advertising under pharmacist regulations; publishes public warnings on misleading device/supplement-style pitches (e.g. 2024 stem-cell/anti-aging patch claims). Consumer Protection Law and the Economy Ministry consumer-protection unit address unfair trade practices. NAD+/IV longevity clinics and influencer health marketing still spread faster than probe throughput reported in third-party monitoring — composite rung 2 (rules + warnings; uneven proactive enforcement).',
         links: [
@@ -719,6 +703,26 @@ const israel: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 2,
+        text: 'I+R: Israel Innovation Authority and national digital-health / biotech programmes provide L+B for digital health, genomics, and data infrastructure (I) with applied research leverage (partial R). P: MOH prevention and screening frameworks exist but federal L+B lines are less visible as multi-year, named appropriations vs methodology rung 3. Coalition churn through 2019–2022 weakens documented C for single flagship lines. No statutory quantified national healthspan target tying R+P+I. Score 2: real I+R activity with public money; P and durability below rung 3.',
+        links: [
+          { label: 'Israel Innovation Authority', url: 'https://innovationisrael.org.il/en/', comment: 'I+R+L — government tech funding; digital health and life-science programmes' },
+          { label: 'Israel MOH — Digital health (English hub)', url: 'https://www.health.gov.il/English/Topics/DigitalHealth/Pages/default.aspx', comment: 'I+L — ministry digital-health policy and programmes' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 2,
+        text: 'National policy on dementia and older people\'s health has a documented Knesset and ministry lineage: the National Dementia Program (MOH, adopted 2013) was developed with expert groups and parliamentary Health Committee engagement; welfare and special committees still hear dementia, carers, and older-adult care. National campaigns and coalition politics remain dominated by security and judicial issues — there is no party competition on geroscience or biological longevity — but Alzheimer\'s/dementia and elder care meet the "disease-of-aging / healthy-aging programme" parliamentary band, not rung 1 (pensions-only).',
+        links: [
+          { label: 'Israel MOH — Dementia overview (older adults)', url: 'https://me.health.gov.il/en/older-adult/keep-me-healthy/common-conditions/dementia-and-alzheimer/did-you-know/dementia-overview/', comment: 'MOH English site — clinical context and epidemiology' },
+          { label: 'Brookdale — Israeli national dementia strategy (expert summary)', url: 'https://brookdale.jdc.org.il/en/publication/addressing-alzheimers-types-dementiaisraeli-national-strategy-summary-document-interdisciplinary-inter-organizational-group-of-experts/', date: '2013–', comment: 'JDC/Brookdale — expert summary informing national programme adoption' },
+          { label: 'Alzheimer Europe — Israel policy note', url: 'https://www.alzheimer-europe.org/policy/national-dementia-strategies/israel', comment: 'European NGO file — Knesset committee context (secondary)' },
+        ],
+      },
+    },
+
   },
 }
 

@@ -7,7 +7,7 @@ import {
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
   OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
   RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
-  SocietalReadinessClaim,
+  SocialReadinessClaim, PoliticalReadinessClaim,
 } from '../schema'
 
 const china: CountryData = {
@@ -705,28 +705,29 @@ const china: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+
+      [SocialReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 4,
         text: 'Hospital-centred care and state delivery still command strong pragmatic confidence; facility-led campaigns remain the operational backbone of national health drives.',
         links: [
           { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'China market report; fieldwork Oct 25–Nov 16, 2025' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 4,
         text: 'Edelman continues to place China in a high-trust cluster for science and health institutions vs Western medians; 2026 global release also flags a sharp year-on-year drop in optimism about the next generation’s prospects — monitor for knock-on effects on long-horizon science narratives.',
         links: [
           { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Top findings + country tables; Oct–Nov 2025 fieldwork' },
         ],
       },
-      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+      [SocialReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
         score: 5,
         text: 'Central government and its health agencies remain among the most trusted globally on Edelman’s institution battery — enough to mobilise population programmes quickly even as macro-optimism indicators worsened in the 2026 headline release.',
         links: [
           { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Government trust — China local report' },
         ],
       },
-      [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
+      [SocialReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
         text: 'Longevity aspiration is embedded in culture (养生, filial elder care), and rapid aging (超老龄社会) is a mainstream social concern. State and popular health discourse centre disease burdens, care expansion, and healthy life years — not a unified public narrative of aging as a single biological target (hallmarks, clocks, reversal). Geroscience at rung 3 remains confined to specialist and academic channels relative to general media.',
         links: [
@@ -734,24 +735,7 @@ const china: CountryData = {
           { label: 'China Daily — addressing population ageing', url: 'https://www.chinadaily.com.cn/a/202410/26/WS671c4476a310f1265a1c9c70.html', date: 'Oct 2024', comment: 'National English-language daily — demographic challenge and care angles' },
         ],
       },
-      [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 4,
-        text: 'R: national plan-law and S&T programmes (14th FYP, 科技创新2030) channel ageing-related and biomedical innovation with documentary budget follow-through. P: Healthy China 2030 (State Council / NHC) sets quantified population health targets including LE 79 by 2030 and prevention pillars — L with measurable KPIs. I: Internet Plus Healthcare and health-informatisation policy (State Council) tie data platforms and digital services to the health system, relevant to monitoring and care pathways for an ageing population. Elder-care expansion alone is not scored here. Cap at 4: methodology rung 5 requires all three buckets with plan-law-level KPI plus protected baseline B and two plan-cycle continuity evidenced in primary appropriations in one place — not fully documented in public English primary sources for I vs generic digital health.',
-        links: [
-          { label: 'State Council — 14th Five-Year Plan outline (Xinhua via Gov.cn)', url: 'http://www.gov.cn/xinwen/2021-03/13/content_5592681.htm', date: 'Mar 2021', comment: 'L — national plan cycle; healthy China / population / innovation chapters (R+P context)' },
-          { label: 'NHC (English) — Healthy China 2030 planning outline', url: 'https://en.nhc.gov.cn/2016-11/15/c_74822.htm', date: '2016', comment: 'P+L — quantified targets (e.g. LE 79 by 2030), prevention and health promotion' },
-          { label: 'State Council (English) — Internet Plus healthcare guideline', url: 'https://english.www.gov.cn/policies/latest_releases/2018/04/28/content_281476127312948.htm', date: 'Apr 2018', comment: 'I+L — national guidance on internet-based medical care, data, and AI support' },
-        ],
-      },
-      [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
-        score: 3,
-        text: 'Under CPC and State Council direction, "actively responding to population aging" is a named national strategy with public documentation (policy interpretation in Qiushi; implementation pieces on elderly-care systems and fiscal inputs). The NPC system publicly covers pension/retirement-age reform as a demographic-economy measure. Official discourse links aging to health capacity and modernisation more than to multiparty electoral competition, so the score reflects documented top-level strategic language and Two Sessions/NPC process, not a Western-style mandate rung 4.',
-        links: [
-          { label: 'Qiushi (English) — national strategy on population aging', url: 'http://en.qstheory.cn/2024-12/26/c_1059363.htm', date: 'Dec 2024', comment: 'CPC theory journal — implementing the national aging strategy' },
-          { label: 'NPC (English) — retirement age and aging society', url: 'http://en.npc.gov.cn/2024-09/11/c_1020969.htm', date: 'Sep 2024', comment: 'NPC English site — gradual retirement-age reform' },
-        ],
-      },
-      [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
+      [SocialReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 1,
         text: 'SAMR runs recurring national ad-law campaigns (e.g. 2024 “民生领域” actions) penalising thousands of cases including food and “神药”-style disease claims; health-food rules restrict efficacy assertions and celebrity endorsement. Enforcement stays campaign- and complaint-heavy; TCM and health-food registration channels still host longevity-style claims with uneven biomarker substantiation — composite stays rung 1 (generic law + bursts, not routine domain-wide pre-clearance).',
         links: [
@@ -760,6 +744,26 @@ const china: CountryData = {
         ],
       },
     },
+    [SocietalField.POLITICAL_READINESS]: {
+      [PoliticalReadinessClaim.POLICY_COMMITMENT]: {
+        score: 4,
+        text: 'R: national plan-law and S&T programmes (14th FYP, 科技创新2030) channel ageing-related and biomedical innovation with documentary budget follow-through. P: Healthy China 2030 (State Council / NHC) sets quantified population health targets including LE 79 by 2030 and prevention pillars — L with measurable KPIs. I: Internet Plus Healthcare and health-informatisation policy (State Council) tie data platforms and digital services to the health system, relevant to monitoring and care pathways for an ageing population. Elder-care expansion alone is not scored here. Cap at 4: methodology rung 5 requires all three buckets with plan-law-level KPI plus protected baseline B and two plan-cycle continuity evidenced in primary appropriations in one place — not fully documented in public English primary sources for I vs generic digital health.',
+        links: [
+          { label: 'State Council — 14th Five-Year Plan outline (Xinhua via Gov.cn)', url: 'http://www.gov.cn/xinwen/2021-03/13/content_5592681.htm', date: 'Mar 2021', comment: 'L — national plan cycle; healthy China / population / innovation chapters (R+P context)' },
+          { label: 'NHC (English) — Healthy China 2030 planning outline', url: 'https://en.nhc.gov.cn/2016-11/15/c_74822.htm', date: '2016', comment: 'P+L — quantified targets (e.g. LE 79 by 2030), prevention and health promotion' },
+          { label: 'State Council (English) — Internet Plus healthcare guideline', url: 'https://english.www.gov.cn/policies/latest_releases/2018/04/28/content_281476127312948.htm', date: 'Apr 2018', comment: 'I+L — national guidance on internet-based medical care, data, and AI support' },
+        ],
+      },
+      [PoliticalReadinessClaim.LEGISLATIVE_SALIENCE]: {
+        score: 3,
+        text: 'Under CPC and State Council direction, "actively responding to population aging" is a named national strategy with public documentation (policy interpretation in Qiushi; implementation pieces on elderly-care systems and fiscal inputs). The NPC system publicly covers pension/retirement-age reform as a demographic-economy measure. Official discourse links aging to health capacity and modernisation more than to multiparty electoral competition, so the score reflects documented top-level strategic language and Two Sessions/NPC process, not a Western-style mandate rung 4.',
+        links: [
+          { label: 'Qiushi (English) — national strategy on population aging', url: 'http://en.qstheory.cn/2024-12/26/c_1059363.htm', date: 'Dec 2024', comment: 'CPC theory journal — implementing the national aging strategy' },
+          { label: 'NPC (English) — retirement age and aging society', url: 'http://en.npc.gov.cn/2024-09/11/c_1020969.htm', date: 'Sep 2024', comment: 'NPC English site — gradual retirement-age reform' },
+        ],
+      },
+    },
+
   },
 }
 
