@@ -1,11 +1,12 @@
 import {
-  TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField,
-  VisasScientistsClaim, VisasCliniciansClaim, PhdProgramsClaim, PhdMdProgramsClaim,
+  TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
-  LongevityAgencyClaim, AdaptiveLicensingClaim, SyntheticControlClaim, RegulatorySandboxClaim, RightToTryClaim,
+  BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
-  OpenDataClaim, InteroperabilityClaim, TrialEndpointsClaim,
-  PerturbationScreeningClaim, MutualRecognitionClaim, SharedInfraClaim, PublicEngagementClaim,
+  OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
+  RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
+  SocietalReadinessClaim,
 } from '../schema'
 import { Locale } from './index'
 
@@ -18,223 +19,291 @@ export interface ClaimTranslation {
 // Prevents key collisions between enums from different fields that share the same string value.
 export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTranslation>>> = {
 
-  // ── Talents: Visas for Scientists ────────────────────────────────────────
-  [TalentsField.VISAS_FOR_SCIENTISTS]: {
-    [VisasScientistsClaim.DEDICATED_CATEGORY]: { [Locale.EN]: {
-      title: 'Dedicated visa category exists',
-      description: 'A specific visa or permit category for researchers/scientists, distinct from general skilled-worker visas.',
+  // ── Talents: Researcher Immigration ──────────────────────────────────────
+  [TalentsField.RESEARCHER_IMMIGRATION]: {
+    [ResearcherImmigrationClaim.VISA_PATHWAY]: { [Locale.EN]: {
+      title: 'Visa pathway quality',
+      description: 'Whether a dedicated, flexible researcher visa category exists — distinct from employer-tied skilled-worker permits — covering all career stages from postdoc to senior PI.',
     }},
-    [VisasScientistsClaim.FAST_PROCESSING]: { [Locale.EN]: {
-      title: 'Processing under 3 months',
-      description: 'Standard end-to-end processing time for a researcher visa is under 3 months.',
+    [ResearcherImmigrationClaim.PROCESSING_SPEED]: { [Locale.EN]: {
+      title: 'Processing speed',
+      description: 'How long it takes to obtain a researcher visa from application to approval — from unpredictable/multi-year to under 2 weeks.',
     }},
-    [VisasScientistsClaim.CREDENTIAL_RECOGNITION]: { [Locale.EN]: {
-      title: 'Foreign credentials recognised',
-      description: 'Foreign academic degrees and research credentials are automatically or streamlined-recognised without lengthy re-evaluation.',
+    [ResearcherImmigrationClaim.CREDENTIAL_RECOGNITION]: { [Locale.EN]: {
+      title: 'Foreign credential recognition',
+      description: 'Whether foreign academic degrees and research qualifications are automatically recognised or require lengthy re-evaluation by a local authority.',
     }},
-    [VisasScientistsClaim.EARLY_CAREER_ACCESSIBLE]: { [Locale.EN]: {
-      title: 'Accessible to early-career researchers',
-      description: 'Fees, income thresholds, and documentation requirements do not effectively exclude early-career (postdoc-level) researchers.',
+    [ResearcherImmigrationClaim.EARLY_CAREER_ACCESS]: { [Locale.EN]: {
+      title: 'Early-career accessibility',
+      description: 'Whether income thresholds, documentation requirements, and employer sponsorship rules realistically include postdocs and junior researchers — not just senior faculty.',
     }},
-  },
-
-  // ── Talents: Visas for Clinicians ────────────────────────────────────────
-  [TalentsField.VISAS_FOR_CLINICIANS]: {
-    [VisasCliniciansClaim.EU_AUTO_RECOGNITION]: { [Locale.EN]: {
-      title: 'EU/EEA licences auto-recognised',
-      description: 'Medical licences from EU/EEA countries are automatically recognised without a re-examination process.',
-    }},
-    [VisasCliniciansClaim.NON_EU_PATHWAY]: { [Locale.EN]: {
-      title: 'Clear pathway for non-EU clinicians',
-      description: 'A defined, publicly documented process exists for non-EU clinicians to obtain a licence to practise.',
-    }},
-    [VisasCliniciansClaim.PROCESSING_UNDER_6M]: { [Locale.EN]: {
-      title: 'Licensing process under 6 months',
-      description: 'End-to-end licence assessment for a foreign clinician takes under 6 months in standard cases.',
-    }},
-    [VisasCliniciansClaim.NO_LANGUAGE_BARRIER]: { [Locale.EN]: {
-      title: 'No prohibitive language requirement',
-      description: 'Language proficiency requirements do not effectively bar clinicians who would practise in international or research settings.',
+    [ResearcherImmigrationClaim.LONG_TERM_RETENTION]: { [Locale.EN]: {
+      title: 'Long-term retention pathway',
+      description: 'Whether a research career provides a viable route to permanent residency or citizenship — including whether academic careers are treated equivalently to industry in points-based systems.',
     }},
   },
 
-  // ── Talents: PhD Programs ─────────────────────────────────────────────────
-  [TalentsField.PHD_PROGRAMS]: {
-    [PhdProgramsClaim.DEDICATED_AGING_TRACK]: { [Locale.EN]: {
-      title: 'Dedicated aging biology track',
-      description: 'At least one PhD programme with a dedicated track or specialisation in aging biology, biogerontology, or longevity science.',
+  // ── Talents: Clinician Immigration ───────────────────────────────────────
+  [TalentsField.CLINICIAN_IMMIGRATION]: {
+    [ClinicianImmigrationClaim.LICENSE_RECOGNITION]: { [Locale.EN]: {
+      title: 'Medical licence recognition',
+      description: 'Whether foreign medical licences are recognised automatically (EU/EEA) or via a competency-based pathway rather than requiring full re-examination — which can add 2+ years.',
     }},
-    [PhdProgramsClaim.PUBLICLY_FUNDED]: { [Locale.EN]: {
-      title: 'Publicly funded positions',
-      description: 'PhD positions in aging research are funded by public grants or national training programmes, not solely by tuition or self-funding.',
+    [ClinicianImmigrationClaim.PATHWAY_CLARITY]: { [Locale.EN]: {
+      title: 'Pathway clarity & support',
+      description: 'Whether a clear, well-documented, digitally accessible process exists for foreign clinicians — with a designated support contact and predictable outcome.',
     }},
-    [PhdProgramsClaim.INTERNATIONAL_RECRUITMENT]: { [Locale.EN]: {
-      title: 'Active international recruitment',
-      description: 'Programmes actively recruit internationally and have mechanisms (fellowships, visa support) to attract foreign PhD students.',
+    [ClinicianImmigrationClaim.PROCESSING_TIME]: { [Locale.EN]: {
+      title: 'Licensing processing time',
+      description: 'Total time from arrival to licensed independent practice — from >2 years (full re-examination required) to <1 month (fast-track with provisional scope).',
     }},
-    [PhdProgramsClaim.INDUSTRY_ACADEMIA_LINKS]: { [Locale.EN]: {
-      title: 'Industry–academia training links',
-      description: 'PhD programmes include structured industry exposure — placements, co-supervision, or joint funding with biotech/pharma.',
+    [ClinicianImmigrationClaim.SCOPE_OF_PRACTICE]: { [Locale.EN]: {
+      title: 'Provisional scope of practice',
+      description: 'What foreign clinicians are permitted to do while their licence is being processed — from no practice at all to near-full independent scope from day 1.',
+    }},
+    [ClinicianImmigrationClaim.RESEARCH_PRACTICE_BALANCE]: { [Locale.EN]: {
+      title: 'Research–practice balance',
+      description: 'Whether foreign clinicians can hold combined research-practice roles — not just choose one or the other — with structural support for dual-role careers in academic settings.',
     }},
   },
 
-  // ── Talents: PhD/MD-PhD Programs ─────────────────────────────────────────
-  [TalentsField.PHD_MD_PROGRAMS_FOR_CLINICIANS]: {
-    [PhdMdProgramsClaim.COMBINED_PROGRAM_EXISTS]: { [Locale.EN]: {
-      title: 'Combined MD–PhD programme exists',
-      description: 'A formal, structured combined clinical and research degree programme exists (not just informal parallel enrolment).',
+  // ── Talents: Research Training Pipeline ──────────────────────────────────
+  [TalentsField.RESEARCH_TRAINING_PIPELINE]: {
+    [ResearchTrainingClaim.UNDERGRADUATE_EXPOSURE]: { [Locale.EN]: {
+      title: 'Undergraduate aging exposure',
+      description: 'Whether aging biology is systematically integrated into undergraduate life science and pre-medical curricula — creating a pipeline of students who see longevity research as a career option.',
     }},
-    [PhdMdProgramsClaim.PUBLICLY_FUNDED]: { [Locale.EN]: {
-      title: 'Publicly funded',
-      description: 'Combined MD–PhD positions are funded by public agencies or national training grants, not solely self-funded.',
+    [ResearchTrainingClaim.GRADUATE_PROGRAMS_DEPTH]: { [Locale.EN]: {
+      title: 'Graduate programme depth',
+      description: 'Quantity and quality of dedicated aging research PhD programmes — from absent to a world-class national ecosystem with strong international talent attraction.',
     }},
-    [PhdMdProgramsClaim.AGING_TRACK_AVAILABLE]: { [Locale.EN]: {
-      title: 'Aging/longevity specialisation available',
-      description: 'MD–PhD students can specialise in aging biology, geriatric medicine, or longevity science within the programme.',
+    [ResearchTrainingClaim.POSTDOC_ECOSYSTEM]: { [Locale.EN]: {
+      title: 'Postdoc ecosystem quality',
+      description: 'Whether postdoc positions in aging research are structured, well-supported, and lead to real career options — rather than being uncoordinated, precarious, and career-dead-end.',
     }},
-    [PhdMdProgramsClaim.RETENTION_MECHANISMS]: { [Locale.EN]: {
-      title: 'Career retention mechanisms',
-      description: 'Specific mechanisms (protected research time, dual appointments, career tracks) exist to retain MD–PhDs in research after graduation.',
+    [ResearchTrainingClaim.PUBLIC_FUNDING_COVERAGE]: { [Locale.EN]: {
+      title: 'Public funding coverage',
+      description: 'Whether PhD and postdoc positions are funded by public training grants at competitive stipend levels — not left to self-funding, tuition, or individual PI grants.',
+    }},
+    [ResearchTrainingClaim.INDUSTRY_ACADEMIA_BRIDGE]: { [Locale.EN]: {
+      title: 'Industry–academia bridge',
+      description: 'Whether training programmes include structured exposure to biotech and pharma — co-supervision, rotations, joint funding — creating researchers who can move between sectors.',
+    }},
+  },
+
+  // ── Talents: Clinician Aging Training ────────────────────────────────────
+  [TalentsField.CLINICIAN_AGING_TRAINING]: {
+    [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: { [Locale.EN]: {
+      title: 'Geriatrics as a recognised specialty',
+      description: 'Whether geriatrics and aging medicine are a formally recognised, well-resourced, and socially valued medical specialty — or a low-prestige underfunded afterthought.',
+    }},
+    [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: { [Locale.EN]: {
+      title: 'Medical school integration',
+      description: 'Whether aging biology — not just geriatric clinical management — is integrated systematically across the medical school curriculum, creating doctors who understand the mechanisms of aging.',
+    }},
+    [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: { [Locale.EN]: {
+      title: 'Aging medicine residency quality',
+      description: 'Quality and breadth of geriatrics / aging medicine residency training — from absent to world-class programmes including longevity interventions and integrated clinical research.',
+    }},
+    [ClinicianAgingTrainingClaim.LONGEVITY_CME]: { [Locale.EN]: {
+      title: 'Longevity continuing medical education',
+      description: 'Whether practising clinicians across all specialties can access structured continuing education in longevity medicine and aging interventions — not just geriatricians.',
+    }},
+    [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: { [Locale.EN]: {
+      title: 'Aging medicine workforce planning',
+      description: 'Whether a national plan exists to match the supply of aging medicine specialists to projected demographic demand — with funded expansion of training capacity.',
+    }},
+  },
+
+  // ── Talents: Clinician-Scientist Pathway ─────────────────────────────────
+  [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
+    [ClinicianScientistClaim.COMBINED_DEGREE_EXISTS]: { [Locale.EN]: {
+      title: 'Combined degree programme exists',
+      description: 'Whether a formal, structured MD-PhD or equivalent exists — not just informal parallel enrolment — with protected research time and a clear curriculum.',
+    }},
+    [ClinicianScientistClaim.PUBLIC_FUNDING]: { [Locale.EN]: {
+      title: 'Public funding',
+      description: 'Whether combined MD-PhD positions are publicly funded at stipend levels that do not impose a financial penalty for choosing the clinician-scientist path over a clinical career.',
+    }},
+    [ClinicianScientistClaim.AGING_SPECIALIZATION]: { [Locale.EN]: {
+      title: 'Aging specialisation track',
+      description: 'Whether a dedicated aging / longevity track exists within combined programmes — with specialist supervisors, aging-specific coursework, and industry links.',
+    }},
+    [ClinicianScientistClaim.PROTECTED_RESEARCH_TIME]: { [Locale.EN]: {
+      title: 'Protected research time in career',
+      description: 'Whether clinicians in academic posts can formally protect 40–50% of their time for research — funded separately from the clinical budget, without informal negotiation or career penalty.',
+    }},
+    [ClinicianScientistClaim.CAREER_VIABILITY]: { [Locale.EN]: {
+      title: 'Long-term career viability',
+      description: 'Whether a clinician-scientist career is genuinely sustainable long-term — with competitive compensation, equivalent prestige to pure clinical or academic paths, and active pipeline management.',
     }},
   },
 
   // ── Science: Research Funding ─────────────────────────────────────────────
   [ScienceField.RESEARCH_FUNDING]: {
-    [ResearchFundingClaim.DEDICATED_AGING_BUDGET]: { [Locale.EN]: {
-      title: 'Dedicated aging research budget line',
-      description: 'A named, ring-fenced public budget line specifically for aging or longevity research.',
+    [ResearchFundingClaim.FUNDING_SCALE]: { [Locale.EN]: {
+      title: 'Funding scale',
+      description: 'The absolute size of ring-fenced public investment in aging and longevity research — from no dedicated budget line to a world-leading independent institute.',
     }},
-    [ResearchFundingClaim.NOT_DISEASE_SILOED]: { [Locale.EN]: {
-      title: 'Not siloed into single disease',
-      description: 'Aging research funding is not overwhelmingly dominated by a single disease at the expense of basic aging biology.',
+    [ResearchFundingClaim.PORTFOLIO_BREADTH]: { [Locale.EN]: {
+      title: 'Portfolio breadth',
+      description: 'Whether funding covers the full spectrum — basic aging mechanisms, biomarkers, translational, and clinical — without being captured by a single disease or a single research stage.',
     }},
-    [ResearchFundingClaim.LONG_TERM_HORIZON]: { [Locale.EN]: {
-      title: 'Long-term funding horizon (>5 years)',
-      description: 'Researchers can access multi-year (>5 year) funding cycles, reducing short-termism in aging biology research.',
+    [ResearchFundingClaim.FUNDING_STABILITY]: { [Locale.EN]: {
+      title: 'Funding stability & horizon',
+      description: 'Whether researchers can access long-term, structurally protected funding — from annual discretionary grants to decade-long institutional commitments immune to political cycles.',
     }},
-    [ResearchFundingClaim.BASIC_RESEARCH_PROTECTED]: { [Locale.EN]: {
-      title: 'Basic research protected from translational pressure',
-      description: 'Funding mechanisms explicitly protect fundamental aging biology from being replaced by applied/translational requirements.',
+    [ResearchFundingClaim.PRIVATE_LEVERAGE]: { [Locale.EN]: {
+      title: 'Private capital leverage',
+      description: 'The degree to which public funding attracts and coordinates private investment — philanthropy, longevity biotech venture capital, and industry co-funding.',
+    }},
+    [ResearchFundingClaim.RISK_APPETITE]: { [Locale.EN]: {
+      title: 'Risk appetite for radical hypotheses',
+      description: 'Whether the funding system actively supports unconventional, high-risk aging theories and novel targets — beyond what conservative peer review would fund.',
     }},
   },
 
   // ── Science: Gene Editing ─────────────────────────────────────────────────
   [ScienceField.GENE_EDITING_REGULATION]: {
-    [GeneEditingClaim.NO_BLANKET_BAN]: { [Locale.EN]: {
-      title: 'No blanket ban on somatic editing',
-      description: 'Somatic gene editing in humans is not categorically prohibited — a regulatory pathway for therapeutic applications exists.',
+    [GeneEditingClaim.SOMATIC_PERMISSIVENESS]: { [Locale.EN]: {
+      title: 'Somatic gene editing permissiveness',
+      description: 'How open the regulatory environment is to somatic gene editing trials — from blanket prohibition to a world-leading approval record across many therapeutic areas.',
     }},
-    [GeneEditingClaim.RISK_PROPORTIONATE]: { [Locale.EN]: {
-      title: 'Risk-proportionate framework',
-      description: 'Regulatory oversight is tiered by risk level; low-risk somatic editing faces lighter oversight than germline.',
+    [GeneEditingClaim.APPROVAL_SPEED]: { [Locale.EN]: {
+      title: 'Clinical trial approval speed',
+      description: 'Time from IND/CTA submission to trial start — from multi-year delays to adaptive, months-long co-development with the regulator.',
     }},
-    [GeneEditingClaim.APPROVED_TRIALS_EXIST]: { [Locale.EN]: {
-      title: 'Approved somatic gene therapy trials',
-      description: 'At least one approved clinical trial or approved therapy using somatic gene editing is active or completed.',
+    [GeneEditingClaim.REGULATORY_ADAPTABILITY]: { [Locale.EN]: {
+      title: 'Regulatory adaptability to new modalities',
+      description: 'How quickly and proactively the regulator extends guidance to new gene editing technologies — base editing, prime editing, epigenetic reprogramming — rather than leaving them in legal limbo.',
     }},
-    [GeneEditingClaim.GERMLINE_PATHWAY_DEFINED]: { [Locale.EN]: {
-      title: 'Germline pathway defined (even if restricted)',
-      description: 'A clear legal/regulatory position on germline editing exists — whether permitted with conditions, moratorium, or explicit prohibition.',
+    [GeneEditingClaim.GERMLINE_PERMISSIVENESS]: { [Locale.EN]: {
+      title: 'Germline editing permissiveness',
+      description: 'How open the framework is to germline gene editing — from legal vacuum or blanket prohibition through structured basic-research permission to a defined clinical pathway.',
+    }},
+    [GeneEditingClaim.LONGEVITY_PATHWAY]: { [Locale.EN]: {
+      title: 'Longevity/aging application pathway',
+      description: 'Whether aging and longevity endpoints are recognised as valid regulatory targets for gene editing — from complete absence to a formal longevity medicine pathway.',
     }},
   },
 
-  // ── Translation: Longevity Agency ─────────────────────────────────────────
+  // ── Translation: Breakthrough Agencies ───────────────────────────────────
   [TranslationField.BIOTECH_BREAKTHROUGH_AGENCIES]: {
-    [LongevityAgencyClaim.DEDICATED_AGENCY_EXISTS]: { [Locale.EN]: {
-      title: 'Dedicated longevity/healthspan agency',
-      description: 'A government agency with an explicit mandate for longevity or healthy-aging research translation exists.',
+    [BreakthroughAgencyClaim.AGENCY_MODEL]: { [Locale.EN]: {
+      title: 'Agency model',
+      description: 'Whether the country has an ARPA/DARPA-style programme-manager model innovation agency — distinct from traditional grant-making councils.',
     }},
-    [LongevityAgencyClaim.CHALLENGE_DRIVEN]: { [Locale.EN]: {
-      title: 'Challenge-driven, not grant-based',
-      description: 'Agency operates on ARPA/DARPA model — directed challenges with competitive execution.',
+    [BreakthroughAgencyClaim.LONGEVITY_MANDATE]: { [Locale.EN]: {
+      title: 'Longevity mandate',
+      description: 'Whether any innovation agency has an explicit aging or longevity mandate, ring-fenced budget, and published goals.',
     }},
-    [LongevityAgencyClaim.NON_DILUTIVE_FUNDING]: { [Locale.EN]: {
-      title: 'Non-dilutive funding available',
-      description: 'Agency provides non-dilutive funding (grants, contracts, prizes) — developers do not give up equity.',
+    [BreakthroughAgencyClaim.FUNDING_TYPE]: { [Locale.EN]: {
+      title: 'Funding type',
+      description: 'Whether public innovation funding is truly non-dilutive and challenge-based — or only co-investment and match-grants with private sector.',
     }},
-    [LongevityAgencyClaim.IP_RETAINED_BY_DEVS]: { [Locale.EN]: {
-      title: 'IP retained by developers',
-      description: 'IP from publicly funded longevity research is retained by the developer, not assigned to the funding agency.',
+    [BreakthroughAgencyClaim.IP_FRAMEWORK]: { [Locale.EN]: {
+      title: 'IP framework for funded research',
+      description: 'Whether developers or individual researchers retain IP from publicly funded longevity research — vs. university or crown ownership.',
+    }},
+    [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: { [Locale.EN]: {
+      title: 'Challenge specificity',
+      description: 'How specific and quantified longevity challenge objectives are — from vague "improve health" to measurable biological age targets with prize mechanisms.',
     }},
   },
 
   // ── Translation: Adaptive Licensing ──────────────────────────────────────
   [TranslationField.ADAPTIVE_LICENSING]: {
-    [AdaptiveLicensingClaim.CONDITIONAL_APPROVAL_EXISTS]: { [Locale.EN]: {
-      title: 'Conditional/accelerated approval pathway',
-      description: 'A formal pathway exists for conditional or accelerated drug approval based on interim or surrogate data.',
+    [AdaptiveLicensingClaim.CONDITIONAL_APPROVAL]: { [Locale.EN]: {
+      title: 'Conditional/accelerated approval',
+      description: 'How well-developed the conditional and accelerated approval ecosystem is — from no mechanism to world-leading integrated pathways.',
     }},
-    [AdaptiveLicensingClaim.SURROGATE_ENDPOINTS_ACCEPTED]: { [Locale.EN]: {
-      title: 'Surrogate endpoints accepted',
-      description: 'Regulatory authority accepts validated surrogate endpoints in place of hard clinical endpoints for approval.',
+    [AdaptiveLicensingClaim.ROLLING_REVIEW]: { [Locale.EN]: {
+      title: 'Rolling review availability',
+      description: 'Whether the regulator accepts data packages as they accumulate during development, rather than requiring the full dossier at submission.',
     }},
-    [AdaptiveLicensingClaim.POST_MARKET_CONFIRMATION]: { [Locale.EN]: {
-      title: 'Post-market confirmatory trials required',
-      description: 'Conditional approvals require post-market confirmatory evidence — not permanent without proof of clinical benefit.',
+    [AdaptiveLicensingClaim.SURROGATE_ENDPOINTS]: { [Locale.EN]: {
+      title: 'Surrogate endpoint breadth',
+      description: 'How broadly surrogate endpoints are accepted — from disease-specific only to composite aging and longevity endpoints for registration.',
     }},
-    [AdaptiveLicensingClaim.AGING_SPECIFIC_PATHWAY]: { [Locale.EN]: {
-      title: 'Aging-specific guidance or pathway',
-      description: 'Regulatory authority has issued specific guidance or pathway for aging/longevity interventions.',
+    [AdaptiveLicensingClaim.POST_MARKET_FRAMEWORK]: { [Locale.EN]: {
+      title: 'Post-market confirmation framework',
+      description: 'Whether conditional approvals have enforceable confirmatory requirements — from no enforcement to real-world evidence feeding back into label updates.',
+    }},
+    [AdaptiveLicensingClaim.EXPANDED_ACCESS]: { [Locale.EN]: {
+      title: 'Expanded access / compassionate use',
+      description: 'How streamlined individual patient access to investigational treatments is — from no mechanism to proactive structured access with insurer coverage.',
     }},
   },
 
-  // ── Translation: Synthetic Control Arms ──────────────────────────────────
-  [TranslationField.SYNTHETIC_CONTROL_ARMS]: {
-    [SyntheticControlClaim.REGULATORY_ACCEPTED]: { [Locale.EN]: {
-      title: 'Regulator accepts synthetic controls',
-      description: 'The regulatory authority has formally accepted synthetic/external control arms as valid comparators in submissions.',
+  // ── Translation: Trial Design Modernization ───────────────────────────────
+  [TranslationField.TRIAL_DESIGN_MODERNIZATION]: {
+    [TrialDesignClaim.ADAPTIVE_DESIGNS]: { [Locale.EN]: {
+      title: 'Adaptive trial design acceptance',
+      description: 'How broadly adaptive designs (dose-finding, seamless Phase 2/3, response-adaptive randomisation) are accepted — from rejection to full co-design with regulator.',
     }},
-    [SyntheticControlClaim.NATIONAL_DATA_AVAILABLE]: { [Locale.EN]: {
-      title: 'National health data available for controls',
-      description: 'Sufficiently rich, accessible national health data exists to construct valid synthetic comparator populations.',
+    [TrialDesignClaim.SYNTHETIC_CONTROLS]: { [Locale.EN]: {
+      title: 'Synthetic control arm acceptance',
+      description: 'Whether synthetic or external control arms using real-world data are accepted — from never to standard tool across therapeutic areas.',
     }},
-    [SyntheticControlClaim.AI_READY_INFRASTRUCTURE]: { [Locale.EN]: {
-      title: 'AI-ready data infrastructure',
-      description: 'National health data infrastructure supports AI/ML-based synthetic control construction.',
+    [TrialDesignClaim.DECENTRALIZED_TRIALS]: { [Locale.EN]: {
+      title: 'Decentralized trial support',
+      description: 'Regulatory and infrastructure support for decentralized, home-based, and digitally-monitored clinical trials.',
     }},
-    [SyntheticControlClaim.USED_IN_APPROVALS]: { [Locale.EN]: {
-      title: 'Already used in regulatory approvals',
-      description: 'At least one approved drug used a synthetic or external control arm as part of the regulatory submission.',
+    [TrialDesignClaim.PLATFORM_PROTOCOLS]: { [Locale.EN]: {
+      title: 'Platform/master protocol trials',
+      description: 'Whether platform trials (multiple interventions, shared control, adaptive arm addition) are supported by regulatory guidance and active infrastructure.',
+    }},
+    [TrialDesignClaim.RWE_INTEGRATION]: { [Locale.EN]: {
+      title: 'Real-world evidence integration',
+      description: 'Extent to which real-world evidence from registries, EHRs, and claims data is accepted in regulatory submissions — from safety-only to routine pivotal evidence.',
     }},
   },
 
   // ── Translation: Regulatory Sandbox ──────────────────────────────────────
   [TranslationField.REGULATORY_SANDBOXES]: {
-    [RegulatorySandboxClaim.SANDBOX_EXISTS]: { [Locale.EN]: {
-      title: 'Formal regulatory sandbox exists',
-      description: 'A legally defined regulatory sandbox for health interventions with explicit safe-harbour provisions exists and is operational.',
+    [RegulatorySandboxClaim.SANDBOX_EXISTENCE]: { [Locale.EN]: {
+      title: 'Sandbox existence & maturity',
+      description: 'Whether a formal regulatory sandbox with defined rules, legal status, and active cohorts exists in the health/biotech sector.',
     }},
-    [RegulatorySandboxClaim.COMBINATION_THERAPIES]: { [Locale.EN]: {
-      title: 'Covers combination therapies',
-      description: 'The sandbox explicitly covers combination therapies (drug + device, drug + biologic, etc.).',
+    [RegulatorySandboxClaim.BIOTECH_COVERAGE]: { [Locale.EN]: {
+      title: 'Biotech therapeutic coverage',
+      description: 'Whether the sandbox covers drugs, biologics, gene therapies, and novel modalities — or is limited to digital health only.',
     }},
-    [RegulatorySandboxClaim.REPURPOSED_DRUGS]: { [Locale.EN]: {
-      title: 'Covers repurposed drugs',
-      description: 'The sandbox explicitly facilitates testing of repurposed/off-label drugs for new aging indications.',
+    [RegulatorySandboxClaim.PATIENT_SCOPE]: { [Locale.EN]: {
+      title: 'Patient participation scope',
+      description: 'Whether real patients — including prevention and longevity cohorts — can participate in sandbox programmes with appropriate protections.',
     }},
-    [RegulatorySandboxClaim.LEGAL_SAFE_HARBOUR]: { [Locale.EN]: {
-      title: 'Legal safe harbour for participants',
-      description: 'Patients and physicians participating in sandbox trials have explicit legal protection from standard liability.',
+    [RegulatorySandboxClaim.LEGAL_PROTECTION]: { [Locale.EN]: {
+      title: 'Legal safe harbour',
+      description: 'Whether developers, physicians, and institutions participating in the sandbox have explicit legal protection — from no safe harbour to comprehensive indemnity and admissible data.',
+    }},
+    [RegulatorySandboxClaim.LONGEVITY_APPLICABILITY]: { [Locale.EN]: {
+      title: 'Longevity applicability',
+      description: 'Whether aging and longevity interventions can explicitly enter the sandbox — from disease-specific only to a dedicated longevity sandbox track.',
     }},
   },
 
-  // ── Translation: Right to Try ─────────────────────────────────────────────
-  [TranslationField.RIGHT_TO_TRY]: {
-    [RightToTryClaim.LAW_EXISTS]: { [Locale.EN]: {
-      title: 'Right-to-try law exists',
-      description: 'A law or regulation explicitly granting patients access to investigational treatments outside standard trial enrolment.',
+  // ── Translation: Aging Endpoint Ecosystem ────────────────────────────────
+  [TranslationField.AGING_ENDPOINT_ECOSYSTEM]: {
+    [AgingEndpointClaim.ENDPOINT_ACCEPTANCE]: { [Locale.EN]: {
+      title: 'Regulatory endpoint acceptance',
+      description: 'Whether aging biomarkers and composite longevity endpoints are accepted as primary endpoints — from exploratory-only to registration-grade.',
     }},
-    [RightToTryClaim.COVERS_TERMINAL]: { [Locale.EN]: {
-      title: 'Covers terminally ill patients',
-      description: 'The law explicitly covers patients with terminal or life-threatening conditions who have exhausted standard treatment options.',
+    [AgingEndpointClaim.QUALIFICATION_PATHWAY]: { [Locale.EN]: {
+      title: 'Biomarker qualification pathway',
+      description: 'Whether a formal, accelerated process exists to qualify novel aging biomarkers as regulatory-grade surrogates, independent of any specific drug.',
     }},
-    [RightToTryClaim.PHYSICIAN_PROTECTION]: { [Locale.EN]: {
-      title: 'Legal protection for prescribing physicians',
-      description: 'Physicians who prescribe investigational treatments under RTT are explicitly protected from professional or legal liability.',
+    [AgingEndpointClaim.CODEV_FRAMEWORK]: { [Locale.EN]: {
+      title: 'Co-development framework',
+      description: 'Whether aging biomarker endpoints can be co-developed and validated alongside a therapeutic within the same regulatory submission.',
     }},
-    [RightToTryClaim.COMPANY_PARTICIPATION]: { [Locale.EN]: {
-      title: 'Company participation mandated',
-      description: 'Developers are legally required to provide access when requested, or strong incentives ensure near-universal access.',
+    [AgingEndpointClaim.REFERENCE_INFRASTRUCTURE]: { [Locale.EN]: {
+      title: 'Reference population infrastructure',
+      description: 'Whether publicly accessible, validated normative aging biomarker databases exist for synthetic control arm construction.',
+    }},
+    [AgingEndpointClaim.STANDARDIZATION]: { [Locale.EN]: {
+      title: 'Measurement standardization',
+      description: 'Whether aging biomarker measurement protocols are harmonised across studies — enabling cross-study comparison, data pooling, and synthetic control construction.',
     }},
   },
 
@@ -372,141 +441,162 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
 
   // ── Data: Open Access ─────────────────────────────────────────────────────
   [DataField.OPEN_ACCESS_TO_HEALTH_DATA]: {
-    [OpenDataClaim.FREE_RESEARCHER_ACCESS]: { [Locale.EN]: {
-      title: 'Free access for qualified researchers',
-      description: 'Qualified researchers can access anonymised national health data at no cost through a defined application process.',
+    [OpenDataClaim.ACCESS_PROCESS]: { [Locale.EN]: {
+      title: 'Access process speed & ease',
+      description: 'How fast and frictionless it is to get approved for health data access — number of steps, wait time, digitisation of workflow. Centralization of data is a separate axis (Linkability).',
     }},
-    [OpenDataClaim.AI_USE_PERMITTED]: { [Locale.EN]: {
-      title: 'AI applications explicitly permitted',
-      description: 'Use of national health data for AI and machine learning applications is explicitly permitted.',
+    [OpenDataClaim.LINKABILITY]: { [Locale.EN]: {
+      title: 'Cross-domain data linkability',
+      description: 'Whether data from different sources (EHR, disease registries, biobanks, prescriptions, wearables) can be linked at the individual level using a consistent identifier.',
     }},
-    [OpenDataClaim.ANONYMIZATION_STANDARD]: { [Locale.EN]: {
-      title: 'Robust anonymisation standard in place',
-      description: 'A defined, audited anonymisation standard governs data releases, providing both privacy protection and research usability.',
+    [OpenDataClaim.PRIVACY_RESOLUTION]: { [Locale.EN]: {
+      title: 'Privacy-preserving access quality',
+      description: 'Quality of the privacy infrastructure from a researcher\'s perspective — from basic pseudonymisation to best-in-class TREs (code-to-data, rich tooling, synthetic twins). Higher scores mean more data richness at less friction, not necessarily more cryptographic sophistication.',
+    }},
+    [OpenDataClaim.AI_USE_GOVERNANCE]: { [Locale.EN]: {
+      title: 'AI/ML use governance',
+      description: 'Whether there is an explicit, fast pathway for AI and ML applications on national health data — from prohibited to proactive federated training infrastructure.',
     }},
     [OpenDataClaim.CROSS_BORDER_SHARING]: { [Locale.EN]: {
-      title: 'Cross-border data sharing enabled',
-      description: 'Legal and technical infrastructure supports sharing anonymised health data with foreign researchers or international consortia.',
+      title: 'Cross-border data sharing',
+      description: 'Legal and technical infrastructure for sharing health data with foreign researchers or international consortia — from no framework to full federated international infrastructure.',
     }},
   },
 
   // ── Data: Interoperability ────────────────────────────────────────────────
   [DataField.INTEROPERABILITY_STANDARDS]: {
-    [InteroperabilityClaim.NATIONAL_STANDARD_EXISTS]: { [Locale.EN]: {
-      title: 'National EHR interoperability standard',
-      description: 'A nationally mandated standard for EHR data exchange exists and is enforced across health providers.',
+    [InteroperabilityClaim.EHR_COVERAGE]: { [Locale.EN]: {
+      title: 'EHR coverage & structure',
+      description: 'How much of the population\'s healthcare is captured in structured, standardised electronic health records — from paper-dominant to full structured coverage including patient-reported outcomes.',
     }},
-    [InteroperabilityClaim.FHIR_IMPLEMENTED]: { [Locale.EN]: {
-      title: 'FHIR implemented at national scale',
-      description: 'HL7 FHIR is mandated and implemented consistently across major health systems.',
+    [InteroperabilityClaim.TERMINOLOGY_COMPLIANCE]: { [Locale.EN]: {
+      title: 'Terminology & standard compliance',
+      description: 'Consistent national use of ICD, LOINC, SNOMED CT, and FHIR — the coding systems that allow data from different providers to be compared. Without consistent terminology, combining data across systems produces noise, not signal.',
     }},
-    [InteroperabilityClaim.REGISTRIES_LINKED]: { [Locale.EN]: {
-      title: 'Health registries linked to EHR',
-      description: 'National health registries are linked to EHR data, enabling longitudinal research without manual data collection.',
+    [InteroperabilityClaim.REGISTRY_COMPLETENESS]: { [Locale.EN]: {
+      title: 'National registry completeness',
+      description: 'How comprehensive and machine-readable national health registries are (cancer, hospitalisation, prescriptions, mortality, rare diseases) — and whether they are linked to EHR via a national identifier.',
     }},
-    [InteroperabilityClaim.REAL_TIME_ACCESS]: { [Locale.EN]: {
-      title: 'Near-real-time research data access',
-      description: 'Researchers can access up-to-date health data (near-real-time or quarterly-updated), not just annual historical batches.',
+    [InteroperabilityClaim.DATA_FRESHNESS]: { [Locale.EN]: {
+      title: 'Data freshness (lag to research)',
+      description: 'Time between a clinical event occurring and the data becoming available to approved researchers — from multi-year batches to near-real-time access.',
+    }},
+    [InteroperabilityClaim.COMPUTABLE_PHENOTYPING]: { [Locale.EN]: {
+      title: 'Computable phenotyping capability',
+      description: 'Whether researchers can define and retrieve patient cohorts programmatically without manual chart review. Requires validated code-set algorithms that resolve the same condition consistently across institutions — the core metadata harmonisation challenge.',
     }},
   },
 
-  // ── Data: Trial Endpoints ─────────────────────────────────────────────────
+  // ── Data: Research-Clinical Integration ──────────────────────────────────
   [DataField.STANDARDIZED_TRIAL_ENDPOINTS]: {
-    [TrialEndpointsClaim.STANDARDIZED_DEFINED]: { [Locale.EN]: {
-      title: 'Standardised endpoints defined',
-      description: 'Standardised endpoint definitions for aging or longevity trials have been formally published.',
+    [ResearchClinicalClaim.SHARED_ONTOLOGIES]: { [Locale.EN]: {
+      title: 'Shared ontologies (research ↔ clinical)',
+      description: 'Whether research and clinical systems use the same controlled vocabularies (HPO, OBO, OMOP, SNOMED). Without shared ontologies, joining a research dataset to a clinical registry requires months of manual mapping — if it\'s possible at all.',
     }},
-    [TrialEndpointsClaim.REGULATORY_ACCEPTED]: { [Locale.EN]: {
-      title: 'Accepted by regulatory authority',
-      description: 'The standardised endpoints are formally accepted by the regulatory authority for use in submissions.',
+    [ResearchClinicalClaim.RESEARCH_COHORT_LINKAGE]: { [Locale.EN]: {
+      title: 'Research cohort → registry linkage',
+      description: 'Whether participants enrolled in research studies can be automatically followed in national health registries — enabling long-term outcome tracking without separate data collection.',
     }},
-    [TrialEndpointsClaim.CROSS_STUDY_COMPARABLE]: { [Locale.EN]: {
-      title: 'Enables cross-study comparability',
-      description: 'Endpoint definitions are consistent enough to enable meaningful meta-analysis across independent trials.',
+    [ResearchClinicalClaim.FAIR_DATA_COMPLIANCE]: { [Locale.EN]: {
+      title: 'FAIR data compliance',
+      description: 'Whether publicly funded research data is Findable, Accessible, Interoperable, and Reusable — with machine-readable metadata, persistent identifiers, and standard ontologies — rather than locked in lab servers after publication.',
     }},
-    [TrialEndpointsClaim.AGING_SPECIFIC_INCLUDED]: { [Locale.EN]: {
-      title: 'Aging-specific composite endpoints included',
-      description: 'Standardised endpoints include at least one aging-specific composite (biological age, functional decline, healthspan measure).',
+    [ResearchClinicalClaim.PHARMACOVIGILANCE_FEEDBACK]: { [Locale.EN]: {
+      title: 'Pharmacovigilance feedback loop',
+      description: 'Whether clinical safety signals (adverse events, unexpected drug interactions) automatically feed back into the research pipeline — triggering new hypotheses, cohort identification, or trial protocols.',
+    }},
+    [ResearchClinicalClaim.OPEN_SCIENCE_MANDATE]: { [Locale.EN]: {
+      title: 'Open science mandate',
+      description: 'Whether pre-registration, results reporting, data sharing, and code sharing are legally or contractually required for publicly funded research — reducing dark data and making all outputs machine-readable and reusable.',
     }},
   },
 
   // ── International: Perturbation Screening ────────────────────────────────
-  [InternationalField.PERTURBATION_SCREENING]: {
-    [PerturbationScreeningClaim.NATIONAL_HTS_EXISTS]: { [Locale.EN]: {
-      title: 'National HTS infrastructure exists',
-      description: 'National high-throughput screening infrastructure for genetic or pharmacological perturbations exists and is accessible.',
+  // ── International: Regulatory Harmonization ──────────────────────────────
+  [InternationalField.REGULATORY_HARMONIZATION]: {
+    [RegulatoryHarmonizationClaim.TRIAL_DATA_ACCEPTANCE]: { [Locale.EN]: {
+      title: 'Foreign trial data acceptance',
+      description: 'Whether clinical trial data generated in foreign jurisdictions can be used as primary evidence for domestic regulatory approval, reducing duplication.',
     }},
-    [PerturbationScreeningClaim.AI_READY]: { [Locale.EN]: {
-      title: 'AI-ready outputs and APIs',
-      description: 'Screening outputs are structured, annotated, and accessible via APIs suitable for AI/ML analysis.',
+    [RegulatoryHarmonizationClaim.JOINT_REVIEW_PARTICIPATION]: { [Locale.EN]: {
+      title: 'Joint review participation',
+      description: 'Participation in formal international joint review programmes (Project Orbis, EMA/FDA/PMDA alignment) for concurrent multi-jurisdiction evaluation.',
     }},
-    [PerturbationScreeningClaim.SHARED_ACCESS]: { [Locale.EN]: {
-      title: 'Shared access for external researchers',
-      description: 'Infrastructure and data are accessible to researchers from other institutions or countries.',
+    [RegulatoryHarmonizationClaim.STANDARD_ALIGNMENT]: { [Locale.EN]: {
+      title: 'ICH/GCP standard alignment',
+      description: 'Depth of integration into global regulatory standards — from ICH signatory status to active participation in developing new guidelines.',
     }},
-    [PerturbationScreeningClaim.AGING_PROGRAM]: { [Locale.EN]: {
-      title: 'Aging-specific screening programme',
-      description: 'A dedicated programme explicitly screens for perturbations that modulate aging biology or healthspan endpoints.',
+    [RegulatoryHarmonizationClaim.FOREIGN_APPROVAL_RELIANCE]: { [Locale.EN]: {
+      title: 'Foreign approval reliance',
+      description: 'Whether the country can formally rely on a foreign regulator\'s approval decision — ranging from expedited review to automatic recognition.',
     }},
-  },
-
-  // ── International: Mutual Recognition ────────────────────────────────────
-  [InternationalField.MUTUAL_RECOGNITION]: {
-    [MutualRecognitionClaim.BILATERAL_AGREEMENTS]: { [Locale.EN]: {
-      title: 'Bilateral regulatory agreements',
-      description: 'Bilateral or multilateral regulatory recognition agreements exist with major partner jurisdictions.',
-    }},
-    [MutualRecognitionClaim.TRIAL_RESULTS_ACCEPTED]: { [Locale.EN]: {
-      title: 'Foreign clinical trial results accepted',
-      description: 'Clinical trial results from approved foreign jurisdictions are accepted without requiring full local replication.',
-    }},
-    [MutualRecognitionClaim.SANDBOX_OUTCOMES_SHARED]: { [Locale.EN]: {
-      title: 'Regulatory sandbox outcomes shared',
-      description: 'Outcomes and learnings from regulatory sandbox programmes are formally shared with partner jurisdictions.',
-    }},
-    [MutualRecognitionClaim.HARMONIZED_STANDARDS]: { [Locale.EN]: {
-      title: 'Harmonised trial conduct standards',
-      description: 'Trial conduct standards are harmonised with major partner jurisdictions, enabling multi-country trials without parallel submissions.',
+    [RegulatoryHarmonizationClaim.RECIPROCAL_RECOGNITION]: { [Locale.EN]: {
+      title: 'Reciprocal recognition agreements',
+      description: 'Number and scope of bilateral or multilateral mutual recognition agreements covering GMP inspection, trials, and/or marketing authorisations.',
     }},
   },
 
-  // ── International: Shared Infrastructure ─────────────────────────────────
-  [InternationalField.SHARED_INFRASTRUCTURE]: {
-    [SharedInfraClaim.WET_LAB_SHARING]: { [Locale.EN]: {
-      title: 'Shared wet lab infrastructure',
-      description: 'Wet lab facilities for aging research are formally shared with international partners.',
+  // ── International: Shared Physical Infrastructure ─────────────────────────
+  [InternationalField.SHARED_PHYSICAL_INFRASTRUCTURE]: {
+    [SharedPhysicalInfraClaim.BSL_ACCESS]: { [Locale.EN]: {
+      title: 'BSL-3/4 containment access',
+      description: 'Availability and accessibility of BSL-3/4 biosafety containment facilities for viral vector work, gene editing, and infectious disease aging research.',
     }},
-    [SharedInfraClaim.COMPUTE_SHARING]: { [Locale.EN]: {
-      title: 'Shared HPC/AI compute',
-      description: 'High-performance computing or AI infrastructure for aging data analysis is formally shared with international partners.',
+    [SharedPhysicalInfraClaim.GMP_CAPACITY]: { [Locale.EN]: {
+      title: 'GMP/CDMO manufacturing capacity',
+      description: 'Domestic or regionally accessible clinical-grade GMP manufacturing capacity for cell and gene therapies — academic GMP suites through commercial CDMOs.',
     }},
-    [SharedInfraClaim.MODEL_ORGANISMS_SHARED]: { [Locale.EN]: {
-      title: 'Shared model organism facilities',
-      description: 'Model organism facilities for aging research are shared with or open to international researchers.',
+    [SharedPhysicalInfraClaim.COMPUTE_INFRA]: { [Locale.EN]: {
+      title: 'HPC/AI compute infrastructure',
+      description: 'Dedicated high-performance computing and GPU infrastructure purpose-built for biological research workloads — not generic cloud compute.',
     }},
-    [SharedInfraClaim.OPEN_TO_FOREIGN]: { [Locale.EN]: {
-      title: 'Open to foreign researchers',
-      description: 'National research infrastructure is formally open to researchers from other countries with defined access procedures.',
+    [SharedPhysicalInfraClaim.SEQUENCING_SCALE]: { [Locale.EN]: {
+      title: 'Population-scale sequencing capacity',
+      description: 'National throughput for genomic and proteomic sequencing at the cohort scale relevant for aging research — from academic capacity to 500k+ population programmes.',
+    }},
+    [SharedPhysicalInfraClaim.MODEL_ORGANISM_PLATFORMS]: { [Locale.EN]: {
+      title: 'Aging model organism platforms',
+      description: 'Shared, standardised facilities for aging biology research in model organisms — from individual lab colonies to ITP-style multi-site lifespan intervention programmes.',
     }},
   },
 
-  // ── International: Public Engagement ─────────────────────────────────────
-  [InternationalField.PUBLIC_ENGAGEMENT]: {
-    [PublicEngagementClaim.NATIONAL_PROGRAM]: { [Locale.EN]: {
-      title: 'National science communication programme',
-      description: 'A nationally coordinated programme specifically communicating longevity science to the general public exists.',
+  // ── International: International Research Network ─────────────────────────
+  [InternationalField.INTERNATIONAL_RESEARCH_NETWORK]: {
+    [IntlResearchNetworkClaim.CONSORTIUM_DEPTH]: { [Locale.EN]: {
+      title: 'Aging consortium participation',
+      description: 'Depth of participation in major international aging and longevity research consortia — from observer status to consortium leadership and agenda-setting roles.',
     }},
-    [PublicEngagementClaim.COUNTER_MISINFORMATION]: { [Locale.EN]: {
-      title: 'Active counter-misinformation effort',
-      description: 'Government or publicly funded bodies actively counter misinformation about aging science.',
+    [IntlResearchNetworkClaim.DATA_SHARING_FRAMEWORKS]: { [Locale.EN]: {
+      title: 'International data sharing frameworks',
+      description: 'Formal frameworks for sharing national health data with international researchers — GA4GH alignment, FAIR data principles, federated analysis capability.',
     }},
-    [PublicEngagementClaim.EQUITY_NARRATIVE]: { [Locale.EN]: {
-      title: 'Equity and access narrative present',
-      description: 'Public communication explicitly frames healthy aging as a public good, not a luxury.',
+    [IntlResearchNetworkClaim.JOINT_FUNDING_ACCESS]: { [Locale.EN]: {
+      title: 'Joint international funding access',
+      description: 'Access to international research funding mechanisms — Horizon Europe participation, bilateral R&D agreements, NIH foreign grants, multilateral co-funding programmes.',
     }},
-    [PublicEngagementClaim.HIGH_PUBLIC_TRUST]: { [Locale.EN]: {
-      title: 'High measured public trust',
-      description: 'Surveys show high public trust in health/science institutions, creating a favourable environment for longevity research acceptance.',
+    [IntlResearchNetworkClaim.FIELD_INFLUENCE]: { [Locale.EN]: {
+      title: 'Longevity field influence',
+      description: 'The country\'s publication impact, leadership roles in international societies, and contribution to setting the global longevity research agenda.',
+    }},
+    [IntlResearchNetworkClaim.PATENT_COOPERATION]: { [Locale.EN]: {
+      title: 'Patent cooperation infrastructure',
+      description: 'PCT membership, bilateral patent treaties, IP framework quality for biomedical inventions, and whether academic inventors retain rights to publicly funded research.',
+    }},
+  },
+
+  // ── Societal: Societal Readiness ──────────────────────────────────────────
+  [SocietalField.SOCIETAL_READINESS]: {
+    [SocietalReadinessClaim.PUBLIC_TRUST]: { [Locale.EN]: {
+      title: 'Public trust in science & medicine',
+      description: 'Measured public trust in scientific and medical institutions — the baseline social contract on which longevity research acceptance depends.',
+    }},
+    [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: { [Locale.EN]: {
+      title: 'Societal longevity acceptance',
+      description: 'How broadly society accepts longevity extension — not just disease treatment — as a legitimate and desirable goal for science and policy.',
+    }},
+    [SocietalReadinessClaim.POLITICAL_WILL]: { [Locale.EN]: {
+      title: 'Political will for longevity',
+      description: 'Whether there is sustained political commitment — funded programmes, dedicated agencies, or cross-party consensus — to advance longevity science and policy.',
     }},
   },
 }

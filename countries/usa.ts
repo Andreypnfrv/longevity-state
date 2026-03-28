@@ -1,272 +1,356 @@
 import {
   Country, CountryData, ScreeningLevel,
-  TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField,
-  VisasScientistsClaim, VisasCliniciansClaim, PhdProgramsClaim, PhdMdProgramsClaim,
+  TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
-  LongevityAgencyClaim, AdaptiveLicensingClaim, SyntheticControlClaim, RegulatorySandboxClaim, RightToTryClaim,
+  BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
-  OpenDataClaim, InteroperabilityClaim, TrialEndpointsClaim,
-  PerturbationScreeningClaim, MutualRecognitionClaim, SharedInfraClaim, PublicEngagementClaim,
+  OpenDataClaim, InteroperabilityClaim, ResearchClinicalClaim,
+  RegulatoryHarmonizationClaim, SharedPhysicalInfraClaim, IntlResearchNetworkClaim,
+  SocietalReadinessClaim,
 } from '../schema'
 
 const usa: CountryData = {
   country: Country.USA,
 
   talents: {
-    [TalentsField.VISAS_FOR_SCIENTISTS]: {
-      [VisasScientistsClaim.DEDICATED_CATEGORY]: {
-        score: 4,
-        text: 'O-1A (extraordinary ability) and EB-1A (outstanding researcher) visas are well-established researcher-specific categories. The EB-2 National Interest Waiver is increasingly used by longevity researchers.',
+    [TalentsField.RESEARCHER_IMMIGRATION]: {
+      [ResearcherImmigrationClaim.VISA_PATHWAY]: {
+        score: 3,
+        text: 'O-1A (extraordinary ability) and EB-1A (outstanding researcher) are well-established researcher-specific categories. The EB-2 NIW is increasingly used by longevity researchers. Covers a wide range of career stages but still employer-tied.',
         links: [{ label: 'USCIS O-1A Visa', url: 'https://www.uscis.gov/working-in-the-united-states/temporary-workers/o-1-visa-individuals-with-extraordinary-ability-or-achievement', comment: 'Primary researcher visa category' }],
       },
-      [VisasScientistsClaim.FAST_PROCESSING]: {
+      [ResearcherImmigrationClaim.PROCESSING_SPEED]: {
         score: 2,
-        text: 'Standard O-1A processing takes 3–6 months. Premium processing (15 business days) costs $2,805 — a significant burden for postdocs and early-career researchers.',
+        text: 'Standard O-1A processing takes 3–6 months. Premium processing (15 business days) costs $2,805 — a significant burden for postdocs and early-career researchers seeking expedited entry.',
         links: [{ label: 'USCIS Processing Times', url: 'https://egov.uscis.gov/processing-times/', comment: 'Current USCIS processing time tracker' }],
       },
-      [VisasScientistsClaim.CREDENTIAL_RECOGNITION]: {
+      [ResearcherImmigrationClaim.CREDENTIAL_RECOGNITION]: {
         score: 4,
-        text: 'Foreign academic credentials are recognised for NIH grants and federal employment. No centralised re-accreditation required — institution-level evaluation is standard.',
+        text: 'Foreign academic credentials are recognised for NIH grants and federal employment. No centralised re-accreditation required — institution-level evaluation is standard and typically fast for top-university PhDs.',
         links: [],
       },
-      [VisasScientistsClaim.EARLY_CAREER_ACCESSIBLE]: {
+      [ResearcherImmigrationClaim.EARLY_CAREER_ACCESS]: {
         score: 2,
-        text: 'O-1A requires demonstrated "extraordinary ability" — a high bar for postdocs. Legal fees ($3–8k) and long timelines effectively exclude many early-career researchers. J-1 is cheaper but requires a 2-year home residency obligation.',
+        text: 'O-1A requires demonstrated "extraordinary ability" — a high bar for postdocs. Legal fees ($3–8k) and long timelines effectively exclude early-career researchers. J-1 is cheaper but carries a 2-year home-residency obligation.',
         links: [{ label: 'J-1 Exchange Visitor Program', url: 'https://j1visa.state.gov/', comment: 'Common pathway for postdocs — but home residency requirement is a barrier' }],
       },
+      [ResearcherImmigrationClaim.LONG_TERM_RETENTION]: {
+        score: 2,
+        text: 'Green card backlog for Indian and Chinese nationals (the two largest researcher cohorts) stretches decades via EB-2/EB-3. EB-1A is faster but hard to qualify for. Many researchers leave for Canada or Europe rather than wait.',
+        links: [{ label: 'USCIS Employment-Based Green Cards', url: 'https://www.uscis.gov/green-card/green-card-eligibility/green-card-for-employment-based-immigrants', comment: 'Employment-based permanent residency — multi-decade backlog for high-demand nationalities' }],
+      },
     },
 
-    [TalentsField.VISAS_FOR_CLINICIANS]: {
-      [VisasCliniciansClaim.EU_AUTO_RECOGNITION]: {
+    [TalentsField.CLINICIAN_IMMIGRATION]: {
+      [ClinicianImmigrationClaim.LICENSE_RECOGNITION]: {
+        score: 2,
+        text: 'The US does not recognise any foreign medical licences. All foreign-trained physicians must complete full US residency regardless of prior experience. ECFMG certification + USMLE Steps 1–3 required as prerequisites.',
+        links: [{ label: 'ECFMG Certification', url: 'https://www.ecfmg.org/', comment: 'Required for all foreign medical graduates before US residency' }],
+      },
+      [ClinicianImmigrationClaim.PATHWAY_CLARITY]: {
+        score: 3,
+        text: 'ECFMG + USMLE + NRMP matching is a well-documented, standardised pathway. Timelines and requirements are publicly available. Dedicated advisory services exist, though navigating state-by-state variation adds friction.',
+        links: [{ label: 'ECFMG Pathway', url: 'https://www.ecfmg.org/certification/applying-for-ecfmg-certification.html', comment: 'Documented multi-step pathway for foreign medical graduates' }],
+      },
+      [ClinicianImmigrationClaim.PROCESSING_TIME]: {
         score: 1,
-        text: 'The US does not recognise foreign medical licences. All foreign-trained physicians must complete US residency regardless of prior experience or EU licensing.',
+        text: 'End-to-end licensure from arrival to independent practice (ECFMG + residency matching + state licence) realistically takes 3–7 years — among the longest pipelines of any high-income country.',
         links: [],
       },
-      [VisasCliniciansClaim.NON_EU_PATHWAY]: {
-        score: 3,
-        text: 'ECFMG certification + USMLE Steps 1–3 provide a defined pathway. Process is well-documented but takes 2–5 years and requires full US residency training.',
-        links: [{ label: 'ECFMG Certification', url: 'https://www.ecfmg.org/', comment: 'Required for foreign medical graduates before US residency' }],
-      },
-      [VisasCliniciansClaim.PROCESSING_UNDER_6M]: {
+      [ClinicianImmigrationClaim.SCOPE_OF_PRACTICE]: {
         score: 1,
-        text: 'End-to-end licensure for a foreign clinician (ECFMG + residency matching + state licence) takes 3–7 years, not 6 months.',
+        text: 'Foreign clinicians cannot practice at all prior to ECFMG certification and residency matching. No provisional licence exists for internationally trained physicians outside narrow J-1 exchange slots.',
         links: [],
       },
-      [VisasCliniciansClaim.NO_LANGUAGE_BARRIER]: {
+      [ClinicianImmigrationClaim.RESEARCH_PRACTICE_BALANCE]: {
         score: 3,
-        text: 'No formal language test requirement beyond USMLE (English), but US residency interviews and state licensing exams are English-only. Practical barrier is moderate.',
+        text: 'Academic medical centres (Harvard, Hopkins, Mayo, UCSF) offer well-structured combined research-practice contracts. However, these positions are concentrated in elite institutions and not accessible as a general pathway for foreign clinicians.',
         links: [],
       },
     },
 
-    [TalentsField.PHD_PROGRAMS]: {
-      [PhdProgramsClaim.DEDICATED_AGING_TRACK]: {
-        score: 5,
-        text: 'Multiple NIA-funded dedicated aging PhD programmes exist: Buck Institute, USC Leonard Davis School, Mayo Clinic, UW, Harvard, Stanford. NIA Nathan Shock Centers run formal training grants (T32) exclusively in aging biology.',
-        links: [{ label: 'NIA Nathan Shock Centers', url: 'https://www.nia.nih.gov/research/dab/nathan-shock-centers-excellence-biology-aging', comment: '6 NIA-funded aging biology centers with T32 training grants' }],
+    [TalentsField.RESEARCH_TRAINING_PIPELINE]: {
+      [ResearchTrainingClaim.UNDERGRADUATE_EXPOSURE]: {
+        score: 3,
+        text: 'Aging biology integrated across pre-med and life science curricula at research universities. Dedicated geroscience electives at schools near aging research hubs (USC, UCSF, UW). Undergrad research opportunities in aging labs widely available via NIH SURF and similar programmes.',
+        links: [{ label: 'NIH Summer Research Fellowship', url: 'https://www.training.nih.gov/programs/sip', comment: 'NIH undergraduate summer research — many placements in aging labs' }],
       },
-      [PhdProgramsClaim.PUBLICLY_FUNDED]: {
-        score: 5,
-        text: 'NIA T32 training grants fund PhD students at $26,000–32,000/year stipend. Over 60 active aging-focused T32 grants nationally.',
-        links: [{ label: 'NIH T32 Training Grants', url: 'https://researchtraining.nih.gov/programs/training-grants', comment: 'NIH training grant mechanism funding PhD stipends' }],
-      },
-      [PhdProgramsClaim.INTERNATIONAL_RECRUITMENT]: {
+      [ResearchTrainingClaim.GRADUATE_PROGRAMS_DEPTH]: {
         score: 4,
-        text: 'US PhD programmes actively recruit internationally. F-1 student visa is straightforward. ~40% of biomedical PhD students in the US are international. Funding for international students varies by programme.',
-        links: [],
+        text: 'World-class aging PhD ecosystem: USC Leonard Davis, Buck Institute, Mayo, UW, Harvard, Stanford. NIA Nathan Shock Centers run formal T32 training grants exclusively in aging biology at 6+ institutions. Multiple top-ranked programmes with strong global recruitment.',
+        links: [{ label: 'NIA Nathan Shock Centers', url: 'https://www.nia.nih.gov/research/dab/nathan-shock-centers-excellence-biology-aging', comment: '6 NIA-funded aging biology training centers' }],
       },
-      [PhdProgramsClaim.INDUSTRY_ACADEMIA_LINKS]: {
+      [ResearchTrainingClaim.POSTDOC_ECOSYSTEM]: {
+        score: 3,
+        text: 'NIH postdoctoral fellowships (F32, T32 postdoc slots) fund aging-focused postdocs at $58k–70k/year. Career transition awards (K99/R00) exist. However, postdoc positions remain precarious relative to cost of living in major biotech hubs.',
+        links: [{ label: 'NIH Postdoctoral Fellowships', url: 'https://researchtraining.nih.gov/programs/fellowships', comment: 'F32 and T32 postdoc funding mechanisms' }],
+      },
+      [ResearchTrainingClaim.PUBLIC_FUNDING_COVERAGE]: {
+        score: 3,
+        text: 'NIA T32 training grants cover stipends ($26k–34k/year) for both PhD students and postdocs. Over 60 active aging-focused T32 grants nationally. Highly competitive; not all qualified trainees receive support.',
+        links: [{ label: 'NIH T32 Training Grants', url: 'https://researchtraining.nih.gov/programs/training-grants', comment: 'NIH training grant mechanism funding PhD and postdoc stipends' }],
+      },
+      [ResearchTrainingClaim.INDUSTRY_ACADEMIA_BRIDGE]: {
         score: 4,
-        text: 'Strong biotech clusters around Boston, Bay Area, San Diego. NIH BEST program funds industry training for PhD students. Buck Institute has formal Genentech/AbbVie collaborations.',
-        links: [{ label: 'NIH BEST Program', url: 'https://commonfund.nih.gov/BEST', comment: 'Broadening Experiences in Scientific Training — industry rotations' }],
+        text: 'Strong biotech clusters (Boston, Bay Area, San Diego) create dense industry-academia pipelines. NIH BEST program funds industry rotations for PhD trainees. Buck Institute has formal Genentech/AbbVie collaborations. Dual appointments common in longevity biotech.',
+        links: [{ label: 'NIH BEST Program', url: 'https://commonfund.nih.gov/BEST', comment: 'Broadening Experiences in Scientific Training — industry rotations for PhD students' }],
       },
     },
 
-    [TalentsField.PHD_MD_PROGRAMS_FOR_CLINICIANS]: {
-      [PhdMdProgramsClaim.COMBINED_PROGRAM_EXISTS]: {
-        score: 5,
-        text: 'NIH MSTP (Medical Scientist Training Program) funds MD–PhD training at 49 institutions, ~170 new students/year. Largest and most structured MD–PhD system globally.',
-        links: [{ label: 'NIH MSTP', url: 'https://www.nigms.nih.gov/Training/InstPredoc/Pages/PredocOverview-MSTP.aspx', comment: 'Federally funded MD–PhD programme, $178M/year' }],
+    [TalentsField.CLINICIAN_AGING_TRAINING]: {
+      [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
+        score: 3,
+        text: 'Geriatrics is a recognised ABIM subspecialty with a structured fellowship pathway. ~300 new geriatricians certified annually — chronically below workforce demand. Prestige and compensation lag behind other internal medicine subspecialties.',
+        links: [{ label: 'ABIM Geriatric Medicine', url: 'https://www.abim.org/certification/policies/internal-medicine-subspecialty-policies/geriatric-medicine/', comment: 'American Board of Internal Medicine geriatrics certification pathway' }],
       },
-      [PhdMdProgramsClaim.PUBLICLY_FUNDED]: {
-        score: 5,
-        text: 'MSTP provides full tuition waiver + stipend (~$34,000/year) for 7–8 year programmes. Completely publicly funded through NIH.',
+      [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
+        score: 2,
+        text: 'Geriatrics rotations required in most US medical schools but vary widely in quality and duration. Aging biology (mechanistic geroscience) largely absent from basic science years. Association of American Medical Colleges standards do not mandate longitudinal aging content.',
         links: [],
       },
-      [PhdMdProgramsClaim.AGING_TRACK_AVAILABLE]: {
-        score: 4,
-        text: 'Aging/longevity tracks available at MSTP programmes at Mayo, UCSF, Columbia, UW. Paul Glenn Foundation funds aging-focused MD–PhD fellowships.',
-        links: [{ label: 'Glenn Foundation', url: 'https://glennfoundation.org/', comment: 'Private funder of aging-focused MD–PhD training' }],
-      },
-      [PhdMdProgramsClaim.RETENTION_MECHANISMS]: {
+      [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
         score: 3,
-        text: 'K08/K23 NIH career development awards provide protected research time post-MD–PhD. However, clinical debt pressure and income gap vs. pure clinical practice leads to significant attrition from research.',
-        links: [{ label: 'NIH Career Development Awards', url: 'https://researchtraining.nih.gov/programs/career-development', comment: 'K-series awards providing protected research time for clinician-researchers' }],
+        text: 'Geriatrics fellowship (1 year post-residency) is ACGME-accredited across many academic centres. Exposure to preventive and longevity-oriented care varies significantly by programme. Research components present at major academic centres.',
+        links: [{ label: 'ACGME Geriatric Medicine', url: 'https://www.acgme.org/specialties/geriatric-medicine/overview/', comment: 'ACGME-accredited geriatrics fellowship programme requirements' }],
+      },
+      [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
+        score: 2,
+        text: 'CME in geriatrics broadly available (AGS, AMDA). Longevity medicine-specific CME (preventive geroscience, biomarkers, longevity interventions) is emerging but not yet standardised. No national mandate for aging CME outside geriatrics specialty.',
+        links: [{ label: 'AGS Annual Meeting CME', url: 'https://www.americangeriatrics.org/education-and-career/education/cme', comment: 'American Geriatrics Society continuing medical education' }],
+      },
+      [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
+        score: 2,
+        text: 'HRSA projects severe geriatrics shortage by 2030. National plan exists on paper but training expansion has been slow. Fellowship fill rates are low (<50% at many programmes). No funded emergency expansion programme.',
+        links: [{ label: 'HRSA Geriatrics Workforce', url: 'https://bhw.hrsa.gov/data-research/projecting-health-workforce-supply-demand/geriatrics', comment: 'Federal workforce projections showing deepening geriatrics shortage' }],
+      },
+    },
+
+    [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
+      [ClinicianScientistClaim.COMBINED_DEGREE_EXISTS]: {
+        score: 4,
+        text: 'NIH MSTP (Medical Scientist Training Program) funds MD–PhD training at 49 institutions, ~170 new students/year. The largest and most structured national MD–PhD programme globally. Multiple aging-focused tracks available.',
+        links: [{ label: 'NIH MSTP', url: 'https://www.nigms.nih.gov/Training/InstPredoc/Pages/PredocOverview-MSTP.aspx', comment: 'Federally funded MD–PhD programme at 49 institutions, $178M/year' }],
+      },
+      [ClinicianScientistClaim.PUBLIC_FUNDING]: {
+        score: 4,
+        text: 'MSTP provides full tuition waiver + stipend (~$34k/year) for 7–8 year programmes, completely publicly funded through NIH. K08/K23 career development awards extend public support post-degree. Salary parity with pure clinical tracks not achieved.',
+        links: [{ label: 'NIH Career Development Awards', url: 'https://researchtraining.nih.gov/programs/career-development', comment: 'K-series awards providing protected research time for clinician-scientists post-degree' }],
+      },
+      [ClinicianScientistClaim.AGING_SPECIALIZATION]: {
+        score: 3,
+        text: 'Aging/longevity tracks at MSTP programmes at Mayo, UCSF, Columbia, UW. Paul Glenn Foundation funds aging-focused MD–PhD fellowships. Growing but not yet a systematically resourced national priority track.',
+        links: [{ label: 'Glenn Foundation Fellowships', url: 'https://glennfoundation.org/', comment: 'Private funder of aging-focused clinician-scientist training' }],
+      },
+      [ClinicianScientistClaim.PROTECTED_RESEARCH_TIME]: {
+        score: 3,
+        text: 'K08/K23 awards fund 75% protected research time for 3–5 years in academic centres. Standard for junior clinician-scientists but requires competitive renewal; clinical income gap creates pressure to drift toward full clinical roles.',
+        links: [],
+      },
+      [ClinicianScientistClaim.CAREER_VIABILITY]: {
+        score: 3,
+        text: 'Clinician-scientist career is viable at major academic medical centres but remains a niche path nationally. Clinical debt pressure and income gap vs. pure clinical practice causes significant mid-career attrition. Compensation at research-active institutions improving.',
+        links: [],
       },
     },
   },
 
   science: {
     [ScienceField.RESEARCH_FUNDING]: {
-      [ResearchFundingClaim.DEDICATED_AGING_BUDGET]: {
+      [ResearchFundingClaim.FUNDING_SCALE]: {
         score: 5,
-        text: 'NIA (National Institute on Aging) has a standalone $4.06B budget in FY2023 — the world\'s largest dedicated aging research funder.',
-        links: [{ label: 'NIA Budget', url: 'https://www.nia.nih.gov/about/budget', comment: '$4.06B FY2023' }],
+        text: 'NIA (National Institute on Aging) has a standalone $4.06B budget in FY2023 — the world\'s largest dedicated aging research funder by a wide margin. Independent institute within NIH with its own protected mandate and budget line.',
+        links: [{ label: 'NIA Budget', url: 'https://www.nia.nih.gov/about/budget', comment: '$4.06B FY2023 — world-leading' }],
       },
-      [ResearchFundingClaim.NOT_DISEASE_SILOED]: {
+      [ResearchFundingClaim.PORTFOLIO_BREADTH]: {
         score: 2,
-        text: '~70% of NIA\'s budget goes to Alzheimer\'s disease research, leaving ~$1.2B for all other aging biology. Basic aging mechanisms are chronically underfunded relative to their importance.',
-        links: [{ label: 'NIA Alzheimer\'s Funding', url: 'https://www.nia.nih.gov/research/alzheimers-dementia', comment: 'NIA AD/ADRD budget dwarfs basic aging biology allocation' }],
+        text: '~70% of NIA\'s budget goes to Alzheimer\'s/ADRD, leaving ~$1.2B for all other aging biology. Basic aging mechanisms (hallmarks, senolytics, epigenetic clocks) are chronically underfunded. Nathan Shock Centers protect some basic science but represent <1% of NIA budget.',
+        links: [{ label: 'NIA Alzheimer\'s Funding', url: 'https://www.nia.nih.gov/research/alzheimers-dementia', comment: 'AD/ADRD budget dominates; basic biology underfunded' }],
       },
-      [ResearchFundingClaim.LONG_TERM_HORIZON]: {
+      [ResearchFundingClaim.FUNDING_STABILITY]: {
         score: 3,
-        text: 'NIH R01 grants are typically 5 years, renewable. However, funding rates (~20%) and annual appropriation uncertainty create effective short-termism. Some P01 programme projects extend 10+ years.',
+        text: 'NIH R01 grants run 5 years, renewable. P01 programme projects can extend 10+ years. However, 20% funding rates and annual Congressional appropriations uncertainty create meaningful short-termism. Political variance in NIH appropriations has grown.',
         links: [],
       },
-      [ResearchFundingClaim.BASIC_RESEARCH_PROTECTED]: {
+      [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
+        score: 4,
+        text: 'Strong private ecosystem: Glenn Foundation (~$100M/year aging), Bezos-backed Altos Labs ($3B), Milner-backed Arc Institute. Dense longevity VC cluster in Bay Area and Boston (Calico, Unity, Ora, NewLimit). NIH public-private partnership mechanisms active.',
+        links: [{ label: 'Glenn Foundation', url: 'https://glennfoundation.org/', comment: 'Dedicated aging philanthropy — major co-funder of academic aging labs' }],
+      },
+      [ResearchFundingClaim.RISK_APPETITE]: {
         score: 3,
-        text: 'Nathan Shock Centers explicitly protect basic aging biology. But NIH-wide pressure toward translational impact and clinical relevance increasingly affects basic science funding decisions.',
-        links: [{ label: 'Nathan Shock Centers', url: 'https://www.nia.nih.gov/research/dab/nathan-shock-centers-excellence-biology-aging', comment: 'Explicitly basic-science aging biology centers — ~$25M/year' }],
+        text: 'NIH Director\'s Pioneer Award and New Innovator Award fund unconventional ideas (~$250M/year combined). ARPA-H (est. 2022) specifically targets transformative biomedical research. However, mainstream R01 peer review heavily favors established paradigms — unconventional longevity targets face high rejection rates.',
+        links: [{ label: 'ARPA-H', url: 'https://arpa-h.gov/', comment: 'Advanced Research Projects Agency for Health — $1.5B FY2023' }],
       },
     },
 
     [ScienceField.GENE_EDITING_REGULATION]: {
-      [GeneEditingClaim.NO_BLANKET_BAN]: {
-        score: 5,
-        text: 'No blanket prohibition on somatic gene editing. FDA regulates gene therapies as biologics under standard IND/BLA pathway.',
-        links: [{ label: 'FDA Gene Therapy Guidance', url: 'https://www.fda.gov/vaccines-blood-biologics/cellular-gene-therapy-products', comment: 'FDA regulatory framework for gene therapies' }],
+      [GeneEditingClaim.SOMATIC_PERMISSIVENESS]: {
+        score: 4,
+        text: 'FDA leads globally in somatic gene editing approvals. Casgevy (CRISPR, sickle cell/beta-thalassemia) approved Dec 2023 — first CRISPR therapy anywhere. Multiple active INDs across oncology, metabolic disease, and rare conditions. Dedicated OTAT (Office of Therapeutic Products) with gene editing expertise.',
+        links: [{ label: 'FDA Casgevy Approval', url: 'https://www.fda.gov/vaccines-blood-biologics/vaccines/casgevy', comment: 'First approved CRISPR therapy — Dec 2023' }],
       },
-      [GeneEditingClaim.RISK_PROPORTIONATE]: {
+      [GeneEditingClaim.APPROVAL_SPEED]: {
         score: 3,
-        text: 'Somatic vs. germline editing treated differently. However, FDA\'s IND requirements apply uniformly — no formal tiering by editing risk level. NIH RAC oversight streamlined in 2019.',
-        links: [{ label: 'NIH RAC 2019 Streamlining', url: 'https://www.nih.gov/about-nih/who-we-are/nih-director/statements/nih-makes-changes-oversight-genomic-data', comment: 'RAC oversight streamlined for lower-risk somatic gene therapy' }],
+        text: 'IND review typically 30-day clock, but manufacturing, safety, and RAC review add 6–12 months pre-trial. Pre-IND meetings standard and scientifically substantive. Breakthrough Therapy Designation available for gene editing. Faster than EU but still significant burden for early-stage programmes.',
+        links: [{ label: 'FDA Pre-IND Meetings', url: 'https://www.fda.gov/vaccines-blood-biologics/biologics-guidances/guidance-documents-cellular-gene-therapy-products', comment: 'FDA guidance on gene therapy IND process' }],
       },
-      [GeneEditingClaim.APPROVED_TRIALS_EXIST]: {
-        score: 5,
-        text: 'Casgevy (CRISPR-based, sickle cell/beta-thalassemia) approved Dec 2023. Multiple active IND somatic gene therapy trials. US leads globally in approved gene therapy products.',
-        links: [{ label: 'Casgevy Approval', url: 'https://www.fda.gov/vaccines-blood-biologics/vaccines/casgevy', comment: 'First CRISPR therapy approved — Dec 2023' }],
+      [GeneEditingClaim.REGULATORY_ADAPTABILITY]: {
+        score: 4,
+        text: 'OTAT has published guidance covering AAV, LNP, base editing, and in vivo delivery. RAC oversight streamlined in 2019 for lower-risk somatic approaches. FDA engaged early with base editing and prime editing developers. ARPA-H partnership enables regulatory science co-investment.',
+        links: [{ label: 'FDA OTAT Guidance', url: 'https://www.fda.gov/vaccines-blood-biologics/cellular-gene-therapy-products', comment: 'Office of Therapeutic Products — dedicated gene therapy regulatory science' }],
       },
-      [GeneEditingClaim.GERMLINE_PATHWAY_DEFINED]: {
+      [GeneEditingClaim.GERMLINE_PERMISSIVENESS]: {
         score: 2,
-        text: 'Germline editing effectively prohibited by annual Congressional rider on FDA appropriations since 2016, but no permanent law. The prohibition is administrative rather than a defined regulatory framework.',
-        links: [{ label: 'Congressional Rider on Germline Editing', url: 'https://www.science.org/content/article/congress-quietly-bars-human-embryo-editing', comment: 'Annual appropriations rider — not a permanent law or regulatory framework' }],
+        text: 'Annual Congressional rider on FDA appropriations (since 2016) prevents FDA from reviewing clinical applications of heritable germline editing. Basic research on embryos is possible with private funding (NIH-funded research blocked by Dickey-Wicker). No defined oversight framework for germline research — technically legal but institutionally discouraged.',
+        links: [{ label: 'Dickey-Wicker Amendment', url: 'https://www.science.org/content/article/congress-quietly-bars-human-embryo-editing', comment: 'Federal prohibition on FDA review of germline editing clinical applications' }],
+      },
+      [GeneEditingClaim.LONGEVITY_PATHWAY]: {
+        score: 1,
+        text: 'No regulatory pathway for longevity-specific gene editing applications. FDA requires disease-specific endpoints for approval — aging hallmarks, biological age clocks, or composite longevity biomarkers are not recognised as primary registration endpoints. TAME trial (metformin/aging) represents the frontier but not gene editing-specific.',
+        links: [],
       },
     },
   },
 
   translation: {
     [TranslationField.BIOTECH_BREAKTHROUGH_AGENCIES]: {
-      [LongevityAgencyClaim.DEDICATED_AGENCY_EXISTS]: {
-        score: 2,
-        text: 'ARPA-H (launched 2022) has aging-adjacent programmes but no explicit longevity mandate. No agency equivalent to "DARPA for aging" exists. NIA is a funder, not an ARPA-model agency.',
-        links: [{ label: 'ARPA-H', url: 'https://arpa-h.gov/', comment: '$1B budget, some aging-adjacent programs but no longevity mandate' }],
-      },
-      [LongevityAgencyClaim.CHALLENGE_DRIVEN]: {
-        score: 3,
-        text: 'ARPA-H uses programme manager model with directed challenges — closer to DARPA than NIH. NIA Interventions Testing Program is challenge-adjacent. But no longevity-specific challenge programme exists.',
-        links: [{ label: 'NIA ITP', url: 'https://www.nia.nih.gov/research/dab/interventions-testing-program-itp', comment: 'Multi-site mouse longevity compound testing programme' }],
-      },
-      [LongevityAgencyClaim.NON_DILUTIVE_FUNDING]: {
+      [BreakthroughAgencyClaim.AGENCY_MODEL]: {
         score: 4,
-        text: 'NIH grants and ARPA-H contracts are non-dilutive. SBIR/STTR provide non-dilutive funding for small biotech. Strong non-dilutive funding ecosystem.',
-        links: [{ label: 'NIH SBIR/STTR', url: 'https://seed.nih.gov/', comment: 'Non-dilutive funding for small biotech companies' }],
+        text: 'ARPA-H (launched 2022, $1.5B budget) uses the full DARPA programme-manager model with directed challenges, milestone-based contracts, and competitive execution. NIH remains a traditional grant agency — ARPA-H is the PM-model component. NIA ITP is challenge-adjacent.',
+        links: [{ label: 'ARPA-H', url: 'https://arpa-h.gov/', comment: 'DARPA-model agency for health — PM-driven challenges, $1.5B budget' }],
       },
-      [LongevityAgencyClaim.IP_RETAINED_BY_DEVS]: {
+      [BreakthroughAgencyClaim.LONGEVITY_MANDATE]: {
+        score: 2,
+        text: 'ARPA-H has aging-adjacent programmes (cancer, Alzheimer\'s) but no explicit longevity or healthspan mandate. NIA funds aging research but is a traditional grant agency. No agency has a published longevity/lifespan challenge target.',
+        links: [{ label: 'NIA Research Portfolio', url: 'https://www.nia.nih.gov/research', comment: 'Aging research funder — grant model, not ARPA model' }],
+      },
+      [BreakthroughAgencyClaim.FUNDING_TYPE]: {
+        score: 4,
+        text: 'ARPA-H contracts are fully non-dilutive (no equity). NIH grants and SBIR/STTR are non-dilutive. Strong non-dilutive funding ecosystem for all company sizes. Some ARPA-H OT (Other Transaction) mechanisms provide even greater flexibility.',
+        links: [{ label: 'NIH SBIR/STTR', url: 'https://seed.nih.gov/', comment: 'Non-dilutive funding for small biotech — $1B+/year' }],
+      },
+      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
         score: 5,
-        text: 'Bayh-Dole Act (1980) gives universities and small businesses IP rights from federally funded research. Inventors retain patent rights. Strong foundation for IP retention in public-funded longevity research.',
-        links: [{ label: 'Bayh-Dole Act', url: 'https://www.nist.gov/tpo/bayh-dole-act', comment: 'Grants IP to developers for federally funded inventions — landmark 1980 law' }],
+        text: 'Bayh-Dole Act (1980): universities, non-profits, and small businesses retain IP rights from all federally funded research. Individual inventors also retain patent rights. The global gold standard for public research IP policy.',
+        links: [{ label: 'Bayh-Dole Act', url: 'https://www.nist.gov/tpo/bayh-dole-act', comment: 'Landmark 1980 law — IP rights to developers for publicly funded inventions' }],
+      },
+      [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
+        score: 2,
+        text: 'ARPA-H challenges are somewhat quantified (specific disease endpoints, milestones) but lack explicit biological age or healthy lifespan targets. NIA ITP tests compounds against mouse lifespan — the closest thing to a quantified longevity challenge, but small-scale.',
+        links: [{ label: 'NIA ITP', url: 'https://www.nia.nih.gov/research/dab/interventions-testing-program-itp', comment: 'Multi-site mouse longevity compound testing — quantified lifespan endpoints' }],
       },
     },
 
     [TranslationField.ADAPTIVE_LICENSING]: {
-      [AdaptiveLicensingClaim.CONDITIONAL_APPROVAL_EXISTS]: {
+      [AdaptiveLicensingClaim.CONDITIONAL_APPROVAL]: {
         score: 5,
-        text: 'FDA Accelerated Approval, Breakthrough Therapy, Fast Track, and Priority Review designations are well-established. Multiple longevity-adjacent drugs have used these pathways.',
-        links: [{ label: 'FDA Accelerated Approval', url: 'https://www.fda.gov/patients/fast-track-breakthrough-therapy-accelerated-approval-priority-review/accelerated-approval-program', comment: 'Allows approval on surrogate endpoints with confirmatory trial requirement' }],
+        text: 'FDA leads globally: Accelerated Approval, Breakthrough Therapy, Fast Track, Priority Review, and Accelerated Approval are well-established. Multiple longevity-adjacent drugs have used these pathways. System is mature, well-understood by industry, and actively used.',
+        links: [{ label: 'FDA Accelerated Approval', url: 'https://www.fda.gov/patients/fast-track-breakthrough-therapy-accelerated-approval-priority-review/accelerated-approval-program', comment: 'Multiple accelerated pathways — world-leading' }],
       },
-      [AdaptiveLicensingClaim.SURROGATE_ENDPOINTS_ACCEPTED]: {
+      [AdaptiveLicensingClaim.ROLLING_REVIEW]: {
         score: 4,
-        text: 'FDA accepts validated surrogate endpoints across many disease areas. PDUFA VII commitments include broader surrogate endpoint guidance. Not yet for aging-specific biomarkers.',
-        links: [{ label: 'FDA Surrogate Endpoint Table', url: 'https://www.fda.gov/drugs/development-resources/table-surrogate-endpoints-were-basis-drug-approval-or-licensure', comment: 'List of FDA-accepted surrogate endpoints by indication' }],
+        text: 'FDA rolling review available for Breakthrough Therapy Designation and RTOR (Real-Time Oncology Review) programmes. Sponsors can submit data modules as they become available. Pre-IND engagement deeply embedded in culture.',
+        links: [{ label: 'FDA RTOR', url: 'https://www.fda.gov/patients/fast-track-breakthrough-therapy-accelerated-approval-priority-review/real-time-oncology-review', comment: 'Real-Time Oncology Review — rolling submission model' }],
       },
-      [AdaptiveLicensingClaim.POST_MARKET_CONFIRMATION]: {
+      [AdaptiveLicensingClaim.SURROGATE_ENDPOINTS]: {
+        score: 3,
+        text: 'FDA accepts validated surrogate endpoints across many disease areas. PDUFA VII includes broader guidance commitments. Not yet for aging-specific biomarkers — TAME trial is the test case for whether aging can be an FDA indication.',
+        links: [{ label: 'FDA Surrogate Endpoint Table', url: 'https://www.fda.gov/drugs/development-resources/table-surrogate-endpoints-were-basis-drug-approval-or-licensure', comment: 'FDA-accepted surrogates by indication — no aging endpoints yet' }],
+      },
+      [AdaptiveLicensingClaim.POST_MARKET_FRAMEWORK]: {
         score: 4,
-        text: 'Required under Accelerated Approval — Omnibus Act 2022 gave FDA authority to withdraw approval if confirmatory trial not completed. Several withdrawals executed post-2022.',
-        links: [{ label: 'Omnibus Act 2022 AA Provisions', url: 'https://www.fda.gov/patients/fast-track-breakthrough-therapy-accelerated-approval-priority-review/accelerated-approval-program', comment: '2022 law strengthened FDA withdrawal authority for failed confirmatory trials' }],
+        text: 'Omnibus Act 2022 gave FDA explicit authority to withdraw Accelerated Approval if confirmatory trial not completed on schedule. Multiple withdrawals executed post-2022. Real-world evidence Sentinel system active for safety.',
+        links: [{ label: 'FDA Withdrawal Authority', url: 'https://www.fda.gov/patients/fast-track-breakthrough-therapy-accelerated-approval-priority-review/accelerated-approval-program', comment: '2022 law strengthened withdrawal authority; multiple withdrawals executed' }],
       },
-      [AdaptiveLicensingClaim.AGING_SPECIFIC_PATHWAY]: {
-        score: 1,
-        text: 'No aging-specific regulatory pathway or guidance document. TAME trial is the test case for whether FDA will accept aging as an indication at all. Critical gap.',
-        links: [{ label: 'TAME Trial', url: 'https://www.afar.org/tame-trial', comment: 'First trial designed to establish aging as FDA indication' }],
+      [AdaptiveLicensingClaim.EXPANDED_ACCESS]: {
+        score: 4,
+        text: 'Federal Right to Try Act (2018) + FDA Expanded Access Programme. Streamlined single-patient IND; physician liability protection defined. Company participation voluntary — major gap; many decline citing supply or liability. FDA requires sponsors to respond to requests within 30 days.',
+        links: [{ label: 'FDA Expanded Access', url: 'https://www.fda.gov/patients/learn-about-expanded-access-and-other-treatment-options', comment: 'Formal compassionate use programme alongside Right to Try' }],
       },
     },
 
-    [TranslationField.SYNTHETIC_CONTROL_ARMS]: {
-      [SyntheticControlClaim.REGULATORY_ACCEPTED]: {
-        score: 3,
-        text: 'FDA has issued RWE guidance accepting external controls in certain contexts, particularly oncology. Not systematically applied to longevity trials.',
-        links: [{ label: 'FDA RWE Framework', url: 'https://www.fda.gov/science-research/science-and-research-special-topics/real-world-evidence', comment: 'FDA\'s framework for real-world evidence in regulatory decisions' }],
+    [TranslationField.TRIAL_DESIGN_MODERNIZATION]: {
+      [TrialDesignClaim.ADAPTIVE_DESIGNS]: {
+        score: 4,
+        text: 'FDA has published comprehensive adaptive trial guidance (2019). Biomarker-adaptive enrichment, seamless Phase 2/3, and response-adaptive randomisation all accepted. FDA proactively engages on novel designs pre-IND. Used across oncology, rare disease, and increasingly non-oncology.',
+        links: [{ label: 'FDA Adaptive Design Guidance', url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adaptive-design-clinical-trials-drugs-and-biologics-guidance-industry', comment: '2019 comprehensive adaptive design guidance' }],
       },
-      [SyntheticControlClaim.NATIONAL_DATA_AVAILABLE]: {
+      [TrialDesignClaim.SYNTHETIC_CONTROLS]: {
         score: 3,
-        text: 'Medicare/Medicaid claims data, VA data, and NIH All of Us provide large populations. But linkage across sources and EHR fragmentation limit synthetic control quality vs. Nordic registries.',
-        links: [{ label: 'NIH All of Us', url: 'https://allofus.nih.gov/', comment: '750k+ participants — largest US longitudinal health cohort' }],
+        text: 'FDA RWE framework accepts external controls for rare disease and certain oncology approvals. CDER and CBER have issued guidance. Not yet systematically applied to aging/longevity indications. Medicare/Medicaid and VA data usable but fragmented.',
+        links: [{ label: 'FDA RWE Framework', url: 'https://www.fda.gov/science-research/science-and-research-special-topics/real-world-evidence', comment: 'FDA RWE framework — accepted for defined contexts' }],
       },
-      [SyntheticControlClaim.AI_READY_INFRASTRUCTURE]: {
-        score: 2,
-        text: 'Data is fragmented across CMS, VA, NIH, and private EHR systems. No unified, AI-ready national health data API. NCATS N3C cloud environment is a partial solution for COVID-era data.',
-        links: [{ label: 'NCATS N3C', url: 'https://ncats.nih.gov/n3c', comment: 'National COVID Cohort Collaborative — model for unified health data, not yet replicated broadly' }],
-      },
-      [SyntheticControlClaim.USED_IN_APPROVALS]: {
+      [TrialDesignClaim.DECENTRALIZED_TRIALS]: {
         score: 3,
-        text: 'External controls used in several oncology approvals (e.g. paediatric rare cancers). Not yet used in aging/longevity context.',
-        links: [],
+        text: 'FDA published comprehensive DCT guidance in 2023. Home visits, local labs, telemedicine visits, and ePRO as primary outcomes accepted. Wearable endpoints being qualified. COVID-era experience accelerated framework development.',
+        links: [{ label: 'FDA DCT Guidance 2023', url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/decentralized-clinical-trials-drugs-biological-products-and-devices', comment: '2023 comprehensive DCT guidance' }],
+      },
+      [TrialDesignClaim.PLATFORM_PROTOCOLS]: {
+        score: 3,
+        text: 'Platform/master protocols accepted and actively used: I-SPY breast cancer, MASTER NSCLC, NCI MATCH. FDA has issued platform trial guidance. Adaptive arm addition with expedited review established in oncology.',
+        links: [{ label: 'FDA Master Protocol Guidance', url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/master-protocols-efficient-clinical-trial-design-strategies-expedite-development-oncology-drugs-and', comment: 'FDA guidance on master protocols and platform trials' }],
+      },
+      [TrialDesignClaim.RWE_INTEGRATION]: {
+        score: 3,
+        text: 'FDA Sentinel system integrates claims and EHR data for post-market safety surveillance. RWE accepted as supportive evidence in label extensions and some approvals. Not yet routine for primary efficacy dossiers outside oncology.',
+        links: [{ label: 'FDA Sentinel System', url: 'https://www.sentinelinitiative.org/', comment: 'FDA active post-market surveillance using real-world data — 100M+ patients' }],
       },
     },
 
     [TranslationField.REGULATORY_SANDBOXES]: {
-      [RegulatorySandboxClaim.SANDBOX_EXISTS]: {
+      [RegulatorySandboxClaim.SANDBOX_EXISTENCE]: {
         score: 1,
-        text: 'No formal regulatory sandbox exists. FDA does not have a designated sandbox programme for health interventions.',
+        text: 'No formal regulatory sandbox for health interventions. FDA does not have a designated sandbox programme. Investigator IND provides limited individual researcher flexibility but no system-level sandbox with safe-harbour provisions.',
         links: [],
       },
-      [RegulatorySandboxClaim.COMBINATION_THERAPIES]: {
-        score: 2,
-        text: 'FDA Combination Products Office handles multi-component products but is a regulatory pathway, not a sandbox with safe-harbour provisions.',
-        links: [{ label: 'FDA Combination Products', url: 'https://www.fda.gov/combination-products', comment: 'Regulatory pathway — not a sandbox' }],
+      [RegulatorySandboxClaim.BIOTECH_COVERAGE]: {
+        score: 1,
+        text: 'No sandbox covering drugs, biologics, or gene therapies. FDA Combination Products Office handles multi-component products but is a regulatory pathway, not a sandbox.',
+        links: [{ label: 'FDA Combination Products', url: 'https://www.fda.gov/combination-products', comment: 'Regulatory pathway — not a sandbox with safe harbour' }],
       },
-      [RegulatorySandboxClaim.REPURPOSED_DRUGS]: {
-        score: 3,
-        text: 'Investigator IND allows off-label/repurposed drug testing. No systematic sandbox, but flexibility exists for individual investigators.',
+      [RegulatorySandboxClaim.PATIENT_SCOPE]: {
+        score: 1,
+        text: 'No sandbox allowing real patient participation outside standard IND/trial frameworks. Investigator IND + IRB provides some individual case flexibility but no sandbox-level patient cohort access.',
         links: [],
       },
-      [RegulatorySandboxClaim.LEGAL_SAFE_HARBOUR]: {
+      [RegulatorySandboxClaim.LEGAL_PROTECTION]: {
         score: 1,
-        text: 'No formal legal safe harbour for sandbox participants. Standard liability rules apply.',
+        text: 'No formal legal safe harbour for sandbox participants. Standard product liability and malpractice law applies fully. No regulatory sandbox framework providing indemnity or liability shield.',
+        links: [],
+      },
+      [RegulatorySandboxClaim.LONGEVITY_APPLICABILITY]: {
+        score: 1,
+        text: 'No sandbox mechanism applicable to longevity interventions. Aging prevention and healthspan applications have no defined exploratory pathway outside standard IND/clinical trial requirements.',
         links: [],
       },
     },
 
-    [TranslationField.RIGHT_TO_TRY]: {
-      [RightToTryClaim.LAW_EXISTS]: {
-        score: 5,
-        text: 'Federal Right to Try Act signed 2018. All 50 states have RTT laws. One of the most comprehensive RTT legal frameworks globally.',
-        links: [{ label: 'Right to Try Act 2018', url: 'https://www.congress.gov/bill/115th-congress/senate-bill/204', comment: 'Federal law — applies in all 50 states' }],
-      },
-      [RightToTryClaim.COVERS_TERMINAL]: {
-        score: 5,
-        text: 'Explicitly covers patients with life-threatening conditions who have exhausted approved treatments and completed Phase 1.',
-        links: [],
-      },
-      [RightToTryClaim.PHYSICIAN_PROTECTION]: {
-        score: 4,
-        text: 'Federal RTT provides liability protection for manufacturers, prescribers, and dispensers. Physicians cannot be sanctioned solely for RTT prescribing.',
-        links: [],
-      },
-      [RightToTryClaim.COMPANY_PARTICIPATION]: {
+    [TranslationField.AGING_ENDPOINT_ECOSYSTEM]: {
+      [AgingEndpointClaim.ENDPOINT_ACCEPTANCE]: {
         score: 2,
-        text: 'Company participation is voluntary — no mandate to provide access. Uptake has been modest; many companies decline RTT requests citing liability or supply concerns.',
-        links: [{ label: 'RTT Utilisation Analysis', url: 'https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2780736', comment: 'JAMA study showing limited uptake due to voluntary company participation' }],
+        text: 'TAME trial (metformin/aging) is the test case for whether FDA will accept aging as a registered indication. Aging biomarkers (epigenetic clocks, proteomics) used as exploratory secondary endpoints. No aging-specific primary endpoint has been accepted for registration.',
+        links: [{ label: 'TAME Trial', url: 'https://www.afar.org/tame-trial', comment: 'First trial designed to qualify aging as FDA indication using composite endpoint' }],
+      },
+      [AgingEndpointClaim.QUALIFICATION_PATHWAY]: {
+        score: 2,
+        text: 'FDA Biomarker Qualification Program (BQP) exists for formal surrogate qualification. No aging biomarker has been successfully qualified. BQP process is 5–10 years and requires consortium-level evidence. No expedited track for aging-specific biomarkers.',
+        links: [{ label: 'FDA Biomarker Qualification Program', url: 'https://www.fda.gov/drugs/drug-development-tool-qualification-programs/biomarker-qualification-program', comment: 'Formal qualification process — no aging biomarkers qualified yet' }],
+      },
+      [AgingEndpointClaim.CODEV_FRAMEWORK]: {
+        score: 2,
+        text: 'FDA Companion Diagnostic framework (CDx) allows co-development of diagnostic + therapeutic. Designed for treatment selection, not aging endpoint co-development. No dedicated pathway for co-developing novel aging biomarker endpoints alongside longevity therapies.',
+        links: [{ label: 'FDA CDx Framework', url: 'https://www.fda.gov/medical-devices/in-vitro-diagnostics/companion-diagnostics', comment: 'Companion diagnostic co-development framework — not designed for aging endpoints' }],
+      },
+      [AgingEndpointClaim.REFERENCE_INFRASTRUCTURE]: {
+        score: 3,
+        text: 'NIH All of Us (~750k participants), UK Biobank (US-accessible), Medicare/CMS longitudinal data, and FHS/CARDIA cohorts provide aging biomarker reference populations. Coverage is substantial but fragmented across systems, not unified as a synthetic control resource.',
+        links: [{ label: 'NIH All of Us', url: 'https://allofus.nih.gov/', comment: '750k+ diverse participants with longitudinal health data — growing aging biomarker coverage' }],
+      },
+      [AgingEndpointClaim.STANDARDIZATION]: {
+        score: 2,
+        text: 'NIA and NIH Common Fund support some aging biomarker standardization efforts. Methylation clock protocols vary across labs. No regulatory-grade harmonized measurement standards for aging biomarkers. Cross-study comparison limited.',
+        links: [],
       },
     },
   },
@@ -512,165 +596,195 @@ const usa: CountryData = {
 
   data: {
     [DataField.OPEN_ACCESS_TO_HEALTH_DATA]: {
-      [OpenDataClaim.FREE_RESEARCHER_ACCESS]: {
-        score: 3,
-        text: 'dbGaP provides controlled-access genomic data. NIH mandates data sharing for funded research (2023 policy). Access is available but requires DUA and IRB — not frictionless.',
-        links: [{ label: 'dbGaP', url: 'https://www.ncbi.nlm.nih.gov/gap/', comment: 'Database of Genotypes and Phenotypes — controlled access' }],
+      [OpenDataClaim.ACCESS_PROCESS]: {
+        score: 2,
+        text: 'NIH data sharing policy (2023) provides a formal process, but it remains multi-step: researchers need a DUA plus IRB approval, often from multiple agencies. Typical wait: 2–4 months. No tiered accreditation or self-service provisioning.',
+        links: [{ label: 'NIH Data Sharing Policy', url: 'https://sharing.nih.gov/data-management-and-sharing-policy', comment: 'NIH 2023 data sharing mandate — formal but multi-step process' }],
       },
-      [OpenDataClaim.AI_USE_PERMITTED]: {
-        score: 3,
-        text: 'NIH data sharing policy permits AI/ML applications on shared data. However, DUAs often restrict commercial AI use. Legal ambiguity remains for large-model training.',
+      [OpenDataClaim.LINKABILITY]: {
+        score: 2,
+        text: 'No national personal identifier; linkage relies on probabilistic matching (name + DOB + SSN fragments). Medicare/Medicaid claims linkable within CMS. Cross-agency linkage (NIH biobanks + CMS + registries) is fragmented and inconsistent.',
+        links: [{ label: 'CMS Research Data', url: 'https://resdac.org/', comment: 'ResDAC — Medicare/Medicaid data access; limited cross-agency linkage' }],
+      },
+      [OpenDataClaim.PRIVACY_RESOLUTION]: {
+        score: 2,
+        text: 'HIPAA Safe Harbor (18-identifier removal) is the dominant standard — relatively weak by modern re-identification standards. dbGaP uses controlled access but no TRE; researchers download data locally. All of Us Research Program offers some cloud-based enclave access but not yet the norm.',
+        links: [{ label: 'HIPAA De-identification', url: 'https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html', comment: 'HIPAA Safe Harbor — legally standard but scientifically weak' }],
+      },
+      [OpenDataClaim.AI_USE_GOVERNANCE]: {
+        score: 2,
+        text: 'NIH data sharing policy permits AI/ML use on shared data in principle. However, DUAs routinely restrict commercial AI applications; large-model training on health data remains legally ambiguous. No dedicated AI researcher tier or fast-track.',
         links: [],
       },
-      [OpenDataClaim.ANONYMIZATION_STANDARD]: {
-        score: 3,
-        text: 'HIPAA Safe Harbor and Expert Determination methods are defined standards. Widely used but HIPAA\'s 18-identifier Safe Harbor is relatively weak by modern re-identification standards.',
-        links: [{ label: 'HIPAA De-identification', url: 'https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html', comment: 'HIPAA Safe Harbor — defined but not state-of-the-art' }],
-      },
       [OpenDataClaim.CROSS_BORDER_SHARING]: {
-        score: 2,
-        text: 'No bilateral health data sharing framework. Individual DUAs handle cross-border sharing case by case. GDPR incompatibility with US law creates friction for EU–US data flows.',
+        score: 1,
+        text: 'No bilateral health data sharing framework. Each cross-border transfer requires a separately negotiated DUA. GDPR incompatibility with US surveillance law creates substantial friction for EU–US research data flows.',
         links: [],
       },
     },
 
     [DataField.INTEROPERABILITY_STANDARDS]: {
-      [InteroperabilityClaim.NATIONAL_STANDARD_EXISTS]: {
-        score: 4,
-        text: '21st Century Cures Act mandates interoperability and prohibits information blocking. ONC USCDI defines required data elements. Legally mandated standard.',
-        links: [{ label: '21st Century Cures Act', url: 'https://www.healthit.gov/curesrule/', comment: 'Mandates interoperability, prohibits information blocking' }],
-      },
-      [InteroperabilityClaim.FHIR_IMPLEMENTED]: {
+      [InteroperabilityClaim.EHR_COVERAGE]: {
         score: 3,
-        text: 'FHIR R4 mandated by ONC rule. Implementation is uneven — major EHR vendors (Epic, Oracle/Cerner) have FHIR APIs but quality and completeness vary significantly.',
+        text: '21st Century Cures Act mandates EHR adoption and prohibits information blocking (ONC USCDI). EHR penetration is near-universal among hospitals and large practices. Enforcement via CMS incentives exists. Patient-reported outcomes and SDOH not systematically structured.',
+        links: [{ label: '21st Century Cures Act', url: 'https://www.healthit.gov/curesrule/', comment: 'Mandates EHR interoperability and prohibits information blocking' }],
+      },
+      [InteroperabilityClaim.TERMINOLOGY_COMPLIANCE]: {
+        score: 3,
+        text: 'FHIR R4 mandated by ONC rule. ICD-10-CM and LOINC required for billing and lab data. SNOMED CT used in clinical documentation inconsistently. Implementation quality varies significantly across EHR vendors.',
         links: [],
       },
-      [InteroperabilityClaim.REGISTRIES_LINKED]: {
+      [InteroperabilityClaim.REGISTRY_COMPLETENESS]: {
         score: 2,
-        text: 'No national linked registry system. SEER (cancer), NHSN (infections), and NVSS (vital statistics) exist as siloed registries. Cross-registry linkage requires case-by-case agreements.',
+        text: 'SEER (cancer), NHSN (infections), and NVSS (vital statistics) exist as separate systems with limited interoperability. No national linked registry — cross-registry analysis requires case-by-case agreements and probabilistic matching without a national ID.',
+        links: [{ label: 'SEER Cancer Registry', url: 'https://seer.cancer.gov/', comment: 'Surveillance, Epidemiology, and End Results — one of the better US registries, but siloed' }],
+      },
+      [InteroperabilityClaim.DATA_FRESHNESS]: {
+        score: 2,
+        text: 'CMS Medicare/Medicaid claims data typically available with 12–18 month lag. SEER data updated annually. No quarterly or near-real-time research access at national scale.',
         links: [],
       },
-      [InteroperabilityClaim.REAL_TIME_ACCESS]: {
-        score: 2,
-        text: 'Research data access is typically through retrospective data requests. Real-time or quarterly-updated research databases do not exist at national scale.',
-        links: [],
+      [InteroperabilityClaim.COMPUTABLE_PHENOTYPING]: {
+        score: 3,
+        text: 'OMOP CDM widely used across research networks (PCORnet, TriNetX, N3C). PheWAS phenotype libraries available. Validated phenotyping algorithms exist via eMERGE network. Cross-institutional queries feasible within networks, not at national scale.',
+        links: [{ label: 'N3C Data Enclave', url: 'https://ncats.nih.gov/n3c', comment: 'National COVID Cohort Collaborative — best US example of cross-institutional computable phenotyping' }],
       },
     },
 
     [DataField.STANDARDIZED_TRIAL_ENDPOINTS]: {
-      [TrialEndpointsClaim.STANDARDIZED_DEFINED]: {
+      [ResearchClinicalClaim.SHARED_ONTOLOGIES]: {
+        score: 3,
+        text: 'OMOP CDM is widely used across research networks (PCORnet, N3C, TriNetX), creating a common data model that bridges research and clinical data. However, adoption is network-specific — not mandated nationally. Joining external research datasets to clinical EHR still requires manual ontology curation in most cases.',
+        links: [{ label: 'OMOP CDM', url: 'https://ohdsi.github.io/CommonDataModel/', comment: 'Common data model used by major US research networks — de facto standard' }],
+      },
+      [ResearchClinicalClaim.RESEARCH_COHORT_LINKAGE]: {
         score: 2,
-        text: 'FDA-NIH BEST resource provides endpoint classification framework. Critical Path Institute working on specific aging endpoints. No finalised gero-specific standard published.',
-        links: [{ label: 'FDA-NIH BEST Resource', url: 'https://www.ncbi.nlm.nih.gov/books/NBK338448/', comment: 'Framework for biomarker and endpoint classification' }],
+        text: 'No national infrastructure for automatic registry follow-up of research participants. Possible via CMS Medicare/Medicaid linkage for older populations, or state cancer registry linkages — but each requires separate DUA negotiation. No national personal identifier makes probabilistic matching error-prone.',
+        links: [{ label: 'CMS Research Data Linkage', url: 'https://resdac.org/', comment: 'Medicare/Medicaid linkage to research cohorts — possible but heavily procedural' }],
       },
-      [TrialEndpointsClaim.REGULATORY_ACCEPTED]: {
-        score: 1,
-        text: 'No aging-specific composite endpoint has been accepted by FDA. This is the central regulatory bottleneck for the entire longevity field.',
-        links: [],
+      [ResearchClinicalClaim.FAIR_DATA_COMPLIANCE]: {
+        score: 3,
+        text: 'NIH 2023 Data Management and Sharing Policy mandates data sharing plans for all funded research. FAIR principles endorsed but not technically enforced. Repositories (dbGaP, Figshare, Zenodo) used, but metadata quality is highly variable and machine-readability not systematically audited.',
+        links: [{ label: 'NIH Data Sharing Policy', url: 'https://sharing.nih.gov/data-management-and-sharing-policy', comment: 'Mandates data sharing plans — FAIR in intent, inconsistent in execution' }],
       },
-      [TrialEndpointsClaim.CROSS_STUDY_COMPARABLE]: {
+      [ResearchClinicalClaim.PHARMACOVIGILANCE_FEEDBACK]: {
+        score: 3,
+        text: 'FDA Sentinel System performs active automated surveillance across 100M+ patient records. MedWatch collects voluntary reports. OpenFDA provides machine-readable access to FAERS data. However, the loop from signal to triggered research protocol is not automated — researchers access signal data but must initiate studies independently.',
+        links: [{ label: 'FDA Sentinel System', url: 'https://www.fda.gov/safety/fdas-sentinel-initiative', comment: 'Active pharmacovigilance across 100M+ patients — best-in-class signal detection' }],
+      },
+      [ResearchClinicalClaim.OPEN_SCIENCE_MANDATE]: {
         score: 2,
-        text: 'Lack of standardised gero endpoints means each trial defines its own measures. Meta-analysis across longevity trials is severely limited.',
-        links: [],
-      },
-      [TrialEndpointsClaim.AGING_SPECIFIC_INCLUDED]: {
-        score: 1,
-        text: 'No validated aging-specific composite endpoint exists. TAME trial will attempt to establish multi-morbidity onset as a primary endpoint — outcome pending.',
-        links: [{ label: 'TAME Trial Design', url: 'https://www.afar.org/tame-trial', comment: 'Multi-morbidity composite as aging endpoint — regulatory test case' }],
+        text: 'ClinicalTrials.gov registration required for IND trials and most NIH-funded research. Results reporting required within 12 months of completion. However, compliance is poor — ~50% of trials fail to report results on time. Code and data sharing mandated by NIH (2023) but enforcement is limited.',
+        links: [{ label: 'ClinicalTrials.gov Compliance', url: 'https://clinicaltrials.gov/', comment: 'Registration required; results reporting compliance historically weak (~50%)' }],
       },
     },
   },
 
   international: {
-    [InternationalField.PERTURBATION_SCREENING]: {
-      [PerturbationScreeningClaim.NATIONAL_HTS_EXISTS]: {
+    [InternationalField.REGULATORY_HARMONIZATION]: {
+      [RegulatoryHarmonizationClaim.TRIAL_DATA_ACCEPTANCE]: {
+        score: 2,
+        text: 'FDA generally requires US-based data to support approval. Foreign trial data is accepted as supporting evidence but not as primary evidence for most submissions. Project Orbis enables parallel review but not mutual acceptance. ICH E5 allows bridging studies for ethnic data, not full substitution.',
+        links: [{ label: 'Project Orbis', url: 'https://www.fda.gov/about-fda/oncology-center-excellence/project-orbis', comment: 'Parallel oncology review with international partners — not mutual data acceptance' }],
+      },
+      [RegulatoryHarmonizationClaim.JOINT_REVIEW_PARTICIPATION]: {
         score: 4,
-        text: 'NCATS HTS infrastructure, Broad Institute Chemical Biology, and NIH Molecular Libraries Program provide substantial HTS capacity.',
-        links: [{ label: 'NCATS HTS', url: 'https://ncats.nih.gov/research/research-activities/preclinical-drug-development', comment: 'National HTS infrastructure at NIH' }],
+        text: 'FDA is the core participant and often the leader of Project Orbis (oncology joint review with Canada, Australia, UK, Singapore, Switzerland, Brazil). FDA also participates in ICMRA (International Coalition of Medicines Regulatory Authorities) and bilateral scientific advice programmes with EMA.',
+        links: [{ label: 'ICMRA', url: 'https://www.icmra.info/', comment: 'International Coalition of Medicines Regulatory Authorities — FDA core member' }],
       },
-      [PerturbationScreeningClaim.AI_READY]: {
-        score: 3,
-        text: 'Broad Institute\'s Chemical Biology and Therapeutics Science program generates AI-ready perturbation data. CZ Biohub building perturbation atlases. Not yet standardised nationally.',
-        links: [{ label: 'CZ Biohub', url: 'https://www.czbiohub.org/', comment: 'Building perturbation atlases relevant to aging biology' }],
+      [RegulatoryHarmonizationClaim.STANDARD_ALIGNMENT]: {
+        score: 5,
+        text: 'FDA is an ICH founding member and active in setting international standards. FDA GCP (ICH E6), GMP, and trial conduct standards are the global reference point. FDA staff chair and co-chair multiple ICH Expert Working Groups. US standards are adopted internationally, not vice versa.',
+        links: [{ label: 'FDA ICH Participation', url: 'https://www.fda.gov/international-programs/international-regulatory-harmonization/ich', comment: 'FDA as founding ICH member and standard-setter' }],
       },
-      [PerturbationScreeningClaim.SHARED_ACCESS]: {
-        score: 3,
-        text: 'NIH data sharing mandate applies to HTS outputs. PubChem hosts compound activity data. Academic sharing is strong; coordination across centres is informal.',
-        links: [{ label: 'PubChem', url: 'https://pubchem.ncbi.nlm.nih.gov/', comment: 'Public repository of compound screening data' }],
+      [RegulatoryHarmonizationClaim.FOREIGN_APPROVAL_RELIANCE]: {
+        score: 2,
+        text: 'FDA does not formally rely on foreign approvals. PDUFA VII includes provisions for considering foreign regulatory actions in rare disease contexts. No automatic or pathway-level reliance on EMA/MHRA/TGA decisions.',
+        links: [],
       },
-      [PerturbationScreeningClaim.AGING_PROGRAM]: {
+      [RegulatoryHarmonizationClaim.RECIPROCAL_RECOGNITION]: {
         score: 3,
-        text: 'NIA ITP screens compounds for mouse lifespan extension. No equivalent human-cell or AI-ready aging perturbation atlas programme.',
-        links: [{ label: 'NIA ITP', url: 'https://www.nia.nih.gov/research/dab/interventions-testing-program-itp', comment: 'Mouse lifespan screening — rapamycin, acarbose, canagliflozin' }],
+        text: 'US–EU MRA for GMP facility inspections covers most pharmaceutical manufacturers. Bilateral MRAs with Switzerland, Canada, Australia, Japan, Israel on GMP. No clinical trial data or approval-level recognition agreements.',
+        links: [{ label: 'FDA Mutual Recognition Agreements', url: 'https://www.fda.gov/international-programs/international-arrangements/mutual-recognition-agreements-mra', comment: 'GMP inspection MRAs — manufacturing quality, not clinical data' }],
       },
     },
 
-    [InternationalField.MUTUAL_RECOGNITION]: {
-      [MutualRecognitionClaim.BILATERAL_AGREEMENTS]: {
-        score: 3,
-        text: 'US–EU MRA covers GMP inspections. ICH membership ensures harmonised trial conduct standards. FDA–EMA parallel scientific advice available.',
-        links: [{ label: 'FDA–EU MRA', url: 'https://www.fda.gov/international-programs/international-arrangements/mutual-recognition-agreements-mra', comment: 'GMP inspection mutual recognition — not clinical trial data' }],
+    [InternationalField.SHARED_PHYSICAL_INFRASTRUCTURE]: {
+      [SharedPhysicalInfraClaim.BSL_ACCESS]: {
+        score: 5,
+        text: 'US has more BSL-3 and BSL-4 facilities than any other country — over 1,400 registered BSL-3 facilities as of 2023. NIH/NIAID, CDC, and major academic medical centres provide extensive access. National Emerging Infectious Diseases Laboratories (NEIDL) and similar facilities are accessible to academic researchers via proposal.',
+        links: [{ label: 'NEIDL', url: 'https://www.neidl.bu.edu/', comment: 'Boston University National Emerging Infectious Diseases Laboratories — BSL-4 with academic access' }],
       },
-      [MutualRecognitionClaim.TRIAL_RESULTS_ACCEPTED]: {
-        score: 2,
-        text: 'FDA requires US data for most approvals. Project Orbis enables parallel oncology review with international partners but does not constitute acceptance of foreign-only data.',
-        links: [{ label: 'Project Orbis', url: 'https://www.fda.gov/about-fda/oncology-center-excellence/project-orbis', comment: 'Parallel oncology review — not mutual acceptance of trial results' }],
+      [SharedPhysicalInfraClaim.GMP_CAPACITY]: {
+        score: 5,
+        text: 'World\'s largest and most diverse GMP/CDMO ecosystem: Lonza, Catalent, Fujifilm Diosynth, WuXi, Samsung Biologics US facilities — full clinical-stage and commercial capacity. Academic GMP suites at most major medical schools (UPenn, Stanford, Johns Hopkins). Cell and gene therapy CDMO capacity growing rapidly.',
+        links: [{ label: 'ISPE GMP Resources', url: 'https://ispe.org/', comment: 'GMP standards and manufacturing ecosystem — US is the global CDMO hub' }],
       },
-      [MutualRecognitionClaim.SANDBOX_OUTCOMES_SHARED]: {
-        score: 1,
-        text: 'No sandbox exists to share outcomes from.',
-        links: [],
+      [SharedPhysicalInfraClaim.COMPUTE_INFRA]: {
+        score: 5,
+        text: 'NSF ACCESS (successor to XSEDE), NIH STRIDES, and DOE national labs (ORNL, ANL, NERSC) provide the world\'s largest academic HPC/AI infrastructure. NIH Cloud Platform includes GPU-accelerated nodes for genomics. Multiple NIH-funded bioinformatics cores at major research universities.',
+        links: [{ label: 'NSF ACCESS', url: 'https://access-ci.org/', comment: 'National advanced computing ecosystem — largest in the world for academic research' }],
       },
-      [MutualRecognitionClaim.HARMONIZED_STANDARDS]: {
+      [SharedPhysicalInfraClaim.SEQUENCING_SCALE]: {
+        score: 5,
+        text: 'All of Us (~750k genomes), UKBB US access, TOPMed (~200k WGS), VA MVP (~900k veterans), and ClinSeq. Multiple commercial sequencing hubs (Illumina HQ in San Diego, PacBio). Academic genomics cores at scale. National sequencing capacity unmatched globally.',
+        links: [{ label: 'NIH All of Us', url: 'https://allofus.nih.gov/', comment: '750k+ diverse participants — growing toward 1M WGS; open researcher access' }],
+      },
+      [SharedPhysicalInfraClaim.MODEL_ORGANISM_PLATFORMS]: {
+        score: 5,
+        text: 'NIA ITP — the only multi-site rigorous aging compound testing programme in the world (UT Health, Michigan, Jackson Lab). JAX distributes aging mouse strains globally (Aged Rodent Colonies). NIA Aged Rodent Colonies provide standardised aged animals to funded researchers. C. elegans and Drosophila aging research centred in US labs.',
+        links: [
+          { label: 'NIA ITP', url: 'https://www.nia.nih.gov/research/dab/interventions-testing-program-itp', comment: 'Multi-site mouse longevity compound testing — gold standard globally' },
+          { label: 'JAX Aged Mice', url: 'https://www.jax.org/jax-mice-and-services/find-and-order-jax-mice/most-popular-jax-mice/aged-mice', comment: 'Global distribution of standardised aging mouse models' },
+        ],
+      },
+    },
+
+    [InternationalField.INTERNATIONAL_RESEARCH_NETWORK]: {
+      [IntlResearchNetworkClaim.CONSORTIUM_DEPTH]: {
+        score: 5,
+        text: 'US researchers lead or co-lead most major international aging consortia: CALERIE (caloric restriction), TAME (metformin/aging), ITP, Human Cell Atlas, ENCODE, TOPMed, GTEx, UK Biobank consortium. NIH international collaboration grants fund partnerships globally. Buck Institute, UCSF, Harvard, and Stanford are de facto global hubs.',
+        links: [{ label: 'Buck Institute', url: 'https://www.buckinstitute.org/', comment: 'Leading US aging research institute — extensive international consortium leadership' }],
+      },
+      [IntlResearchNetworkClaim.DATA_SHARING_FRAMEWORKS]: {
         score: 4,
-        text: 'US is ICH founding member. FDA GCP harmonised with EU, Japan, Canada. Trials conducted to ICH E6 standards are accepted in submissions.',
-        links: [{ label: 'ICH E6 GCP', url: 'https://www.ich.org/page/efficacy-guidelines', comment: 'Harmonised trial conduct standards — FDA fully aligned' }],
+        text: 'NIH Data Management and Sharing Policy (2023) mandates open data sharing for all NIH-funded research. GA4GH frameworks adopted by NIH. dbGaP, GEO, and SRA host and share large-scale genomic and omics datasets internationally. FAIR data principles integrated into NIH grant requirements.',
+        links: [{ label: 'NIH Data Sharing Policy', url: 'https://sharing.nih.gov/data-management-and-sharing-policy', comment: '2023 mandate — all NIH-funded research must share data' }],
+      },
+      [IntlResearchNetworkClaim.JOINT_FUNDING_ACCESS]: {
+        score: 4,
+        text: 'NIH Fogarty International Center funds global health research partnerships. NSF international collaboration supplements. Bilateral science and technology agreements with 50+ countries. No Horizon Europe equivalent but extensive bilateral co-funding. NIH grants can fund foreign investigators as co-investigators.',
+        links: [{ label: 'NIH Fogarty Center', url: 'https://www.fic.nih.gov/', comment: 'NIH international funding arm — global health research partnerships' }],
+      },
+      [IntlResearchNetworkClaim.FIELD_INFLUENCE]: {
+        score: 5,
+        text: 'US-based researchers produce the plurality of high-impact longevity science publications. Nature Aging, Cell, Science, NEJM — editorial boards and senior authorship dominated by US institutions. NIA, Buck, Calico, Unity, and academic medical centres set the global research agenda. Most longevity society presidents and guideline committee chairs are US-based.',
+        links: [{ label: 'Nature Aging', url: 'https://www.nature.com/nataging/', comment: 'Leading longevity journal — US editorial leadership and primary author pool' }],
+      },
+      [IntlResearchNetworkClaim.PATENT_COOPERATION]: {
+        score: 5,
+        text: 'US is the global leader in biomedical patent cooperation. Bayh-Dole Act (1980): federally funded inventions are owned by the university/company, not the government — the model copied worldwide. Full PCT membership, bilateral patent treaties with all major economies, active USPTO biotech patent examination capacity.',
+        links: [{ label: 'Bayh-Dole Act', url: 'https://www.nist.gov/tpo/bayh-dole-act', comment: 'Gold standard IP framework — university/company ownership of publicly funded inventions' }],
       },
     },
+  },
 
-    [InternationalField.SHARED_INFRASTRUCTURE]: {
-      [SharedInfraClaim.WET_LAB_SHARING]: {
-        score: 2,
-        text: 'No formal international wet lab sharing programme for aging research. Individual academic collaborations exist but no national programme.',
-        links: [],
-      },
-      [SharedInfraClaim.COMPUTE_SHARING]: {
+  societal: {
+    [SocietalField.SOCIETAL_READINESS]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST]: {
         score: 3,
-        text: 'NIH participates in GA4GH. XSEDE/ACCESS national supercomputing network accessible to international collaborators with US PI.',
-        links: [{ label: 'NSF ACCESS', url: 'https://access-ci.org/', comment: 'National supercomputing network — accessible to international collaborators' }],
+        text: 'Pew Research (2022) shows ~55% of Americans trust scientists "a lot" — moderate and declining. Trust is politically polarised: Republicans significantly less trusting of scientists and medical institutions post-COVID. Vaccine hesitancy and anti-establishment health movements are measurable factors. Above average globally but below Scandinavian norms.',
+        links: [{ label: 'Pew Research on Science Trust', url: 'https://www.pewresearch.org/science/2022/02/15/americans-trust-in-scientists-other-groups-declines/', comment: 'Pew 2022 — 55% trust scientists "a lot", declining trend, politically polarised' }],
       },
-      [SharedInfraClaim.MODEL_ORGANISMS_SHARED]: {
+      [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
         score: 3,
-        text: 'JAX (Jackson Laboratory) distributes mouse strains globally. NIA-funded aged rodent colonies available to researchers. Formal international sharing is limited beyond strain distribution.',
-        links: [{ label: 'NIA Aged Rodent Colonies', url: 'https://www.nia.nih.gov/research/dab/aged-rodent-colonies-handbook', comment: 'NIA-funded aged mouse and rat colonies — available to researchers' }],
+        text: 'US public increasingly receptive to "healthy aging" and preventive medicine framing. Longevity biotech has significant mainstream media coverage. However, "billionaire longevity" framing creates class-equity concerns. Religious and cultural resistance to life extension exists but is not dominant. Growing acceptance among educated urban demographics.',
+        links: [{ label: 'AFAR Public Outreach', url: 'https://www.afar.org/', comment: 'American Federation for Aging Research — building public acceptance of longevity science' }],
       },
-      [SharedInfraClaim.OPEN_TO_FOREIGN]: {
-        score: 3,
-        text: 'NIH intramural programmes and national labs nominally open to foreign researchers. In practice, security restrictions and visa barriers limit access, especially for AI/computing infrastructure.',
-        links: [],
-      },
-    },
-
-    [InternationalField.PUBLIC_ENGAGEMENT]: {
-      [PublicEngagementClaim.NATIONAL_PROGRAM]: {
+      [SocietalReadinessClaim.POLITICAL_WILL]: {
         score: 2,
-        text: 'No nationally coordinated longevity science communication programme. NIA runs public outreach focused on Alzheimer\'s. Private advocacy (AFAR, Alliance for Aging Research) operates independently.',
-        links: [{ label: 'Alliance for Aging Research', url: 'https://www.agingresearch.org/', comment: 'Main public advocacy organisation — privately funded' }],
-      },
-      [PublicEngagementClaim.COUNTER_MISINFORMATION]: {
-        score: 2,
-        text: 'No government-led counter-misinformation effort for longevity science. FTC takes action on egregious anti-aging product fraud but does not engage with scientific misinformation.',
-        links: [],
-      },
-      [PublicEngagementClaim.EQUITY_NARRATIVE]: {
-        score: 2,
-        text: '"Billionaire longevity" framing dominates US media coverage, creating equity and credibility concerns. No coordinated public counter-narrative framing longevity as a public good.',
-        links: [],
-      },
-      [PublicEngagementClaim.HIGH_PUBLIC_TRUST]: {
-        score: 3,
-        text: 'Pew Research shows ~55% of Americans trust scientists "a lot" — moderate. Trust declined post-COVID. Science trust is politically polarised, affecting longevity science acceptance.',
-        links: [{ label: 'Pew Research on Science Trust', url: 'https://www.pewresearch.org/science/2022/02/15/americans-trust-in-scientists-other-groups-declines/', comment: 'Pew 2022: trust in scientists declining, politically polarised' }],
+        text: 'No explicit national longevity strategy. ARPA-H and NIA fund relevant research but without longevity mandates. Political attention focuses on Alzheimer\'s (bipartisan), Medicare cost containment, and cancer. No major party platform includes longevity as a distinct policy axis. Congressional Longevity Caucus exists but has limited legislative output.',
+        links: [{ label: 'Congressional Longevity Caucus', url: 'https://www.agingresearch.org/programs/congressional-longevity-caucus/', comment: 'Bipartisan caucus on aging policy — limited legislative activity' }],
       },
     },
   },

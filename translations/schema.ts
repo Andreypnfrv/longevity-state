@@ -6,6 +6,7 @@ import {
   HealthcareField,
   DataField,
   InternationalField,
+  SocietalField,
   SCREENING_SCALE,
   ScreeningLevel,
 } from '../schema'
@@ -31,32 +32,39 @@ export const groupLabels: Record<PolicyGroup, Record<Locale, string>> = {
   [PolicyGroup.HEALTHCARE]:    { [Locale.EN]: 'Healthcare' },
   [PolicyGroup.DATA]:          { [Locale.EN]: 'Data' },
   [PolicyGroup.INTERNATIONAL]: { [Locale.EN]: 'International' },
+  [PolicyGroup.SOCIETAL]:      { [Locale.EN]: 'Societal' },
 }
 
 export const fieldLabels: Record<string, Record<Locale, FieldTranslation>> = {
   // Talents
-  [TalentsField.VISAS_FOR_SCIENTISTS]: {
+  [TalentsField.RESEARCHER_IMMIGRATION]: {
     [Locale.EN]: {
-      title: 'Visas for Scientists',
-      description: 'Fast-track visa pathways and credential recognition for foreign researchers in aging biology, biogerontology, and longevity science.',
+      title: 'Researcher Immigration',
+      description: 'How easy it is for foreign scientists and researchers to enter, work, and build long-term careers — covering visa pathways, processing speed, credential recognition, early-career access, and permanent residency routes.',
     },
   },
-  [TalentsField.VISAS_FOR_CLINICIANS]: {
+  [TalentsField.CLINICIAN_IMMIGRATION]: {
     [Locale.EN]: {
-      title: 'Visas for Clinicians',
-      description: 'Streamlined entry and license recognition for clinicians specializing in geriatrics, preventive medicine, and longevity-related practice.',
+      title: 'Clinician Immigration',
+      description: 'How easy it is for foreign-trained clinicians to enter and practice — a distinct challenge from researcher immigration, requiring medical board recognition, scope of practice rules, and support for combined research-practice roles.',
     },
   },
-  [TalentsField.PHD_PROGRAMS]: {
+  [TalentsField.RESEARCH_TRAINING_PIPELINE]: {
     [Locale.EN]: {
-      title: 'PhD Programs',
-      description: 'Doctoral programs bridging aging biology, data science, and translational medicine to build a pipeline of longevity researchers.',
+      title: 'Research Training Pipeline',
+      description: 'Whether the country builds its own longevity research talent — from undergraduate exposure to aging biology through PhD programmes, postdoc ecosystems, public funding coverage, and industry-academia training links.',
     },
   },
-  [TalentsField.PHD_MD_PROGRAMS_FOR_CLINICIANS]: {
+  [TalentsField.CLINICIAN_AGING_TRAINING]: {
     [Locale.EN]: {
-      title: 'PhD / MD-PhD Programs for Clinicians',
-      description: 'Combined MD-PhD tracks enabling clinicians to develop deep expertise in aging science and drive bench-to-bedside translation.',
+      title: 'Clinician Aging Training',
+      description: 'How well clinicians are trained to work with aging — geriatrics as a recognised and well-resourced specialty, integration of aging biology in medical school, residency quality, longevity-specific CME, and national workforce planning.',
+    },
+  },
+  [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
+    [Locale.EN]: {
+      title: 'Clinician-Scientist Pathway',
+      description: 'Infrastructure for the rarest and most valuable talent in longevity: clinicians who can also conduct research. Covers combined degree programmes, public funding, aging specialisation, protected research time, and long-term career viability.',
     },
   },
 
@@ -87,22 +95,22 @@ export const fieldLabels: Record<string, Record<Locale, FieldTranslation>> = {
       description: 'Regulatory pathways that allow conditional early approval based on interim data, with post-market evidence generation requirements.',
     },
   },
-  [TranslationField.SYNTHETIC_CONTROL_ARMS]: {
+  [TranslationField.TRIAL_DESIGN_MODERNIZATION]: {
     [Locale.EN]: {
-      title: 'Synthetic Control Arms',
-      description: 'Use of national health data to construct synthetic comparator arms for longevity trials, reducing the need for placebo-only controls.',
+      title: 'Trial Design Modernization',
+      description: 'Regulatory acceptance of modern trial design innovations — adaptive designs, synthetic control arms, decentralized trials, platform protocols, and real-world evidence integration.',
     },
   },
   [TranslationField.REGULATORY_SANDBOXES]: {
     [Locale.EN]: {
       title: 'Regulatory Sandboxes',
-      description: 'Defined safe-harbour environments for testing combination therapies and repurposed drugs with relaxed but monitored approval requirements.',
+      description: 'Defined legal safe-harbour environments for testing novel therapeutic approaches — including gene editing, combinations, and longevity interventions — with real patients under ethics oversight.',
     },
   },
-  [TranslationField.RIGHT_TO_TRY]: {
+  [TranslationField.AGING_ENDPOINT_ECOSYSTEM]: {
     [Locale.EN]: {
-      title: 'Right-to-Try',
-      description: 'Legal frameworks allowing terminally ill or high-risk patients to access investigational longevity therapies outside standard trial pathways.',
+      title: 'Aging Endpoint Ecosystem',
+      description: 'Infrastructure and regulatory frameworks for co-developing therapies with their aging biomarker endpoints — including endpoint acceptance, qualification pathways, reference databases, and measurement standardization.',
     },
   },
 
@@ -148,34 +156,36 @@ export const fieldLabels: Record<string, Record<Locale, FieldTranslation>> = {
   },
   [DataField.STANDARDIZED_TRIAL_ENDPOINTS]: {
     [Locale.EN]: {
-      title: 'Standardized Trial Endpoints',
-      description: 'Common endpoint definitions for gero-therapeutic trials to enable cross-study comparability, meta-analysis, and regulatory harmonization.',
+      title: 'Research-Clinical Data Integration',
+      description: 'Infrastructure connecting scientific research data to clinical systems — shared ontologies, research cohort linkage to registries, FAIR data compliance, pharmacovigilance feedback loops, and open science mandates.',
     },
   },
 
   // International
-  [InternationalField.PERTURBATION_SCREENING]: {
+  [InternationalField.REGULATORY_HARMONIZATION]: {
     [Locale.EN]: {
-      title: 'AI-Ready Perturbation Screening',
-      description: 'Shared international programs for high-throughput, AI-assisted screening of genetic and pharmacological perturbations relevant to aging.',
+      title: 'Regulatory Harmonization',
+      description: 'How deeply integrated the country is into the global regulatory ecosystem — mutual acceptance of foreign trial data, joint review programmes, ICH standard alignment, foreign approval reliance pathways, and reciprocal recognition agreements.',
     },
   },
-  [InternationalField.MUTUAL_RECOGNITION]: {
+  [InternationalField.SHARED_PHYSICAL_INFRASTRUCTURE]: {
     [Locale.EN]: {
-      title: 'Mutual Recognition of Trial Results',
-      description: 'Bilateral and multilateral agreements to accept clinical trial results and regulatory sandbox outcomes across jurisdictions, reducing duplication.',
+      title: 'Shared Physical Infrastructure',
+      description: 'Access to the physical infrastructure that no single country needs to own independently: BSL-3/4 containment, GMP/CDMO manufacturing, HPC compute, population-scale sequencing, and aging model organism platforms.',
     },
   },
-  [InternationalField.SHARED_INFRASTRUCTURE]: {
+  [InternationalField.INTERNATIONAL_RESEARCH_NETWORK]: {
     [Locale.EN]: {
-      title: 'Shared Research Infrastructure',
-      description: 'Jointly funded and operated facilities — wet labs, model organism platforms, HPC compute, perturbation screening — accessible to researchers across member states.',
+      title: 'International Research Network',
+      description: 'The country\'s integration into global longevity science — depth of consortium participation, data sharing frameworks, access to joint funding, publication influence, and IP cooperation infrastructure.',
     },
   },
-  [InternationalField.PUBLIC_ENGAGEMENT]: {
+
+  // Societal
+  [SocietalField.SOCIETAL_READINESS]: {
     [Locale.EN]: {
-      title: 'Public Engagement & Counter-Misinformation',
-      description: 'Coordinated public communication to build societal support for longevity science and counter misinformation around anti-aging interventions.',
+      title: 'Societal Readiness',
+      description: 'Public trust in science and medicine, societal acceptance of longevity extension as a legitimate goal, and political will to fund and prioritize longevity policy.',
     },
   },
 }
