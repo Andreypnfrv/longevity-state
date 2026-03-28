@@ -1307,11 +1307,15 @@ export interface ClaimData {
   links: Link[]
 }
 
+export interface CountryMetric { value: number; year: number; source: string }
+export interface CountryMetrics { lifeExpectancy: CountryMetric; healthyLifeExpectancy: CountryMetric; populationShare60Plus: CountryMetric }
+
 // ------------------------------------------------------------
 // COUNTRY DATA — each field is a record of claims
 // ------------------------------------------------------------
 export interface CountryData {
   country: Country
+  metrics: CountryMetrics
 
   talents: {
     [TalentsField.RESEARCHER_IMMIGRATION]:      Record<ResearcherImmigrationClaim, ClaimData>

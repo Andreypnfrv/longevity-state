@@ -13,6 +13,12 @@ import {
 const switzerland: CountryData = {
   country: Country.SWITZERLAND,
 
+  metrics: {
+    lifeExpectancy: { value: 84.1, year: 2023, source: 'World Bank WDI SP.DYN.LE00.IN' },
+    healthyLifeExpectancy: { value: 71.1, year: 2021, source: 'IHME via Our World in Data' },
+    populationShare60Plus: { value: 0.273, year: 2023, source: 'UN WPP 2024' },
+  },
+
   talents: {
     [TalentsField.RESEARCHER_IMMIGRATION]: {
       [ResearcherImmigrationClaim.VISA_PATHWAY]: {

@@ -16,3 +16,7 @@ Build: `npm run build`. Preview static: `npm run preview`.
 - `src/countries/*.ts` — `CountryData` per country; register in `src/countries/index.ts`.
 - `src/translations/` — labels for UI.
 - `src/App.tsx` — view.
+
+## QA
+- not sure that IP is valued properly. So far from what i remember in Switzerland u have to buy it out, and in US it belongs to univerisities.
+

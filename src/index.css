@@ -51,6 +51,7 @@ html, body {
   --group-tone-b:    color-mix(in srgb, #6b8cc9 12%, var(--surface));
   --group-outline:   color-mix(in srgb, var(--border) 85%, var(--accent));
   --cell-max-highlight-bg: color-mix(in srgb, var(--dot-5) 7%, var(--cell-bg));
+  --claim-row-hover-bg: color-mix(in srgb, var(--border-hi) 35%, var(--cell-bg));
 }
 
 html { font-size: 14px; }
@@ -107,4 +108,5 @@ details > summary::-webkit-details-marker { display: none; }
   --dot-4:      #43a047;
   --dot-5:      #00c853;
   --cell-max-highlight-bg: color-mix(in srgb, var(--dot-5) 9%, var(--cell-bg));
+  --claim-row-hover-bg: color-mix(in srgb, var(--border-hi) 28%, var(--cell-bg));
 }

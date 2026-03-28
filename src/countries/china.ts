@@ -13,6 +13,12 @@ import {
 const china: CountryData = {
   country: Country.CHINA,
 
+  metrics: {
+    lifeExpectancy: { value: 78.0, year: 2023, source: 'World Bank WDI SP.DYN.LE00.IN' },
+    healthyLifeExpectancy: { value: 68.6, year: 2021, source: 'IHME via Our World in Data' },
+    populationShare60Plus: { value: 0.215, year: 2023, source: 'UN WPP 2024' },
+  },
+
   talents: {
     [TalentsField.RESEARCHER_IMMIGRATION]: {
       [ResearcherImmigrationClaim.VISA_PATHWAY]: {
