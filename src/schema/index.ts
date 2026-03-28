@@ -1145,7 +1145,12 @@ export enum IntlResearchNetworkClaim {
 
 export enum SocietalReadinessClaim {
   AGING_MEDIA_FRAMING   = 'aging_media_framing',   // at what ambition level does mainstream media frame aging — from fatalism to indefinite healthspan
-  PUBLIC_TRUST          = 'public_trust',
+  /** A — doctors, hospitals, “medicine in general” (Eurobarometer health, national health barometers). */
+  PUBLIC_TRUST_CLINICAL_SYSTEM = 'public_trust_clinical_system',
+  /** B — scientists, biomedical research, universities in a health context (Wellcome, science-attitude surveys). */
+  PUBLIC_TRUST_SCIENCE_RESEARCH = 'public_trust_science_research',
+  /** C — ministry of health, CDC/PHI equivalent, regulator as source of official guidance. */
+  PUBLIC_TRUST_STATE_HEALTH = 'public_trust_state_health',
   POLICY_COMMITMENT     = 'policy_commitment',     // funded and statutory institutional commitment — not the same as rhetorical salience
   LEGISLATIVE_SALIENCE  = 'legislative_salience',  // ambition level at which political elites publicly discuss aging (0–4 scale)
   QUACKERY_RESISTANCE   = 'quackery_resistance',   // protection against unproven anti-aging claims: supplements, cosmetics, pseudo-specialists
@@ -1281,16 +1286,29 @@ export const INTL_RESEARCH_NETWORK_CLAIM_SCALES: Record<IntlResearchNetworkClaim
 }
 
 export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Record<number, string>> = {
-  // Single score compresses trust in clinicians, biomedical science, and state health agencies — use the weakest
-  // pillar that would plausibly constrain longevity-relevant adoption (novel therapies, trials, data programmes).
-  // Prefer repeated representative surveys (Wellcome, Eurobarometer, national panels) over one-off polls.
-  [SocietalReadinessClaim.PUBLIC_TRUST]: {
-    0: 'Legitimacy crisis for science-led health policy: large refusal blocks or active anti-science coalitions on high-salience medical consensus; institutions cannot run population programmes without major backlash',
-    1: 'Clearly below peer-country benchmarks on doctors, scientists, or national health authorities; chronic prevention hesitancy (e.g. vaccines, screening) beyond access or supply gaps',
-    2: 'Average or split signals: routine care and established prevention broadly accepted, but sharp caution on novel regulated biotech, trial participation, government health-data use, or acute political polarisation on science',
-    3: 'Stable majorities trust medical institutions and scientists; regulated innovation and clinical research are socially legitimate; polarisation exists but no blocking minority on core public-health and research norms',
-    4: 'Very high trust on standard measures; strong fiscal/social support for biomedical research; organised anti-science influence on national policy is marginal',
-    5: 'Top-decile internationally on comparable trust indicators; durable norm that science and public health are part of the social contract across the main partisan or cultural cleavages that matter for health policy',
+  [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+    0: 'Legitimacy crisis for front-line medicine: large-scale refusal of routine care guidance or collapsing trust in the medical profession as a whole',
+    1: 'Clearly below peer benchmarks on trust in physicians, nurses, or hospitals/clinics in representative surveys',
+    2: 'Routine care broadly accepted, but sharp inequality or polarisation in trust in medical institutions by group or region',
+    3: 'Stable majorities trust doctors and medical facilities for standard care; controversies do not block national care or prevention programmes',
+    4: 'Very high trust in the medical profession and hospitals on standard national or international measures',
+    5: 'Top-decile internationally; trust in front-line medicine holds across the main political or cultural cleavages that affect health behaviour',
+  },
+  [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+    0: 'Biomedical science rejected as a basis for health policy at scale; major anti-research coalitions on salient medical issues',
+    1: 'Clearly below peers on trust in scientists, universities, or medical research for health decisions',
+    2: 'Established science accepted for familiar interventions; sharp caution on novel regulated biotech, trial participation, or research use of health data',
+    3: 'Stable majorities trust scientists and biomedical research; clinical trial participation is broadly socially legitimate',
+    4: 'Very high trust and fiscal/social support for medical science; organised science scepticism has marginal influence on national health-research policy',
+    5: 'Top-decile internationally; durable norm that biomedical research is part of the social contract on health across main cleavages',
+  },
+  [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+    0: 'National public-health bodies lack legitimacy to recommend or run population programmes; central guidance ignored or actively opposed at scale',
+    1: 'Clearly below peers on trust in the ministry of health, CDC/PHI equivalent, or medicines regulator as source of official health guidance',
+    2: 'Personal or local care trusted more than national health agencies; polarisation or scandal episodically undermines central guidance',
+    3: 'Stable majorities trust national public-health institutions and their core recommendations (vaccination, screening, emergency measures where applicable)',
+    4: 'Very high trust in the national health ministry, agency, or PHI on standard measures',
+    5: 'Top-decile internationally; central health-authority credibility holds across main partisan or cultural divides that affect implementation',
   },
   // Ordinal ladder for the *level of ambition* at which mainstream media frames aging.
   // The question is the highest ambition level that has achieved sustained mainstream presence — not fringe coverage.
@@ -1304,13 +1322,14 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
     4: 'Indefinite healthspan as cultural aspiration: aging is framed as an engineering problem to be solved, not a biological limit to be managed; mainstream discourse includes concepts like longevity escape velocity; the goal is not a fixed target lifespan but the elimination of aging-driven decline regardless of mechanism',
     5: 'Global reference-point framing: the national media ecosystem is cited abroad as the benchmark for serious, accessible longevity coverage; prime-time documentary and fiction routinely treat biological age reversal and longevity escape velocity as plausible without apology; geroscience is ambient background culture, not a movement — skepticism is proportionate to other mature science debates, not dismissed as science fiction',
   },
+  // Scored on research (R), prevention (P), and AI/data-for-ageing-health (I) only — see methodology on claim. LTCI / care / pensions do not raise the score without qualifying L+B in R/P/I.
   [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-    0: 'Active legislative obstruction — statutes block longevity-relevant research without a review pathway; or the state funds only social care with no science mandate on aging biology',
-    1: 'No dedicated budget line; longevity appears only inside generic health strategies; no ring-fenced programme — announcements do not convert to durable fiscal commitment',
-    2: 'Ring-fenced aging or longevity funding exists but is tied to one government term; weak cross-party renewal; modest per-capita spend; easily reversed after an election',
-    3: 'Multi-year programme that has survived at least one change of government; cross-ministry coordination is routine; moderate per-capita investment with a visible continuity record',
-    4: 'Longevity is an explicit funded priority — dedicated agency or statutory mandate, politically insulated baseline budget, multi-decade flagship programmes, large per-capita commitment',
-    5: 'Plan-law or equivalent statutory anchor with quantified healthy lifespan targets; world-leading per-capita longevity spend; reversing course requires a formal high-level political decision',
+    0: 'Statute blocks longevity-relevant research without a review pathway; or no primary L+B (and no A+B) in any of R, P, or I — large long-term care spend alone does not lift this rung',
+    1: 'Executive strategy or law mentions health/ageing/digital direction but no appropriation with a named line and amount in official budget or programme annex for R, P, or I',
+    2: 'L+B in exactly one of R / P / I for at most one typical political cycle (annual line or no multi-year lock-in in primary documents); continuity after government/plan change not demonstrated',
+    3: 'L+B with ≥3-year horizon (or equivalent year-on-year same line) in ≥1 bucket; documented continuity (C) after a cabinet/plan/coalition change (or plan-cycle analogue); ≥2 ministries or a formal inter-ministerial instrument',
+    4: 'All rung-3 conditions plus L+B in ≥2 buckets; and either a permanent agency/centre (A) with budget attribution or flagship L naming healthy longevity / aging biology / national digital health for ageing; spend is large vs peer countries in narrative',
+    5: 'Plan-law-level L with a quantitative population health anchor (LE, DFLE, HLY, or explicit national R/P/I KPIs) plus protected baseline B; C across ≥2 political/plan cycles or repeal only by high act; L+B closes all three buckets — R, P, and I — otherwise cap at 4',
   },
   [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
     0: 'Aging is not a scientific topic in political speech — only pensions and social protection',
@@ -1319,13 +1338,14 @@ export const SOCIETAL_READINESS_CLAIM_SCALES: Record<SocietalReadinessClaim, Rec
     3: 'Geroscience in political language: leaders or parties describe extending healthy life as a scientific mission, name biological targets, treat 100+ as a political goal — documentary record (Hansard, manifestos, flagship speeches)',
     4: 'Longevity as a political mandate: parties compete on this terrain; the head of state publicly makes it a core goal; the theme recurs in flagship state speeches and national strategic documents',
   },
+  // One composite score: marketing (cosmetics, supplements, ads), product borderlines, and professional discipline — not public opinion (see public trust pillars).
   [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
-    0: '"Anti-aging" is an unregulated marketing term. Supplements and cosmetics may freely claim to reverse aging without evidence. A4M-style pseudo-specialist certifications are unchallenged by professional licensing bodies and can be used to claim clinical authority. No enforcement mechanism specific to anti-aging pseudoscience.',
-    1: 'General consumer protection and advertising standards apply, but enforcement is reactive — complaints-only, no proactive monitoring. Anti-aging claims may be challenged after the fact if reported to the advertising regulator. Professional licensing bodies neither endorse nor sanction members for promoting unproven interventions.',
-    2: 'Advertising regulator has issued domain-specific guidance on anti-aging claims; unsubstantiated "anti-aging" and "reverses aging" claims in cosmetics and supplements are routinely challenged and removed. Professional medical associations have published position statements against specific pseudo-practices (A4M-style, IV drip clinics, hormone optimisation without indication). No pre-market requirement; enforcement remains complaint-driven.',
-    3: 'Products cannot carry "anti-aging" or equivalent systemic claims without substantiated clinical data on file with the regulator. Medical licensing boards have explicit rules: members endorsing unproven anti-aging interventions face disciplinary proceedings. A4M-type certifications are explicitly listed as insufficient clinical qualification; practitioners using them to justify prescribing unlicensed agents can be sanctioned.',
-    4: 'Systemic anti-aging effect claims require biomarker evidence reviewed by the regulator before marketing is permitted. Advertising regulator proactively monitors and issues removal orders on non-compliant claims. Public registry distinguishes validated from non-validated anti-aging claims. Practitioners at dedicated "longevity clinics" promoting disproven regimens face license review.',
-    5: 'Anti-aging effect claims require the same evidence standard as drug efficacy claims — validated biomarker endpoints from a regulator-approved list must be demonstrated. Pseudo-certification bodies that grant clinical authority without recognised medical training are banned from doing so. Country is a global reference for evidence-based consumer protection in the longevity space.',
+    0: '"Anti-aging" / "reverses aging" are effectively unregulated for marketing: cosmetics, foods, and supplements can imply systemic rejuvenation without evidence; non-recognised "longevity" or anti-aging certifications are used to imply clinical authority without challenge from licensing bodies; no anti-aging-specific enforcement pathway',
+    1: 'Only generic consumer protection and advertising law applies; anti-aging claims are addressed reactively if complained; no proactive monitoring; medical regulators do not treat promotion of unproven longevity interventions as a distinct disciplinary offence',
+    2: 'Advertising or health-product regulator has issued guidance targeting anti-aging / systemic rejuvenation claims; unsubstantiated cosmetic and supplement claims are routinely removed in practice; professional associations have position statements against named pseudo-practices (e.g. IV "wellness" clinics, hormone optimisation without indication, reliance on non-recognised anti-aging credentials); still largely complaint-driven, no pre-market anti-aging bar',
+    3: 'Systemic or whole-body "anti-aging" effect claims in consumer health products require substantiated clinical data held on file or pre-cleared with the regulator; licensing rules explicitly allow sanction for promoting unproven anti-aging protocols; non-recognised longevity certifications are named as insufficient basis for prescribing or clinical authority',
+    4: 'Systemic anti-aging marketing claims require pre-market review with biomarker or clinical evidence acceptable to the regulator; advertising authority proactively monitors and removes non-compliant longevity claims; optional or de-facto public distinction between validated and hype claims; dedicated longevity or anti-aging clinics pushing disproven regimens face credible license review',
+    5: 'Anti-aging or systemic rejuvenation effect claims meet essentially the same evidence standard as medicinal efficacy for marketing purposes; bodies that confer "clinical" or prescribing authority without recognised medical training cannot legally support commercial longevity practice; jurisdiction is cited internationally as a reference for evidence-based longevity consumer protection',
   },
 }
 

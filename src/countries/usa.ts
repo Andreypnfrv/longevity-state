@@ -806,10 +806,26 @@ const usa: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 3,
-        text: 'Pew Research (2022) shows ~55% of Americans trust scientists "a lot" — moderate and declining. Trust is politically polarised: Republicans significantly less trusting of scientists and medical institutions post-COVID. Vaccine hesitancy and anti-establishment health movements are measurable factors. Above average globally but below Scandinavian norms.',
-        links: [{ label: 'Pew Research on Science Trust', url: 'https://www.pewresearch.org/science/2022/02/15/americans-trust-in-scientists-other-groups-declines/', comment: 'Pew 2022 — 55% trust scientists "a lot", declining trend, politically polarised' }],
+        text: 'Gallup honesty/ethics (Dec 2025): nurses 75% and medical doctors 57% high/very high — still top-tier professions but far below pandemic peaks and with a 16-point partisan gap on doctors. Clinical trust is uneven vs Nordic benchmarks.',
+        links: [
+          { label: 'Gallup — Honesty and ethics of professions', url: 'https://news.gallup.com/poll/700736/nurses-continue-lead-honesty-ethics-ratings.aspx', date: 'Jan 2026', comment: 'Survey Dec 1–15, 2025 — nurses 75%, doctors 57% high/very high ethics' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 3.5,
+        text: 'Pew ATP Oct 21–27, 2024: 76% have a great deal or fair amount of confidence in scientists to act in the public interest (up from 73% Oct 2023); 88% Democrats vs 66% Republicans — wide gap, GOP up 5 pts year-on-year. Still below April 2020 (87%) aggregate confidence.',
+        links: [
+          { label: 'Pew Research — Public trust in scientists', url: 'https://www.pewresearch.org/science/2024/11/14/public-trust-in-scientists-and-views-on-their-role-in-policymaking/', date: 'Nov 2024', comment: 'Fieldwork Oct 21–27, 2024 — confidence in scientists; partisan breakdown' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 2,
+        text: 'KFF Health Information and Trust (Jan 13–20, 2026): 47% trust CDC at least a fair amount for reliable vaccine information — near series low; sharp erosion from 2020 baselines, with recent decline concentrated among Democrats after schedule politics.',
+        links: [
+          { label: 'KFF — Trust and confidence in the CDC', url: 'https://www.kff.org/health-information-trust/poll-trust-and-confidence-in-the-cdc-remain-at-low-point-after-changes-to-recommended-childhood-vaccines-more-say-the-changes-will-hurt-than-help-childrens-health/', date: 'Feb 2026', comment: 'National poll Jan 13–20, 2026 — 47% trust CDC on vaccine information' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
@@ -821,8 +837,12 @@ const usa: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 3,
-        text: 'NIA, established by statute in 1974, has sustained a $4B+ annual budget across 50+ years and administrations from both parties — the strongest evidence of policy durability in aging science globally. The bipartisan National Alzheimer\'s Project Act (NAPA, 2011) and its multi-year successors demonstrate cross-party funding continuity for an aging disease. ARPA-H (2022) includes longevity-adjacent health moonshot programmes. However, no explicit statutory mandate for healthy lifespan extension as a distinct policy goal exists — all major commitments are disease-framed (Alzheimer\'s, cancer) rather than geroscience-framed, and no quantified healthspan target has been adopted.',
-        links: [{ label: 'NIA Strategic Directions 2020–2025', url: 'https://www.nia.nih.gov/about/aging-strategic-directions-research', comment: 'NIA — 50-year statutory institute; largest aging science budget globally' }],
+        text: 'R: NIA is a statutory institute with annual congressional appropriation (CJ/budget justification) — clear L+B for ageing research. P: Older Americans Act and HHS ACL programmes, plus CDC healthy-ageing work, give named federal prevention and services lines for older adults — P bucket, not Medicare acute-care generality. I: NIH Common Fund Bridge2AI and related data/AI initiatives support health-relevant AI and datasets; linkage to ageing-specific KPIs in one appropriation table is weaker than R. No single plan-law quantifying national healthspan ties all three. Score 3: multi-year R with documented C across administrations; P and I present but not at rung-4 dual-bucket scale with flagship ageing-digital statute.',
+        links: [
+          { label: 'NIA — FY 2024 budget (Congressional justification)', url: 'https://www.nia.nih.gov/about/budget/fiscal-year-2024-budget', date: 'FY 2024', comment: 'R+B — appropriated ageing research institute; primary budget artefact' },
+          { label: 'ACL — Older Americans Act overview', url: 'https://acl.gov/about-acl/authorizing-statutes/older-americans-act', comment: 'P+L — statutory authorisation for federal ageing services and prevention supports' },
+          { label: 'NIH — Bridge2AI programme', url: 'https://commonfund.nih.gov/bridge2ai', comment: 'I — NIH Common Fund for ethical AI-ready health datasets (health-linked I bucket)' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 2,
@@ -834,10 +854,11 @@ const usa: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'FTC has enforcement authority over false advertising including anti-aging product claims, and has issued guidance explicitly warning against unsubstantiated "reverses aging" marketing. However, enforcement is reactive and complaint-driven — no pre-market review. The DSHEA (1994) supplements law creates a regulatory gap: supplement makers don\'t need to prove claims before marketing. A4M operates freely, offers board certifications unchallenged by state medical licensing boards.',
+        text: 'FTC health-claims enforcement and Health Products Compliance Guidance require competent and reliable scientific evidence for anti-aging and disease-style supplement/OTC marketing; public cases through 2020–2024 targeted “reverses aging”–style cure claims. Remains reactive and case-driven — no pre-market bar for supplement claims. DSHEA leaves dietary supplements without FDA pre-approval for claims. Non-recognised “longevity” credentials and state-by-state medical-board practice vary — structural gap vs rung 3.',
         links: [
-          { label: 'FTC – Anti-Aging Claims Guidance', url: 'https://www.ftc.gov/business-guidance/resources/ftcs-revised-endorsement-guides-what-people-are-asking', comment: 'FTC guidance on substantiation — applies to anti-aging claims' },
-          { label: 'DSHEA Supplement Regulation', url: 'https://www.fda.gov/food/dietary-supplements/overview-dietary-supplements', comment: 'FDA supplement framework — manufacturers do not need FDA approval before marketing' },
+          { label: 'FTC — Health claims (advertising & marketing)', url: 'https://www.ftc.gov/business-guidance/advertising-marketing/health-claims', comment: 'L+B — FTC hub; substantiation expectations for health-related ads' },
+          { label: 'FTC — Health Products Compliance Guidance', url: 'https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance', comment: 'L+B — examples and proof standard for health product claims' },
+          { label: 'FDA — Dietary supplements overview', url: 'https://www.fda.gov/food/dietary-supplements/overview-dietary-supplements', comment: 'L — no pre-market approval for supplement claims (structural ceiling)' },
         ],
       },
     },

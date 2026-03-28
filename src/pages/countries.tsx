@@ -20,7 +20,7 @@ import {
   stickyCornerHeaderCol,
   stickyFirstCol,
   stickyGroupFirstCol,
-  getClaimScaleLegendLines,
+  ClaimLeftRubricBody,
   claimTodoModel,
   parseScaleLegendEntries,
 } from './index'
@@ -56,11 +56,6 @@ function todoCellShell(rh: boolean | undefined): CSSProperties {
     width: '100%',
     background: rh ? 'transparent' : 'var(--cell-bg)',
   }
-}
-
-function legendLineLeadingLevel(line: string): number | null {
-  const m = line.match(/^(\d+)/)
-  return m ? Number(m[1]) : null
 }
 
 function countryLevelFloor(score: number, maxScore: number, field: string, claimKey: string): number {
@@ -754,29 +749,11 @@ export default function CountryPage(props: IndexPageProps) {
                                     style={{ marginTop: 10, marginLeft: 16, paddingLeft: 18, paddingBottom: 4 }}
                                     onClick={e => e.stopPropagation()}
                                   >
-                                    {getClaimScaleLegendLines(field, claimKey).map((line, i) => {
-                                      const lineLv = legendLineLeadingLevel(line)
-                                      const hl = countryLv != null && lineLv != null && lineLv === countryLv
-                                      return (
-                                        <div
-                                          key={i}
-                                          style={{
-                                            fontSize: 10,
-                                            lineHeight: 1.55,
-                                            marginBottom: 3,
-                                            color: hl ? 'var(--text)' : 'var(--muted)',
-                                            fontWeight: hl ? 600 : 400,
-                                            padding: hl ? '4px 8px' : undefined,
-                                            marginLeft: hl ? -8 : undefined,
-                                            borderRadius: hl ? 4 : undefined,
-                                            background: hl ? 'var(--cell-max-highlight-bg)' : undefined,
-                                            borderLeft: hl ? '3px solid var(--accent)' : undefined,
-                                          }}
-                                        >
-                                          {line}
-                                        </div>
-                                      )
-                                    })}
+                                    <ClaimLeftRubricBody
+                                      fieldKey={field}
+                                      claimKey={claimKey}
+                                      countryLegendLevel={countryLv}
+                                    />
                                   </div>
                                 )}
                               </div>

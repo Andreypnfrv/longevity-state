@@ -796,11 +796,25 @@ const netherlands: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
-        text: 'The Netherlands consistently ranks among the top 3 countries globally for public trust in science, medicine, and public health institutions. Eurobarometer surveys place NL trust in science at 85–90%. Vaccine uptake typically exceeds 90% for childhood programmes. Trust in the national public health institute (RIVM) and the Gezondheidsraad is institutionally embedded and supported by transparent public communication practices. The Dutch social contract with public health — embedded in the Calvinist tradition of collective responsibility — creates exceptional conditions for population-level health research and screening participation.',
+        text: 'Very high routine vaccination and screening uptake; care system remains a trusted channel for national prevention advice — consistent with NL’s long-standing top band in EU science-and-health attitude surveys.',
         links: [
-          { label: 'Eurobarometer Science Trust 2021', url: 'https://europa.eu/eurobarometer/surveys/detail/2237', comment: 'EU survey placing NL among highest-trust nations for science and medicine' },
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Special Eurobarometer science & technology; fieldwork Sep 12–Oct 10, 2024 (EU27+)' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 5,
+        text: 'Same 2024-field Eurobarometer wave: EU aggregate 83% see S&T influence as positive; NL historically clusters at the top on trust-in-science items vs EU average.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU27+ fieldwork Sep–Oct 2024 — trust and attitudes to science' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 5,
+        text: 'RIVM and Gezondheidsraad retain high technical credibility; national PHA communication remains a reference model within the EU.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Context wave Sep–Oct 2024 — NL public-health trust in EU top tier' },
         ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
@@ -813,8 +827,12 @@ const netherlands: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 3,
-        text: 'ZonMw\'s Healthy Ageing programme is a multi-year government-funded commitment that has survived multiple coalition governments (VVD-PvdA, VVD-CDA, Rutte III, IV, and the Schoof cabinet). The Deltaplan Dementie (2012, renewed 2018, 2023) demonstrates cross-party renewal capacity for an aging disease programme over a decade. NWO Gravitation grants (10-year commitments) provide institutionalised aging science funding independent of annual budget cycles. The National Prevention Agreement is coalition-signed. However, no ring-fenced longevity science budget with quantified healthspan targets exists; framing remains disease prevention and social care quality.',
-        links: [],
+        text: 'R+P: ZonMw Healthy Ageing programme is a multi-year, government-commissioned research funding line with calls and budgets published (L+B) and continuity across coalitions (C). National Prevention Agreement and dementia (Deltaplan) tracks add P bucket ministry and parliamentary follow-through. I: national e-health / data exchange policy (Ministry of VWS, MedMij, EHR standards) supplies digital-health L; explicit ageing-KPI linkage in one budget annex is moderate vs peers. WOZO/elder housing-care letters support system reform but are not scored as LTCI-style care commitment here. Meets rung 3 (multi-year R/P with C + cross-ministry signals); not 4 without second bucket at flagship statute level.',
+        links: [
+          { label: 'ZonMw — JPI More Years Better Lives / gezond ouder worden', url: 'https://www.zonmw.nl/nl/programma/jpi-more-years-better-lives-j-age-2', comment: 'R+L+B — national participation / knowledge agenda on healthy ageing research' },
+          { label: 'Rijksoverheid — Nationaal Preventieakkoord', url: 'https://www.rijksoverheid.nl/onderwerpen/gezonde-leefstijl/presentatie-aanpak-van-de-rijksoverheid', comment: 'P+L — national prevention agreement (government sites)' },
+          { label: 'Ministerie van VWS — Elektronische gegevensuitwisseling in de zorg', url: 'https://www.rijksoverheid.nl/onderwerpen/electronische-gegevensuitwisseling', comment: 'I+L — national e-health / data exchange policy' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 2,
@@ -826,9 +844,10 @@ const netherlands: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
-        text: 'The Netherlands Inspection for Health Care and Youth (IGJ) actively enforces standards for healthcare advertising, including anti-aging claims. There is no equivalent to the German Heilpraktiker system. The Keuringsraad Openbare Aanprijzing Geneesmiddelen (KOAG/KAG) enforces advertising standards for health products and supplements. However, the Dutch supplement and wellness market is active, and online direct-to-consumer marketing of NAD+ precursors, senolytics, and other longevity supplements is common and operates largely outside the medical framework, as in most EU countries.',
+        text: 'IGJ monitors medicine advertising and inducement rules (including influencer and online channels) with administrative fines in scope. Keuringsraad KOAG/KAG pre-clears much public advertising for medicines and health products under the CAG. No Heilpraktiker-equivalent. Direct-to-consumer longevity and supplement marketing still outpaces inspection capacity in places — composite rung 3.',
         links: [
-          { label: 'IGJ Healthcare Advertising Enforcement', url: 'https://www.igj.nl/en', comment: 'Dutch healthcare inspection including anti-quackery enforcement' },
+          { label: 'IGJ — Medicine advertising and inducement (English)', url: 'https://english.igj.nl/medicines/medicine-advertising-and-inducement', comment: 'L+B — inspectorate rules and enforcement levers' },
+          { label: 'Keuringsraad — KOAG / KAG (medicines and health products)', url: 'https://keuringsraad.nl/over-de-keuringsraad/koag-kag/', comment: 'L+B — statutory review body for health-product advertising' },
         ],
       },
     },

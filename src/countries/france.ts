@@ -704,10 +704,26 @@ const france: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+        score: 3.5,
+        text: 'Doctors and hospitals remain more trusted than politicians; interpersonal clinical trust is middling-to-good vs northern peers.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep–Oct 2024 — France EU comparator' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 3,
-        text: 'France has significant vaccine hesitancy historically — among the highest in Western Europe — and a culturally embedded méfiance toward institutions. Trust in medicine itself is reasonable but trust in government-directed health interventions is lower than in Scandinavia or Germany. Science communication is a political priority but baseline scepticism persists.',
-        links: [],
+        text: 'State promotes science literacy but baseline scepticism toward expert health claims runs above Nordics; EU-wide 2024-field wave still shows majority pro-science sentiment with equity and rights caveats.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Feb 2025 EC release — attitudes to S&T (EU27+)' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 2.5,
+        text: 'Historically higher vaccine hesitancy and méfiance toward central health campaigns than Germany or Scandinavia; national agencies face recurring legitimacy tests in media and politics.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Cross-national context wave Sep–Oct 2024' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -719,8 +735,12 @@ const france: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 3,
-        text: 'France 2030 is a genuine multi-year investment plan (€54B total, €7.5B for health innovation) endorsed by the Élysée and backed by programme law — providing more structural durability than a simple budget line. The Plan Maladies Neurodégénératives and national Alzheimer strategy represent cross-ministry sustained commitments. INSERM\'s Institut du Vieillissement and the France Biotech ecosystem give longevity-adjacent science institutional anchoring. France 2030 has survived multiple prime ministers under Macron, demonstrating presidential-level commitment resilience — though its aging-specific budget line lacks quantified healthspan targets.',
-        links: [{ label: 'France 2030 Santé', url: 'https://www.gouvernement.fr/france-2030', comment: 'France 2030 — multi-year presidential programme; health innovation including aging, without explicit longevity-science mandate' }],
+        text: 'R: France 2030 (programme law) channels multi-year health-innovation and biomedical investment — L+B with presidential continuity (C) across premiers. P: national prevention policy (stratégie de prévention santé) and dementia / neurodegeneration plans supply population-health and older-age disease-prevention L, with ministry-of-health execution. I: Ségur du numérique en santé and Mon espace santé deliver statutory digital-health infrastructure — I bucket tied to care pathways. Score 3: clear multi-year R and cross-cutting P/I at national level; not 4 because ageing-longevity is not isolated in a single ring-fenced appropriation line comparable to peers and flagship L explicitly naming healthy longevity / geroscience is thinner than rung-4 bar.',
+        links: [
+          { label: 'Gouvernement — France 2030', url: 'https://www.gouvernement.fr/france-2030', comment: 'R+L+B — programme-law-backed innovation investment including santé' },
+          { label: 'Santé publique France — Stratégie de prévention santé', url: 'https://www.santepubliquefrance.fr/determinants-de-sante/promotion-de-la-sante/strategie-nationale-de-sante', comment: 'P+L — national prevention strategy (population health)' },
+          { label: 'Ministère de la Santé — Mon espace santé / dossier numérique', url: 'https://esante.gouv.fr/mon-espace-sante', comment: 'I+L — national shared health record / digital health (Ségur suite)' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 1,
@@ -732,8 +752,11 @@ const france: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
-        text: 'ANSM proactively challenges unsubstantiated health claims and is among the more active EU regulators on cosmetic and supplement advertising enforcement. DGCCRF (consumer protection) enforces EU Cosmetics Regulation strictly. The Ordre des Médecins has explicit positions against pseudo-scientific medicine. France lacks a Heilpraktiker-equivalent class, making the regulatory environment somewhat cleaner than Germany for unregulated anti-aging practitioners.',
-        links: [],
+        text: 'ANSM controls medicine advertising formats and obligations; EU nutrition and health-claim rules (EFSA register) bound food-supplement messaging — therapeutic or disease claims without MA remain off-limits. CNOM has published national concern on unconventional practices and illegal exercise risks (2023–2025 materials). No Heilpraktiker-equivalent class. Wellness and online longevity marketing still stress complaint-led enforcement — composite rung 3.',
+        links: [
+          { label: 'ANSM — Publicité des médicaments (supports et mentions)', url: 'https://ansm.sante.fr/documents/reference/supports-publicitaires-gp-autorises-et-presentation-des-mentions-obligatoires-associees', comment: 'L+B — authorised advertising formats for medicines to the public' },
+          { label: 'CNOM — Pratiques de soins non conventionnelles (communiqué)', url: 'https://www.conseil-national.medecin.fr/publications/communiques-presse/pratiques-soins-conventionnelles', date: '2023–2025', comment: 'L — national medical council position on unconventional care and risks' },
+        ],
       },
     },
   },

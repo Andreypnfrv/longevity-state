@@ -823,10 +823,26 @@ const sweden: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
-        text: 'Sweden consistently ranks among the top countries globally for trust in science and public institutions. Eurobarometer surveys show ~75–80% of Swedes trust scientists. Trust in healthcare, government, and research institutions is a defining feature of Swedish civil society. High baseline makes longevity science acceptance substantially easier.',
-        links: [{ label: 'Eurobarometer Science Trust', url: 'https://europa.eu/eurobarometer/surveys/detail/2237', comment: 'Sweden among highest EU countries for institutional and scientific trust' }],
+        text: 'Healthcare delivery and medical professions sit in Sweden’s high institutional-trust cluster alongside other public services.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep 12–Oct 10, 2024 — Sweden in EU high-trust band' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 5,
+        text: 'Same wave: Sweden remains among the EU’s strongest on trust in science and scientific institutions (historically ~75–80%+ on comparable items).',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Sep–Oct 2024 fieldwork — EU comparative release Feb 2025' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 5,
+        text: 'Folkhälsomyndigheten benefits from durable baseline trust in national institutions; COVID strategy fights did not erase long-run PHA legitimacy.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Institutional trust context — EU survey Sep–Oct 2024' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -838,8 +854,12 @@ const sweden: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 3,
-        text: 'Sweden\'s welfare state provides structurally stable aging research funding through VR, Vinnova, and Forte — not as explicit longevity commitments but as part of health and social science budgets that have survived decades of Social Democrat and centre-right governments alike. The Swedish Life Science Strategy (2019, updated 2023) includes aging as one of several priority areas with industry co-investment ambitions. The elderly care system (äldreomsorgen) commands large sustained budgets with cross-party consensus, providing an indirect stable floor. However, no ring-fenced longevity science programme with healthspan targets has been legislated.',
-        links: [{ label: 'Swedish Life Science Strategy', url: 'https://www.government.se/government-policy/life-science/', comment: 'National life science strategy — aging as a priority area; no standalone longevity mandate' }],
+        text: 'R: VR, Forte, and Vinnova fund ageing and health research through open and thematic calls with multi-year agency budgets (L+B) and long-run political continuity (C) across governments — R bucket without a single “longevity” statute. P: national public-health and regional prevention programmes (NCD, physical activity) support P; national dementia strategy documents add older-age P. I: national digitalisation of health and welfare (välfärdsdatalagen, 1177, e-health agency mandates) provides I infrastructure used across ages. Äldreomsorg spend is out of scope for this claim\'s score. Rung 3: durable agency-funded R plus national P/I policy lines; not 4 without two clearly ring-fenced buckets with named appropriations in one flagship law.',
+        links: [
+          { label: 'Regeringen — Life science strategy', url: 'https://www.government.se/government-policy/life-science/', date: '2019–', comment: 'R+L — government policy; ageing as priority area among others' },
+          { label: 'Forte — research on health and welfare', url: 'https://forte.se/en/', comment: 'R+B — Swedish research council for health, working life, welfare' },
+          { label: 'Socialstyrelsen — Nationell e-hälsostrategi (overview)', url: 'https://www.socialstyrelsen.se/en/health-and-social-care/e-health/', comment: 'I+L — national e-health guidance and regulation' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 2,
@@ -852,10 +872,10 @@ const sweden: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
-        text: 'Läkemedelsverket (Swedish MPA) enforces EU cosmetics regulations strictly — cosmetics cannot carry systemic anti-aging claims without reclassification as drugs. Reklamombudsmannen proactively reviews and removes unsubstantiated anti-aging claims. The Swedish Medical Association has issued guidelines against members promoting unproven interventions, and IVO can sanction healthcare providers for pseudoscientific practice. The supplement and "biohacking" market is smaller and less aggressive than in the US or UK.',
+        text: 'Läkemedelsverket applies EU borderline logic: cosmetics must not claim medicinal effects or systemic “anti-aging” in ways that trigger medicinal status. Reklamombudsmannen (self-regulatory advertising jury) issues decisions on misleading health and beauty claims. Medical profession and IVO can intervene on dangerous or misleading clinical promotion. Nordic supplement/biohacking volume is lower than Anglo markets but online longevity ads still appear — composite rung 3.',
         links: [
-          { label: 'Läkemedelsverket – Cosmetics Regulation', url: 'https://www.lakemedelsverket.se/en/cosmetics', comment: 'Swedish MPA — systemic anti-aging claims trigger drug classification' },
-          { label: 'Reklamombudsmannen', url: 'https://www.reklamombudsmannen.se/', comment: 'Swedish advertising standards — proactive review; removes unsubstantiated claims' },
+          { label: 'Läkemedelsverket — Cosmetics', url: 'https://www.lakemedelsverket.se/en/cosmetics', comment: 'L+B — national competent authority; cosmetic vs medicinal boundary' },
+          { label: 'Reklamombudsmannen — Start', url: 'https://www.reklamombudsmannen.se/', comment: 'L+B — advertising self-regulation and published opinions' },
         ],
       },
     },

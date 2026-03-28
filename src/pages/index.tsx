@@ -321,6 +321,60 @@ export function getClaimScaleLegendLines(fieldKey: string, claimKey: string): st
   return standardScaleLegendLines()
 }
 
+export function claimLegendLineLevel(line: string): number | null {
+  const m = line.match(/^(\d+)/)
+  return m ? Number(m[1]) : null
+}
+
+export function ClaimLeftRubricBody({
+  fieldKey,
+  claimKey,
+  countryLegendLevel,
+}: {
+  fieldKey: string
+  claimKey: string
+  countryLegendLevel?: number | null
+}) {
+  const methodology = claimLabels[fieldKey]?.[claimKey]?.[Locale.EN]?.methodology?.trim()
+  const lines = getClaimScaleLegendLines(fieldKey, claimKey)
+  return (
+    <>
+      {methodology ? (
+        <>
+          <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>Methodology</div>
+          <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.55, marginBottom: 12, whiteSpace: 'pre-wrap' }}>
+            {methodology}
+          </div>
+          <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>Scale</div>
+        </>
+      ) : null}
+      {lines.map((line, i) => {
+        const lineLv = countryLegendLevel != null ? claimLegendLineLevel(line) : null
+        const hl = countryLegendLevel != null && lineLv != null && lineLv === countryLegendLevel
+        return (
+          <div
+            key={i}
+            style={{
+              fontSize: 10,
+              lineHeight: 1.55,
+              marginBottom: 3,
+              color: hl ? 'var(--text)' : 'var(--muted)',
+              fontWeight: hl ? 600 : 400,
+              padding: hl ? '4px 8px' : undefined,
+              marginLeft: hl ? -8 : undefined,
+              borderRadius: hl ? 4 : undefined,
+              background: hl ? 'var(--cell-max-highlight-bg)' : undefined,
+              borderLeft: hl ? '3px solid var(--accent)' : undefined,
+            }}
+          >
+            {line}
+          </div>
+        )
+      })}
+    </>
+  )
+}
+
 export function claimTodoModel(
   fieldKey: string,
   claimKey: string,
@@ -471,7 +525,6 @@ function ClaimRow({
       }}
       style={{
         marginTop: noTopBorder ? 0 : 8,
-        padding: '8px 0',
         cursor: detailToggleOnClick ? 'pointer' : 'default',
       }}
     >
@@ -481,10 +534,12 @@ function ClaimRow({
         gap: 8,
         width: '100%',
         minWidth: 0,
+        minHeight: 44,
+        boxSizing: 'border-box',
       }}>
         <div style={{
           display: 'flex',
-          alignItems: hideTitle && hideChevron ? 'center' : 'flex-start',
+          alignItems: 'center',
           gap: 8,
           flex: 1,
           minWidth: 0,
@@ -653,9 +708,11 @@ export function SingleClaimCell({
       style={{
         background: fill,
         borderRadius: 6,
-        padding: '6px 10px',
+        padding: '0 10px',
         minHeight: 44,
         boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <ClaimRow
@@ -717,7 +774,7 @@ export function FieldCell({
       style={{
         background: fill,
         borderRadius: 6,
-        padding: CELL_PAD,
+        padding: '0 12px',
         minHeight: 44,
         height: '100%',
         cursor: 'pointer',
@@ -726,7 +783,14 @@ export function FieldCell({
         boxSizing: 'border-box',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        minHeight: 44,
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
         <Tooltip text={cellTooltip} widthPx={200}>
           <ScoreDots score={score} maxScore={maxScore} />
         </Tooltip>
@@ -1364,14 +1428,7 @@ export default function IndexPage({
                                   style={{ marginTop: 10, marginLeft: 16, paddingLeft: 18, paddingBottom: 4 }}
                                   onClick={e => e.stopPropagation()}
                                 >
-                                  {getClaimScaleLegendLines(field, claimKey).map((line, i) => (
-                                    <div
-                                      key={i}
-                                      style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.55, marginBottom: 3 }}
-                                    >
-                                      {line}
-                                    </div>
-                                  ))}
+                                  <ClaimLeftRubricBody fieldKey={field} claimKey={claimKey} />
                                 </div>
                               )}
                             </div>

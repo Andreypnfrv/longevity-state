@@ -663,10 +663,27 @@ const israel: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+        score: 5,
+        text: '2020–2021 COVID campaign: fastest proportional full-vaccination rollout globally — a hard benchmark of mass trust in the health system and front-line delivery.',
+        links: [
+          { label: 'Our World in Data — COVID-19 vaccinations', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'National time series — Dec 2020–2021 rollout vs population (historical benchmark)' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 4,
-        text: 'Israel\'s COVID-19 vaccination campaign — the world\'s fastest proportional rollout (60% of population fully vaccinated within 3 months of programme start) — demonstrated exceptionally high public trust in the healthcare system and medical science. Edelman Trust Barometer consistently shows Israeli trust in science and healthcare institutions above the global average. The Weizmann Institute has 80%+ public recognition and trust. Post-2021 political polarisation has dented some institutional trust, and anti-vaccine movements have grown modestly, but scientific institutions retain high credibility.',
-        links: [{ label: 'Israel COVID Vaccination Rate', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'Our World in Data — Israel COVID vaccination rate; world\'s fastest proportional rollout; demonstrates public health trust' }],
+        text: 'Weizmann and peer institutions retain very high public recognition; science-led vaccination messaging worked at scale in 2021 even though wider political polarisation later stressed other institutions.',
+        links: [
+          { label: 'Our World in Data — COVID-19 vaccinations', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'Proxy for acceptance of biomedical guidance during 2021 campaign' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 3.5,
+        text: 'MOH operational credibility during COVID was high; Israeli Democracy Index 2025 (May + Nov 2025 waves) documents persistently low trust in most state institutions — a cooler long-run ceiling for “national government” legitimacy than the pandemic peak, even where healthcare delivery still works.',
+        links: [
+          { label: 'IDI — Israeli Democracy Index 2025 (press)', url: 'https://en.idi.org.il/articles/62722', date: 'Dec 2025', comment: 'May 4–28 and Nov 2025 replicates — low trust in majority of institutions' },
+          { label: 'Our World in Data — COVID-19 vaccinations', url: 'https://ourworldindata.org/covid-vaccinations', comment: 'Historical MOH-led programme performance (2020–21)' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
@@ -678,8 +695,11 @@ const israel: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 2,
-        text: 'Israel\'s Ministry of Innovation, Science and Technology (MIST, 2020) and the Israel Innovation Authority explicitly support digital health and precision medicine with some longevity-adjacent programmes. The National Biobank and Israeli Genome Project have sustained government funding. However, five elections in four years (2019\u20132022) and resulting coalition instability have made multi-cycle programme commitment structurally difficult -- the MoST portfolio changed substantially with each coalition. No dedicated longevity science programme with ring-fenced budget and quantified healthspan targets has been established; existing commitments are vulnerable to government reshuffling.',
-        links: [{ label: 'Israel Innovation Authority', url: 'https://innovationisrael.org.il/en/', comment: 'Israel Innovation Authority -- supports digital health including longevity-adjacent programmes' }],
+        text: 'I+R: Israel Innovation Authority and national digital-health / biotech programmes provide L+B for digital health, genomics, and data infrastructure (I) with applied research leverage (partial R). P: MOH prevention and screening frameworks exist but federal L+B lines are less visible as multi-year, named appropriations vs methodology rung 3. Coalition churn through 2019–2022 weakens documented C for single flagship lines. No statutory quantified national healthspan target tying R+P+I. Score 2: real I+R activity with public money; P and durability below rung 3.',
+        links: [
+          { label: 'Israel Innovation Authority', url: 'https://innovationisrael.org.il/en/', comment: 'I+R+L — government tech funding; digital health and life-science programmes' },
+          { label: 'Israel MOH — Digital health (English hub)', url: 'https://www.health.gov.il/English/Topics/DigitalHealth/Pages/default.aspx', comment: 'I+L — ministry digital-health policy and programmes' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 2,
@@ -692,9 +712,10 @@ const israel: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'Israeli MOH regulates advertising of healthcare services and can sanction false claims, and the Consumer Protection Authority handles misleading supplement/cosmetic marketing. However, the Israeli market has seen rapid growth in "functional medicine", NAD+ IV clinics, and anti-aging supplement companies making implicit or explicit longevity claims. MOH enforcement on these clinics is limited in practice. The Israeli Medical Association has not issued specific guidelines against practitioners offering unproven anti-aging protocols.',
+        text: 'MOH pre-approves OTC pharmaceutical advertising under pharmacist regulations; publishes public warnings on misleading device/supplement-style pitches (e.g. 2024 stem-cell/anti-aging patch claims). Consumer Protection Law and the Economy Ministry consumer-protection unit address unfair trade practices. NAD+/IV longevity clinics and influencer health marketing still spread faster than probe throughput reported in third-party monitoring — composite rung 2 (rules + warnings; uneven proactive enforcement).',
         links: [
-          { label: 'Israeli Consumer Protection Authority', url: 'https://www.gov.il/en/departments/ministry_of_economy_and_industry/consumer_protection', comment: 'Handles misleading health and supplement advertising claims' },
+          { label: 'Israel MOH — Public warning: misleading ads (X39 patches)', url: 'https://www.gov.il/en/pages/29012024-01', date: 'Jan 2024', comment: 'L+B — ministry warning on unapproved anti-aging / stem-cell style claims' },
+          { label: 'Israel — Consumer Protection (Economy Ministry)', url: 'https://www.gov.il/en/departments/ministry_of_economy_and_industry/consumer_protection', comment: 'L — unfair-trade / misleading commercial practices' },
         ],
       },
     },

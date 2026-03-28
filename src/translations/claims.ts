@@ -13,6 +13,8 @@ import { Locale } from './index'
 export interface ClaimTranslation {
   title: string
   description: string
+  /** Long-form scoring methodology; shown in the left rubric column when expanded. */
+  methodology?: string
   maxScore?: number
 }
 
@@ -607,9 +609,17 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
 
   // ── Societal: Societal Readiness ──────────────────────────────────────────
   [SocietalField.SOCIETAL_READINESS]: {
-    [SocietalReadinessClaim.PUBLIC_TRUST]: { [Locale.EN]: {
-      title: 'Public trust in science & medicine',
-      description: 'Representative-survey trust in clinicians, biomedical science, and public-health institutions — scored by the weakest link that would constrain longevity-relevant uptake (novel therapies, trials, data sharing). Not the same as quackery resistance (alternative medicine markets can thrive even when institutional trust is high).',
+    [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: { [Locale.EN]: {
+      title: 'Public trust — clinical system',
+      description: 'Pillar A: trust in physicians, nurses, hospitals, and “medicine in general” in representative surveys (e.g. Eurobarometer health, national health barometers). Independent from science-in-the-lab and from trust in national health agencies.',
+    }},
+    [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: { [Locale.EN]: {
+      title: 'Public trust — biomedical science',
+      description: 'Pillar B: trust in scientists, universities, and medical research as a basis for health — trial participation, novel therapy legitimacy, research uses of data (e.g. Wellcome Global Monitor, Eurobarometer S&T).',
+    }},
+    [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: { [Locale.EN]: {
+      title: 'Public trust — national health authority',
+      description: 'Pillar C: trust in the ministry of health, public-health institute (CDC-style), and regulator as source of official guidance and population programmes — not the same as generic “trust in government”.',
     }},
     [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: { [Locale.EN]: {
       title: 'Aging media framing',
@@ -617,7 +627,14 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
     }},
     [SocietalReadinessClaim.POLICY_COMMITMENT]: { [Locale.EN]: {
       title: 'Policy commitment',
-      description: 'What the state actually funds and locks in — ring-fenced budgets, agencies, statute, and survival across elections. This is institutional follow-through, not how often politicians talk about aging (see legislative salience).',
+      description: 'State follow-through for research (R), prevention (P), and AI/data for ageing-related health (I) — statute plus budget where named; long-term care alone is out of scope. Expand the left column for methodology and rubric.',
+      methodology: `Scope: state-backed commitment in three buckets only — (R) Research: aging biology, geroscience, translation and trials infrastructure with an explicit aging/longevity R&D mandate (not generic hospital spend). (P) Prevention: national programmes — screening, healthy ageing, NCD risk reduction for older adults — with a named line and appropriation. (I) AI / data / digital: national AI-in-health, biobanks, digital tools for early detection or monitoring, explicitly tied to health and ageing/longevity (not a generic national AI strategy without health linkage).
+
+Out of scope for this claim: long-term care insurance, dependency systems, nursing-home capacity, pensions. A large LTCI budget does not raise the score unless there is also qualifying R, P, or I with L+B.
+
+Evidence codes (primary documents in country links): L = statute / plan-law / cabinet act naming the programme or body. B = official budget or multi-year programme annex with amount and time horizon. A = permanent agency or centre plus budget attribution. C = same mandate or line continuing after a government or plan cycle change (use the analogue for single-party plan systems).
+
+Scoring: assign the highest rung (0–5) whose conditions are met using only R/P/I commitments. Ring-fence means traceable in L+B, not press-only announcements. Country narrative should name which bucket(s) anchor the score. Detailed rung definitions are listed below under Scale.`,
     }},
     [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: { [Locale.EN]: {
       title: 'Legislative salience',
@@ -626,7 +643,12 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
     }},
     [SocietalReadinessClaim.QUACKERY_RESISTANCE]: { [Locale.EN]: {
       title: 'Anti-aging quackery resistance',
-      description: 'How well the regulatory and professional environment protects people from unproven anti-aging products and pseudo-specialist claims. Ranges from an unregulated "anti-aging" marketing free-for-all (0) to a system where any anti-aging effect claim requires validated biomarker evidence and pseudo-certification bodies cannot confer clinical authority (5).',
+      description: 'Single composite score: how strongly law, regulators, and professional discipline constrain unproven anti-aging marketing (cosmetics, supplements, ads), borderline health products, and clinical "longevity" practice. Not the same as public trust in science. Expand the left column for methodology.',
+      methodology: `One axis — the weakest link among (1) marketing and advertising enforcement for systemic / whole-body "anti-aging" or rejuvenation claims, (2) how borderline products are classified and controlled (cosmetic vs drug vs procedure), and (3) whether medical licensing credibly sanctions clinicians who sell unproven longevity protocols or rely on non-recognised "anti-aging" credentials. Public trust surveys do not set this score.
+
+Evidence: primary regulator guidance, statutes, published enforcement or rulings (e.g. advertising authority case law), and medical-board conduct codes — not media sentiment. Where law is federal but enforcement is regional, the score reflects the effective national regime; narrative should mention gaps (e.g. cross-border e-commerce, traditional-medicine carve-outs) if they cap the rung.
+
+Scoring: assign the highest rung (0–5) fully supported by documentary evidence. Detailed rung text is under Scale.`,
     }},
   },
 }

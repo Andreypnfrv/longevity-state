@@ -666,10 +666,28 @@ const uk: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 4,
-        text: 'NHS is the most trusted public institution in the UK (Ipsos Veracity Index consistently ranks NHS nurses #1). Trust in science is high: UK Science Media Centre and Wellcome Monitor (2023) report 77% of UK adults say they trust scientists. COVID vaccine rollout — UK\'s fastest among large nations — demonstrated public willingness to participate in national health programmes. However, trust in government handling of health data has been eroded by GPDPR (GP Data programme) controversy (2021) — requiring careful re-building for data access programmes.',
-        links: [{ label: 'Wellcome Global Monitor 2023', url: 'https://wellcome.org/reports/wellcome-global-monitor/2020', comment: 'Wellcome Monitor — 77% of UK adults trust scientists; NHS trust scores consistently highest among institutions' }],
+        text: 'Ipsos Veracity Index (Nov 5–11, 2025): nurses, engineers and doctors still lead trusted professions. British Social Attitudes 2025 (Aug 26–Oct 6, 2025): only 26% satisfied with how the NHS runs (up from 2024 but historically low); 37% satisfied with hospital inpatient care — strong interpersonal trust in clinicians coexists with system-level strain.',
+        links: [
+          { label: 'Ipsos — Veracity Index 2025', url: 'https://www.ipsos.com/en-uk/ipsos-veracity-index-2025', date: 'Dec 2025', comment: 'Telephone survey Nov 5–11, 2025 — nurses/doctors among most trusted professions' },
+          { label: 'The King\'s Fund — BSA NHS satisfaction 2025', url: 'https://www.kingsfund.org.uk/insight-and-analysis/reports/public-satisfaction-nhs-social-care-2025-bsa', date: 'Mar 2026', comment: 'BSA fieldwork Aug–Oct 2025 — 26% satisfied NHS overall; 37% hospital care' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 4,
+        text: 'Ipsos PAS 2025 for UKRI/BSA (Feb–July 2025, n=5,281): 82% agree scientists make a valuable contribution; 87% trust university-based scientists a great deal/fair amount to follow rules — but trust in government-employed scientists fell to 69% (from 76% in 2019) and private-sector scientists to 48%, with more neutral/uncertain responses than pre-pandemic waves.',
+        links: [
+          { label: 'Ipsos — Public Attitudes to Science (PAS 2025)', url: 'https://pas.ipsos.com/home/', date: '2025', comment: 'UK adults 16+; fieldwork Feb–July 2025 — trust by employer type; contribution items' },
+          { label: 'Ipsos PAS — Chapter 2 (scientists)', url: 'https://pas.ipsos.com/chapter-2_views-on-scientists-and-researchers/', comment: 'Trust to follow rules: universities 87%, government 69%, private companies 48%' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 3,
+        text: 'National data-stewardship remains sensitive after GP Data for Planning and Research (2021). BSA 2025 shows majority still back NHS founding principles but low satisfaction with how the system runs — pressure on confidence in national delivery and policy stewardship, not only local care.',
+        links: [
+          { label: 'The King\'s Fund — BSA NHS satisfaction 2025', url: 'https://www.kingsfund.org.uk/insight-and-analysis/reports/public-satisfaction-nhs-social-care-2025-bsa', date: 'Mar 2026', comment: 'National barometer on NHS running — context for NHSE/system legitimacy' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 3,
@@ -681,8 +699,12 @@ const uk: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 4,
-        text: 'UKRI\'s Healthy Ageing Challenge (£98M, 2018–2024) survived the transition from May to Johnson to Sunak governments. ARIA (Advanced Research + Invention Agency, 2022) has a longevity-adjacent remit and DARPA-style PM model with statutory independence. The Longevity Science Panel (2022) is a formal government advisory body. MRC has funded aging research continuously for four decades — a structural commitment comparable to NIA in durability. The NHS Long Term Plan explicitly includes healthy ageing prevention milestones. No quantified biological age target has been adopted, preventing a score of 5, but the breadth and multi-cycle durability of commitment is among the strongest in Europe.',
-        links: [{ label: 'UKRI Healthy Ageing Challenge', url: 'https://www.ukri.org/what-we-offer/browse-our-areas-of-investment-and-support/healthy-ageing/', comment: 'UKRI £98M multi-year Healthy Ageing Challenge — cross-party durability across three governments' }],
+        text: 'R+P: UKRI Healthy Ageing Challenge and related innovation ageing portfolio provide named multi-year funding (L+B) with continuity across governments (C). NHS Long Term Plan embeds prevention and older-age care redesign targets — P bucket (system-level prevention, not social-care capacity scored here). I: NHS England digital transformation and federated data (GP data for planning and research, NHS App) supply national digital-health L relevant to monitoring older cohorts. UKRI acts as durable funding agency (A-like). Rung 4: ≥2 buckets with primary L+B plus agency-scale R delivery; not 5 without plan-law quantified population healthspan KPI and all three buckets locked in one statutory appropriation cycle.',
+        links: [
+          { label: 'UKRI — Healthy Ageing', url: 'https://www.ukri.org/what-we-offer/browse-our-areas-of-investment-and-support/healthy-ageing/', comment: 'R+P+L+B — challenge fund and ageing innovation mission' },
+          { label: 'NHS — Long Term Plan (ageing and prevention sections)', url: 'https://www.longtermplan.nhs.uk/', date: '2019', comment: 'P+L — operational plan targets for prevention and older people\'s care' },
+          { label: 'NHS England — Digital transformation', url: 'https://www.england.nhs.uk/digitaltechnology/', comment: 'I+L — national digital health delivery and data infrastructure' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 2.5,
@@ -696,10 +718,11 @@ const uk: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
-        text: 'ASA (Advertising Standards Authority) is one of the most active advertising regulators globally for health claims and proactively challenges unsubstantiated anti-aging claims in cosmetics, supplements, and clinics. MHRA enforces the drug/cosmetics borderline strictly — products claiming systemic anti-aging effects are classified as unlicensed medicines. The "longevity clinic" market (IV drips, NAD+, hormone therapy) has grown rapidly and the GMC has issued warnings, but systematic practitioner sanctions remain limited.',
+        text: 'ASA publishes sector advice (e.g. IV nutritional therapy) and upholds complaints removing unsubstantiated clinic, cosmetic, and supplement health claims through 2023–2025. MHRA borderline guidance treats presentation and claims (including implied rejuvenation) as core tests for medicinal classification. GMC ethical hub requires factual, verifiable advertising for doctors. IV/longevity wellness remains commercially active — fits rung 3 (documented substantiation and borderline rules; not economy-wide pre-market biomarker clearance for anti-aging marketing).',
         links: [
-          { label: 'ASA – Health & Beauty Claims Rulings', url: 'https://www.asa.org.uk/codes-and-rulings/rulings.html', comment: 'ASA proactive enforcement — rulings regularly remove unsubstantiated anti-aging claims' },
-          { label: 'MHRA – Borderline Products', url: 'https://www.gov.uk/guidance/borderline-products', comment: 'MHRA borderline product guidance — systemic anti-aging claims trigger drug classification' },
+          { label: 'ASA — Healthcare: intravenous nutritional therapy (AdviceOnline)', url: 'https://www.asa.org.uk/advice-online/healthcare-intravenous-nutritional-therapy.html', comment: 'L+B — CAP/ASA expectations for IV clinic health claims' },
+          { label: 'MHRA — Borderline products: is your product a medicine?', url: 'https://www.gov.uk/guidance/borderline-products-how-to-tell-if-your-product-is-a-medicine', comment: 'L+B — classification by claims and presentation' },
+          { label: 'GMC — Ethical hub: advertising', url: 'https://www.gmc-uk.org/ethical-guidance/ethical-hub/advertising', comment: 'L — professional advertising duties for doctors' },
         ],
       },
     },

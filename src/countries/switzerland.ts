@@ -704,10 +704,28 @@ const switzerland: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 4,
-        text: 'Switzerland has consistently high institutional trust — OECD Better Life Index shows ~65–70% trust in national government, and Edelman shows ~70% in science/medicine. Direct democracy (initiative and referendum) reinforces citizen-institution dialogue. Trust in healthcare and research institutions is high; the pharmaceutical industry (home of Novartis, Roche) enjoys relatively positive public perception compared to other countries.',
-        links: [{ label: 'OECD Government at a Glance – Switzerland', url: 'https://www.oecd.org/gov/switzerland-government-at-a-glance.htm', comment: 'OECD — Switzerland institutional trust indicators; government and science trust above OECD average; pharma sector perceived well' }],
+        text: 'Strong confidence in medical quality and access; Swiss residents cluster with high-trust neighbours on routine care and prevention.',
+        links: [
+          { label: 'OECD — Government at a Glance (Switzerland)', url: 'https://www.oecd.org/gov/switzerland-government-at-a-glance.htm', comment: 'Composite governance and institutional indicators' },
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Regional comparator — EU fieldwork Sep–Oct 2024' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 4,
+        text: 'Domestic pharma and research culture support high science credibility; EU-wide 2024-field S&T barometer (Feb 2025 release) underscores a still broadly pro-science European public opinion environment around Switzerland.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU27+ science attitudes — regional benchmark' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 4,
+        text: 'Federal and cantonal health governance (FOPH/BAG) retain comparatively high legitimacy; direct-democratic fights on single issues are normal politics, not PHA collapse.',
+        links: [
+          { label: 'OECD — Government at a Glance (Switzerland)', url: 'https://www.oecd.org/gov/switzerland-government-at-a-glance.htm', comment: 'Trust in national government context' },
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Neighbouring EU sentiment on institutions and S&T' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -719,8 +737,12 @@ const switzerland: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 2,
-        text: 'FOPH\'s Stratégie nationale sur les soins palliatifs and Politique de la vieillesse framework address eldercare quality but not longevity science. SNF\'s NRP (National Research Programme) 74 addressed "smarter healthcare" with some aging components, but it completed in 2021 without a dedicated longevity science successor. Switzerland\'s federal structure (cantons control much health policy) fragments any national commitment. The Federal Council has not adopted a longevity science mandate. InnoSuisse supports health tech including aging-adjacent startups, but without a ring-fenced longevity programme. The private sector (Nestlé, Roche) makes the scientific investment that the government has not committed to publicly.',
-        links: [{ label: 'FOPH Healthy Aging Strategy', url: 'https://www.bag.admin.ch/bag/en/home/strategie-und-politik/nationale-gesundheitsstrategien/gesundes-altern.html', comment: 'FOPH — eldercare quality focus; no longevity science mandate' }],
+        text: 'R: SNSF (SNF) funds biomedical and public-health research including ageing and chronic disease through competitive project grants (L+B at programme level) but without a federal ring-fenced “healthy longevity” line — typical rung-2 breadth. P: FOPH prevention and NCD strategy elements touch population health; national “healthy ageing” strategy text is primarily care-system and quality framing — only the parts that are prevention/NCD policy count toward P, not LTCI capacity. I: federal digital-health / interoperability policy (eHealth Suisse, EPR law) supplies I; cantonal execution fragments a single national B line. No multi-year federal flagship tying R+P+I for ageing in one statute. Private pharma R&D does not substitute for L+B here.',
+        links: [
+          { label: 'SNSF — funding areas (life sciences / medicine)', url: 'https://www.snf.ch/en/2BpF5JUPdEymO2mx/funding/funding-instruments', comment: 'R+B — federal research foundation; competitive grants' },
+          { label: 'FOPH — Non-communicable diseases strategy', url: 'https://www.bag.admin.ch/bag/en/home/strategie-und-politik/nationale-gesundheitsstrategien/nicht-uebertragbare-krankheiten.html', comment: 'P+L — federal NCD / prevention strategy' },
+          { label: 'eHealth Suisse', url: 'https://www.e-health-suisse.ch/en/', comment: 'I+L — national eHealth coordination' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 1,
@@ -732,10 +754,10 @@ const switzerland: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 4,
-        text: 'Swissmedic enforces strict drug/cosmetic borderlines — products making systemic anti-aging claims are classified as medicinal products requiring approval. The Swiss Advertising Code (SWK) prohibits unsubstantiated health claims. SGfE (Swiss Society of Gerontology) and FMH have ethical guidelines against unproven anti-aging treatments. The anti-aging supplement market is less aggressive than in the UK or US; Swissmedic\'s pre-market control of health claims is among Europe\'s most rigorous.',
+        text: 'Swissmedic borderline guidance centres on presentation and pharmacological claims: products marketed with therapeutic or systemic rejuvenation claims fall under medicinal authorisation. SWK/Lauterkeitscode sets unfairness rules for health advertising. Supplement and cosmetic sectors are less aggressive than US/UK peers; rung 4 reflects strong borderline and advertising discipline — not asserted as global “drug-parity biomarker list” rung 5.',
         links: [
-          { label: 'Swissmedic Borderline Products', url: 'https://www.swissmedic.ch/swissmedic/en/home/medicinal-products/authorisation-of-medicinal-products/borderline.html', comment: 'Swissmedic — systemic anti-aging claims trigger medicinal product classification; strict borderline enforcement' },
-          { label: 'Swiss Advertising Code Health Claims', url: 'https://www.lauterkeit.ch/en/', comment: 'SWK Swiss Advertising Code — prohibits unsubstantiated health and anti-aging claims; actively enforced' },
+          { label: 'Swissmedic — Questions on delimitation', url: 'https://www.swissmedic.ch/swissmedic/en/home/services/questions-on-delimitation.html', comment: 'L+B — medicines vs food/cosmetics/devices; case-by-case classification' },
+          { label: 'SWK — Swiss Fairness Commission (advertising self-regulation)', url: 'https://www.lauterkeit.ch/en/', comment: 'L+B — fairness code including health-related advertising' },
         ],
       },
     },

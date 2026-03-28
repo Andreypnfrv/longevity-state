@@ -707,10 +707,26 @@ const japan: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+        score: 5,
+        text: 'Trust in physicians and hospitals stays very high in repeated cross-national barometer readings; bedside legitimacy remains a national asset.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Japan market report; fieldwork Oct 25–Nov 16, 2025' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 4,
-        text: 'Japan has high institutional trust in healthcare — trust in physicians and hospitals is consistently above 80% in surveys. Science and government trust are moderate (~55–65% in Edelman measures), somewhat lowered by post-Fukushima regulatory credibility questions and the HPV vaccine suspension controversy (2013–2022). Trust in the national health insurance system is very high. Overall, Japan\'s public trust environment is favourable for health research and preventive programmes.',
-        links: [{ label: 'Edelman Trust Barometer – Japan', url: 'https://www.edelman.com/trust', comment: 'Japan: moderate government trust (~60%); high healthcare system trust; HPV saga historically reduced vaccine confidence' }],
+        text: 'Science and university-led authority still score below bedside medicine; 2026 global report highlights Japan among the most “insular” markets on trusting unlike others — a headwind for cross-border scientific legitimacy even when domestic research institutions score well.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Insularity and trust-brokering themes; Japan country breakout' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 4,
+        text: 'National health insurance and MHLW-led programmes retain strong structural legitimacy; HPV episode (2013–2022) remains the textbook case where vaccine-specific trust lagged system trust.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Government and health-institution trust — Japan local report' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -721,9 +737,13 @@ const japan: CountryData = {
         ],
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 5,
-        text: 'Japan\'s healthy aging policy commitment is the most durably institutionalised of any democracy. The Kaigo Hoken (Long-Term Care Insurance) system, enacted 2000 and continuously expanded, has survived LDP and DPJ governments alike — structural permanence comparable to Medicare. AMED (Japan Agency for Medical Research and Development), established 2015, has sustained JPY 100B+/year health research budget. Moonshot Goal 7 ("Realise a society in which people can be free from limitations on physical and cognitive functions by 2050") is PM-office statutory with JPY 50B dedicated funding. The 5th Science and Technology Basic Plan explicitly includes healthy longevity as a quantified national target. This is commitment durability matched only by China and Singapore.',
-        links: [{ label: 'Japan Moonshot R&D Goal 7', url: 'https://www.jst.go.jp/moonshot/en/program/goal7/', comment: 'PM-endorsed statutory moonshot — quantified healthy longevity target to 2050; JPY 50B commitment' }],
+        score: 4,
+        text: 'R: AMED Moonshot Goal 7 and cabinet/S&T Basic Plan lines provide named, funded healthy-life-span R&D to 2050 (L+B). P: Healthy Japan 21 (MHLW) is a long-running national prevention and health-promotion programme with statutory policy backing — P bucket, not LTCI. I: MHLW Healthcare DX (national platform, My Number integration, secondary use of health data) is official L for digital health infrastructure serving the whole system including older adults. LTCI (Kaigo) fiscal scale is out of scope for this claim. Score 4: strong R+P+I in primary documents and cross-ministry execution, but rung 5 is not applied without a single plan-law instrument showing protected multi-cycle B for all three buckets with explicit ageing-health KPIs in annexed appropriations.',
+        links: [
+          { label: 'JST — Moonshot Goal 7 (English)', url: 'https://www.jst.go.jp/moonshot/en/program/goal7/', date: 'from 2021', comment: 'R+L — PM-endorsed programme; healthy life / function goals to 2050' },
+          { label: 'MHLW — Healthy Japan 21', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kenkounippon21.html', comment: 'P+L — national health promotion / prevention framework' },
+          { label: 'MHLW — Healthcare DX (English)', url: 'https://www.mhlw.go.jp/english/policy/health-medical/healthcare-dx/index.html', comment: 'I+L — national digital health / data platform policy' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 4,
@@ -736,8 +756,11 @@ const japan: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'Japan has a large and poorly regulated anti-aging supplement and cosmetic market. The FOSHU (Foods for Specified Health Uses) system allows health claims with scientific substantiation, but enforcement against exaggerated anti-aging claims is inconsistent. TCM-adjacent (Kampo) anti-aging practices occupy a significant grey zone — sold through pharmacies with limited evidence requirements. Japan\'s cultural openness to supplement and food-based anti-aging approaches creates a permissive environment for unproven claims.',
-        links: [{ label: 'Japan FOSHU System', url: 'https://www.mhlw.go.jp/english/topics/foodsafety/fhc/02.html', comment: 'FOSHU — functional food health claims system; substantiation required but anti-aging claim enforcement inconsistent' }],
+        text: 'FOSHU/FCCP-style systems require scientific review for registered functional claims; CAA/MHLW guidance applies the Premiums and Representations Act and Health Promotion Act to “health food” exaggeration and disease-flavoured copy. Large retail and cosmetic “anti-aging” marketing still pushes borderline beauty and vitality claims; Kampo and general foods sit in a grey band — composite rung 2 (law + guidance; not pre-market drug-level proof for all longevity marketing).',
+        links: [
+          { label: 'MHLW (English) — FOSHU / nutrition labelling', url: 'https://www.mhlw.go.jp/english/topics/foodsafety/fhc/02.html', comment: 'L+B — functional-food claims framework' },
+          { label: 'CAA — Food labelling (English overview)', url: 'https://www.caa.go.jp/en/policy/food_labeling', comment: 'L+B — consumer-agency food-labelling portal (incl. health/functional context)' },
+        ],
       },
     },
   },

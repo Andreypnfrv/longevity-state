@@ -43,6 +43,15 @@ Use **2+ independent links** for heavily contested or high scores when practical
 4. Write **`text`** aligned with that level; avoid contradictions with links.
 5. Add **`links`** with `date` split out where relevant; verify URLs load or swap for canonical equivalents.
 
+## Public trust pillars (`PUBLIC_TRUST_*`)
+
+Three **independent** claims — **A** clinical system (doctors, hospitals), **B** biomedical science (scientists, research, trials), **C** national health authority (ministry, PHI/CDC-style body, regulator guidance). Score each from its own evidence; do not average mentally into one number.
+
+- **Composite mental model for longevity uptake** — the binding constraint is often the **weakest** of A/B/C for novel therapies, trials, and data programmes; say so in `text` or `comment` when one pillar lags.
+- **Sources** — prefer repeated representative waves: Wellcome Global Monitor; Eurobarometer (science & tech, health); national panels (e.g. Pew US); national health barometers. Edelman is usable as **supporting** context, not the sole basis for C (government trust ≠ ministry-of-health trust).
+- **`date` on links** — survey wave or field period when the figure is cited (e.g. `2023`, `Sep 2024`).
+- **Not** `QUACKERY_RESISTANCE` — high institutional trust can coexist with large alternative-medicine markets.
+
 ## Aging media framing (`AGING_MEDIA_FRAMING`)
 
 Evidence is **national mainstream media and mass science communication**, not parliament minutes or ministry strategy pages (those belong under **legislative salience** / **policy commitment**).

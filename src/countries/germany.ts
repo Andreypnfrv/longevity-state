@@ -704,10 +704,26 @@ const germany: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
+        score: 4,
+        text: 'Hospitals and physicians above EU averages; residual vaccine and system-stress debates post-COVID but front-line care retains majority confidence.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep–Oct 2024 — Germany vs EU aggregate S&T attitudes' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
         score: 3,
-        text: 'Germany has above-average trust in medical institutions by European standards. The Robert Koch Institut commands high institutional credibility for health guidance. Post-COVID, vaccine hesitancy remains more significant than in Scandinavia. General scientific trust is good; trust in biotech and gene technology is more contested historically.',
-        links: [],
+        text: 'Feb 2025 Eurobarometer (science & tech) release on Sep–Oct 2024 fieldwork: EU-average enthusiasm for S&T softened vs the prior comparable wave in commission reporting; Germany remains broadly pro-science but gene tech and some novel biotech frames stay more contested than in Nordics.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Special EB — EU27+ attitudes to science and technology' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 4,
+        text: 'RKI remains the default credible source for outbreak science; federal–Länder fragmentation caps a single “national voice” but technical PHA trust stayed high through COVID.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU institutional-trust context wave Sep–Oct 2024' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -719,8 +735,11 @@ const germany: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 2,
-        text: 'BMBF\'s Rahmenprogramm Gesundheitsforschung allocates aging research funding as one of several themes without a dedicated longevity mandate. The Nationale Demenzstrategie 2020–2022 is the most concrete aging-specific commitment, but it was time-limited and renewal is uncertain. Notably, ESchG (the Embryo Protection Act) represents active legislative obstruction of germline longevity research — enacted 1990 and never seriously revised despite advances in the field. No multi-year ring-fenced programme for healthy lifespan extension exists at federal level; the coalition system makes sustained commitment across election cycles structurally difficult.',
-        links: [{ label: 'BMBF Gesundheitsforschung', url: 'https://www.bmbf.de/bmbf/de/forschung/gesundheit-ernaehrung-umwelt/gesundheitsforschung/gesundheitsforschung_node.html', comment: 'German health research framework — aging as one of several themes, no longevity-specific mandate' }],
+        text: 'R: BMBF health-research framework (Rahmenprogramm Gesundheitsforschung) funds ageing-related biomedical work as one theme — L with budget pool but not a standalone longevity line; typical rung-2 single-bucket horizon before coalition renegotiation. P: federal dementia strategy and prevention discourse exist but the last national dementia strategy window was time-bounded; renewal is not treated here as multi-cycle C in primary law. I: Gematik / electronic health record law and hospital digitisation provide digital-health L, but explicit L+B tying AI/data programmes to ageing-health KPIs in one appropriation document is thin vs methodology rung 3. ESchG still constrains embryo research (germline-relevant), not general ageing biology — not rung 0. LTCI (Pflege) financing is out of scope for this score.',
+        links: [
+          { label: 'BMBF — Gesundheitsforschung', url: 'https://www.bmbf.de/bmbf/de/forschung/gesundheit-ernaehrung-umwelt/gesundheitsforschung/gesundheitsforschung_node.html', comment: 'R+L+B — federal health research programme (thematic funding)' },
+          { label: 'Bundesgesundheitsministerium — Nationale Demenzstrategie', url: 'https://www.bundesgesundheitsministerium.de/themen/pflege/unsere-politik-fuer-menschen-mit-demenz.html', comment: 'P+L — federal dementia / older-age brain-health policy context' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 1,
@@ -732,8 +751,11 @@ const germany: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'Germany has a structurally weak quackery-resistance problem due to the Heilpraktiker system — a legally protected class of unregulated alternative health practitioners who can diagnose and treat patients without medical degrees. Anti-aging services (IV vitamin drips, ozone therapy, hormone optimisation) are legally offered by Heilpraktiker with no clinical oversight. Advertising standards apply to outright false claims but enforcement is reactive.',
-        links: [{ label: 'Heilpraktiker Gesetz', url: 'https://www.gesetze-im-internet.de/heilprg/', comment: 'Legal basis for unregulated health practitioners — structural quackery vulnerability' }],
+        text: 'HWG (Heilmittelwerbegesetz) tightly constrains advertising for medicines, devices, and many health-related offers in the mainstream economy. The Heilpraktiker statute still authorises a parallel non-medical practitioner class that can diagnose and treat within its scope — IV “wellness”, ozone, and hormone-style anti-aging offers often route through that channel and cap the composite vs peers. Composite rung 2: strong ad law for classical health products alongside a structural carve-out.',
+        links: [
+          { label: 'Heilpraktikergesetz (HeilprG)', url: 'https://www.gesetze-im-internet.de/heilprg/', comment: 'L — statutory basis for Heilpraktiker practice (weakest-link factor)' },
+          { label: 'HWG — Gesetz über die Werbung auf dem Gebiete des Heilwesens', url: 'https://www.gesetze-im-internet.de/heilmwerbg/BJNR006049965.html', comment: 'L — federal health advertising law (medicines, devices, therapeutic claims)' },
+        ],
       },
     },
   },

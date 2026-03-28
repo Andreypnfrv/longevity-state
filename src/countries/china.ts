@@ -705,10 +705,26 @@ const china: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 4,
-        text: 'Edelman Trust Barometer (2023) shows China with among the highest institutional trust globally — ~89% trust in government, ~82% trust in science/medicine. Confucian cultural values around respect for authority and collective welfare reinforce institutional trust. COVID-19 response maintained, not damaged, trust in health institutions by government messaging. Very high baseline — enables rapid adoption of health programmes.',
-        links: [{ label: 'Edelman Trust Barometer 2023', url: 'https://www.edelman.com/trust/2023/trust-barometer', comment: 'China among highest globally for trust in government and science — ~89%' }],
+        text: 'Hospital-centred care and state delivery still command strong pragmatic confidence; facility-led campaigns remain the operational backbone of national health drives.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'China market report; fieldwork Oct 25–Nov 16, 2025' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 4,
+        text: 'Edelman continues to place China in a high-trust cluster for science and health institutions vs Western medians; 2026 global release also flags a sharp year-on-year drop in optimism about the next generation’s prospects — monitor for knock-on effects on long-horizon science narratives.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Top findings + country tables; Oct–Nov 2025 fieldwork' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 5,
+        text: 'Central government and its health agencies remain among the most trusted globally on Edelman’s institution battery — enough to mobilise population programmes quickly even as macro-optimism indicators worsened in the 2026 headline release.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Government trust — China local report' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -719,9 +735,13 @@ const china: CountryData = {
         ],
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 5,
-        text: 'China\'s aging policy commitment is encoded directly in Five-Year Plan law — plan-law status means it cannot be overturned by any individual political actor. The 14th FYP (2021–2025) contains dedicated chapters on aging population management with quantified life expectancy targets (LE 79 by 2030). "Healthy China 2030" coordinates NHC, MOST, NDRC, and MCA with ring-fenced funding streams for healthy aging R&D. The Moonshot-equivalent 科技创新2030 programme includes aging biology. The one-party system eliminates the electoral reversal risk that limits Western democracies\' programme durability; a central leadership commitment to longevity is structurally permanent until explicitly rescinded at the same level.',
-        links: [{ label: '14th Five-Year Plan — Aging', url: 'http://www.gov.cn/xinwen/2021-03/13/content_5592681.htm', comment: 'National plan-law with quantified healthy aging targets — maximum policy durability' }],
+        score: 4,
+        text: 'R: national plan-law and S&T programmes (14th FYP, 科技创新2030) channel ageing-related and biomedical innovation with documentary budget follow-through. P: Healthy China 2030 (State Council / NHC) sets quantified population health targets including LE 79 by 2030 and prevention pillars — L with measurable KPIs. I: Internet Plus Healthcare and health-informatisation policy (State Council) tie data platforms and digital services to the health system, relevant to monitoring and care pathways for an ageing population. Elder-care expansion alone is not scored here. Cap at 4: methodology rung 5 requires all three buckets with plan-law-level KPI plus protected baseline B and two plan-cycle continuity evidenced in primary appropriations in one place — not fully documented in public English primary sources for I vs generic digital health.',
+        links: [
+          { label: 'State Council — 14th Five-Year Plan outline (Xinhua via Gov.cn)', url: 'http://www.gov.cn/xinwen/2021-03/13/content_5592681.htm', date: 'Mar 2021', comment: 'L — national plan cycle; healthy China / population / innovation chapters (R+P context)' },
+          { label: 'NHC (English) — Healthy China 2030 planning outline', url: 'https://en.nhc.gov.cn/2016-11/15/c_74822.htm', date: '2016', comment: 'P+L — quantified targets (e.g. LE 79 by 2030), prevention and health promotion' },
+          { label: 'State Council (English) — Internet Plus healthcare guideline', url: 'https://english.www.gov.cn/policies/latest_releases/2018/04/28/content_281476127312948.htm', date: 'Apr 2018', comment: 'I+L — national guidance on internet-based medical care, data, and AI support' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 3,
@@ -733,8 +753,11 @@ const china: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 1,
-        text: 'China has one of the world\'s most active anti-aging supplement, cosmetic, and Traditional Chinese Medicine (TCM) markets. SAMR has enforcement authority over false advertising but enforcement is inconsistent and primarily targets egregious fraud after complaints. TCM anti-aging claims occupy a regulatory grey zone — many products with no Western biomarker evidence are formally registered. The "health food" category allows approved products to make vague vitality claims without clinical evidence.',
-        links: [{ label: 'SAMR Advertising Law Enforcement', url: 'http://www.samr.gov.cn/', comment: 'Chinese advertising regulator — enforcement of false health/anti-aging claims; reactive and inconsistent' }],
+        text: 'SAMR runs recurring national ad-law campaigns (e.g. 2024 “民生领域” actions) penalising thousands of cases including food and “神药”-style disease claims; health-food rules restrict efficacy assertions and celebrity endorsement. Enforcement stays campaign- and complaint-heavy; TCM and health-food registration channels still host longevity-style claims with uneven biomarker substantiation — composite stays rung 1 (generic law + bursts, not routine domain-wide pre-clearance).',
+        links: [
+          { label: 'SAMR — “神医”“神药” illegal ad typical cases (2023)', url: 'https://www.samr.gov.cn/xw/zj/art/2024/art_a68c3d6b97c24ec89fbb52182b9a24b8.html', date: 'Apr 2024', comment: 'L+B — batch enforcement (health foods, medical aesthetics, ads law)' },
+          { label: 'SAMR — Advertising Law of the PRC (published text)', url: 'https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_5474cf75173c45d6a0379730fb4e8d97.html', date: '2023', comment: 'L — statutory advertising rules (Chinese)' },
+        ],
       },
     },
   },

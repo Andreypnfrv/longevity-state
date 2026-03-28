@@ -704,10 +704,26 @@ const spain: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 3,
-        text: 'Spain had among the highest COVID-19 vaccination uptake in the EU (>80%), demonstrating strong public trust in health authorities relative to regional neighbours. General institutional trust in medicine is good. Anti-science movements are present but not dominant. Trust in public health guidance is higher than in France or Eastern Europe.',
-        links: [],
+        text: 'Trust in doctors and SNS routine care is sound by southern-European standards — adequate for everyday use, below Nordic ceiling.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Fieldwork Sep–Oct 2024 — Spain EU comparator' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 3,
+        text: 'Anti-science politics visible but not dominant; biomedical research stays mainstream-legitimate. Latest EU S&T barometer wave (2024 field) shows broad majority positive on science with standard equity worries.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'EU27+ science attitudes — Feb 2025 publication' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 4,
+        text: 'COVID-era vaccination uptake was among the EU’s highest — strong revealed trust in national vaccine guidance vs several neighbours; post-pandemic tracking should be refreshed in national panels.',
+        links: [
+          { label: 'European Commission — Eurobarometer S&T (press)', url: 'https://ec.europa.eu/commission/presscorner/detail/en/ip_25_396', date: 'Feb 2025', comment: 'Institutional/S&T trust context Sep–Oct 2024 fieldwork' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -719,8 +735,11 @@ const spain: CountryData = {
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
         score: 2,
-        text: 'The Estrategia Nacional para el Envejecimiento Activo y Saludable provides a policy framework, and the 2022 Ley de la Ciencia included some aging research provisions. IMSERSO channels significant social care funding toward older adults. However, dedicated longevity science funding with ring-fenced budget and multi-year commitment is absent; the 17-CCAA structure makes national coordination difficult; and coalition instability (Spain has had five governments since 2018) works against long-cycle programme commitments. No longevity agency or statutory healthspan target exists.',
-        links: [],
+        text: 'P: Ministry of Health national strategy for active and healthy ageing provides executive L for population-level prevention framing. R: Ley de la Ciencia and national R&D plans reference health and ageing-capacity building but without a ring-fenced, multi-year federal line equivalent to methodology rung 3. I: national digital health (Historia Clínica Digital / SNS digital agenda) advances I-shaped infrastructure but L+B explicitly for ageing cohorts is weaker. IMSERSO social-care spend is out of scope for raising this claim. Coalition churn limits documented C for single named R/P/I lines — score 2.',
+        links: [
+          { label: 'Ministerio de Sanidad — Envejecimiento activo y saludable', url: 'https://www.sanidad.gob.es/areas/promocionPrevencion/envejecimientoSaludable/activo/home.htm', comment: 'P+L — national active and healthy ageing framework' },
+          { label: 'BOE — Ley 17/2022 de la ciencia y la tecnología', url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2022-15291', date: '2022', comment: 'R+L — science law (research system; ageing not isolated budget line)' },
+        ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
         score: 1,
@@ -732,8 +751,11 @@ const spain: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'AEMPS enforces regulations on health product claims. The Consejo General de Colegios Oficiales de Médicos has positions against unproven therapies. However, "naturopatía", homeopathy, and unproven anti-aging treatments (ozone, IV vitamins, hormone optimisation) are widespread in Spain, with partial institutionalisation in some CCAA health policies. Enforcement is reactive and inconsistent.',
-        links: [],
+        text: 'AEMPS publishes the legal framework for human-medicine advertising (RD 1416/1994 suite). CGCOM’s Observatorio OPPISS coordinates medical-college action against pseudotherapies and misleading health offers. Unproven wellness, naturopathy-adjacent, and IV/longevity-style services remain common; autonomous-community variation and reactive enforcement keep the composite below rung 3.',
+        links: [
+          { label: 'AEMPS — Legislación sobre publicidad', url: 'https://www.aemps.gob.es/la-aemps/legislacion/legislacion-sobre-otros-temas/publicidad/', comment: 'L+B — agency index of medicine advertising legislation' },
+          { label: 'CGCOM — Observatorio contra pseudociencias y pseudoterapias (OPPISS)', url: 'https://www.cgcom.es/observatorios/oppiss', comment: 'L+B — official medical councils’ observatory on unevidenced practices' },
+        ],
       },
     },
   },

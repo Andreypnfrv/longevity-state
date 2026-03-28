@@ -707,10 +707,28 @@ const singapore: CountryData = {
 
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
-      [SocietalReadinessClaim.PUBLIC_TRUST]: {
+      [SocietalReadinessClaim.PUBLIC_TRUST_CLINICAL_SYSTEM]: {
         score: 5,
-        text: 'Singapore consistently ranks among the world\'s highest for institutional trust. Edelman Trust Barometer (2024) shows Singapore at ~85% trust in government and ~80% in science/medicine — among the highest globally. The government\'s competence track record (pandemic management, economic development, healthcare quality) has generated unusually high public confidence in state-directed health programmes. This enables rapid uptake of national screening and preventive interventions.',
-        links: [{ label: 'Edelman Trust Barometer 2024 – Singapore', url: 'https://www.edelman.com/trust/2024/trust-barometer', comment: 'Singapore: ~85% government trust, ~80% science/medicine trust — among world\'s highest' }],
+        text: 'MOH-led delivery and hospital quality still enjoy very strong confidence; Healthier SG uptake remains consistent with a high-trust clinical system despite broader economic-anxiety and insularity themes in 2026 barometer commentary.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Global launch; online interviews Oct 25–Nov 16, 2025 (~1,200/country)' },
+          { label: 'The Straits Times — Edelman trust survey (Singapore)', url: 'https://www.straitstimes.com/singapore/growing-insularity-in-spore-amid-economic-anxiety-worries-about-the-future-edelman-trust-survey', date: '2026', comment: 'National press — Edelman 2026 domestic headlines' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_SCIENCE_RESEARCH]: {
+        score: 5,
+        text: 'Edelman national trust remains in the top global band for institutions; science- and health-innovation narratives still draw on high baseline credibility even as insularity and economic-worry indicators rise.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Methodology: Oct 25–Nov 16, 2025 fieldwork' },
+        ],
+      },
+      [SocietalReadinessClaim.PUBLIC_TRUST_STATE_HEALTH]: {
+        score: 4.5,
+        text: 'Government remains highly trusted vs most democracies, but Edelman 2026 reports modest erosion (e.g. national trust in the mid-60s % range in headline coverage) alongside insularity and future-pessimism — still enough for aggressive MOH programmes, with less margin than mid-2020s peaks.',
+        links: [
+          { label: 'Edelman — Trust Barometer 2026', url: 'https://www.edelman.com/trust/2026/trust-barometer', date: 'Jan 2026', comment: 'Institution trust trends; SG local report in Edelman hub' },
+          { label: 'The Straits Times — Edelman trust survey (Singapore)', url: 'https://www.straitstimes.com/singapore/growing-insularity-in-spore-amid-economic-anxiety-worries-about-the-future-edelman-trust-survey', date: '2026', comment: 'Domestic reporting on 2026 barometer' },
+        ],
       },
       [SocietalReadinessClaim.AGING_MEDIA_FRAMING]: {
         score: 2,
@@ -721,11 +739,12 @@ const singapore: CountryData = {
         ],
       },
       [SocietalReadinessClaim.POLICY_COMMITMENT]: {
-        score: 5,
-        text: 'Singapore\'s Healthy Longevity National Programme is PM-office endorsed and carries the structural permanence of Singapore\'s planning model — the PAP government\'s unbroken 60-year tenure means commitment does not face electoral reversal risk. NRF committed SGD 25M for the Global Healthy Longevity Challenge. The Ministry of Health\'s Action Plan for Successful Ageing 2023–2030 is a multi-ministry statutory framework with quantified targets. The Catalyst Awards (USD 1.5M per award) demonstrate prize-funded commitment at the level of breakthrough science funding. Relative to population and GDP, Singapore\'s per-capita longevity commitment is the highest of any government globally.',
+        score: 4,
+        text: 'R: NRF Healthy Longevity programme and NMRC Healthy Longevity Grand Challenge provide named research funding lines (L+B). P: MOH Action Plan for Successful Ageing and Healthier SG are executive-led national programmes with quantified service and population-health targets — P. I: National AI strategy and Smart Nation / health IT (GovTech, MOH digital services under Healthier SG) supply the I bucket with L tied to health delivery. Inter-ministry coordination (MOH, NRF, GovTech) supports rung-3-style breadth. Cap at 4: rung 5 would require plan-law-level statutory KPI plus protected baseline appropriations for R, P, and I evidenced together across two political cycles in primary budget law — Singapore\'s model is strong but not scored 5 under that bar.',
         links: [
-          { label: 'NRF Healthy Longevity National Programme', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity', comment: 'NRF — PM-office endorsed national healthy longevity programme with multi-year commitment' },
-          { label: 'MOH Action Plan for Successful Ageing 2023', url: 'https://www.moh.gov.sg/others/resources-and-statistics/action-plan-for-successful-ageing', comment: 'Multi-ministry action plan with quantified healthy aging targets to 2030' },
+          { label: 'NRF — Healthy Longevity National Programme', url: 'https://www.nrf.gov.sg/programmes/healthy-longevity', comment: 'R+L+B — national research programme (NRF)' },
+          { label: 'MOH — Action Plan for Successful Ageing', url: 'https://www.moh.gov.sg/our-healthcare-system/action-plan-for-successful-ageing', comment: 'P+L — cross-agency plan; quantified targets to 2030' },
+          { label: 'MOH — Healthier SG', url: 'https://www.moh.gov.sg/healthier-sg', date: 'from 2023', comment: 'P+I — national preventive care enrolment; digital and primary-care infrastructure' },
         ],
       },
       [SocietalReadinessClaim.LEGISLATIVE_SALIENCE]: {
@@ -739,10 +758,11 @@ const singapore: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
-        text: 'HSA enforces the Health Products Act strictly — cosmetic and supplement "anti-aging" claims undergo pre-market review and health claims require substantiation. The Complementary Health Products framework requires safety evidence before sale. HSA proactively removes illegal health products and false anti-aging advertising. SMC sanctions doctors making unsubstantiated anti-aging claims. However, TCM-adjacent anti-aging practices occupy a grey zone, and the booming wellness market has outpaced enforcement capacity in some areas.',
+        text: 'HSA bars therapeutic and disease claims on health supplements and requires substantiation on request; dealer guidelines list impermissible endocrine and “anti-aging”-adjacent claims. Health products regulation includes removal orders for non-compliant articles. SMC ethical codes restrict unjustified treatment claims and advertising. TCM practice is separately licensed; general wellness/longevity e-commerce still creates enforcement lag — composite rung 3.',
         links: [
-          { label: 'HSA Health Products Regulation', url: 'https://www.hsa.gov.sg/health-products-regulation', comment: 'HSA — pre-market control of health product claims; anti-aging advertising requires substantiation' },
-          { label: 'SMC Ethical Guidelines', url: 'https://www.smc.gov.sg/guidelines', comment: 'SMC — ethical guidelines including restrictions on unproven treatments and advertising' },
+          { label: 'HSA — Health supplement claims', url: 'https://www.hsa.gov.sg/health-supplements/claims', comment: 'L+B — prohibited claim classes and substantiation duty' },
+          { label: 'HSA — Health products regulation', url: 'https://www.hsa.gov.sg/health-products-regulation', comment: 'L — regulatory framework for health products' },
+          { label: 'SMC — Guidelines', url: 'https://www.smc.gov.sg/guidelines', comment: 'L — professional conduct and advertising expectations' },
         ],
       },
     },
