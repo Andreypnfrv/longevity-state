@@ -1,7 +1,7 @@
 import {
   Country, CountryData, ScreeningLevel,
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
-  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
   BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
@@ -95,34 +95,6 @@ const uk: CountryData = {
         score: 4,
         text: 'CASE (Collaborative Awards in Science and Engineering) studentships provide formal industry co-supervision with guaranteed industrial placement; many in aging-adjacent biotech (GSK, AstraZeneca, Sanofi). UKRI iCASE adds enhanced industrial stipend. Knowledge Transfer Partnerships (KTPs) allow seamless researcher movement. Cambridge and Oxford biotech clusters (the "Golden Triangle") provide exceptional industry-academia bridge infrastructure for aging scientists.',
         links: [{ label: 'UKRI iCASE Studentships', url: 'https://www.ukri.org/opportunity/icase-studentships/', comment: 'Industry co-supervised PhD studentships — major pharma and biotech companies participate' }],
-      },
-    },
-
-    [TalentsField.CLINICIAN_AGING_TRAINING]: {
-      [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
-        score: 4,
-        text: 'Geriatric Medicine is a well-established and respected NHS specialty with a 5-year Core Medical Training + specialist training pathway. JRCPTB-accredited Geriatric Medicine curriculum covers frailty, multi-morbidity, falls, delirium, end-of-life, and rehabilitation. BGSA (British Geriatrics Society) is an influential professional body. Sub-specialisation in complex frailty and community geriatrics is growing. However, geriatrics remains less prestigious and less compensated than cardiology or oncology — a workforce recruitment challenge.',
-        links: [{ label: 'JRCPTB Geriatric Medicine', url: 'https://www.jrcptb.org.uk/specialties/geriatric-medicine', comment: 'GMC-approved Geriatric Medicine training curriculum — 5-year specialist pathway' }],
-      },
-      [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
-        score: 3,
-        text: 'UK medical schools (5-year MBChB/MBBS) include aging biology and geriatric clinical training but depth varies. GMC Tomorrow\'s Doctors framework mandates clinical exposure to older patients, frailty, and multi-morbidity. Aging mechanisms (senescence, inflammaging) are in some but not all pre-clinical curricula. Oxford and UCL have stronger biological aging content than average. Systematic national integration of longevity medicine into pre-clinical years remains incomplete.',
-        links: [{ label: 'GMC Medical Education Outcomes', url: 'https://www.gmc-uk.org/education/standards-guidance-and-curricula/standards-and-outcomes/outcomes-for-graduates', comment: 'GMC Outcomes for Graduates framework — includes older patient and frailty competencies' }],
-      },
-      [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
-        score: 4,
-        text: 'Geriatric Medicine ST3–ST8 training is comprehensive: covers comprehensive geriatric assessment (CGA), frailty syndromes, delirium management, orthogeriatrics, and perioperative medicine. ARCP (Annual Review of Competency Progression) provides structured quality assurance. Many geriatric registrars rotate through specialist units (falls clinics, memory services, stroke rehabilitation). British Geriatrics Society actively promotes longevity medicine education and runs dedicated training days for trainees.',
-        links: [{ label: 'British Geriatrics Society', url: 'https://www.bgs.org.uk/resources/medical-education-training', comment: 'BGS training and education resources for geriatric medicine trainees' }],
-      },
-      [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
-        score: 3,
-        text: 'NHS mandatory CPD requirements (50 hours/year for licensed doctors) include aging-relevant content for specialties routinely managing older patients. BGS runs an annual conference with aging biology tracks. Academy of Medical Royal Colleges supports multi-specialty frailty education. However, longevity medicine specifically (senolytics, biological age interventions, healthspan optimisation) is not yet in formal CME frameworks — it remains conference- and society-driven rather than mandated.',
-        links: [{ label: 'BGS Annual Conference', url: 'https://www.bgs.org.uk/events/bgs-autumn-meeting', comment: 'BGS Annual Meeting — major CME event for UK geriatric medicine and longevity science' }],
-      },
-      [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
-        score: 3,
-        text: 'NHS Long Term Workforce Plan (2023) projects need for 170k additional staff by 2037, including significant geriatrics expansion. NHS England publishes annual specialty training supply/demand analysis. However, geriatrics faces persistent recruitment shortfalls relative to demand — declared "at risk" specialty by RCP. International recruitment is filling gaps. Workforce planning exists and is evidence-based but has not yet solved the structural underinvestment in geriatrics relative to the aging demographic.',
-        links: [{ label: 'NHS Long Term Workforce Plan', url: 'https://www.england.nhs.uk/publication/nhs-long-term-workforce-plan/', comment: 'NHS Long Term Workforce Plan 2023 — includes aging specialty training expansion targets' }],
       },
     },
 
@@ -368,23 +340,26 @@ const uk: CountryData = {
       [PopulationScreeningClaim.ATRIAL_FIBRILLATION]: { score: ScreeningLevel.FUNDED_PASSIVE, text: 'NICE guidelines recommend opportunistic AF screening (pulse check or ECG) in adults >65 during any healthcare contact. NHS Health Check does not currently include AF screening. MHRA-approved AliveCor Kardia devices are used in NHS pilots. AF detection app integrated in NHS App under evaluation. Systematic proactive AF invitation programme not yet implemented — policy landscape is evolving with SAFER trial results expected 2025.', links: [{ label: 'NICE AF Detection Guidance', url: 'https://www.nice.org.uk/guidance/ng196', comment: 'NICE NG196 — opportunistic AF screening recommended; no proactive national programme yet' }] },
       [PopulationScreeningClaim.COGNITIVE_DECLINE]: { score: ScreeningLevel.FUNDED_PASSIVE, text: 'NHS Dementia case-finding: GPs are incentivised via Quality Outcomes Framework (QOF) to identify and register dementia patients. GPs can refer for cognitive assessment. No proactive population-wide cognitive screening programme. The PREVENT Dementia project (Cambridge, Edinburgh, Kings) runs research-based screening in mid-life. Policy community is actively debating national cognitive screening as disease-modifying treatments (lecanemab) emerge.', links: [{ label: 'NHS Dementia Case Finding', url: 'https://www.england.nhs.uk/mental-health/dementia/', comment: 'NHS Dementia strategy — QOF incentivises GP case finding; no proactive population invitation' }] },
       [PopulationScreeningClaim.POLYGENIC_RISK]: { score: ScreeningLevel.COST_SHARING, text: 'UK Biobank\'s genomic data is available to researchers for PRS validation. GenoME study (NHS Genomics Medicine Service) is piloting return of polygenic risk scores to patients at scale. NHS Long-Term Plan includes genomic medicine as a priority with PRS integration planned. Genomics England is developing NHS-grade PRS pipelines. PRS is in pilot/research phase — not yet a funded population-wide screening programme, but the UK is the most advanced nationally in readiness.', links: [{ label: 'Genomics England PRS', url: 'https://www.genomicsengland.co.uk/initiatives/polygenic-risk-scores', comment: 'Genomics England PRS programme — NHS integration of polygenic risk scoring in active development' }] },
-
       [PopulationScreeningClaim.SARCOPENIA_MUSCLE_MASS]: {
         score: 3,
-        text: 'No national proactive screening programme. NICE Guidance recommends muscle-mass assessment in at-risk populations. NHS DEXA capacity is available for osteoporosis, and some CCGs extend to muscle-mass assessment. Geriatric assessments in NHS frailty pathways routinely include SARC-F screening questionnaire.',
-        links: [{ label: 'NICE – Older People Multimorbidity', url: 'https://www.nice.org.uk/guidance/ng56', comment: 'NICE guidance recommending functional assessment including muscle mass in high-risk older adults' }],
+        text: 'No national proactive screening programme. NICE Guidance NG45 (Older People Multimorbidity) recommends muscle-mass assessment in at-risk populations. NHS England DEXA capacity is available for osteoporosis and fracture risk, and some CCGs extend to muscle-mass assessment. BIA tools are used in community frailty services. UK Biobank\'s 100k DEXA scans have established reference ranges for lean mass. Geriatric assessments in NHS frailty pathways routinely include SARC-F screening questionnaire. Score: 3 (funded passively — available within frailty/multimorbidity pathways; no proactive national offer).',
+        links: [
+          { label: 'NICE NG45 – Older People Multimorbidity', url: 'https://www.nice.org.uk/guidance/ng56', comment: 'NICE guidance recommending functional assessment including muscle mass in high-risk older adults' },
+        ],
       },
       [PopulationScreeningClaim.SLEEP_APNEA]: {
         score: 3,
-        text: 'No national population-level sleep apnoea screening programme. NICE Clinical Guideline provides evidence-based referral pathways. NHS provides funded home sleep testing on clinical referral. STOP-BANG and Epworth questionnaires are embedded in primary care pathways. NHS Accelerated Access Collaborative is piloting AI-based OSA triage.',
-        links: [{ label: 'NICE – CPAP for OSA', url: 'https://www.nice.org.uk/guidance/ta139', comment: 'NICE guidance on CPAP for OSA — funded pathway via GP referral' }],
+        text: 'No national population-level sleep apnoea screening programme. NICE Clinical Guideline CG73 (Sleep Apnoea) provides evidence-based referral pathways for symptomatic patients. NHS provides funded home sleep testing (limited-channel polygraphy) on clinical referral. STOP-BANG and Epworth questionnaires are embedded in primary care QOF-adjacent pathways. NHS Accelerated Access Collaborative is piloting AI-based OSA triage. Score: 3 (funded on clinical indication; GP-led STOP-BANG screening is common; no mass-population proactive offer).',
+        links: [
+          { label: 'NICE CG73 – Continuous Positive Airway Pressure', url: 'https://www.nice.org.uk/guidance/ta139', comment: 'NICE guidance on CPAP for OSA — funded pathway via GP referral' },
+        ],
       },
       [PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY]: {
         score: 4,
-        text: 'UK National Screening Committee (UK NSC) is a world benchmark for evidence-based rapid screening evaluation. UK NSC conducts reviews on a rolling basis and can recommend policy changes within 12–18 months for priority items. Horizon-scanning is systematic. NHS pilots can be commissioned rapidly through the Accelerated Access Collaborative.',
+        text: 'UK National Screening Committee (UK NSC) is a world benchmark for evidence-based rapid screening evaluation. UK NSC conducts evidence reviews on a rolling basis and can recommend policy changes within 12–18 months for priority items. Horizon-scanning is systematic — UK NSC publishes a rolling programme of topics under review. NHS pilot programmes can be commissioned by NHS England rapidly through the Accelerated Access Collaborative. NICE Technology Appraisals run on 6–9 month tracks for selected diagnostics. Score: 4 (systematic horizon-scanning; commissioning authority for promising screenings; 12–18 month evaluation cycle for priority topics).',
         links: [
-          { label: 'UK National Screening Committee', url: 'https://www.gov.uk/government/organisations/uk-national-screening-committee', comment: 'UK NSC — world benchmark; rolling horizon-scan programme; 12–18 month evaluation cycle for priority topics' },
-          { label: 'NHS Accelerated Access Collaborative', url: 'https://www.england.nhs.uk/aac/', comment: 'NHS rapid pathway for adopting innovative health technologies' },
+          { label: 'UK National Screening Committee', url: 'https://www.gov.uk/government/organisations/uk-national-screening-committee', comment: 'UK NSC — world benchmark for evidence-based screening evaluation; rolling horizon-scan programme' },
+          { label: 'NHS Accelerated Access Collaborative', url: 'https://www.england.nhs.uk/aac/', comment: 'NHS rapid pathway for adopting innovative health technologies including diagnostics' },
         ],
       },
     },
@@ -445,9 +420,10 @@ const uk: CountryData = {
       },
       [PreventiveTrialsClaim.PATIENT_TRIAL_ACCESS]: {
         score: 4,
-        text: 'NIHR "Be Part of Research" is a national platform matching NHS patients to open trials via GP and hospital systems. Automated EHR-based eligibility matching is implemented in multiple NHS Trusts and expanding nationally through the NIHR CRN. RECOVERY and other NHS-embedded trials demonstrated near-zero friction enrolment via NHS care pathway integration.',
+        text: 'NIHR "Be Part of Research" is a national platform matching NHS patients to open trials via GP and hospital systems. Automated EHR-based eligibility matching is implemented in multiple NHS Trusts and is expanding nationally through the NIHR CRN. OpenSAFELY and CPRD can identify eligible populations for trial contact at national scale. RECOVERY and other NHS-embedded trials demonstrated near-zero friction enrolment via NHS care pathway integration. Score: 4 (HMO/NHS-style population-level identification; proactive patient contact via EHR-matching; near-zero friction enrolment in platform trials).',
         links: [
-          { label: 'NIHR Be Part of Research', url: 'https://bepartofresearch.nihr.ac.uk/', comment: 'National NHS patient-trial matching platform' },
+          { label: 'NIHR Be Part of Research', url: 'https://bepartofresearch.nihr.ac.uk/', comment: 'National NHS patient-trial matching platform — proactive recruitment via GP and hospital systems' },
+          { label: 'NIHR CRN Patient Recruitment', url: 'https://www.nihr.ac.uk/explore-nihr/infrastructure/clinical-research-network.htm', comment: 'NIHR CRN — EHR-based eligibility matching for NHS trial recruitment at national scale' },
         ],
       },
     },
@@ -672,9 +648,9 @@ const uk: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 3,
-        text: 'ASA (Advertising Standards Authority) is one of the most active advertising regulators globally for health claims and proactively challenges unsubstantiated anti-aging claims in cosmetics, supplements, and clinics. MHRA enforces the drug/cosmetics borderline strictly — products claiming systemic anti-aging effects are classified as unlicensed medicines. The "longevity clinic" market (IV drips, NAD+, hormone therapy) has grown rapidly and the GMC has issued warnings, but systematic practitioner sanctions remain limited.',
+        text: 'ASA (Advertising Standards Authority) is one of the most active advertising regulators globally for health claims and proactively challenges unsubstantiated anti-aging claims in cosmetics, supplements, and clinics. MHRA enforces the drug/cosmetics borderline strictly — products claiming systemic anti-aging effects are classified as unlicensed medicines. The "longevity clinic" market (IV drips, NAD+, hormone therapy) has grown rapidly and the GMC has issued warnings, but systematic practitioner sanctions are limited. CTSI (Trading Standards) prosecutes outright fraud in anti-aging products. No pre-market biomarker evidence requirement. Score: 3 (ASA proactively removes claims; MHRA enforces drug borderline; A4M-style certifications not accepted as GMC-equivalent; enforcement on practitioners weaker than on products).',
         links: [
-          { label: 'ASA – Health & Beauty Claims Rulings', url: 'https://www.asa.org.uk/codes-and-rulings/rulings.html', comment: 'ASA proactive enforcement — rulings regularly remove unsubstantiated anti-aging claims' },
+          { label: 'ASA – Health & Beauty Claims', url: 'https://www.asa.org.uk/codes-and-rulings/rulings.html', comment: 'ASA proactive enforcement — rulings regularly remove unsubstantiated anti-aging claims in ads' },
           { label: 'MHRA – Borderline Products', url: 'https://www.gov.uk/guidance/borderline-products', comment: 'MHRA borderline product guidance — systemic anti-aging claims trigger drug classification' },
         ],
       },

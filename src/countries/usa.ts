@@ -1,7 +1,7 @@
 import {
   Country, CountryData, ScreeningLevel,
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
-  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
   BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
@@ -95,34 +95,6 @@ const usa: CountryData = {
         score: 4,
         text: 'Strong biotech clusters (Boston, Bay Area, San Diego) create dense industry-academia pipelines. NIH BEST program funds industry rotations for PhD trainees. Buck Institute has formal Genentech/AbbVie collaborations. Dual appointments common in longevity biotech.',
         links: [{ label: 'NIH BEST Program', url: 'https://commonfund.nih.gov/BEST', comment: 'Broadening Experiences in Scientific Training — industry rotations for PhD students' }],
-      },
-    },
-
-    [TalentsField.CLINICIAN_AGING_TRAINING]: {
-      [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
-        score: 3,
-        text: 'Geriatrics is a recognised ABIM subspecialty with a structured fellowship pathway. ~300 new geriatricians certified annually — chronically below workforce demand. Prestige and compensation lag behind other internal medicine subspecialties.',
-        links: [{ label: 'ABIM Geriatric Medicine', url: 'https://www.abim.org/certification/policies/internal-medicine-subspecialty-policies/geriatric-medicine/', comment: 'American Board of Internal Medicine geriatrics certification pathway' }],
-      },
-      [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
-        score: 2,
-        text: 'Geriatrics rotations required in most US medical schools but vary widely in quality and duration. Aging biology (mechanistic geroscience) largely absent from basic science years. Association of American Medical Colleges standards do not mandate longitudinal aging content.',
-        links: [],
-      },
-      [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
-        score: 3,
-        text: 'Geriatrics fellowship (1 year post-residency) is ACGME-accredited across many academic centres. Exposure to preventive and longevity-oriented care varies significantly by programme. Research components present at major academic centres.',
-        links: [{ label: 'ACGME Geriatric Medicine', url: 'https://www.acgme.org/specialties/geriatric-medicine/overview/', comment: 'ACGME-accredited geriatrics fellowship programme requirements' }],
-      },
-      [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
-        score: 2,
-        text: 'CME in geriatrics broadly available (AGS, AMDA). Longevity medicine-specific CME (preventive geroscience, biomarkers, longevity interventions) is emerging but not yet standardised. No national mandate for aging CME outside geriatrics specialty.',
-        links: [{ label: 'AGS Annual Meeting CME', url: 'https://www.americangeriatrics.org/education-and-career/education/cme', comment: 'American Geriatrics Society continuing medical education' }],
-      },
-      [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
-        score: 2,
-        text: 'HRSA projects severe geriatrics shortage by 2030. National plan exists on paper but training expansion has been slow. Fellowship fill rates are low (<50% at many programmes). No funded emergency expansion programme.',
-        links: [{ label: 'HRSA Geriatrics Workforce', url: 'https://bhw.hrsa.gov/data-research/projecting-health-workforce-supply-demand/geriatrics', comment: 'Federal workforce projections showing deepening geriatrics shortage' }],
       },
     },
 
@@ -451,21 +423,27 @@ const usa: CountryData = {
           { label: 'NIH All of Us – Genomics', url: 'https://allofus.nih.gov/about/program-overview/genomics', comment: 'Research programme — not yet a clinical PRS pathway' },
         ],
       },
-
       [PopulationScreeningClaim.SARCOPENIA_MUSCLE_MASS]: {
         score: 2,
-        text: 'No national sarcopenia screening programme. DEXA is available but primarily used for bone density (osteoporosis). BIA-based assessment exists in some academic and sports medicine settings but is not part of routine clinical pathways. Some geriatric medicine clinics screen opportunistically.',
-        links: [{ label: 'Foundation for the NIH – Sarcopenia Biomarkers', url: 'https://fnih.org/our-programs/biomarkers-consortium/programs/sarcopenia/', comment: 'Research consortium — not yet a clinical screening standard' }],
+        text: 'No national screening programme for sarcopenia or low muscle mass. DEXA is available but primarily used for bone density (osteoporosis). BIA-based assessment exists in some academic and sports medicine settings but is not part of routine clinical pathways. Some geriatric medicine clinics screen opportunistically. Score: 2 (opportunistic/partial; not funded proactively).',
+        links: [
+          { label: 'Foundation for the NIH – Sarcopenia Biomarkers', url: 'https://fnih.org/our-programs/biomarkers-consortium/programs/sarcopenia/', comment: 'Research consortium — not yet a clinical screening standard' },
+        ],
       },
       [PopulationScreeningClaim.SLEEP_APNEA]: {
         score: 3,
-        text: 'No national population-level screening programme. USPSTF found insufficient evidence to recommend universal screening for asymptomatic adults (2017; under review). High-risk screening is common in primary care via STOP-BANG, Epworth. Home sleep testing covered by Medicare/most insurers on clinical indication. Significant underdiagnosis persists.',
-        links: [{ label: 'USPSTF – Obstructive Sleep Apnea', url: 'https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/obstructive-sleep-apnea-in-adults-screening', comment: 'I-grade recommendation — insufficient evidence for universal screening' }],
+        text: 'No national population-level screening programme. USPSTF found insufficient evidence to recommend universal screening for asymptomatic adults (2017; under review). However, high-risk screening is common in primary care via validated questionnaires (STOP-BANG, Epworth). Home sleep testing covered by Medicare/most insurers on clinical indication. Significant underdiagnosis persists. Score: 3 (funded on clinical indication, physician-initiated).',
+        links: [
+          { label: 'USPSTF – Obstructive Sleep Apnea', url: 'https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/obstructive-sleep-apnea-in-adults-screening', comment: 'I-grade recommendation — insufficient evidence for universal screening' },
+          { label: 'Medicare Home Sleep Testing Coverage', url: 'https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?NCDId=226', comment: 'CMS coverage for HST in Medicare beneficiaries' },
+        ],
       },
       [PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY]: {
         score: 3,
-        text: 'USPSTF provides a formal evidence review process (typically 2–4 years per recommendation) that shapes coverage under ACA § 2713. Faster pathways exist for urgent public health priorities, but the default process is slow. Individual states can move faster.',
-        links: [{ label: 'USPSTF Methodology', url: 'https://www.uspreventiveservicestaskforce.org/uspstf/about-uspstf/methods-and-processes/procedure-manual', comment: 'USPSTF evidence review process — 2–4 years typical' }],
+        text: 'USPSTF provides a formal evidence review process (typically 2–4 years per recommendation) that shapes coverage under ACA § 2713. Faster pathways exist for urgent public health priorities (e.g., COVID-19), but the default process is slow. CMS coverage follows USPSTF with A/B grades but can lag. Individual states can move faster. Score: 3 (formal rapid evaluation pathway exists; 12–24 month horizon for selected priorities, but standard cycle is 3–4 years).',
+        links: [
+          { label: 'USPSTF Methodology', url: 'https://www.uspreventiveservicestaskforce.org/uspstf/about-uspstf/methods-and-processes/procedure-manual', comment: 'USPSTF evidence review process — 2–4 years typical' },
+        ],
       },
     },
 
@@ -562,7 +540,7 @@ const usa: CountryData = {
       },
       [PreventiveTrialsClaim.PATIENT_TRIAL_ACCESS]: {
         score: 3,
-        text: 'ClinicalTrials.gov is the world\'s largest trials registry (450k+ studies) with improved patient-facing search since 2023 redesign. NIH ResearchMatch and individual CTSA patient recruitment platforms exist. No nationwide EHR-based automated eligibility matching. CTSA institutions run local recruitment systems but no national interoperable layer.',
+        text: 'ClinicalTrials.gov is the world\'s largest trials registry (450k+ studies) with improved patient-facing search since 2023 redesign. NIH ResearchMatch and individual CTSA patient recruitment platforms exist. No nationwide EHR-based automated eligibility matching. CTSA institutions run local recruitment systems but no national interoperable layer. Score: 3 (automated matching in selected CTSA centres; no population-level EHR-triggered enrolment).',
         links: [
           { label: 'ClinicalTrials.gov', url: 'https://clinicaltrials.gov/', comment: 'US national trials registry — 450k+ studies with improved patient search' },
           { label: 'NIH ResearchMatch', url: 'https://www.researchmatch.org/', comment: 'Volunteer-trial matching platform — opt-in, 175k+ volunteers' },
@@ -812,10 +790,10 @@ const usa: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'FTC has enforcement authority over false advertising including anti-aging product claims, and has issued guidance explicitly warning against unsubstantiated "reverses aging" marketing. However, enforcement is reactive and complaint-driven — no pre-market review. The DSHEA (1994) supplements law creates a regulatory gap: supplement makers don\'t need to prove claims before marketing. A4M operates freely, offers board certifications unchallenged by state medical licensing boards.',
+        text: 'FTC has enforcement authority over false advertising including anti-aging product claims, and has issued guidance explicitly warning against unsubstantiated "reverses aging" marketing. However, enforcement is reactive and complaint-driven — no pre-market review of anti-aging claims. The DSHEA (1994) supplements law creates a regulatory gap: supplement makers don\'t need to prove claims before marketing. A4M (American Academy of Anti-Aging Medicine) operates freely, offers board certifications unchallenged by state medical licensing boards, and its practitioners face no systematic oversight. IV therapy lounges, "longevity clinics", and hormone optimization clinics proliferate with minimal oversight. Score: 2 (active advertising enforcement; reactive FTC actions; no pre-market biomarker requirement; A4M unchallenged).',
         links: [
-          { label: 'FTC – Anti-Aging Claims Guidance', url: 'https://www.ftc.gov/business-guidance/resources/ftcs-revised-endorsement-guides-what-people-are-asking', comment: 'FTC guidance on substantiation — applies to anti-aging claims' },
-          { label: 'DSHEA Supplement Regulation', url: 'https://www.fda.gov/food/dietary-supplements/overview-dietary-supplements', comment: 'FDA supplement framework — manufacturers do not need FDA approval before marketing' },
+          { label: 'FTC – Anti-Aging Claims Guidance', url: 'https://www.ftc.gov/business-guidance/resources/ftcs-revised-endorsement-guides-what-people-are-asking', comment: 'FTC guidance on endorsements and substantiation — applies to anti-aging claims' },
+          { label: 'DSHEA Supplement Regulation Gap', url: 'https://www.fda.gov/food/dietary-supplements/overview-dietary-supplements', comment: 'FDA supplement framework — manufacturers do not need FDA approval before marketing' },
         ],
       },
     },

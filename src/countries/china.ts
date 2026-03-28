@@ -1,7 +1,7 @@
 import {
   Country, CountryData, ScreeningLevel,
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
-  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
   BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
@@ -95,34 +95,6 @@ const china: CountryData = {
         score: 3,
         text: 'China\'s booming biotech sector (BioIsland Guangzhou, Zhangjiang Shanghai, Beijing Life Science Park) provides growing industry-academia links. BeiGene, Zymeworks China, Zai Lab, and BioAtla partner with academic centres. Government-mandated technology transfer offices at universities. Still maturing — dual career tracks less formalised than US.',
         links: [{ label: 'Zhangjiang Biotech', url: 'https://www.zhangjiang.gov.cn/', comment: 'Shanghai Zhangjiang Hi-Tech Park — major pharma/biotech industry-academia hub' }],
-      },
-    },
-
-    [TalentsField.CLINICIAN_AGING_TRAINING]: {
-      [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
-        score: 3,
-        text: 'Geriatrics (老年医学) is a recognised specialty in China with residency programs at major academic hospitals. China\'s massive aging population (21% over 60 by 2023) has driven rapid capacity expansion. However, geriatrics remains less prestigious than internal medicine or surgery — a workforce shortage persists relative to the demographic need.',
-        links: [{ label: 'National Geriatrics Center China', url: 'http://www.nhc.gov.cn/', comment: 'National Health Commission — geriatrics specialty accreditation and training' }],
-      },
-      [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
-        score: 3,
-        text: 'Chinese medical schools increasingly incorporate aging biology into core curricula in response to demographic pressure. The National Health Commission mandates geriatrics content in medical education guidelines. Depth varies substantially across the ~170 medical schools — top schools (PKU, Fudan, SYSMH) have stronger programs.',
-        links: [],
-      },
-      [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
-        score: 3,
-        text: 'Geriatrics residency standardisation is improving under the National Standardised Residency Training system (住院医师规范化培训) launched in 2013. All graduates must complete 3-year standardised residency. Quality varies significantly between tier-1 academic hospitals and lower-tier facilities. Aging-specific competencies are explicitly included in geriatrics training standards.',
-        links: [{ label: 'China Residency Training', url: 'http://www.nhc.gov.cn/', comment: 'National standardised residency programme — geriatrics track included' }],
-      },
-      [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
-        score: 2,
-        text: 'CME requirements exist (25 credits/year) but longevity-science-specific content (senolytics, biological aging clocks, healthspan interventions) is not systematically available. Most CME focuses on disease management rather than aging mechanisms. Chinese Society of Geriatrics conferences address some aging biology topics.',
-        links: [],
-      },
-      [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
-        score: 4,
-        text: 'China has explicit national workforce planning for aging healthcare — the "14th Five-Year Plan for Aging Services" mandates rapid expansion of geriatric physician supply. Target of training 100k+ geriatrics specialists by 2025. National Geriatrics Center network established. Direct response to demographic urgency makes this one of China\'s most actively managed healthcare workforce priorities.',
-        links: [{ label: '14th Five-Year Plan for Aging Services', url: 'http://www.nhc.gov.cn/lljks/s3577/202203/b11d5a7ea0ea4add8b3cbb0e22cd4b85.shtml', comment: 'National plan for expanding geriatrics workforce to 2025' }],
       },
     },
 
@@ -412,21 +384,20 @@ const china: CountryData = {
         text: 'BGI and commercial providers offer polygenic risk score tests in China\'s consumer genomics market. BGI\'s Complete Genomics platform, WeGene, and similar services provide DTC genomics including some PRS. No clinical or national programme for PRS-based screening. Regulatory framework for clinical PRS is not defined. Scored COST_SHARING (2): commercially accessible but without clinical validation or public funding.',
         links: [{ label: 'BGI Group Genomics', url: 'https://www.bgi.com/', comment: 'BGI — world\'s largest genomics company; consumer and research PRS services in China' }],
       },
-
       [PopulationScreeningClaim.SARCOPENIA_MUSCLE_MASS]: {
         score: 2,
-        text: 'No national sarcopenia screening programme. NHC has issued guidelines on sarcopenia management (2021), and some tertiary hospitals screen in geriatric outpatient settings. DEXA available in major urban hospitals but limited rural access.',
-        links: [{ label: 'Chinese Expert Consensus on Sarcopenia', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8531450/', comment: 'NHC-endorsed consensus — not a national screening mandate' }],
+        text: 'No national sarcopenia screening programme. Given China\'s rapidly aging population, NHC has issued guidelines on sarcopenia management (2021), and some tertiary hospitals screen for it in geriatric outpatient settings. DEXA available in major urban hospitals but limited rural access. BIA used in research settings. Score: 2 (guidelines exist; clinical assessment available in tertiary urban centres; no proactive national programme).',
+        links: [{ label: 'Chinese Expert Consensus on Sarcopenia (2021)', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8531450/', comment: 'NHC-endorsed consensus — not a national screening mandate' }],
       },
       [PopulationScreeningClaim.SLEEP_APNEA]: {
         score: 1,
-        text: 'No national sleep apnoea screening programme. Polysomnography and home sleep testing available in major urban centres, primarily via pulmonology and ENT specialist referral. Significant underdiagnosis — estimated >40 million undiagnosed cases. Limited primary care integration.',
+        text: 'No national sleep apnoea screening programme. Polysomnography and home sleep testing available in major urban centres, primarily via pulmonology and ENT specialist referral. Significant underdiagnosis — estimated >40 million undiagnosed cases. Limited primary care integration. Insurance coverage for sleep testing varies by province and is inconsistent. Score: 1 (specialist access only; patient or limited insurance cost-sharing; no proactive population screening).',
         links: [],
       },
       [PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY]: {
         score: 2,
-        text: 'China\'s NHC can mandate national screening programmes rapidly when political priority is given (e.g. early cancer screening rollouts under Healthy China 2030). However, new programme adoption is typically driven by central government directives rather than evidence-based horizon-scanning. Pilot programmes require NHC approval and typically take 2–3+ years to become policy.',
-        links: [{ label: 'Healthy China 2030 Action Plan', url: 'http://www.nhc.gov.cn/', comment: 'National cancer screening expansion — illustrates top-down rapid deployment' }],
+        text: 'China\'s NHC can mandate national screening programmes rapidly when political priority is given (e.g. early cancer screening rollouts under Healthy China 2030). However, new programme adoption is typically driven by central government directives rather than evidence-based horizon-scanning. Pilot programmes require NHC approval and typically take 2–3+ years to become policy. Local pilots are possible but rarely systematically evaluated and scaled. Score: 2 (pilot programmes possible with MOH approval; evidence review within 2–3 years for political priorities).',
+        links: [{ label: 'Healthy China 2030 Action Plan', url: 'http://www.nhc.gov.cn/guihuaxxs/s3586s/201710/94a5765ccd444aad9b4395c3c36ae5ef.shtml', comment: 'National cancer screening expansion — illustrates top-down rapid deployment' }],
       },
     },
 
@@ -486,7 +457,7 @@ const china: CountryData = {
       },
       [PreventiveTrialsClaim.PATIENT_TRIAL_ACCESS]: {
         score: 2,
-        text: 'ChiCTR (Chinese Clinical Trial Registry) provides a national registry with lay summaries. No national EHR-based patient-matching platform. Hospital-based recruitment is the norm — patients learn of trials through their treating physician. Major academic hospitals have internal matching systems. No systematic nationwide proactive notification.',
+        text: 'ChiCTR (Chinese Clinical Trial Registry) provides a national registry with lay summaries. No national EHR-based patient-matching platform. Hospital-based recruitment is the norm — patients learn of trials through their treating physician. Major academic hospitals (PUMCH, Huashan) have internal matching systems. No systematic nationwide proactive notification. Score: 2 (patient-facing registry with lay summaries; no matching or EHR integration at national level).',
         links: [{ label: 'Chinese Clinical Trial Registry (ChiCTR)', url: 'http://www.chictr.org.cn/enindex.aspx', comment: 'National WHO-registered clinical trials registry — patient-facing search available' }],
       },
     },
@@ -711,8 +682,10 @@ const china: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 1,
-        text: 'China has one of the world\'s most active anti-aging supplement, cosmetic, and Traditional Chinese Medicine (TCM) markets. SAMR has enforcement authority over false advertising but enforcement is inconsistent and primarily targets egregious fraud after complaints. TCM anti-aging claims occupy a regulatory grey zone — many products with no Western biomarker evidence are formally registered. The "health food" category allows approved products to make vague vitality claims without clinical evidence.',
-        links: [{ label: 'SAMR Advertising Law Enforcement', url: 'http://www.samr.gov.cn/', comment: 'Chinese advertising regulator — enforcement of false health/anti-aging claims; reactive and inconsistent' }],
+        text: 'China has one of the world\'s most active anti-aging supplement, cosmetic, and Traditional Chinese Medicine (TCM) markets, with enormous revenue from products making implicit or explicit longevity claims. SAMR (State Administration for Market Regulation) has enforcement authority over false advertising but enforcement is inconsistent and primarily targets egregious fraud after complaints. TCM anti-aging claims occupy a regulatory grey zone — many products with no Western biomarker evidence are formally registered. The "health food" category allows approved products to make vague health/vitality claims without clinical evidence. "Anti-aging" pseudo-specialists operate widely on social media with minimal oversight. Score: 1 (general consumer protection applies; reactive enforcement only; no domain-specific anti-aging claims standard; TCM creates structural regulatory gap).',
+        links: [
+          { label: 'SAMR Advertising Law Enforcement', url: 'http://www.samr.gov.cn/', comment: 'Chinese advertising regulator — enforcement of false health/anti-aging claims; reactive and inconsistent' },
+        ],
       },
     },
   },

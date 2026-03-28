@@ -1,7 +1,7 @@
 import {
   Country, CountryData, ScreeningLevel,
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
-  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
   BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
@@ -95,34 +95,6 @@ const israel: CountryData = {
         score: 4,
         text: 'Israel\'s "startup nation" ethos creates exceptionally strong industry-academia bridges. Yeda Research and Development (Weizmann TTO), Ramot (Tel Aviv TTO), and T3 (Technion TTO) are among the world\'s most productive technology transfer offices — Yeda licenses have generated billions in royalties. PhD students routinely participate in startup creation during or immediately after training. TEVA, Taro, and major biotech companies co-fund academic positions. The cultural expectation of commercial application is deeply embedded in Israeli research training.',
         links: [{ label: 'Yeda Research and Development', url: 'https://www.yeda.org/', comment: 'Weizmann TTO — one of world\'s most productive; billions in licensed revenue from academic aging research' }],
-      },
-    },
-
-    [TalentsField.CLINICIAN_AGING_TRAINING]: {
-      [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
-        score: 3,
-        text: 'Geriatric Medicine is a recognised specialty in Israel with a 4-year post-internship residency. The Israeli Board of Geriatrics certifies specialists. Academic geriatrics departments exist at all major academic medical centres (Hadassah, Sheba, Ichilov, Rambam). Israel\'s aging demographic (20%+ over 65) creates clinical demand. Geriatrics is respected but faces the same recruitment challenges as elsewhere — lower compensation and prestige than internal medicine or cardiology.',
-        links: [{ label: 'Israeli Board of Geriatrics', url: 'https://www.health.gov.il/English/MinistryUnits/HealthCouncil/Pages/default.aspx', comment: 'Israeli MOH Health Council — certifies geriatric medicine specialty training' }],
-      },
-      [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
-        score: 3,
-        text: 'Israeli medical schools (Hebrew University-Hadassah, Tel Aviv-Sackler, Technion-Ruth, Ben-Gurion, Bar-Ilan-Azrieli) include geriatrics rotations and some aging biology content. The 6-year MD programme includes mandatory geriatric clerkship at most schools. Aging biology (senescence, inflammaging, age-related disease mechanisms) is increasingly integrated into pre-clinical years at Hebrew University and Tel Aviv. The integration depth is above average but not yet placing aging mechanisms at the core of pre-clinical training.',
-        links: [{ label: 'Hebrew University-Hadassah Medical School', url: 'https://medicine.ekmd.huji.ac.il/en/', comment: 'Hebrew University medical school — 6-year programme with geriatrics rotation and aging biology' }],
-      },
-      [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
-        score: 3,
-        text: 'Geriatrics residency in Israel covers comprehensive geriatric assessment, frailty, dementia management, falls, and rehabilitation — aligned with Israeli Gerontological Society standards. Rotations include community geriatrics (HMO-based), acute care, rehabilitation, and palliative care. Academic centres (Hadassah Mount Scopus, Sheba) provide research exposure. Quality is solid though clinical volume pressure and ward sizes limit the depth of mentoring vs. specialty programmes in smaller countries.',
-        links: [{ label: 'Israeli Gerontological Society', url: 'https://www.gerontology.org.il/', comment: 'IGS — professional body setting geriatric residency standards and running CME' }],
-      },
-      [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
-        score: 2,
-        text: 'CME in Israel is managed through the IMA\'s continuing education framework. The Israeli Gerontological Society runs an annual conference with aging medicine content. Longevity science specifically (geroprotectors, biological age, senolytics) is not yet in formal CME tracks — it appears at academic conferences but not as mandated or systematically structured CME for practising clinicians. This is a gap relative to the UK or US continuing education landscape.',
-        links: [{ label: 'Israeli Gerontological Society CME', url: 'https://www.gerontology.org.il/', comment: 'IGS annual conference — primary CME for geriatric medicine; aging biology content increasing' }],
-      },
-      [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
-        score: 3,
-        text: 'Israeli MOH publishes healthcare workforce projections. The rapid growth of the 75+ population (expected to double by 2040) has prompted policy response: expanded geriatric training positions at academic hospitals, new long-term care medical directorships requiring geriatrics certification, and salary supplements for geriatric specialists in shortage areas. The planning exists and is evidence-based; execution is ongoing with acknowledged shortfalls.',
-        links: [{ label: 'Israeli MOH Workforce Plan', url: 'https://www.health.gov.il/English/MinistryUnits/ClinicalProfessions/Pages/default.aspx', comment: 'Israeli MOH — healthcare workforce planning including geriatrics specialty expansion' }],
       },
     },
 
@@ -368,21 +340,26 @@ const israel: CountryData = {
       [PopulationScreeningClaim.ATRIAL_FIBRILLATION]: { score: ScreeningLevel.FUNDED_PASSIVE, text: 'AF detection is recommended by Israeli cardiology guidelines as opportunistic screening during primary care visits for patients over 65. HMOs include pulse rhythm assessment in annual health maintenance examinations. Wearable device-based AF detection (Apple Watch, KardiaMobile) is increasingly used but not systematically integrated into HMO clinical workflows. No proactive national invitation programme exists for AF.', links: [{ label: 'Israeli Heart Society AF Guidelines', url: 'https://www.heart.org.il/', comment: 'Israeli Heart Society — AF screening recommendations; opportunistic at primary care visits' }] },
       [PopulationScreeningClaim.COGNITIVE_DECLINE]: { score: ScreeningLevel.FUNDED_PASSIVE, text: 'Israeli HMOs include cognitive assessment (MMSE, MoCA) as part of annual health maintenance for patients 70+. GP-initiated cognitive screening is incentivised through HMO quality metrics. Memory clinics at academic hospitals are well-established. No proactive population-wide invitation for cognitive screening. The PREVENT Dementia-equivalent Israeli research programme (IYCAR — Israeli Consortium for Alzheimer Research) conducts research-based mid-life screening.', links: [{ label: 'IYCAR Alzheimer Research', url: 'https://www.health.gov.il/', comment: 'Israeli Consortium for Alzheimer Research — mid-life cognitive screening cohort studies' }] },
       [PopulationScreeningClaim.POLYGENIC_RISK]: { score: ScreeningLevel.COST_SHARING, text: 'Israel\'s unique population genetics — multiple distinct founder populations (Ashkenazi, Sephardi, Mizrahi, Ethiopian, Arab Israeli) with known disease-associated variants — makes PRS particularly powerful and clinically actionable. Israeli genome studies (e.g. Carmi et al.) have characterised population-specific variants. Clalit and Maccabi are piloting PRS return to patients. National PRS programme is in pilot phase; carrier screening for founder variants (BRCA, GBA, etc.) is already proactively offered through HMOs.', links: [{ label: 'Israeli Population Genomics', url: 'https://www.haplogenomics.com/', comment: 'Israeli genomics — unique founder population structure; PRS clinically powerful; national programme in pilot phase' }] },
-
       [PopulationScreeningClaim.SARCOPENIA_MUSCLE_MASS]: {
         score: 3,
-        text: 'Israeli HMOs include physical function assessments in annual health maintenance for older adults (65+). Clalit\'s geriatric protocols include muscle-strength testing (grip dynamometry) and walking speed as part of frailty assessments. DEXA is available through HMO referral for osteoporosis, and some geriatricians extend it to muscle mass.',
-        links: [{ label: 'Clalit Research Institute – Geriatric Frailty Data', url: 'https://clalitresearch.org/', comment: 'Clalit Institute publishes sarcopenia prevalence and trajectory data from HMO cohorts' }],
+        text: 'Israeli HMOs include physical function assessments in annual health maintenance for older adults (65+). Clalit\'s geriatric protocols include muscle-strength testing (grip dynamometry) and walking speed as part of frailty assessments. DEXA is available through HMO referral for osteoporosis, and some geriatricians extend it to muscle mass. Research-grade sarcopenia screening data from large Clalit cohorts has produced internationally cited reference ranges. Score: 3 (funded passively within geriatric/frailty pathway; HMO geriatric assessments include muscle function; no proactive national invite for asymptomatic adults).',
+        links: [
+          { label: 'Clalit Research Institute – Geriatric Frailty Data', url: 'https://clalitresearch.org/', comment: 'Clalit Institute publishes sarcopenia prevalence and trajectory data from HMO cohorts — foundation for national screening evidence' },
+        ],
       },
       [PopulationScreeningClaim.SLEEP_APNEA]: {
         score: 3,
-        text: 'No national population screening programme. Israeli HMOs provide funded home sleep testing on clinical referral; high-risk patients (hypertension, metabolic syndrome, obesity) are typically screened by GP or relevant specialist. HMO integration enables faster referral pathways than fragmented systems.',
-        links: [{ label: 'Israeli Society of Pulmonology', url: 'https://www.pulmonology.org.il/', comment: 'OSA guidelines and referral standards within Israeli HMOs' }],
+        text: 'No national population screening programme. Israeli HMOs provide funded home sleep testing on clinical referral; high-risk patients (hypertension, metabolic syndrome, obesity) are typically screened by GP or relevant specialist. HMO quality metrics include referral rates for sleepy patients. Israel\'s HMO integration enables faster referral pathways than fragmented systems. Score: 3 (funded on clinical indication; GP-initiated in HMOs; no proactive population offer but relatively low friction referral pathway).',
+        links: [
+          { label: 'Israeli Society of Pulmonology – OSA Guidelines', url: 'https://www.pulmonology.org.il/', comment: 'Israeli pulmonology professional body — OSA guidelines and referral standards within HMOs' },
+        ],
       },
       [PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY]: {
         score: 3,
-        text: 'The Israeli Health Basket (Sal Briut) is updated annually by a statutory committee using explicit cost-effectiveness criteria. New screening programmes enter via Health Basket Committee, which reviews submissions and makes decisions within one annual cycle (typically 6–12 months). Pilots can be run through HMO research arms and feed directly into the next annual cycle.',
-        links: [{ label: 'Israeli Health Basket Committee', url: 'https://www.health.gov.il/English/Topics/InsuranceLaws/Pages/health_basket.aspx', comment: 'Annual Health Basket — 6–12 month evidence-to-decision cycle' }],
+        text: 'The Israeli Health Basket (Sal Briut) is updated annually by a statutory committee using explicit cost-effectiveness criteria. New screening programmes enter via Health Basket Committee, which reviews submissions and makes decisions within one annual cycle (typically 6–12 months). This makes Israel one of the most agile health systems for adding funded interventions. Pilots can be run through HMO research arms and results can feed directly into the next annual cycle. Score: 3 (annual Health Basket update process constitutes a formal rapid evaluation pathway; 6–12 month commissioning cycle; evidence from HMO pilots informs policy).',
+        links: [
+          { label: 'Israeli Health Basket Committee', url: 'https://www.health.gov.il/English/Topics/InsuranceLaws/Pages/health_basket.aspx', comment: 'Annual Health Basket — statutory process for adding covered interventions; 6–12 month evidence-to-decision cycle' },
+        ],
       },
     },
 
@@ -442,9 +419,10 @@ const israel: CountryData = {
       },
       [PreventiveTrialsClaim.PATIENT_TRIAL_ACCESS]: {
         score: 4,
-        text: 'Israel\'s HMO infrastructure gives uniquely efficient patient trial access. Clalit Research Institute can identify trial-eligible patients from 4.7M members within days using EHR criteria. COVID-19 vaccine efficacy studies enrolled matched HMO cohorts in near real-time. The HMO model means patient-trial matching is feasible at population scale.',
+        text: 'Israel\'s HMO infrastructure gives it uniquely efficient patient trial access. Clalit Research Institute can identify trial-eligible patients from 4.7M members within days using EHR criteria. COVID-19 vaccine efficacy studies enrolled matched HMO cohorts and identified eligible populations in near real-time. ISRCTN and ClinicalTrials.gov are used for registration; Israeli HMOs operate internal patient contact systems for research. Maccabi and Leumit have similar capabilities. The HMO model means patient-trial matching is feasible at population scale. Score: 4 (HMO-based population-level identification; proactive patient contact for research; near-zero friction enrolment demonstrated at scale in COVID vaccine studies).',
         links: [
-          { label: 'Clalit Research Institute', url: 'https://clalitresearch.org/', comment: 'HMO-based patient identification; COVID vaccine study assembled matched cohorts in days' },
+          { label: 'Clalit Research Institute', url: 'https://clalitresearch.org/', comment: 'Clalit Research Institute — HMO-based patient identification; COVID vaccine study assembled matched cohorts in days' },
+          { label: 'Maccabi Healthcare Research', url: 'https://www.maccabi4u.co.il/new/doctors/research/maccabi-institute-for-health-services-research/', comment: 'Maccabi Institute for Health Services Research — HMO-integrated clinical trial and cohort study infrastructure' },
         ],
       },
     },
@@ -669,9 +647,10 @@ const israel: CountryData = {
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'Israeli MOH regulates advertising of healthcare services and can sanction false claims, and the Consumer Protection Authority handles misleading supplement/cosmetic marketing. However, the Israeli market has seen rapid growth in "functional medicine", NAD+ IV clinics, and anti-aging supplement companies making implicit or explicit longevity claims. MOH enforcement on these clinics is limited in practice. The Israeli Medical Association has not issued specific guidelines against practitioners offering unproven anti-aging protocols.',
+        text: 'Israeli MOH regulates advertising of healthcare services and can sanction false claims, and the Consumer Protection Authority handles misleading supplement/cosmetic marketing. However, the Israeli market has seen rapid growth in "functional medicine", NAD+ IV clinics, and anti-aging supplement companies making implicit or explicit longevity claims. MOH enforcement on these clinics is limited in practice. The Israeli Medical Association (IMA) has not issued specific guidelines against practitioners offering unproven anti-aging protocols, creating a gap where well-credentialed doctors can promote borderline interventions. No pre-market biomarker requirement. Score: 2 (advertising enforcement exists and is complaint-driven; active longevity clinic market with limited oversight; no domain-specific anti-aging claims standard; professional body guidance absent).',
         links: [
-          { label: 'Israeli Consumer Protection Authority', url: 'https://www.gov.il/en/departments/ministry_of_economy_and_industry/consumer_protection', comment: 'Handles misleading health and supplement advertising claims' },
+          { label: 'Israeli Consumer Protection Authority', url: 'https://www.gov.il/en/departments/ministry_of_economy_and_industry/consumer_protection', comment: 'Israeli consumer protection — handles misleading health and supplement advertising claims' },
+          { label: 'Israeli MOH – Healthcare Advertising', url: 'https://www.health.gov.il/English/Pages/HomePage.aspx', comment: 'Israeli MOH — advertising regulations for healthcare services and medical products' },
         ],
       },
     },

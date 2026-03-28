@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   Country,
   PolicyGroup,
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
-  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianScientistClaim,
   TALENTS_CLAIM_SCALES,
   BreakthroughAgencyClaim, BREAKTHROUGH_AGENCY_CLAIM_SCALES,
   AdaptiveLicensingClaim, ADAPTIVE_LICENSING_CLAIM_SCALES,
@@ -22,36 +22,27 @@ import {
   SharedPhysicalInfraClaim, SHARED_PHYSICAL_INFRA_CLAIM_SCALES,
   IntlResearchNetworkClaim, INTL_RESEARCH_NETWORK_CLAIM_SCALES,
   SocietalReadinessClaim, SOCIETAL_READINESS_CLAIM_SCALES,
+  PopulationScreeningClaim,
+  SCREENING_PROGRAMME_AGILITY_SCALE,
   type CountryData, type ClaimData,
-} from '../schema'
-import { allCountries } from '../countries'
-import { groupLabels, fieldLabels, claimLabels, countryLabels, countryFlags, SCREENING_SCALE, Locale } from '../translations'
+} from './schema'
+import { GROUPS, type GroupDef } from './schema/policyGroups'
+import { allCountries } from './countries'
+import { groupLabels, fieldLabels, claimLabels, countryLabels, countryFlags, SCREENING_SCALE, Locale } from './translations'
+import {
+  Filters,
+  readStoredTheme,
+  parseFiltersFromSearch,
+  filtersToSearchParams,
+  THEME_STORAGE_KEY,
+} from './ui/filters'
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+const FIELD_COL = 260
+const LEADERS_COL = 248
+const COUNTRY_COL = 300
+const GRID_GAP = 6
+const CELL_PAD = '10px 12px'
 
-type AnyField =
-  | TalentsField | ScienceField | TranslationField
-  | HealthcareField | DataField | InternationalField | SocietalField
-
-interface GroupDef {
-  group: PolicyGroup
-  fields: AnyField[]
-  accessor: (c: CountryData) => Record<string, Record<string, ClaimData>>
-}
-
-const GROUPS: GroupDef[] = [
-  { group: PolicyGroup.TALENTS,       fields: Object.values(TalentsField),       accessor: c => c.talents as Record<string, Record<string, ClaimData>> },
-  { group: PolicyGroup.SCIENCE,       fields: Object.values(ScienceField),       accessor: c => c.science as Record<string, Record<string, ClaimData>> },
-  { group: PolicyGroup.TRANSLATION,   fields: Object.values(TranslationField),   accessor: c => c.translation as Record<string, Record<string, ClaimData>> },
-  { group: PolicyGroup.HEALTHCARE,    fields: Object.values(HealthcareField),    accessor: c => c.healthcare as Record<string, Record<string, ClaimData>> },
-  { group: PolicyGroup.DATA,          fields: Object.values(DataField),          accessor: c => c.data as Record<string, Record<string, ClaimData>> },
-  { group: PolicyGroup.INTERNATIONAL, fields: Object.values(InternationalField), accessor: c => c.international as Record<string, Record<string, ClaimData>> },
-  { group: PolicyGroup.SOCIETAL,      fields: Object.values(SocietalField),      accessor: c => c.societal as Record<string, Record<string, ClaimData>> },
-]
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-/** Round to nearest 0.5 */
 function avgScore(claims: Record<string, ClaimData>): number {
   const scores = Object.values(claims).map(c => c.score as number)
   const mean = scores.reduce((a, b) => a + b, 0) / scores.length
@@ -76,30 +67,17 @@ function leadersForField(
   return atTop
 }
 
-/** Map score/maxScore → hue: red at 0, yellow-green at mid, bright green at max */
 function scoreColor(score: number, maxScore: number): string {
   if (maxScore === 0) return 'var(--border-hi)'
   const t = score / maxScore
-  if (t === 0)   return '#1a0a0a'
-  if (t <= 0.17) return '#7f2020'
-  if (t <= 0.33) return '#c26020'
-  if (t <= 0.50) return '#8aaf30'
-  if (t <= 0.67) return '#6dcc50'
-  if (t <= 0.83) return '#44ee70'
-  return '#00f090'
+  if (t === 0) return 'var(--dot-1)'
+  if (t <= 0.17) return 'var(--dot-2)'
+  if (t <= 0.33) return 'var(--dot-3)'
+  if (t <= 0.50) return 'var(--dot-4)'
+  if (t <= 0.67) return 'var(--dot-5)'
+  if (t <= 0.83) return 'var(--dot-5)'
+  return 'var(--dot-5)'
 }
-
-function scoreBg(score: number, maxScore: number): string {
-  if (maxScore === 0 || score === 0) return '#110808'
-  const t = score / maxScore
-  if (t <= 0.17) return '#1a0f0f'
-  if (t <= 0.33) return '#1a1505'
-  if (t <= 0.50) return '#111318'
-  if (t <= 0.67) return '#0f1a0f'
-  return '#0c1a10'
-}
-
-// ─── Scale text lookup ────────────────────────────────────────────────────────
 
 const STANDARD_SCALE_LABELS: Record<number, string> = {
   1: 'Absent',
@@ -109,145 +87,88 @@ const STANDARD_SCALE_LABELS: Record<number, string> = {
   5: 'Exemplary',
 }
 
-/** Returns a human-readable description for a given score within its field/claim context. */
 function getTalentsClaimKey(fieldKey: string, claimKey: string):
   | ResearcherImmigrationClaim | ClinicianImmigrationClaim
-  | ResearchTrainingClaim | ClinicianAgingTrainingClaim | ClinicianScientistClaim | null {
-  if (fieldKey === TalentsField.RESEARCHER_IMMIGRATION)      return claimKey as ResearcherImmigrationClaim
-  if (fieldKey === TalentsField.CLINICIAN_IMMIGRATION)       return claimKey as ClinicianImmigrationClaim
-  if (fieldKey === TalentsField.RESEARCH_TRAINING_PIPELINE)  return claimKey as ResearchTrainingClaim
-  if (fieldKey === TalentsField.CLINICIAN_AGING_TRAINING)    return claimKey as ClinicianAgingTrainingClaim
+  | ResearchTrainingClaim | ClinicianScientistClaim | null {
+  if (fieldKey === TalentsField.RESEARCHER_IMMIGRATION) return claimKey as ResearcherImmigrationClaim
+  if (fieldKey === TalentsField.CLINICIAN_IMMIGRATION) return claimKey as ClinicianImmigrationClaim
+  if (fieldKey === TalentsField.RESEARCH_TRAINING_PIPELINE) return claimKey as ResearchTrainingClaim
   if (fieldKey === TalentsField.CLINICIAN_SCIENTIST_PATHWAY) return claimKey as ClinicianScientistClaim
   return null
 }
 
-/** Returns a human-readable description for a given score within its field/claim context. */
 function getScaleLevelText(fieldKey: string, claimKey: string, score: number): string | null {
-  const level = Math.floor(score) // half-points floor to the level below
-  // ── Talents ──
+  const level = Math.floor(score)
   const talentsKey = getTalentsClaimKey(fieldKey, claimKey)
   if (talentsKey !== null) {
     const fieldScales = TALENTS_CLAIM_SCALES[fieldKey as TalentsField] as Record<string, Record<number, string>> | undefined
     if (!fieldScales) return null
     const scales = fieldScales[claimKey]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return scales?.[level] ?? null
   }
   if (fieldKey === HealthcareField.POPULATION_SCREENINGS) {
+    if (claimKey === PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY) {
+      const n = Math.round(score)
+      return SCREENING_PROGRAMME_AGILITY_SCALE[n] ?? null
+    }
     const entry = SCREENING_SCALE[level]
     if (!entry) return null
     const suffix = score % 1 !== 0 ? ' (narrow subset)' : ''
     return `${entry.label}${suffix}: ${entry.description}`
   }
   if (fieldKey === HealthcareField.AGING_BIOMARKER_COLLECTIONS) {
-    const scales = BIOMARKER_CLAIM_SCALES[claimKey as BiomarkerCollectionClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return BIOMARKER_CLAIM_SCALES[claimKey as BiomarkerCollectionClaim]?.[level] ?? null
   }
   if (fieldKey === HealthcareField.PREVENTIVE_TRIALS) {
-    const scales = PREVENTIVE_TRIAL_CLAIM_SCALES[claimKey as PreventiveTrialsClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return PREVENTIVE_TRIAL_CLAIM_SCALES[claimKey as PreventiveTrialsClaim]?.[level] ?? null
   }
   if (fieldKey === HealthcareField.GERO_THERAPEUTIC_ENDPOINTS) {
-    const scales = GERO_ENDPOINT_CLAIM_SCALES[claimKey as GeroEndpointsClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return GERO_ENDPOINT_CLAIM_SCALES[claimKey as GeroEndpointsClaim]?.[level] ?? null
   }
   if (fieldKey === DataField.OPEN_ACCESS_TO_HEALTH_DATA) {
-    const scales = OPEN_DATA_CLAIM_SCALES[claimKey as OpenDataClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return OPEN_DATA_CLAIM_SCALES[claimKey as OpenDataClaim]?.[level] ?? null
   }
   if (fieldKey === DataField.INTEROPERABILITY_STANDARDS) {
-    const scales = INTEROPERABILITY_CLAIM_SCALES[claimKey as InteroperabilityClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return INTEROPERABILITY_CLAIM_SCALES[claimKey as InteroperabilityClaim]?.[level] ?? null
   }
   if (fieldKey === DataField.STANDARDIZED_TRIAL_ENDPOINTS) {
-    const scales = RESEARCH_CLINICAL_CLAIM_SCALES[claimKey as ResearchClinicalClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return RESEARCH_CLINICAL_CLAIM_SCALES[claimKey as ResearchClinicalClaim]?.[level] ?? null
   }
   if (fieldKey === ScienceField.RESEARCH_FUNDING) {
-    const scales = RESEARCH_FUNDING_CLAIM_SCALES[claimKey as ResearchFundingClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return RESEARCH_FUNDING_CLAIM_SCALES[claimKey as ResearchFundingClaim]?.[level] ?? null
   }
   if (fieldKey === ScienceField.GENE_EDITING_REGULATION) {
-    const scales = GENE_EDITING_CLAIM_SCALES[claimKey as GeneEditingClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return GENE_EDITING_CLAIM_SCALES[claimKey as GeneEditingClaim]?.[level] ?? null
   }
   if (fieldKey === TranslationField.BIOTECH_BREAKTHROUGH_AGENCIES) {
-    const scales = BREAKTHROUGH_AGENCY_CLAIM_SCALES[claimKey as BreakthroughAgencyClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return BREAKTHROUGH_AGENCY_CLAIM_SCALES[claimKey as BreakthroughAgencyClaim]?.[level] ?? null
   }
   if (fieldKey === TranslationField.ADAPTIVE_LICENSING) {
-    const scales = ADAPTIVE_LICENSING_CLAIM_SCALES[claimKey as AdaptiveLicensingClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return ADAPTIVE_LICENSING_CLAIM_SCALES[claimKey as AdaptiveLicensingClaim]?.[level] ?? null
   }
   if (fieldKey === TranslationField.TRIAL_DESIGN_MODERNIZATION) {
-    const scales = TRIAL_DESIGN_CLAIM_SCALES[claimKey as TrialDesignClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return TRIAL_DESIGN_CLAIM_SCALES[claimKey as TrialDesignClaim]?.[level] ?? null
   }
   if (fieldKey === TranslationField.REGULATORY_SANDBOXES) {
-    const scales = REGULATORY_SANDBOX_CLAIM_SCALES[claimKey as RegulatorySandboxClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return REGULATORY_SANDBOX_CLAIM_SCALES[claimKey as RegulatorySandboxClaim]?.[level] ?? null
   }
   if (fieldKey === TranslationField.AGING_ENDPOINT_ECOSYSTEM) {
-    const scales = AGING_ENDPOINT_CLAIM_SCALES[claimKey as AgingEndpointClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return AGING_ENDPOINT_CLAIM_SCALES[claimKey as AgingEndpointClaim]?.[level] ?? null
   }
   if (fieldKey === InternationalField.REGULATORY_HARMONIZATION) {
-    const scales = REGULATORY_HARMONIZATION_CLAIM_SCALES[claimKey as RegulatoryHarmonizationClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return REGULATORY_HARMONIZATION_CLAIM_SCALES[claimKey as RegulatoryHarmonizationClaim]?.[level] ?? null
   }
   if (fieldKey === InternationalField.SHARED_PHYSICAL_INFRASTRUCTURE) {
-    const scales = SHARED_PHYSICAL_INFRA_CLAIM_SCALES[claimKey as SharedPhysicalInfraClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return SHARED_PHYSICAL_INFRA_CLAIM_SCALES[claimKey as SharedPhysicalInfraClaim]?.[level] ?? null
   }
   if (fieldKey === InternationalField.INTERNATIONAL_RESEARCH_NETWORK) {
-    const scales = INTL_RESEARCH_NETWORK_CLAIM_SCALES[claimKey as IntlResearchNetworkClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return INTL_RESEARCH_NETWORK_CLAIM_SCALES[claimKey as IntlResearchNetworkClaim]?.[level] ?? null
   }
   if (fieldKey === SocietalField.SOCIETAL_READINESS) {
-    const scales = SOCIETAL_READINESS_CLAIM_SCALES[claimKey as SocietalReadinessClaim]
-    if (!scales) return null
-    const desc = scales[level]
-    return desc ?? null
+    return SOCIETAL_READINESS_CLAIM_SCALES[claimKey as SocietalReadinessClaim]?.[level] ?? null
   }
-  // Standard 1–5
-  const label = STANDARD_SCALE_LABELS[Math.round(score)]
-  return label ?? null
+  return STANDARD_SCALE_LABELS[Math.round(score)] ?? null
 }
-
-// ─── Tooltip ─────────────────────────────────────────────────────────────────
 
 function Tooltip({ text, children }: { text: string | null; children: React.ReactNode }) {
   const [visible, setVisible] = useState(false)
@@ -264,18 +185,18 @@ function Tooltip({ text, children }: { text: string | null; children: React.Reac
           position: 'absolute',
           bottom: 'calc(100% + 6px)',
           left: 0,
-          background: '#12121e',
+          background: 'var(--tooltip-bg)',
           border: '1px solid var(--border-hi)',
           borderRadius: 5,
           padding: '6px 10px',
           fontSize: 10,
-          color: 'var(--text)',
+          color: 'var(--tooltip-fg)',
           whiteSpace: 'normal',
           maxWidth: 260,
           zIndex: 200,
           lineHeight: 1.55,
           pointerEvents: 'none',
-          boxShadow: '0 4px 16px rgba(0,0,0,0.6)',
+          boxShadow: 'var(--shadow-tooltip)',
         }}>
           {text}
         </span>
@@ -283,8 +204,6 @@ function Tooltip({ text, children }: { text: string | null; children: React.Reac
     </span>
   )
 }
-
-// ─── Score dots ──────────────────────────────────────────────────────────────
 
 function ScoreDots({ score, maxScore = 5, size = 7 }: { score: number; maxScore?: number; size?: number }) {
   const color = scoreColor(score, maxScore)
@@ -310,8 +229,6 @@ function ScoreDots({ score, maxScore = 5, size = 7 }: { score: number; maxScore?
   )
 }
 
-// ─── Single claim row ─────────────────────────────────────────────────────────
-
 function ClaimRow({ fieldKey, claimKey, data, maxScore = 5 }: { fieldKey: string; claimKey: string; data: ClaimData; maxScore?: number }) {
   const [open, setOpen] = useState(false)
   const t = claimLabels[fieldKey]?.[claimKey]?.[Locale.EN]
@@ -329,10 +246,10 @@ function ClaimRow({ fieldKey, claimKey, data, maxScore = 5 }: { fieldKey: string
         <Tooltip text={getScaleLevelText(fieldKey, claimKey, data.score)}>
           <ScoreDots score={data.score} maxScore={maxScore} size={6} />
         </Tooltip>
-        <span style={{ fontSize: 11, color: 'var(--text)', opacity: 0.75, flex: 1, lineHeight: 1.4 }}>
+        <span style={{ fontSize: 11, color: 'var(--cell-text)', flex: 1, lineHeight: 1.4, opacity: 0.92 }}>
           {t?.title ?? claimKey}
         </span>
-        <span style={{ color: 'var(--muted)', fontSize: 9, flexShrink: 0 }}>
+        <span style={{ color: 'var(--cell-muted)', fontSize: 9, flexShrink: 0 }}>
           {open ? '▲' : '▼'}
         </span>
       </div>
@@ -340,7 +257,7 @@ function ClaimRow({ fieldKey, claimKey, data, maxScore = 5 }: { fieldKey: string
       {open && (
         <div style={{ marginTop: 6, paddingLeft: 18 }}>
           {data.text && (
-            <p style={{ fontSize: 11, color: 'var(--muted)', lineHeight: 1.6, marginBottom: 6 }}>
+            <p style={{ fontSize: 11, color: 'var(--cell-muted)', lineHeight: 1.6, marginBottom: 6 }}>
               {data.text}
             </p>
           )}
@@ -358,7 +275,7 @@ function ClaimRow({ fieldKey, claimKey, data, maxScore = 5 }: { fieldKey: string
                 ↗ {l.label}
               </a>
               {l.comment && (
-                <span style={{ color: 'var(--muted)', fontSize: 10, marginLeft: 6 }}>
+                <span style={{ color: 'var(--cell-muted)', fontSize: 10, marginLeft: 6 }}>
                   — {l.comment}
                 </span>
               )}
@@ -369,8 +286,6 @@ function ClaimRow({ fieldKey, claimKey, data, maxScore = 5 }: { fieldKey: string
     </div>
   )
 }
-
-// ─── Field cell (summary + claims when row expanded) ─────────────────────────
 
 function FieldCell({
   fieldKey,
@@ -386,31 +301,38 @@ function FieldCell({
   onToggleRow: () => void
 }) {
   const score = avgScore(claims)
+  const claimKeys = Object.keys(claims)
+  const cellTooltip = claimKeys.length === 1
+    ? getScaleLevelText(fieldKey, claimKeys[0]!, score)
+    : (STANDARD_SCALE_LABELS[Math.round(score)] ?? null)
 
   return (
     <div
       onClick={onToggleRow}
       style={{
-        background: scoreBg(score, maxScore),
-        border: `1px solid var(--border)`,
+        background: 'var(--cell-bg)',
+        border: '1px solid var(--border)',
         borderRadius: 6,
-        padding: '10px 12px',
+        padding: CELL_PAD,
         transition: 'border-color 0.15s',
         minHeight: 44,
+        height: '100%',
         cursor: 'pointer',
+        display: 'flex',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
       }}
       onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hi)')}
       onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <ScoreDots score={score} maxScore={maxScore} />
-        <span style={{ color: 'var(--muted)', fontSize: 10 }}>
-          {Object.keys(claims).length} claims
-        </span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+        <Tooltip text={cellTooltip}>
+          <ScoreDots score={score} maxScore={maxScore} />
+        </Tooltip>
       </div>
 
       {expanded && (
-        <div style={{ marginTop: 8 }} onClick={e => e.stopPropagation()}>
+        <div style={{ marginTop: 8, flex: 1, minHeight: 0 }} onClick={e => e.stopPropagation()}>
           {Object.entries(claims).map(([key, data]) => (
             <ClaimRow key={key} fieldKey={fieldKey} claimKey={key} data={data} maxScore={maxScore} />
           ))}
@@ -424,64 +346,52 @@ const stickyFirstCol: React.CSSProperties = {
   position: 'sticky',
   left: 0,
   zIndex: 8,
-  background: 'var(--bg)',
-  boxShadow: '4px 0 12px -4px rgba(0,0,0,0.45)',
+  background: 'var(--cell-bg)',
+  boxShadow: 'var(--shadow-sticky)',
 }
 
-const stickyCorner: React.CSSProperties = {
+const stickyCornerStyle: React.CSSProperties = {
   position: 'sticky',
   left: 0,
   top: 0,
   zIndex: 30,
-  background: 'var(--bg)',
-  boxShadow: '4px 4px 12px -4px rgba(0,0,0,0.45)',
+  background: 'var(--cell-bg)',
+  boxShadow: 'var(--shadow-corner)',
 }
 
 const stickyGroupFirstCol: React.CSSProperties = {
   position: 'sticky',
   left: 0,
   zIndex: 9,
-  background: 'var(--bg)',
-  boxShadow: '4px 0 12px -4px rgba(0,0,0,0.45)',
+  background: 'var(--cell-bg)',
+  boxShadow: 'var(--shadow-sticky)',
 }
 
-function stickyLeadersCol(fieldCol: number): React.CSSProperties {
+function stickyLeadersCol(): React.CSSProperties {
   return {
     position: 'sticky',
-    left: fieldCol,
+    left: FIELD_COL,
     zIndex: 7,
-    background: 'var(--bg)',
-    boxShadow: '4px 0 12px -4px rgba(0,0,0,0.45)',
+    background: 'var(--cell-bg)',
+    boxShadow: 'var(--shadow-sticky)',
   }
 }
 
-function LeaderBadge({
-  countryKey,
-  score,
-  maxScore,
-}: {
-  countryKey: CountryData['country']
-  score: number
-  maxScore: number
-}) {
+function LeaderBadge({ countryKey }: { countryKey: CountryData['country'] }) {
   return (
-    <div
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 6,
-        flexWrap: 'wrap',
-        padding: '5px 9px',
-        borderRadius: 8,
-        border: '1px solid var(--border-hi)',
-        background: scoreBg(score, maxScore),
-      }}
-    >
+    <div style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      padding: '5px 9px',
+      borderRadius: 8,
+      border: '1px solid var(--border-hi)',
+      background: 'var(--cell-bg)',
+    }}>
       <span style={{ fontSize: 14, lineHeight: 1 }} aria-hidden>{countryFlags[countryKey]}</span>
-      <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--text)' }}>
+      <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--cell-text)' }}>
         {countryLabels[countryKey][Locale.EN]}
       </span>
-      <ScoreDots score={score} maxScore={maxScore} size={5} />
     </div>
   )
 }
@@ -490,103 +400,50 @@ function rowKey(group: PolicyGroup, field: string) {
   return `${group}::${field}`
 }
 
-const selectBase: React.CSSProperties = {
-  padding: '6px 10px',
-  borderRadius: 6,
-  border: '1px solid var(--border)',
-  background: 'var(--surface)',
-  color: 'var(--text)',
-  fontFamily: 'inherit',
-  fontSize: 12,
-  cursor: 'pointer',
-}
-
-function ToolbarMulti({
-  label,
-  children,
-}: {
-  label: string
-  children: React.ReactNode
-}) {
-  return (
-    <details style={{ position: 'relative' }}>
-      <summary
-        style={{
-          ...selectBase,
-          listStyle: 'none',
-          userSelect: 'none',
-        }}
-      >
-        {label}
-      </summary>
-      <div
-        style={{
-          position: 'absolute',
-          top: 'calc(100% + 4px)',
-          left: 0,
-          zIndex: 400,
-          minWidth: 220,
-          maxHeight: 280,
-          overflowY: 'auto',
-          padding: 8,
-          background: 'var(--surface)',
-          border: '1px solid var(--border-hi)',
-          borderRadius: 6,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-        }}
-        onClick={e => e.stopPropagation()}
-      >
-        {children}
-      </div>
-    </details>
-  )
-}
-
-const toolbarRow: React.CSSProperties = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  alignItems: 'center',
-  gap: 10,
-  marginBottom: 28,
-  padding: '12px 14px',
-  background: 'var(--surface)',
-  border: '1px solid var(--border)',
-  borderRadius: 8,
-}
-
-const checkboxLabel: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 8,
-  fontSize: 12,
-  color: 'var(--text)',
-  padding: '4px 0',
-  cursor: 'pointer',
-}
-
-// ─── App ─────────────────────────────────────────────────────────────────────
-
 export default function App() {
-  const FIELD_COL = 260
-  const LEADERS_COL = 248
-  const COUNTRY_COL = 300
+  const [theme, setTheme] = useState<'night' | 'day'>(readStoredTheme)
 
-  const [theme, setTheme] = useState<'night' | 'day'>('night')
-  const [visibleGroups, setVisibleGroups] = useState<Set<PolicyGroup>>(
-    () => new Set(GROUPS.map(g => g.group)),
-  )
-  const [visibleCountries, setVisibleCountries] = useState<Set<Country>>(
-    () => new Set(allCountries.map(c => c.country)),
-  )
-  const [showLeaders, setShowLeaders] = useState(true)
+  const handleThemeChange = useCallback((t: 'night' | 'day') => {
+    setTheme(t)
+    try { localStorage.setItem(THEME_STORAGE_KEY, t) } catch { /* ignore */ }
+  }, [])
 
   useEffect(() => {
     if (theme === 'day') document.documentElement.dataset.theme = 'light'
     else document.documentElement.removeAttribute('data-theme')
   }, [theme])
 
+  const [visibleGroups, setVisibleGroups] = useState<Set<PolicyGroup>>(
+    () => parseFiltersFromSearch(window.location.search).visibleGroups,
+  )
+  const [visibleCountries, setVisibleCountries] = useState<Set<Country>>(
+    () => parseFiltersFromSearch(window.location.search).visibleCountries,
+  )
+  const [showLeaders, setShowLeaders] = useState<boolean>(
+    () => parseFiltersFromSearch(window.location.search).showLeaders,
+  )
+
+  useEffect(() => {
+    const onPop = () => {
+      const p = parseFiltersFromSearch(window.location.search)
+      setVisibleGroups(p.visibleGroups)
+      setVisibleCountries(p.visibleCountries)
+      setShowLeaders(p.showLeaders)
+    }
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
+
+  useEffect(() => {
+    const params = filtersToSearchParams(visibleGroups, visibleCountries, showLeaders)
+    const str = params.toString()
+    const { pathname, hash } = window.location
+    const next = str ? `${pathname}?${str}${hash}` : `${pathname}${hash}`
+    window.history.replaceState(null, '', next)
+  }, [visibleGroups, visibleCountries, showLeaders])
+
   const groupsFiltered = useMemo(
-    () => GROUPS.filter(g => visibleGroups.has(g.group)),
+    () => GROUPS.filter((g: GroupDef) => visibleGroups.has(g.group)),
     [visibleGroups],
   )
   const countries = useMemo(
@@ -597,6 +454,11 @@ export default function App() {
   const gridCols = showLeaders
     ? `${FIELD_COL}px ${LEADERS_COL}px repeat(${countries.length}, ${COUNTRY_COL}px)`
     : `${FIELD_COL}px repeat(${countries.length}, ${COUNTRY_COL}px)`
+
+  const numCols = 1 + (showLeaders ? 1 : 0) + countries.length
+  const gapTotal = GRID_GAP * Math.max(0, numCols - 1)
+  const tableMinWidth =
+    FIELD_COL + (showLeaders ? LEADERS_COL : 0) + countries.length * COUNTRY_COL + gapTotal
 
   const [expandedRows, setExpandedRows] = useState<Set<string>>(() => new Set())
 
@@ -609,13 +471,13 @@ export default function App() {
     })
   }
 
-  const totalFields = groupsFiltered.reduce((n, g) => n + g.fields.length, 0)
+  const totalFields = groupsFiltered.reduce((n: number, g: GroupDef) => n + g.fields.length, 0)
   const totalClaims = countries.reduce(
-    (acc, c) =>
+    (acc: number, c) =>
       acc +
       groupsFiltered.reduce(
-        (gAcc, g) =>
-          gAcc + g.fields.reduce((fAcc, field) => {
+        (gAcc: number, g: GroupDef) =>
+          gAcc + g.fields.reduce((fAcc: number, field: string) => {
             const fd = g.accessor(c)[field]
             return fAcc + (fd ? Object.keys(fd).length : 0)
           }, 0),
@@ -625,217 +487,137 @@ export default function App() {
   )
 
   return (
-    <div style={{ minHeight: '100vh', padding: '40px 32px 80px' }}>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+      <div style={{
+        flex: 1,
+        minHeight: 0,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+      }}>
+        <div style={{ padding: '40px 32px 0' }}>
+          <header style={{ marginBottom: 36, maxWidth: 700 }}>
+            <h1 style={{
+              fontSize: 'clamp(28px, 4vw, 48px)',
+              fontWeight: 600,
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
+              marginBottom: 14,
+              fontFamily: 'var(--font-display)',
+            }}>
+              Longevity State
+            </h1>
+            <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
+              {countries.length} countries · {groupsFiltered.length} policy groups · {totalFields} fields · {totalClaims.toLocaleString('en-US')} claims · claim-level evidence.
+            </p>
+          </header>
 
-      {/* Header */}
-      <header style={{ marginBottom: 48, maxWidth: 700 }}>
-        <h1 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 600, lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 14 }}>
-          Longevity State
-        </h1>
-        <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
-          {countries.length} countries · {groupsFiltered.length} policy groups · {totalFields} fields · {totalClaims.toLocaleString('en-US')} claims · claim-level evidence.
-        </p>
-      </header>
+          <Filters
+            theme={theme}
+            onThemeChange={handleThemeChange}
+            visibleGroups={visibleGroups}
+            setVisibleGroups={setVisibleGroups}
+            visibleCountries={visibleCountries}
+            setVisibleCountries={setVisibleCountries}
+            showLeaders={showLeaders}
+            setShowLeaders={setShowLeaders}
+          />
+        </div>
 
-      <nav style={toolbarRow} aria-label="View options">
-        <select
-          value={theme}
-          onChange={e => setTheme(e.target.value as 'night' | 'day')}
-          style={selectBase}
-          aria-label="Theme"
-        >
-          <option value="night">Night</option>
-          <option value="day">Day</option>
-        </select>
+        <div style={{
+          margin: '24px 32px 0',
+          overflowX: 'auto',
+          overflowY: 'clip',
+          background: 'var(--cell-bg)',
+          border: '1px solid var(--border)',
+          borderRadius: 8,
+        }}>
+          <div style={{ minWidth: tableMinWidth, padding: GRID_GAP }}>
 
-        <ToolbarMulti label={`Policy groups (${visibleGroups.size})`}>
-          <div style={{ marginBottom: 8 }}>
-            <button
-              type="button"
-              style={{ ...selectBase, padding: '4px 8px', fontSize: 11 }}
-              onClick={() => setVisibleGroups(new Set(GROUPS.map(g => g.group)))}
-            >
-              All groups
-            </button>
-          </div>
-          {GROUPS.map(({ group }) => (
-            <label key={group} style={checkboxLabel}>
-              <input
-                type="checkbox"
-                checked={visibleGroups.has(group)}
-                onChange={() => {
-                  setVisibleGroups(prev => {
-                    const next = new Set(prev)
-                    if (next.has(group)) {
-                      if (next.size <= 1) return prev
-                      next.delete(group)
-                    } else next.add(group)
-                    return next
-                  })
-                }}
-              />
-              {groupLabels[group][Locale.EN]}
-            </label>
-          ))}
-        </ToolbarMulti>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: gridCols,
+              gap: GRID_GAP,
+              paddingBottom: 8,
+            }}>
+              <div style={{ ...stickyCornerStyle, minHeight: 1 }} />
 
-        <ToolbarMulti label={`Countries (${visibleCountries.size})`}>
-          <div style={{ marginBottom: 8 }}>
-            <button
-              type="button"
-              style={{ ...selectBase, padding: '4px 8px', fontSize: 11 }}
-              onClick={() => setVisibleCountries(new Set(allCountries.map(c => c.country)))}
-            >
-              All countries
-            </button>
-          </div>
-          {allCountries.map(c => (
-            <label key={c.country} style={checkboxLabel}>
-              <input
-                type="checkbox"
-                checked={visibleCountries.has(c.country)}
-                onChange={() => {
-                  setVisibleCountries(prev => {
-                    const next = new Set(prev)
-                    if (next.has(c.country)) {
-                      if (next.size <= 1) return prev
-                      next.delete(c.country)
-                    } else next.add(c.country)
-                    return next
-                  })
-                }}
-              />
-              <span aria-hidden style={{ marginRight: 2 }}>{countryFlags[c.country]}</span>
-              {countryLabels[c.country][Locale.EN]}
-            </label>
-          ))}
-        </ToolbarMulti>
-
-        <select
-          value={showLeaders ? 'yes' : 'no'}
-          onChange={e => setShowLeaders(e.target.value === 'yes')}
-          style={selectBase}
-          aria-label="Leaders column"
-        >
-          <option value="yes">Leaders: on</option>
-          <option value="no">Leaders: off</option>
-        </select>
-      </nav>
-
-      <div style={{ overflowX: 'auto', marginRight: -32, paddingRight: 32 }}>
-        <div style={{ minWidth: FIELD_COL + (showLeaders ? LEADERS_COL : 0) + countries.length * COUNTRY_COL }}>
-
-          {/* Country header row */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: gridCols,
-            gap: 1,
-            paddingBottom: 8,
-          }}>
-            <div style={stickyCorner} />
-            {showLeaders && (
-              <div
-                style={{
-                  ...stickyLeadersCol(FIELD_COL),
+              {showLeaders && (
+                <div style={{
+                  ...stickyLeadersCol(),
                   top: 0,
                   zIndex: 29,
                   padding: '8px 10px 8px 0',
                   borderBottom: '2px solid var(--accent)',
                   alignSelf: 'stretch',
-                }}
-              >
-                <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
-                  Leaders
-                </span>
-              </div>
-            )}
-            {countries.map(c => (
-              <div
-                key={c.country}
-                style={{
-                  padding: '8px 12px',
-                  borderBottom: '2px solid var(--accent)',
-                  position: 'sticky',
-                  top: 0,
-                  zIndex: 12,
-                  background: 'var(--bg)',
-                }}
-              >
-                <div style={{ fontSize: 15, fontWeight: 400, display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span aria-hidden>{countryFlags[c.country]}</span>
-                  <span>{countryLabels[c.country][Locale.EN]}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {groupsFiltered.map(({ group, fields, accessor }) => (
-            <div key={group} style={{ marginTop: 28 }}>
-
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: gridCols,
-                gap: 1,
-                marginBottom: 6,
-              }}>
-                <div style={{ ...stickyGroupFirstCol, paddingBottom: 4, paddingRight: 12 }}>
+                }}>
                   <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
-                    {groupLabels[group][Locale.EN]}
+                    Leaders
                   </span>
                 </div>
-                {showLeaders && <div style={{ ...stickyLeadersCol(FIELD_COL), paddingBottom: 4 }} />}
-                {countries.map(c => (
-                  <div key={c.country} style={{ borderTop: '1px solid var(--border)' }} />
-                ))}
-              </div>
+              )}
 
-              {fields.map(field => {
-                const ft = fieldLabels[field]?.[Locale.EN]
-                const maxScore = ft?.maxScore ?? 5
-                const rk = rowKey(group, field)
-                const open = expandedRows.has(rk)
-                const leaders = leadersForField(countries, accessor, field)
-                return (
-                  <div
-                    key={field}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: gridCols,
-                      gap: 6,
-                      marginBottom: 6,
-                      alignItems: 'start',
-                    }}
-                  >
+              {countries.map(c => (
+                <div
+                  key={c.country}
+                  style={{
+                    padding: '8px 12px',
+                    borderBottom: '2px solid var(--accent)',
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 12,
+                    background: 'var(--cell-bg)',
+                  }}
+                >
+                  <div style={{ fontSize: 15, fontWeight: 400, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--cell-text)' }}>
+                    <span aria-hidden>{countryFlags[c.country]}</span>
+                    <span>{countryLabels[c.country][Locale.EN]}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {groupsFiltered.map(({ group, fields, accessor }: GroupDef) => (
+              <div key={group} style={{ marginTop: 28 }}>
+
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: gridCols,
+                  gap: GRID_GAP,
+                  marginBottom: 6,
+                }}>
+                  <div style={{ ...stickyGroupFirstCol, paddingBottom: 4, paddingRight: 12 }}>
+                    <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
+                      {groupLabels[group][Locale.EN]}
+                    </span>
+                  </div>
+                  {showLeaders && <div style={{ ...stickyLeadersCol(), paddingBottom: 4 }} />}
+                  {countries.map(c => (
+                    <div key={c.country} style={{ borderTop: '1px solid var(--border)' }} />
+                  ))}
+                </div>
+
+                {fields.map(field => {
+                  const ft = fieldLabels[field]?.[Locale.EN]
+                  const maxScore = ft?.maxScore ?? 5
+                  const rk = rowKey(group, field)
+                  const open = expandedRows.has(rk)
+                  const leaders = leadersForField(countries, accessor, field)
+                  const claimCountMax = countries.reduce((m, c) => {
+                    const fd = accessor(c)[field]
+                    return Math.max(m, fd ? Object.keys(fd).length : 0)
+                  }, 0)
+
+                  return (
                     <div
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => toggleRow(rk)}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          toggleRow(rk)
-                        }
+                      key={field}
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: gridCols,
+                        gap: GRID_GAP,
+                        marginBottom: 6,
+                        alignItems: 'stretch',
                       }}
-                      style={{ ...stickyFirstCol, paddingTop: 10, paddingRight: 20, cursor: 'pointer' }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                        <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0, marginTop: 2 }}>
-                          {open ? '▲' : '▼'}
-                        </span>
-                        <div style={{ minWidth: 0 }}>
-                          <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)', lineHeight: 1.35 }}>
-                            {ft?.title ?? field}
-                          </div>
-                          {ft?.description && (
-                            <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 4, lineHeight: 1.5 }}>
-                              {ft.description}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {showLeaders && (
                       <div
                         role="button"
                         tabIndex={0}
@@ -846,80 +628,125 @@ export default function App() {
                             toggleRow(rk)
                           }
                         }}
-                        style={{
-                          ...stickyLeadersCol(FIELD_COL),
-                          paddingTop: 10,
-                          paddingRight: 8,
-                          cursor: 'pointer',
-                          minHeight: 44,
-                        }}
+                        style={{ ...stickyFirstCol, paddingTop: 10, paddingRight: 20, cursor: 'pointer' }}
                       >
-                        {leaders.length === 0 ? (
-                          <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
-                        ) : (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                            {leaders.map(({ data, score }) => (
-                              <LeaderBadge key={data.country} countryKey={data.country} score={score} maxScore={maxScore} />
-                            ))}
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                          <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0, marginTop: 2 }}>
+                            {open ? '▲' : '▼'}
+                          </span>
+                          <div style={{ minWidth: 0 }}>
+                            <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)', lineHeight: 1.35 }}>
+                              {ft?.title ?? field}
+                            </div>
+                            {!open && claimCountMax > 0 && (
+                              <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 4 }}>
+                                {claimCountMax} claims
+                              </div>
+                            )}
+                            {open && ft?.description && (
+                              <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 4, lineHeight: 1.5 }}>
+                                {ft.description}
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </div>
-                    )}
 
-                    {countries.map(c => {
-                      const fieldData = accessor(c)[field]
-                      if (!fieldData) {
-                        return (
-                          <div
-                            key={c.country}
-                            role="button"
-                            tabIndex={0}
-                            onClick={() => toggleRow(rk)}
-                            onKeyDown={e => {
-                              if (e.key === 'Enter' || e.key === ' ') {
-                                e.preventDefault()
-                                toggleRow(rk)
-                              }
-                            }}
-                            style={{
-                              background: 'var(--surface)',
-                              border: '1px dashed var(--border)',
-                              borderRadius: 6,
-                              minHeight: 44,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              cursor: 'pointer',
-                            }}
-                          >
+                      {showLeaders && (
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => toggleRow(rk)}
+                          onKeyDown={e => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              toggleRow(rk)
+                            }
+                          }}
+                          style={{
+                            ...stickyLeadersCol(),
+                            paddingTop: 10,
+                            paddingRight: 8,
+                            cursor: 'pointer',
+                            minHeight: 44,
+                            alignSelf: 'stretch',
+                          }}
+                        >
+                          {leaders.length === 0 ? (
                             <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
-                          </div>
-                        )
-                      }
-                      return (
-                        <FieldCell
-                          key={c.country}
-                          fieldKey={field}
-                          claims={fieldData}
-                          maxScore={maxScore}
-                          expanded={open}
-                          onToggleRow={() => toggleRow(rk)}
-                        />
-                      )
-                    })}
-                  </div>
-                )
-              })}
-            </div>
-          ))}
-        </div>
-      </div>
+                          ) : (
+                            <div style={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              flexWrap: 'wrap',
+                              gap: 6,
+                              alignContent: 'flex-start',
+                              alignItems: 'flex-start',
+                            }}>
+                              {leaders.map(({ data }) => (
+                                <LeaderBadge key={data.country} countryKey={data.country} />
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
 
-      <footer style={{ marginTop: 80, borderTop: '1px solid var(--border)', paddingTop: 24 }}>
-        <p style={{ color: 'var(--muted)', fontSize: 11, fontFamily: 'var(--font-mono)' }}>
-          Based on Longevity State policy blueprint · fundlongevity.org
-        </p>
-      </footer>
+                      {countries.map(c => {
+                        const fieldData = accessor(c)[field]
+                        if (!fieldData) {
+                          return (
+                            <div
+                              key={c.country}
+                              role="button"
+                              tabIndex={0}
+                              onClick={() => toggleRow(rk)}
+                              onKeyDown={e => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  toggleRow(rk)
+                                }
+                              }}
+                              style={{
+                                background: 'var(--cell-bg)',
+                                border: '1px dashed var(--border)',
+                                borderRadius: 6,
+                                minHeight: 44,
+                                height: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                              }}
+                            >
+                              <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
+                            </div>
+                          )
+                        }
+                        return (
+                          <FieldCell
+                            key={c.country}
+                            fieldKey={field}
+                            claims={fieldData}
+                            maxScore={maxScore}
+                            expanded={open}
+                            onToggleRow={() => toggleRow(rk)}
+                          />
+                        )
+                      })}
+                    </div>
+                  )
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <footer style={{ margin: '48px 32px 40px', borderTop: '1px solid var(--border)', paddingTop: 24 }}>
+          <p style={{ color: 'var(--muted)', fontSize: 11, fontFamily: 'var(--font-mono)' }}>
+            Based on Longevity State policy blueprint · fundlongevity.org
+          </p>
+        </footer>
+      </div>
     </div>
   )
 }

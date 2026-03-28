@@ -1,5 +1,12 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 :root {
   --bg:         #0a0b0d;
   --surface:    #111318;
@@ -8,6 +15,9 @@
   --text:       #e8eaf0;
   --muted:      #6b7280;
   --accent:     #c8f05a;
+  --cell-bg:    #111318;
+  --cell-text:  #e8eaf0;
+  --cell-muted: #6b7280;
   --score-1:    #3d1515;
   --score-2:    #3d2a10;
   --score-3:    #1a2e1a;
@@ -21,6 +31,12 @@
   --font-sans:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: var(--font-sans);
   --font-mono:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --tooltip-bg:   #12121e;
+  --tooltip-fg:   #e8eaf0;
+  --shadow-dropdown: 0 8px 24px rgba(0,0,0,0.35);
+  --shadow-sticky:   4px 0 12px -4px rgba(0,0,0,0.18);
+  --shadow-corner:   4px 4px 12px -4px rgba(0,0,0,0.18);
+  --shadow-tooltip:  0 4px 16px rgba(0,0,0,0.25);
 }
 
 html { font-size: 14px; }
@@ -31,7 +47,7 @@ body {
   font-family: var(--font-sans);
   font-weight: 300;
   line-height: 1.6;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -51,4 +67,13 @@ details > summary::-webkit-details-marker { display: none; }
   --text:       #111318;
   --muted:      #5c6473;
   --accent:     #4a6600;
+  --cell-bg:    #ffffff;
+  --cell-text:  #111318;
+  --cell-muted: #5c6473;
+  --tooltip-bg: #1e2230;
+  --tooltip-fg: #e8eaf0;
+  --shadow-dropdown: none;
+  --shadow-sticky:   none;
+  --shadow-corner:   none;
+  --shadow-tooltip:  none;
 }

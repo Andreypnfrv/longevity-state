@@ -1,6 +1,6 @@
 import {
   TalentsField, ScienceField, TranslationField, HealthcareField, DataField, InternationalField, SocietalField,
-  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianAgingTrainingClaim, ClinicianScientistClaim,
+  ResearcherImmigrationClaim, ClinicianImmigrationClaim, ResearchTrainingClaim, ClinicianScientistClaim,
   ResearchFundingClaim, GeneEditingClaim,
   BreakthroughAgencyClaim, AdaptiveLicensingClaim, TrialDesignClaim, RegulatorySandboxClaim, AgingEndpointClaim,
   PopulationScreeningClaim, BiomarkerCollectionClaim, PreventiveTrialsClaim, GeroEndpointsClaim,
@@ -92,29 +92,6 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
   },
 
   // ── Talents: Clinician Aging Training ────────────────────────────────────
-  [TalentsField.CLINICIAN_AGING_TRAINING]: {
-    [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: { [Locale.EN]: {
-      title: 'Geriatrics as a recognised specialty',
-      description: 'Whether geriatrics and aging medicine are a formally recognised, well-resourced, and socially valued medical specialty — or a low-prestige underfunded afterthought.',
-    }},
-    [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: { [Locale.EN]: {
-      title: 'Medical school integration',
-      description: 'Whether aging biology — not just geriatric clinical management — is integrated systematically across the medical school curriculum, creating doctors who understand the mechanisms of aging.',
-    }},
-    [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: { [Locale.EN]: {
-      title: 'Aging medicine residency quality',
-      description: 'Quality and breadth of geriatrics / aging medicine residency training — from absent to world-class programmes including longevity interventions and integrated clinical research.',
-    }},
-    [ClinicianAgingTrainingClaim.LONGEVITY_CME]: { [Locale.EN]: {
-      title: 'Longevity continuing medical education',
-      description: 'Whether practising clinicians across all specialties can access structured continuing education in longevity medicine and aging interventions — not just geriatricians.',
-    }},
-    [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: { [Locale.EN]: {
-      title: 'Aging medicine workforce planning',
-      description: 'Whether a national plan exists to match the supply of aging medicine specialists to projected demographic demand — with funded expansion of training capacity.',
-    }},
-  },
-
   // ── Talents: Clinician-Scientist Pathway ─────────────────────────────────
   [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
     [ClinicianScientistClaim.COMBINED_DEGREE_EXISTS]: { [Locale.EN]: {
@@ -616,7 +593,7 @@ export const claimLabels: Record<string, Record<string, Record<Locale, ClaimTran
     }},
     [SocietalReadinessClaim.QUACKERY_RESISTANCE]: { [Locale.EN]: {
       title: 'Anti-aging quackery resistance',
-      description: 'How well the regulatory and professional environment protects people from unproven anti-aging products and pseudo-specialist claims. Ranges from an unregulated "anti-aging" marketing free-for-all (0) to a system where any anti-aging effect claim requires validated biomarker evidence and pseudo-certification bodies cannot confer clinical authority (5).',
+      description: 'How well the regulatory and professional environment protects people from unproven anti-aging products and pseudo-specialist claims. Ranges from an unregulated "anti-aging" marketing free-for-all (0) to a system where any anti-aging effect claim requires validated biomarker evidence — equivalent to drug approval standards — and pseudo-certification bodies cannot confer clinical authority (5).',
     }},
   },
 }
