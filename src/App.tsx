@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import {
   Country,
   PolicyGroup,
@@ -67,16 +67,49 @@ function leadersForField(
   return atTop
 }
 
-function scoreColor(score: number, maxScore: number): string {
-  if (maxScore === 0) return 'var(--border-hi)'
-  const t = score / maxScore
-  if (t === 0) return 'var(--dot-1)'
-  if (t <= 0.17) return 'var(--dot-2)'
-  if (t <= 0.33) return 'var(--dot-3)'
-  if (t <= 0.50) return 'var(--dot-4)'
-  if (t <= 0.67) return 'var(--dot-5)'
-  if (t <= 0.83) return 'var(--dot-5)'
-  return 'var(--dot-5)'
+function leadersForClaim(
+  list: CountryData[],
+  accessor: (c: CountryData) => Record<string, Record<string, ClaimData>>,
+  field: string,
+  claimKey: string,
+): { data: CountryData; score: number }[] {
+  const scored: { data: CountryData; score: number }[] = []
+  for (const c of list) {
+    const claim = accessor(c)[field]?.[claimKey]
+    if (claim) scored.push({ data: c, score: claim.score as number })
+  }
+  if (scored.length === 0) return []
+  const best = Math.max(...scored.map(s => s.score))
+  const atTop = scored.filter(s => s.score === best)
+  const order = new Map(list.map((c, i) => [c.country, i]))
+  atTop.sort((a, b) => (order.get(a.data.country) ?? 0) - (order.get(b.data.country) ?? 0))
+  return atTop
+}
+
+function orderedClaimKeys(
+  list: CountryData[],
+  accessor: (c: CountryData) => Record<string, Record<string, ClaimData>>,
+  field: string,
+): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const c of list) {
+    const fd = accessor(c)[field]
+    if (!fd) continue
+    for (const k of Object.keys(fd)) {
+      if (seen.has(k)) continue
+      seen.add(k)
+      out.push(k)
+    }
+  }
+  out.sort((a, b) => a.localeCompare(b))
+  return out
+}
+
+function achievedFillDotVar(score: number, maxScore: number): string {
+  if (maxScore <= 0 || score <= 0) return 'var(--border-hi)'
+  const level = Math.min(5, Math.max(1, Math.round((score / maxScore) * 5)))
+  return `var(--dot-${level})`
 }
 
 const STANDARD_SCALE_LABELS: Record<number, string> = {
@@ -206,7 +239,7 @@ function Tooltip({ text, children }: { text: string | null; children: React.Reac
 }
 
 function ScoreDots({ score, maxScore = 5, size = 7 }: { score: number; maxScore?: number; size?: number }) {
-  const color = scoreColor(score, maxScore)
+  const fillColor = achievedFillDotVar(score, maxScore)
   const dots = Array.from({ length: maxScore }, (_, i) => i + 1)
   return (
     <span style={{ display: 'inline-flex', gap: 3, alignItems: 'center' }}>
@@ -214,9 +247,9 @@ function ScoreDots({ score, maxScore = 5, size = 7 }: { score: number; maxScore?
         const fill = Math.min(Math.max(score - (i - 1), 0), 1)
         const pct = fill * 100
         let bg: string
-        if (fill >= 1) bg = color
+        if (fill >= 1) bg = fillColor
         else if (fill <= 0) bg = 'var(--border-hi)'
-        else bg = `linear-gradient(90deg, ${color} ${pct}%, var(--border-hi) ${pct}%)`
+        else bg = `linear-gradient(90deg, ${fillColor} ${pct}%, var(--border-hi) ${pct}%)`
         return (
           <span key={i} style={{
             width: size, height: size, borderRadius: '50%',
@@ -229,15 +262,37 @@ function ScoreDots({ score, maxScore = 5, size = 7 }: { score: number; maxScore?
   )
 }
 
-function ClaimRow({ fieldKey, claimKey, data, maxScore = 5 }: { fieldKey: string; claimKey: string; data: ClaimData; maxScore?: number }) {
-  const [open, setOpen] = useState(false)
+function ClaimRow({
+  fieldKey,
+  claimKey,
+  data,
+  maxScore = 5,
+  noTopBorder,
+  detailExpanded,
+  onDetailToggle,
+}: {
+  fieldKey: string
+  claimKey: string
+  data: ClaimData
+  maxScore?: number
+  noTopBorder?: boolean
+  detailExpanded?: boolean
+  onDetailToggle?: () => void
+}) {
+  const [localDetailOpen, setLocalDetailOpen] = useState(false)
+  const controlled = onDetailToggle !== undefined
+  const open = controlled ? Boolean(detailExpanded) : localDetailOpen
   const t = claimLabels[fieldKey]?.[claimKey]?.[Locale.EN]
 
   return (
     <div
-      onClick={e => { e.stopPropagation(); setOpen(o => !o) }}
+      onClick={e => {
+        e.stopPropagation()
+        if (controlled) onDetailToggle()
+        else setLocalDetailOpen(o => !o)
+      }}
       style={{
-        borderTop: '1px solid var(--border)',
+        borderTop: noTopBorder ? undefined : '1px solid var(--border)',
         padding: '8px 0',
         cursor: 'pointer',
       }}
@@ -287,18 +342,66 @@ function ClaimRow({ fieldKey, claimKey, data, maxScore = 5 }: { fieldKey: string
   )
 }
 
+function SingleClaimCell({
+  fieldKey,
+  claimKey,
+  data,
+  maxScore = 5,
+  detailExpanded,
+  onDetailToggle,
+}: {
+  fieldKey: string
+  claimKey: string
+  data: ClaimData
+  maxScore?: number
+  detailExpanded: boolean
+  onDetailToggle: () => void
+}) {
+  return (
+    <div
+      onClick={e => e.stopPropagation()}
+      style={{
+        background: 'var(--cell-bg)',
+        border: '1px solid var(--border)',
+        borderRadius: 6,
+        padding: '6px 10px',
+        minHeight: 44,
+        boxSizing: 'border-box',
+      }}
+    >
+      <ClaimRow
+        fieldKey={fieldKey}
+        claimKey={claimKey}
+        data={data}
+        maxScore={maxScore}
+        noTopBorder
+        detailExpanded={detailExpanded}
+        onDetailToggle={onDetailToggle}
+      />
+    </div>
+  )
+}
+
 function FieldCell({
   fieldKey,
   claims,
   maxScore = 5,
   expanded,
   onToggleRow,
+  showInlineClaimList = true,
+  fieldRowKey,
+  expandedClaimDetails,
+  onToggleClaimDetail,
 }: {
   fieldKey: string
   claims: Record<string, ClaimData>
   maxScore?: number
   expanded: boolean
   onToggleRow: () => void
+  showInlineClaimList?: boolean
+  fieldRowKey?: string
+  expandedClaimDetails?: Set<string>
+  onToggleClaimDetail?: (detailKey: string) => void
 }) {
   const score = avgScore(claims)
   const claimKeys = Object.keys(claims)
@@ -331,11 +434,23 @@ function FieldCell({
         </Tooltip>
       </div>
 
-      {expanded && (
+      {expanded && showInlineClaimList && (
         <div style={{ marginTop: 8, flex: 1, minHeight: 0 }} onClick={e => e.stopPropagation()}>
-          {Object.entries(claims).map(([key, data]) => (
-            <ClaimRow key={key} fieldKey={fieldKey} claimKey={key} data={data} maxScore={maxScore} />
-          ))}
+          {Object.entries(claims).map(([key, data], i) => {
+            const dk = fieldRowKey && onToggleClaimDetail ? `${fieldRowKey}::${key}` : undefined
+            return (
+              <ClaimRow
+                key={key}
+                fieldKey={fieldKey}
+                claimKey={key}
+                data={data}
+                maxScore={maxScore}
+                noTopBorder={i === 0}
+                detailExpanded={dk !== undefined ? expandedClaimDetails?.has(dk) : undefined}
+                onDetailToggle={dk !== undefined ? () => onToggleClaimDetail!(dk) : undefined}
+              />
+            )
+          })}
         </div>
       )}
     </div>
@@ -470,15 +585,36 @@ export default function App() {
     FIELD_COL + (showLeaders ? LEADERS_COL : 0) + countries.length * COUNTRY_COL + gapTotal
 
   const [expandedRows, setExpandedRows] = useState<Set<string>>(() => new Set())
+  const [expandedClaimDetails, setExpandedClaimDetails] = useState<Set<string>>(() => new Set())
 
   const toggleRow = (key: string) => {
     setExpandedRows(prev => {
       const next = new Set(prev)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
+      if (next.has(key)) {
+        next.delete(key)
+        setExpandedClaimDetails(prevD => {
+          const n = new Set(prevD)
+          const prefix = `${key}::`
+          for (const k of prevD) {
+            if (k.startsWith(prefix)) n.delete(k)
+          }
+          return n
+        })
+      } else {
+        next.add(key)
+      }
       return next
     })
   }
+
+  const toggleClaimDetail = useCallback((detailKey: string) => {
+    setExpandedClaimDetails(prev => {
+      const next = new Set(prev)
+      if (next.has(detailKey)) next.delete(detailKey)
+      else next.add(detailKey)
+      return next
+    })
+  }, [])
 
   const totalFields = groupsFiltered.reduce((n: number, g: GroupDef) => n + g.fields.length, 0)
   const totalClaims = countries.reduce(
@@ -694,53 +830,19 @@ export default function App() {
                     const fd = accessor(c)[field]
                     return Math.max(m, fd ? Object.keys(fd).length : 0)
                   }, 0)
+                  const claimKeysOrdered = orderedClaimKeys(countries, accessor, field)
 
                   return (
-                    <div
-                      key={field}
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: gridCols,
-                        gap: GRID_GAP,
-                        marginBottom: 6,
-                        alignItems: 'stretch',
-                      }}
-                    >
+                    <Fragment key={field}>
                       <div
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => toggleRow(rk)}
-                        onKeyDown={e => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault()
-                            toggleRow(rk)
-                          }
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: gridCols,
+                          gap: GRID_GAP,
+                          marginBottom: 6,
+                          alignItems: 'stretch',
                         }}
-                        style={{ ...stickyFirstCol, paddingTop: 10, paddingRight: 20, cursor: 'pointer' }}
                       >
-                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                          <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0, marginTop: 2 }}>
-                            {open ? '▲' : '▼'}
-                          </span>
-                          <div style={{ minWidth: 0 }}>
-                            <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)', lineHeight: 1.35 }}>
-                              {ft?.title ?? field}
-                            </div>
-                            {!open && claimCountMax > 0 && (
-                              <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 4 }}>
-                                {claimCountMax} claims
-                              </div>
-                            )}
-                            {open && ft?.description && (
-                              <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 4, lineHeight: 1.5 }}>
-                                {ft.description}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      {showLeaders && (
                         <div
                           role="button"
                           tabIndex={0}
@@ -751,77 +853,207 @@ export default function App() {
                               toggleRow(rk)
                             }
                           }}
-                          style={{
-                            ...stickyLeadersCol(),
-                            paddingTop: 10,
-                            paddingRight: 8,
-                            cursor: 'pointer',
-                            minHeight: 44,
-                            alignSelf: 'stretch',
-                          }}
+                          style={{ ...stickyFirstCol, paddingTop: 10, paddingRight: 20, cursor: 'pointer' }}
                         >
-                          {leaders.length === 0 ? (
-                            <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
-                          ) : (
-                            <div style={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              flexWrap: 'wrap',
-                              gap: 6,
-                              alignContent: 'flex-start',
-                              alignItems: 'flex-start',
-                            }}>
-                              {leaders.map(({ data }) => (
-                                <LeaderBadge key={data.country} countryKey={data.country} />
-                              ))}
+                          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                            <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0, marginTop: 2 }}>
+                              {open ? '▲' : '▼'}
+                            </span>
+                            <div style={{ minWidth: 0 }}>
+                              <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)', lineHeight: 1.35 }}>
+                                {ft?.title ?? field}
+                              </div>
+                              {!open && claimCountMax > 0 && (
+                                <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 4 }}>
+                                  {claimCountMax} claims
+                                </div>
+                              )}
+                              {open && ft?.description && (
+                                <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 4, lineHeight: 1.5 }}>
+                                  {ft.description}
+                                </div>
+                              )}
                             </div>
-                          )}
+                          </div>
                         </div>
-                      )}
 
-                      {countries.map(c => {
-                        const fieldData = accessor(c)[field]
-                        if (!fieldData) {
-                          return (
-                            <div
-                              key={c.country}
-                              role="button"
-                              tabIndex={0}
-                              onClick={() => toggleRow(rk)}
-                              onKeyDown={e => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  toggleRow(rk)
-                                }
-                              }}
-                              style={{
-                                background: 'var(--cell-bg)',
-                                border: '1px dashed var(--border)',
-                                borderRadius: 6,
-                                minHeight: 44,
-                                height: '100%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                cursor: 'pointer',
-                              }}
-                            >
+                        {showLeaders && (
+                          <div
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => toggleRow(rk)}
+                            onKeyDown={e => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault()
+                                toggleRow(rk)
+                              }
+                            }}
+                            style={{
+                              ...stickyLeadersCol(),
+                              paddingTop: 10,
+                              paddingRight: 8,
+                              cursor: 'pointer',
+                              minHeight: 44,
+                              alignSelf: 'stretch',
+                            }}
+                          >
+                            {leaders.length === 0 ? (
                               <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
-                            </div>
+                            ) : (
+                              <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                gap: 6,
+                                alignContent: 'flex-start',
+                                alignItems: 'flex-start',
+                              }}>
+                                {leaders.map(({ data }) => (
+                                  <LeaderBadge key={data.country} countryKey={data.country} />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {countries.map(c => {
+                          const fieldData = accessor(c)[field]
+                          if (!fieldData) {
+                            return (
+                              <div
+                                key={c.country}
+                                role="button"
+                                tabIndex={0}
+                                onClick={() => toggleRow(rk)}
+                                onKeyDown={e => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault()
+                                    toggleRow(rk)
+                                  }
+                                }}
+                                style={{
+                                  background: 'var(--cell-bg)',
+                                  border: '1px dashed var(--border)',
+                                  borderRadius: 6,
+                                  minHeight: 44,
+                                  height: '100%',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
+                              </div>
+                            )
+                          }
+                          return (
+                            <FieldCell
+                              key={c.country}
+                              fieldKey={field}
+                              claims={fieldData}
+                              maxScore={maxScore}
+                              expanded={open}
+                              showInlineClaimList={!open}
+                              fieldRowKey={rk}
+                              expandedClaimDetails={expandedClaimDetails}
+                              onToggleClaimDetail={toggleClaimDetail}
+                              onToggleRow={() => toggleRow(rk)}
+                            />
                           )
-                        }
+                        })}
+                      </div>
+
+                      {open && claimKeysOrdered.map(claimKey => {
+                        const claimDetailKey = `${rk}::${claimKey}`
+                        const claimLeaders = leadersForClaim(countries, accessor, field, claimKey)
+                        const ct = claimLabels[field]?.[claimKey]?.[Locale.EN]
                         return (
-                          <FieldCell
-                            key={c.country}
-                            fieldKey={field}
-                            claims={fieldData}
-                            maxScore={maxScore}
-                            expanded={open}
-                            onToggleRow={() => toggleRow(rk)}
-                          />
+                          <div
+                            key={claimKey}
+                            style={{
+                              display: 'grid',
+                              gridTemplateColumns: gridCols,
+                              gap: GRID_GAP,
+                              marginBottom: 6,
+                              alignItems: 'stretch',
+                            }}
+                          >
+                            <div style={{ ...stickyFirstCol, paddingTop: 8, paddingRight: 20, paddingLeft: 26 }}>
+                              <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text)', lineHeight: 1.4 }}>
+                                {ct?.title ?? claimKey}
+                              </div>
+                            </div>
+
+                            {showLeaders && (
+                              <div
+                                style={{
+                                  ...stickyLeadersCol(),
+                                  paddingTop: 8,
+                                  paddingRight: 8,
+                                  minHeight: 44,
+                                  alignSelf: 'stretch',
+                                }}
+                                onClick={e => e.stopPropagation()}
+                              >
+                                {claimLeaders.length === 0 ? (
+                                  <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
+                                ) : (
+                                  <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    flexWrap: 'wrap',
+                                    gap: 6,
+                                    alignContent: 'flex-start',
+                                    alignItems: 'flex-start',
+                                  }}>
+                                    {claimLeaders.map(({ data }) => (
+                                      <LeaderBadge key={data.country} countryKey={data.country} />
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            )}
+
+                            {countries.map(c => {
+                              const fieldData = accessor(c)[field]
+                              const data = fieldData?.[claimKey]
+                              if (!data) {
+                                return (
+                                  <div
+                                    key={c.country}
+                                    style={{
+                                      background: 'var(--cell-bg)',
+                                      border: '1px dashed var(--border)',
+                                      borderRadius: 6,
+                                      minHeight: 44,
+                                      height: '100%',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                    }}
+                                    onClick={e => e.stopPropagation()}
+                                  >
+                                    <span style={{ color: 'var(--border-hi)', fontSize: 11 }}>—</span>
+                                  </div>
+                                )
+                              }
+                              return (
+                                <SingleClaimCell
+                                  key={c.country}
+                                  fieldKey={field}
+                                  claimKey={claimKey}
+                                  data={data}
+                                  maxScore={maxScore}
+                                  detailExpanded={expandedClaimDetails.has(claimDetailKey)}
+                                  onDetailToggle={() => toggleClaimDetail(claimDetailKey)}
+                                />
+                              )
+                            })}
+                          </div>
                         )
                       })}
-                    </div>
+                    </Fragment>
                   )
                 })}
               </div>

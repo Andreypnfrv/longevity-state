@@ -33,11 +33,11 @@ html, body {
   --score-3:    #1a2e1a;
   --score-4:    #1a2e1a;
   --score-5:    #1a3520;
-  --dot-1:      #7f2020;
-  --dot-2:      #c26020;
-  --dot-3:      #8aaf30;
-  --dot-4:      #6dcc50;
-  --dot-5:      #44ee70;
+  --dot-1:      #ff5252;
+  --dot-2:      #ff9100;
+  --dot-3:      #ffea00;
+  --dot-4:      #69f0ae;
+  --dot-5:      #00e676;
   --font-sans:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: var(--font-sans);
   --font-mono:    'Plus Jakarta Sans', system-ui, sans-serif;
@@ -100,4 +100,9 @@ details > summary::-webkit-details-marker { display: none; }
   --group-tone-a:    color-mix(in srgb, var(--accent) 14%, var(--surface));
   --group-tone-b:    color-mix(in srgb, #8aa8d4 18%, var(--surface));
   --group-outline:   color-mix(in srgb, var(--border) 92%, var(--accent));
+  --dot-1:      #d32f2f;
+  --dot-2:      #ef6c00;
+  --dot-3:      #f9a825;
+  --dot-4:      #43a047;
+  --dot-5:      #00c853;
 }
