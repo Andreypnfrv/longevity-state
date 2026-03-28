@@ -38,7 +38,7 @@ import {
 } from './ui/filters'
 
 const FIELD_COL = 260
-const LEADERS_COL = 248
+const LEADERS_COL = 200
 const COUNTRY_COL = 300
 const GRID_GAP = 6
 const CELL_PAD = '10px 12px'
@@ -201,6 +201,94 @@ function getScaleLevelText(fieldKey: string, claimKey: string, score: number): s
     return SOCIETAL_READINESS_CLAIM_SCALES[claimKey as SocietalReadinessClaim]?.[level] ?? null
   }
   return STANDARD_SCALE_LABELS[Math.round(score)] ?? null
+}
+
+function sortedScaleEntries(scales: Record<number, string>): { level: number; text: string }[] {
+  return Object.entries(scales)
+    .map(([k, text]) => ({ level: Number(k), text }))
+    .filter(e => !Number.isNaN(e.level))
+    .sort((a, b) => a.level - b.level)
+}
+
+function standardScaleLegendLines(): string[] {
+  return [1, 2, 3, 4, 5].map(n => `${n} — ${STANDARD_SCALE_LABELS[n]}`)
+}
+
+function getClaimScaleLegendLines(fieldKey: string, claimKey: string): string[] {
+  const talentsKey = getTalentsClaimKey(fieldKey, claimKey)
+  if (talentsKey !== null) {
+    const fieldScales = TALENTS_CLAIM_SCALES[fieldKey as TalentsField] as Record<string, Record<number, string>> | undefined
+    const scales = fieldScales?.[claimKey]
+    if (scales) return sortedScaleEntries(scales).map(e => `${e.level} — ${e.text}`)
+    return standardScaleLegendLines()
+  }
+  if (fieldKey === HealthcareField.POPULATION_SCREENINGS) {
+    if (claimKey === PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY) {
+      return sortedScaleEntries(SCREENING_PROGRAMME_AGILITY_SCALE).map(e => `${e.level} — ${e.text}`)
+    }
+    return Object.entries(SCREENING_SCALE)
+      .map(([k, v]) => ({ level: Number(k), text: `${v.label}: ${v.description}` }))
+      .filter(e => !Number.isNaN(e.level))
+      .sort((a, b) => a.level - b.level)
+      .map(e => `${e.level} — ${e.text}`)
+  }
+  const from = (scales: Record<number, string> | undefined): string[] | null => {
+    if (!scales) return null
+    const rows = sortedScaleEntries(scales)
+    return rows.length ? rows.map(e => `${e.level} — ${e.text}`) : null
+  }
+  if (fieldKey === HealthcareField.AGING_BIOMARKER_COLLECTIONS) {
+    return from(BIOMARKER_CLAIM_SCALES[claimKey as BiomarkerCollectionClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === HealthcareField.PREVENTIVE_TRIALS) {
+    return from(PREVENTIVE_TRIAL_CLAIM_SCALES[claimKey as PreventiveTrialsClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === HealthcareField.GERO_THERAPEUTIC_ENDPOINTS) {
+    return from(GERO_ENDPOINT_CLAIM_SCALES[claimKey as GeroEndpointsClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === DataField.OPEN_ACCESS_TO_HEALTH_DATA) {
+    return from(OPEN_DATA_CLAIM_SCALES[claimKey as OpenDataClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === DataField.INTEROPERABILITY_STANDARDS) {
+    return from(INTEROPERABILITY_CLAIM_SCALES[claimKey as InteroperabilityClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === DataField.STANDARDIZED_TRIAL_ENDPOINTS) {
+    return from(RESEARCH_CLINICAL_CLAIM_SCALES[claimKey as ResearchClinicalClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === ScienceField.RESEARCH_FUNDING) {
+    return from(RESEARCH_FUNDING_CLAIM_SCALES[claimKey as ResearchFundingClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === ScienceField.GENE_EDITING_REGULATION) {
+    return from(GENE_EDITING_CLAIM_SCALES[claimKey as GeneEditingClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === TranslationField.BIOTECH_BREAKTHROUGH_AGENCIES) {
+    return from(BREAKTHROUGH_AGENCY_CLAIM_SCALES[claimKey as BreakthroughAgencyClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === TranslationField.ADAPTIVE_LICENSING) {
+    return from(ADAPTIVE_LICENSING_CLAIM_SCALES[claimKey as AdaptiveLicensingClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === TranslationField.TRIAL_DESIGN_MODERNIZATION) {
+    return from(TRIAL_DESIGN_CLAIM_SCALES[claimKey as TrialDesignClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === TranslationField.REGULATORY_SANDBOXES) {
+    return from(REGULATORY_SANDBOX_CLAIM_SCALES[claimKey as RegulatorySandboxClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === TranslationField.AGING_ENDPOINT_ECOSYSTEM) {
+    return from(AGING_ENDPOINT_CLAIM_SCALES[claimKey as AgingEndpointClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === InternationalField.REGULATORY_HARMONIZATION) {
+    return from(REGULATORY_HARMONIZATION_CLAIM_SCALES[claimKey as RegulatoryHarmonizationClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === InternationalField.SHARED_PHYSICAL_INFRASTRUCTURE) {
+    return from(SHARED_PHYSICAL_INFRA_CLAIM_SCALES[claimKey as SharedPhysicalInfraClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === InternationalField.INTERNATIONAL_RESEARCH_NETWORK) {
+    return from(INTL_RESEARCH_NETWORK_CLAIM_SCALES[claimKey as IntlResearchNetworkClaim]) ?? standardScaleLegendLines()
+  }
+  if (fieldKey === SocietalField.SOCIETAL_READINESS) {
+    return from(SOCIETAL_READINESS_CLAIM_SCALES[claimKey as SocietalReadinessClaim]) ?? standardScaleLegendLines()
+  }
+  return standardScaleLegendLines()
 }
 
 function Tooltip({ text, children }: { text: string | null; children: React.ReactNode }) {
@@ -501,22 +589,28 @@ function stickyLeadersCol(): React.CSSProperties {
   }
 }
 
+const LEADER_FLAG_SIZE = 26
+
 function LeaderBadge({ countryKey }: { countryKey: CountryData['country'] }) {
+  const name = countryLabels[countryKey][Locale.EN]
   return (
-    <div style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 6,
-      padding: '5px 9px',
-      borderRadius: 8,
-      border: '1px solid var(--border-hi)',
-      background: 'var(--cell-bg)',
-    }}>
-      <span style={{ fontSize: 14, lineHeight: 1 }} aria-hidden>{countryFlags[countryKey]}</span>
-      <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--cell-text)' }}>
-        {countryLabels[countryKey][Locale.EN]}
+    <Tooltip text={name}>
+      <span
+        role="img"
+        aria-label={name}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: LEADER_FLAG_SIZE,
+          lineHeight: 1,
+          cursor: 'default',
+          userSelect: 'none',
+        }}
+      >
+        {countryFlags[countryKey]}
       </span>
-    </div>
+    </Tooltip>
   )
 }
 
@@ -966,6 +1060,7 @@ export default function App() {
 
                       {open && claimKeysOrdered.map(claimKey => {
                         const claimDetailKey = `${rk}::${claimKey}`
+                        const claimDetailOpen = expandedClaimDetails.has(claimDetailKey)
                         const claimLeaders = leadersForClaim(countries, accessor, field, claimKey)
                         const ct = claimLabels[field]?.[claimKey]?.[Locale.EN]
                         return (
@@ -979,10 +1074,43 @@ export default function App() {
                               alignItems: 'stretch',
                             }}
                           >
-                            <div style={{ ...stickyFirstCol, paddingTop: 8, paddingRight: 20, paddingLeft: 26 }}>
-                              <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text)', lineHeight: 1.4 }}>
-                                {ct?.title ?? claimKey}
+                            <div style={{ ...stickyFirstCol, paddingTop: 8, paddingRight: 20, paddingLeft: 10 }}>
+                              <div
+                                role="button"
+                                tabIndex={0}
+                                onClick={() => toggleClaimDetail(claimDetailKey)}
+                                onKeyDown={e => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault()
+                                    toggleClaimDetail(claimDetailKey)
+                                  }
+                                }}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginLeft: 16 }}>
+                                  <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0, marginTop: 2 }}>
+                                    {claimDetailOpen ? '▲' : '▼'}
+                                  </span>
+                                  <div style={{ minWidth: 0, fontSize: 11, fontWeight: 500, color: 'var(--text)', lineHeight: 1.4 }}>
+                                    {ct?.title ?? claimKey}
+                                  </div>
+                                </div>
                               </div>
+                              {claimDetailOpen && (
+                                <div
+                                  style={{ marginTop: 10, marginLeft: 16, paddingLeft: 18, paddingBottom: 4 }}
+                                  onClick={e => e.stopPropagation()}
+                                >
+                                  {getClaimScaleLegendLines(field, claimKey).map((line, i) => (
+                                    <div
+                                      key={i}
+                                      style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.55, marginBottom: 3 }}
+                                    >
+                                      {line}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
                             </div>
 
                             {showLeaders && (

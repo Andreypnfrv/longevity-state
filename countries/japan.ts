@@ -17,384 +17,679 @@ const japan: CountryData = {
     [TalentsField.RESEARCHER_IMMIGRATION]: {
       [ResearcherImmigrationClaim.VISA_PATHWAY]: {
         score: 3,
-        text: 'Japan offers the Highly Skilled Professional (HSP) visa with a points-based system and the J-Skip visa (2023) for top global talents — no employer sponsor required for the latter. Researcher visas exist and are straightforward for institution-sponsored applicants. However, real-world uptake of foreign researchers remains low due to language barriers (Japanese required for most administrative processes), cultural insularity at many institutions, and slower improvement than government targets suggest.',
-        links: [{ label: 'METI Highly Skilled Professional Visa', url: 'https://www.meti.go.jp/english/policy/mono_info_service/it_policy/documents/hsp.pdf', comment: 'HSP visa points system — researchers score highly; 5-year residence from day one' }],
+        text: 'Japan\'s Highly Skilled Professional (HSP) visa offers a points-based fast-track for researchers. The J-SKIP visa (2023) targets world-leading researchers and allows permanent residency from day 1 without employer sponsorship. MEXT and JSPS fund incoming international researchers through fellowship programmes (JSPS Postdoctoral Fellowships, Invitational Fellowships). In practice, most foreign researchers enter on the standard specialist/researcher visa requiring institutional sponsorship — streamlined but not friction-free.',
+        links: [{ label: 'J-SKIP Visa – MOJ Japan', url: 'https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00129.html', comment: 'J-SKIP — world-leading researcher visa; PR from day 1; no employer sponsorship required for top-tier researchers' }],
       },
       [ResearcherImmigrationClaim.PROCESSING_SPEED]: {
         score: 3,
-        text: 'COE (Certificate of Eligibility) processing: 1–3 months. J-Skip visa: 10 days from COE issue. Institution-sponsored research visas are processed at standard MOFA timelines — competitive but not exceptional. The administrative burden (Japanese-language forms, in-person requirements for some processes) adds de facto friction beyond the formal processing time.',
-        links: [{ label: 'MOFA Visa for Researchers', url: 'https://www.mofa.go.jp/j_info/visit/visa/index.html', comment: 'MOFA — researcher visa processing; COE required from hosting institution' }],
+        text: 'Standard researcher visa processing: 3–5 weeks from complete application. Designated universities (Tokyo, Kyoto, Osaka, RIKEN) have priority processing channels at immigration offices — typical 2–3 week turnaround. HSP points calculation adds some documentation burden. J-SKIP is faster by design. Language barrier (all documents accepted in Japanese or English) is not a major obstacle for research institutions, which have international offices to assist.',
+        links: [{ label: 'JSPS International Fellowship', url: 'https://www.jsps.go.jp/english/e-fellow/', comment: 'JSPS — postdoctoral fellowship processing; institutional support for immigration at partner universities' }],
       },
       [ResearcherImmigrationClaim.CREDENTIAL_RECOGNITION]: {
         score: 3,
-        text: 'MEXT and leading universities (Tokyo, Kyoto, Osaka) accept major international doctoral degrees without re-qualification. However, Japanese institutions often require Japanese language proficiency for full career integration, limiting the practical utility of credential recognition. NISTEP data shows foreign researcher share at national universities is ~5% — among the lowest for an OECD country of this scientific stature.',
-        links: [{ label: 'MEXT International Researcher Policy', url: 'https://www.mext.go.jp/en/policy/science_technology/policy/title02/detail02/sdetail02/1373839.htm', comment: 'MEXT — credential recognition policy; practical barriers remain due to language requirements' }],
+        text: 'Foreign PhD degrees from internationally accredited institutions are automatically accepted for researcher visa eligibility and institutional hiring by Japanese universities and RIKEN. Ministry of Education recognition of foreign degrees is standard for major partner countries. No re-examination required for research positions. JSPS and JST both accept foreign PhDs for fellowship eligibility without case-by-case review.',
+        links: [{ label: 'JSPS Fellowship Eligibility', url: 'https://www.jsps.go.jp/english/e-fellow/', comment: 'JSPS — foreign PhD eligibility; international degree recognition from accredited institutions' }],
       },
-    },
-    [TalentsField.CLINICIAN_IMMIGRATION]: {
-      [ClinicianImmigrationClaim.MEDICAL_LICENCE_PORTABILITY]: {
-        score: 1,
-        text: 'Japan has among the most restrictive medical licensing in the OECD for foreign-trained physicians. International medical graduates must pass the Japanese National Medical Licensing Examination — conducted entirely in Japanese. There is no fast-track for specialty recognition, no bilateral recognition agreements, and no exemption for holders of US USMLE or UK GMC licenses. In practice, almost no foreign-trained physicians practise clinically in Japan.',
-        links: [{ label: 'Japan Medical Licensing – MHLW', url: 'https://www.mhlw.go.jp/english/policy/health-medical/health/index.html', comment: 'MHLW — medical licensing; Japanese exam required for all foreign graduates; no bilateral recognition' }],
-      },
-      [ClinicianImmigrationClaim.FAST_TRACK_SPECIALIST]: {
-        score: 1,
-        text: 'No fast-track pathway for international specialist physicians exists in Japan. The medical licensing bottleneck blocks virtually all foreign geriatricians from practising. This is widely recognised as a policy gap but has not been substantively reformed. Academic research roles (non-clinical) can be filled by foreign scientists, but clinical practice requires Japanese licensure regardless of prior credentials.',
-        links: [{ label: 'Japan Specialist Board System', url: 'https://jmsb.or.jp/en/', comment: 'Japan Medical Specialty Board — specialist accreditation requires Japanese medical licence as prerequisite' }],
-      },
-    },
-    [TalentsField.RESEARCH_TRAINING_PIPELINE]: {
-      [ResearchTrainingClaim.PHD_THROUGHPUT]: {
-        score: 4,
-        text: 'Japan produces ~15,000 doctoral graduates per year across all disciplines — the third largest in the OECD. In life sciences and biomedical fields, PhD output is substantial. The declining trend in PhD enrolment (down 20% since 2003) is a recognised concern. MEXT and JSPS have multiple fellowship programmes to support doctoral training, including the SPRING (Support for Pioneering Research Initiated by the Next Generation) programme.',
-        links: [{ label: 'MEXT PhD Statistics', url: 'https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo0/toushin/attach/1337243.htm', comment: 'MEXT — doctoral graduation statistics; declining enrolment trend; SPRING programme for young researchers' }],
-      },
-      [ResearchTrainingClaim.POSTDOC_CONDITIONS]: {
+      [ResearcherImmigrationClaim.EARLY_CAREER_ACCESS]: {
         score: 2,
-        text: 'Japanese postdoctoral salaries average JPY 3–4M (approximately USD 20–27k at 2024 rates) — substantially below US, UK, or Singapore equivalents. Fixed-term contracts with limited renewal are the norm; permanent research positions are scarce and seniority-dependent. JSPS Research Fellowships provide competitive stipends but cover only a fraction of postdocs. Japan\'s "postdoc problem" (高学歴ワーキングプア) is well-documented and drives emigration of talented young researchers.',
-        links: [{ label: 'JSPS Research Fellowships', url: 'https://www.jsps.go.jp/english/e-fellow/', comment: 'JSPS fellowships — competitive; covers only minority of postdocs; majority face poor conditions' }],
+        text: 'JSPS Postdoctoral Fellowships are available to international early-career researchers with stipends of JPY 360,000/month. Income thresholds for standard researcher visa are calibrated to academic salaries. However, postdoc culture in Japan features hierarchical lab structures that can disadvantage foreign early-career researchers unfamiliar with Japanese academic norms. Fixed-term contracts (3 years typical) create instability.',
+        links: [{ label: 'JSPS Postdoctoral Fellowship', url: 'https://www.jsps.go.jp/english/e-fellow/postdoctoral.html', comment: 'JSPS — postdoctoral fellowships for international researchers; JPY 360k/month stipend' }],
       },
-      [ResearchTrainingClaim.AGING_SPECIFIC_TRAINING]: {
-        score: 4,
-        text: 'Japan is arguably the world\'s most experienced country in aging biology training by necessity — it has been a super-aged society since 2005. The Tokyo Metropolitan Institute of Gerontology (TMIG), RIKEN Center for Biosystems Dynamics Research (aging focus), Nagoya University Institute for Advanced Research, and multiple medical schools have dedicated aging research training. MEXT\'s "Science of Aging" grant programme funds aging-specific PhD training at several universities.',
-        links: [{ label: 'Tokyo Metropolitan Institute of Gerontology', url: 'https://www.tmghig.jp/en/', comment: 'TMIG — Japan\'s oldest and most established aging research institute; dedicated training pipeline' }],
+      [ResearcherImmigrationClaim.LONG_TERM_RETENTION]: {
+        score: 2,
+        text: 'Japan\'s Highly Skilled Professional visa offers an accelerated 3-year PR pathway (vs. standard 10 years); J-SKIP provides immediate PR. However, retention of foreign researchers is a recognised challenge — language barriers, academic hierarchy, salary gaps vs. US/EU, and limited PI positions create "brain circulation" rather than retention. AMED and JST have launched specific programmes to improve retention of foreign researchers who have completed fellowships.',
+        links: [{ label: 'Highly Skilled Professional Visa PR', url: 'https://www.moj.go.jp/isa/applications/procedures/nyuukokukanri07_00129.html', comment: 'HSP — accelerated PR pathway; 3 years for high-point scorers vs. standard 10-year pathway' }],
       },
     },
-    [TalentsField.CLINICIAN_AGING_TRAINING]: {
-      [ClinicianAgingTrainingClaim.GERIATRICS_CURRICULUM]: {
-        score: 5,
-        text: 'Japan has the world\'s most developed geriatric medicine training system by any measure: ~7,000 board-certified geriatricians (Japanese Society of Geriatrics), mandatory geriatrics rotations in all medical schools, and a 3-year specialist training programme. Every medical student in Japan receives substantial geriatrics training — the demographic necessity has made this unavoidable. Japan leads the world in per-capita geriatrician density.',
-        links: [{ label: 'Japanese Society of Geriatrics', url: 'https://www.jpn-geriat-soc.or.jp/english/', comment: 'JSG — 7,000+ board-certified geriatricians; mandatory rotation in medical curriculum; 3-year specialist programme' }],
+
+    [TalentsField.CLINICIAN_IMMIGRATION]: {
+      [ClinicianImmigrationClaim.LICENSE_RECOGNITION]: {
+        score: 1,
+        text: 'Japan requires all foreign-trained physicians to pass the Japanese Medical Licensing Examination (国家試験) regardless of their country of origin or specialty. The exam is conducted entirely in Japanese. No bilateral recognition agreements exist with any country. This is among the most restrictive physician licensing frameworks in any developed nation — effectively prohibiting foreign physicians from independent practice without years of preparation.',
+        links: [{ label: 'Japan Medical Licensing Exam (MHLW)', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/senmoni/index.html', comment: 'MHLW — full exam in Japanese required for all foreign physicians regardless of origin or specialty' }],
       },
-      [ClinicianAgingTrainingClaim.LONGEVITY_SCIENCE_IN_CME]: {
+      [ClinicianImmigrationClaim.PATHWAY_CLARITY]: {
+        score: 2,
+        text: 'The pathway for foreign physicians is technically documented by MHLW: pass Japanese language proficiency (JLPT N1 or equivalent), then pass all components of the national medical exam in Japanese. MHLW publishes process guidance primarily in Japanese. Academic medical centres assist foreign physician-researchers, but independent clinical practice by non-Japanese-speaking foreign clinicians is effectively impossible.',
+        links: [{ label: 'MHLW Physician Licensing Information', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/senmoni/', comment: 'MHLW — licensing process documentation; Japanese-language guidance; foreign pathway technically documented' }],
+      },
+      [ClinicianImmigrationClaim.PROCESSING_TIME]: {
+        score: 1,
+        text: 'Realistically 3–5 years from arrival to independent practice for a foreign-trained physician: 1–2 years of Japanese language study, 1 year of exam preparation, 1 year of exam cycles. For foreign physician-researchers in academic settings, supervised research is possible immediately but clinical practice is blocked for this entire period. The timeline is among the longest of any OECD country.',
+        links: [{ label: 'Japan Medical Council', url: 'https://jmc.or.jp/', comment: 'Japan Medical Council — certifying body; exam schedule and requirements for foreign-trained physicians' }],
+      },
+      [ClinicianImmigrationClaim.SCOPE_OF_PRACTICE]: {
+        score: 1,
+        text: 'Foreign-trained physicians without Japanese licensure may not provide clinical care to patients in Japan, including during any academic period. They may participate in research, attend clinical rounds as observers, and teach — but the scope of medical practice is zero without the Japanese licence. National strategic special zones theoretically allow limited exceptions, but implementation has been minimal.',
+        links: [{ label: 'National Strategic Special Zone (Medical)', url: 'https://www.kantei.go.jp/jp/singi/tiiki/kokusentoc/index.html', comment: 'Special zone — limited exceptions theoretically available; implementation for foreign clinicians remains minimal' }],
+      },
+      [ClinicianImmigrationClaim.RESEARCH_PRACTICE_BALANCE]: {
+        score: 2,
+        text: 'Academic hospitals do offer dual research-practice positions for Japanese-licensed clinicians with AMED and MEXT funding for protected research time. For foreign physician-researchers without Japanese licensure, the research role is available but clinical practice is entirely blocked. The research-practice balance infrastructure exists; foreign access is gate-kept by the licensing barrier.',
+        links: [{ label: 'AMED Clinician-Scientist Programme', url: 'https://www.amed.go.jp/en/', comment: 'AMED — clinician-scientist funding at academic hospitals; requires Japanese medical licence for clinical component' }],
+      },
+    },
+
+    [TalentsField.RESEARCH_TRAINING_PIPELINE]: {
+      [ResearchTrainingClaim.UNDERGRADUATE_EXPOSURE]: {
         score: 3,
-        text: 'Japanese Society of Geriatrics and Japanese Gerontological Society run extensive CME programmes on aging biology and frailty. Senescence biology, sarcopenia management, and polypharmacy in older adults are standard CME topics. Biological age and longevity biomarkers are beginning to appear in specialist CME but are not yet mainstream in GP-level continuing education. The depth of geriatric CME is world-class; longevity science specifically is an emerging addition.',
-        links: [{ label: 'Japanese Gerontological Society CME', url: 'https://www.jageront.org/', comment: 'JGS — annual congress and CME covering senescence biology, sarcopenia, frailty; longevity biomarkers emerging' }],
+        text: 'Japanese universities (Tokyo, Kyoto, Osaka, Tohoku, Nagoya) integrate aging biology into biomedical and pharmacology undergraduate programmes. The Institute for Frontier Life and Medical Sciences (Kyoto) offers undergraduate research programmes in aging. JSPS undergraduate research fellowships support aging-focused student projects. Japan\'s large biomedical undergraduate cohort includes meaningful aging biology exposure, though depth varies by institution.',
+        links: [{ label: 'Kyoto University Life Sciences', url: 'https://www.kyoto-u.ac.jp/en/research/fields/life-sciences', comment: 'Kyoto University — frontier life sciences including aging biology; undergraduate research opportunities' }],
+      },
+      [ResearchTrainingClaim.GRADUATE_PROGRAMS_DEPTH]: {
+        score: 4,
+        text: 'Japan has one of the world\'s most developed aging research PhD ecosystems. RIKEN BioSystems Dynamics Research (BDR) and Centre for Biosystems Dynamics Research are world-class training environments. University of Tokyo, Kyoto, and Osaka have dedicated geroscience PhD tracks. AMED Moonshot Goal 7 explicitly funds PhD positions in aging biology. Japan produces proportionally among the highest number of aging biology publications per capita globally.',
+        links: [{ label: 'RIKEN BDR PhD Training', url: 'https://www.bdr.riken.jp/en/research/index.html', comment: 'RIKEN BDR — world-class aging biology PhD programme; systems biology of aging; elite international training' }],
+      },
+      [ResearchTrainingClaim.POSTDOC_ECOSYSTEM]: {
+        score: 3,
+        text: 'JSPS Postdoctoral Fellowships (JPY 360k/month) and RIKEN research scientist positions provide competitive postdoc infrastructure. AMED and JST offer independent research fellowships for early-career scientists. The main challenges are cultural (hierarchical lab structures, limited English-language mentoring culture at some institutions) and contractual (fixed-term positions, limited industry transition pathways). RIKEN and Tokyo University are exceptions with more internationally competitive environments.',
+        links: [{ label: 'JSPS Research Fellowship', url: 'https://www.jsps.go.jp/english/e-fellow/', comment: 'JSPS — JPY 360k/month stipend; most widely used postdoc support mechanism in Japan' }],
+      },
+      [ResearchTrainingClaim.PUBLIC_FUNDING_COVERAGE]: {
+        score: 4,
+        text: 'JSPS funds the overwhelming majority of PhD and postdoc positions in aging biology through KAKENHI grants (JPY 350B+ annually across all fields), Research Fellowship for Young Scientists, and institutional grants. AMED provides additional medical research training funding. MEXT covers tuition for graduate students at national universities. Near-universal public funding for PhD positions; stipend levels are adequate at major institutions.',
+        links: [{ label: 'JSPS KAKENHI Funding', url: 'https://www.jsps.go.jp/english/e-grants/', comment: 'JSPS KAKENHI — JPY 350B+ annual research budget; PhD and postdoc position coverage across institutions' }],
+      },
+      [ResearchTrainingClaim.INDUSTRY_ACADEMIA_BRIDGE]: {
+        score: 3,
+        text: 'Japan\'s pharma industry (Takeda, Astellas, Eisai, Daiichi Sankyo) runs academic collaboration programmes in aging. JST Strategic Basic Research Programs (CREST, PRESTO) include industry co-supervision components. The "open innovation" reform of Japanese academia (2019 MEXT policy) has increased industry-academic collaboration. However, traditional culture and strict IP norms historically created barriers; reforms are improving but not yet fully effective.',
+        links: [{ label: 'JST Industry-Academia Collaboration', url: 'https://www.jst.go.jp/en/index.html', comment: 'JST — CREST and PRESTO programmes; industry co-supervision components; open innovation reform' }],
       },
     },
+
+    [TalentsField.CLINICIAN_AGING_TRAINING]: {
+      [ClinicianAgingTrainingClaim.GERIATRICS_AS_SPECIALTY]: {
+        score: 5,
+        text: 'Japan has the world\'s most developed geriatric medicine specialty. The Japan Geriatrics Society (founded 1959) board certifies 7,000+ geriatric specialists — more than any other country by absolute number. Geriatric medicine is a high-prestige specialty driven by Japan\'s unique demographic reality (30%+ over 65). Longevity medicine is an emerging formalised sub-field. Geriatrics training programmes are fully resourced and competitive.',
+        links: [{ label: 'Japan Geriatrics Society', url: 'https://www.jpn-geriat-soc.or.jp/', comment: 'Japan Geriatrics Society — 7,000+ board-certified geriatricians; world-leading specialist density' }],
+      },
+      [ClinicianAgingTrainingClaim.MEDICAL_SCHOOL_INTEGRATION]: {
+        score: 4,
+        text: 'All Japanese medical schools include substantial geriatrics content in their 6-year curriculum, driven by the clinical reality that >30% of hospital patients are elderly. Aging biology (frailty, sarcopenia, polypharmacy, dementia pathophysiology) is taught across pre-clinical and clinical years. Japan\'s demographic urgency has made geroscience a central rather than peripheral medical school topic. MHLW guidelines require geriatrics competencies for all physicians.',
+        links: [{ label: 'Japanese Association of Medical Sciences', url: 'https://www.jams.med.or.jp/en/', comment: 'JAMS — mandates geriatric competencies in medical education; aging biology across curriculum' }],
+      },
+      [ClinicianAgingTrainingClaim.RESIDENCY_QUALITY]: {
+        score: 4,
+        text: 'Geriatric medicine residency in Japan covers comprehensive geriatric assessment, frailty, falls, dementia, polypharmacy, and rehabilitation — to Japan Geriatrics Society standards across hundreds of certified training hospitals. Academic centres (Tokyo Medical University, Keio, Osaka) provide research exposure. Japan\'s clinical volume creates exceptional hands-on training density. A formal longevity medicine sub-specialisation is under development.',
+        links: [{ label: 'Japan Geriatrics Society Training', url: 'https://www.jpn-geriat-soc.or.jp/', comment: 'JGS — certified training hospitals nationwide; comprehensive geriatric medicine residency curriculum' }],
+      },
+      [ClinicianAgingTrainingClaim.LONGEVITY_CME]: {
+        score: 3,
+        text: 'Japan Geriatrics Society and Japan Medical Association run extensive CME programmes including frailty, aging biology, and longevity interventions. Biological aging biomarkers are appearing in specialist CME but not yet in mandated CME for all physicians. AMED Moonshot-funded clinical translation results are disseminated through academic conferences. Coverage is strong for geriatricians; breadth to other specialties is improving.',
+        links: [{ label: 'Japan Medical Association CME', url: 'https://www.med.or.jp/english/', comment: 'JMA — CME framework including aging medicine; specialist updates on longevity science' }],
+      },
+      [ClinicianAgingTrainingClaim.WORKFORCE_PLANNING]: {
+        score: 4,
+        text: 'MHLW publishes detailed healthcare workforce projections by specialty including geriatric medicine supply-demand analysis with 10–20 year horizons. Japan\'s demographic crisis creates politically compelling case for geriatrics workforce investment. Training capacity expansion is consistently funded. Geriatrics is one of the few medical specialties in Japan with active government-sponsored workforce growth targets.',
+        links: [{ label: 'MHLW Healthcare Workforce Plan', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000116974.html', comment: 'MHLW — 10–20 year geriatric medicine workforce projections; supply-demand gap actively managed' }],
+      },
+    },
+
     [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
+      [ClinicianScientistClaim.COMBINED_DEGREE_EXISTS]: {
+        score: 3,
+        text: 'MD-PhD combined programmes exist at major Japanese universities (Tokyo, Kyoto, Osaka). The standard route is 6-year MD then 4-year PhD — sequential rather than integrated. Joint MD-PhD tracks with concurrent enrolment are available at some institutions (Keio, Juntendo) but are less common than in the US or UK. AMED and JSPS offer dedicated fellowships for clinician-scientists pursuing PhD training after medical school.',
+        links: [{ label: 'University of Tokyo MD-PhD Programme', url: 'https://www.m.u-tokyo.ac.jp/en/', comment: 'UTokyo — MD-PhD pathway; sequential enrolment; JSPS and AMED fellowship support for clinician-scientists' }],
+      },
+      [ClinicianScientistClaim.PUBLIC_FUNDING]: {
+        score: 3,
+        text: 'JSPS Research Fellowship for Young Scientists and AMED Translational Research Programme provide stipend support for clinician-scientists pursuing research. Funding covers the PhD period and early-career research phase. Stipends are adequate but below clinical salary levels — creating a financial disincentive relative to clinical practice. MHLW has acknowledged this gap and launched pilot programmes to reduce the financial penalty for clinician-scientists.',
+        links: [{ label: 'AMED Translational Research Programme', url: 'https://www.amed.go.jp/en/', comment: 'AMED — clinician-scientist research funding; PhD period support; below-clinical-salary stipend levels' }],
+      },
+      [ClinicianScientistClaim.AGING_SPECIALIZATION]: {
+        score: 4,
+        text: 'AMED Moonshot Goal 7 (extending healthy lifespan) explicitly funds clinician-scientist investigators working on aging biology in human clinical cohorts. Japan Geriatrics Society supports aging-specialised clinician-scientist training. RIKEN and Keio University have specific aging research tracks for physician-scientists. The scientific and clinical infrastructure for aging-specialised clinician-scientists is world-class.',
+        links: [{ label: 'AMED Moonshot Goal 7', url: 'https://www.amed.go.jp/en/program/list/04/01/005.html', comment: 'AMED Moonshot Goal 7 — healthy lifespan extension; clinician-scientist investigator grants for aging biology' }],
+      },
       [ClinicianScientistClaim.PROTECTED_RESEARCH_TIME]: {
         score: 3,
-        text: 'MEXT\'s Tenure Track Programme and JSPS research fellowships provide protected research time for clinician-scientists at national universities. However, the dual-track system (clinician vs. researcher) is institutionally entrenched in Japan. Full clinical duties are often incompatible with research time commitments. The AMED (Japan Agency for Medical Research and Development) clinician-scientist support programme is improving the situation, but protected time allocation remains below UK or Singapore standards.',
-        links: [{ label: 'AMED Clinician-Scientist Support', url: 'https://www.amed.go.jp/en/', comment: 'AMED — Japan\'s medical research agency; funding mechanism for clinician-scientists; improving but below global best' }],
+        text: 'Academic hospital contracts in Japan typically include 20–40% protected research time for clinician-scientists in academic positions. AMED and JST grants fund salary for protected time. However, clinical throughput pressure at Japanese hospitals — some of the highest in the world — often erodes formally allocated research time in practice. The contractual protection exists; enforcement varies by institution.',
+        links: [{ label: 'JST PRESTO Researcher Grants', url: 'https://www.jst.go.jp/kisoken/presto/en/', comment: 'JST PRESTO — independent researcher grants; 3–4 years protected salary for early-career clinician-scientists' }],
+      },
+      [ClinicianScientistClaim.CAREER_VIABILITY]: {
+        score: 3,
+        text: 'Clinician-scientist career is viable in Japan but faces structural challenges: limited PI positions, strong competition for academic hospital posts, lifetime employment norms that slow career progression, and cultural pressure to choose clinical or research identity at senior career stages. Top institutions (UTokyo, Kyoto, RIKEN) have established clinician-scientist tracks with competitive compensation; the broader landscape is more constrained.',
+        links: [{ label: 'Japan Geriatrics Society Academic Track', url: 'https://www.jpn-geriat-soc.or.jp/', comment: 'JGS — academic geriatrician pathway; clinician-scientist career track in aging medicine' }],
       },
     },
   },
 
   science: {
     [ScienceField.RESEARCH_FUNDING]: {
-      [ResearchFundingClaim.PUBLIC_FUNDING_INTENSITY]: {
+      [ResearchFundingClaim.FUNDING_SCALE]: {
         score: 4,
-        text: 'Japan spends ~0.7% of GDP on public R&D (government GERD), with total R&D at ~3.3% of GDP — among the highest in the OECD. MEXT, JSPS, and AMED collectively provide over JPY 1 trillion in biomedical and basic science funding annually. The absolute scale is large; however, funding concentration in large established institutions and limited flexibility for high-risk proposals are persistent critiques.',
-        links: [{ label: 'MEXT Science and Technology Budget', url: 'https://www.mext.go.jp/en/policy/science_technology/whitepaper/1417027.htm', comment: 'MEXT — annual S&T whitepaper; public research funding statistics; JPY 1T+ biomedical allocation' }],
+        text: 'AMED (Japan Agency for Medical Research and Development) has an annual budget of JPY 130B (~USD 900M) for medical R&D including aging. JSPS KAKENHI provides JPY 350B+ across all research fields. The Moonshot R&D Programme (Goal 7: healthy lifespan extension to 2050) is funded at JPY 50B (~USD 340M). Japan\'s aging research funding is substantial but fragmented across agencies, and per-researcher funding trails the USA.',
+        links: [{ label: 'AMED Moonshot Goal 7', url: 'https://www.amed.go.jp/en/program/list/04/01/005.html', comment: 'AMED — Moonshot Goal 7; JPY 50B for healthy lifespan extension by 2050' }],
       },
-      [ResearchFundingClaim.AGING_SPECIFIC_PROGRAMMES]: {
-        score: 5,
-        text: 'Japan has more dedicated public aging research programmes than any other country: AMED\'s Research on Geriatric Diseases, MEXT\'s Science of Aging initiative, RIKEN\'s aging biology programme, NIBIOHN (National Institute of Biomedical Innovation, Health and Nutrition) longevity studies, and TMIG\'s integrated aging research. The Moonshot Research and Development Programme (Moonshot Goal 7: disease-free life to 100 years) allocates JPY 50B over 10 years explicitly to healthy longevity.',
-        links: [
-          { label: 'AMED Geriatric Disease Research', url: 'https://www.amed.go.jp/en/program/list/04/01/001.html', comment: 'AMED — dedicated geriatric disease research programme; major funder of Japan aging biology' },
-          { label: 'Moonshot Goal 7 – Healthy Longevity', url: 'https://www.jst.go.jp/moonshot/en/research/goal7/', comment: 'JST Moonshot Goal 7 — JPY 50B for disease-free life to 100; most explicit longevity funding mandate globally' },
-        ],
+      [ResearchFundingClaim.PORTFOLIO_BREADTH]: {
+        score: 4,
+        text: 'Japan\'s aging research portfolio spans basic biology (RIKEN, JST CREST), translational science (AMED), clinical trials (TMIG, geriatric medicine nationwide), and population epidemiology (JAGES, Hisayama). AMED Moonshot Goal 7 explicitly funds across hallmarks of aging, biomarker development, and intervention trials. The portfolio is genuinely diversified — no single disease dominates the aging research budget.',
+        links: [{ label: 'JST CREST Aging Research', url: 'https://www.jst.go.jp/kisoken/crest/en/', comment: 'JST CREST — basic aging biology; mechanisms of senescence, proteostasis, metabolism; diverse portfolio' }],
       },
-      [ResearchFundingClaim.PRIVATE_LONGEVITY_INVESTMENT]: {
+      [ResearchFundingClaim.FUNDING_STABILITY]: {
         score: 3,
-        text: 'Japan\'s longevity biotech industry includes: Samumed (US, JP-partnered), HEALIOS, Healink, and several stealth-stage companies focused on senolytics and regenerative medicine. SoftBank Vision Fund has made longevity-adjacent investments. Venture investment in longevity biotech is growing but Japan\'s VC ecosystem remains conservative relative to the US or Israel. Corporate R&D in aging (Kirin, Suntory, Kao) is significant in supplements and functional foods but not in therapeutics.',
-        links: [{ label: 'Japan Regenerative Medicine Industry', url: 'https://www.jhsf.or.jp/en/', comment: 'Japan Healthcare and Science Foundation — regenerative medicine industry; longevity-adjacent biotech sector' }],
+        text: 'KAKENHI grants provide 3–5 year research support, with renewal pathways. AMED programmes run in 5–7 year cycles. Moonshot goal funding is a 9-year commitment (2021–2030). However, Japanese R&D budgets have been relatively stagnant in real terms over the past decade. Fixed-term academic contracts create career instability that undermines long-term institutional commitment to researchers.',
+        links: [{ label: 'JSPS KAKENHI Programmes', url: 'https://www.jsps.go.jp/english/e-grants/', comment: 'KAKENHI — 3–5 year research grants; structured renewal pathway; stagnant real-terms budget trend' }],
+      },
+      [ResearchFundingClaim.PRIVATE_LEVERAGE]: {
+        score: 3,
+        text: 'Japan\'s pharmaceutical industry (Takeda, Astellas, Eisai, Daiichi Sankyo, Shionogi) invests substantially in aging-related R&D — Eisai\'s lecanemab investment alone represents billions. Industry-academic collaboration in aging is growing through JST open innovation programmes. Japan-based longevity VC ecosystem is modest; major private leverage comes from established pharma rather than early-stage longevity biotech.',
+        links: [{ label: 'Eisai Lecanemab Development', url: 'https://www.eisai.com/', comment: 'Eisai — major private aging R&D investment; Alzheimer\'s drug co-developed with Biogen; tens of billions in private aging investment' }],
+      },
+      [ResearchFundingClaim.RISK_APPETITE]: {
+        score: 3,
+        text: 'The Moonshot R&D Programme explicitly funds speculative, high-risk aging research — Goal 7 targets a 2050 lifespan goal that requires breakthrough science. JST ERATO (exploratory research) and FOREST programmes support radical hypotheses in aging biology. However, Japanese grant review culture has historically favoured incremental, safe science. The Moonshot structure is an explicit policy response to this recognised gap.',
+        links: [{ label: 'Moonshot R&D Programme', url: 'https://www.jst.go.jp/moonshot/en/', comment: 'Moonshot — designed for transformative, speculative research; Goal 7 is aging lifespan extension by 2050' }],
       },
     },
+
     [ScienceField.GENE_EDITING_REGULATION]: {
-      [GeneEditingClaim.RESEARCH_PERMISSIVENESS]: {
+      [GeneEditingClaim.SOMATIC_PERMISSIVENESS]: {
         score: 3,
-        text: 'Japan\'s gene editing guidelines (MHLW/MEXT, 2019 revised) permit somatic cell gene therapy research and gene editing of human embryos for research only, with strict ethical review. CRISPR-based aging research at the somatic level is permitted without specific restrictions. Japan was notably the first country to approve a CRISPR therapy for a non-oncology indication (heart disease, 2023). The framework is science-enabling but not as permissive as Singapore or the UK.',
-        links: [{ label: 'MHLW Gene Therapy Guidelines', url: 'https://www.mhlw.go.jp/english/policy/health-medical/health/index.html', comment: 'MHLW — gene editing and gene therapy regulatory framework; somatic applications well-governed' }],
+        text: 'Japan permits somatic cell gene editing research and clinical trials under MHLW/AMED regulatory frameworks. PMDA (Pharmaceuticals and Medical Devices Agency) oversees gene therapy clinical trials. Japan approved its first CAR-T cell therapy (Kymriah) in 2019, establishing a regulatory precedent. CRISPR-based somatic editing trials are feasible under existing frameworks; aging-specific gene therapy trials are not yet running but would be assessed within the standard framework.',
+        links: [{ label: 'PMDA Gene Therapy Guidance', url: 'https://www.pmda.go.jp/english/review-services/reviews/0001.html', comment: 'PMDA — gene therapy regulatory review; approved CAR-T precedent; somatic editing clinical pathway exists' }],
       },
-      [GeneEditingClaim.CLINICAL_TRANSLATION_PATHWAY]: {
+      [GeneEditingClaim.APPROVAL_SPEED]: {
+        score: 2,
+        text: 'PMDA gene therapy CTA processing takes 12–24 months — slower than FDA but comparable to many EU competent authorities. Pre-submission consultation with PMDA (RS Strategy Consultations) is available and typically takes 3–6 months for gene therapy modalities. Japan has a dedicated consultation programme for advanced therapies, reducing surprise rejections, but overall approval speed is below world-leading standards.',
+        links: [{ label: 'PMDA RS Strategy Consultation', url: 'https://www.pmda.go.jp/english/rs-sb-std/rs/0001.html', comment: 'PMDA — RS consultation for gene therapy; 3–6 months; CTA processing 12–24 months' }],
+      },
+      [GeneEditingClaim.REGULATORY_ADAPTABILITY]: {
         score: 3,
-        text: 'PMDA (Pharmaceuticals and Medical Devices Agency) has a dedicated regenerative medicine regulation track under the Act on the Safety of Regenerative Medicine and the Act on Pharmaceuticals and Medical Devices. SAKIGAKE (breakthrough designation) is available for innovative gene therapies. Japan approved CAR-T and gene therapy products and has shown regulatory innovation in this space — though the overall pipeline remains slower than the US.',
-        links: [{ label: 'PMDA SAKIGAKE Programme', url: 'https://www.pmda.go.jp/english/review-services/expedited-procedures/0001.html', comment: 'PMDA SAKIGAKE — Japanese breakthrough designation; gene therapy fast-track; aging applications eligible' }],
+        text: 'MHLW and PMDA have updated gene editing guidance in response to CRISPR (2019) and base editing emergence. Guidance updates take 2–3 years after new modality emergence — moderate speed. PMDA actively participates in ICH S12 (gene therapy standards) development. Regulatory science capacity is genuinely embedded in PMDA\'s structure.',
+        links: [{ label: 'MHLW Gene Editing Regulatory Update', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — updated gene editing guidance for CRISPR; PMDA participates in ICH S12 standard-setting' }],
+      },
+      [GeneEditingClaim.GERMLINE_PERMISSIVENESS]: {
+        score: 2,
+        text: 'Japan clinically prohibits germline gene editing but explicitly permits basic research on human embryos including gene editing under the Human Embryo Research Guidelines (2019 revision). The 14-day rule applies. Research requires National Science Council ethics review. The regulatory position is clear: research permitted with oversight, clinical application prohibited.',
+        links: [{ label: 'Japan Human Embryo Research Guidelines', url: 'https://www8.cao.go.jp/cstp/tyousakai/life2/6kai/siryo3.pdf', comment: 'Cabinet Office — human embryo gene editing research permitted under 2019 revised guidelines; clinical application prohibited' }],
+      },
+      [GeneEditingClaim.LONGEVITY_PATHWAY]: {
+        score: 2,
+        text: 'No specific longevity gene therapy regulatory pathway in Japan. PMDA does not recognise aging as a primary indication. Aging-adjacent indications (sarcopenia, age-related macular degeneration) have regulatory precedent. The Moonshot Goal 7 longevity mandate creates political context for future pathway development, and AMED-funded aging gene therapy preclinical work is building toward clinical applications.',
+        links: [{ label: 'AMED Advanced Therapy Programme', url: 'https://www.amed.go.jp/en/', comment: 'AMED — advanced therapy including gene editing for aging-adjacent indications; longevity-specific pathway not yet formalised' }],
       },
     },
   },
 
   translation: {
     [TranslationField.BIOTECH_BREAKTHROUGH_AGENCIES]: {
-      [BreakthroughAgencyClaim.DEDICATED_BODY]: {
-        score: 4,
-        text: 'AMED (Japan Agency for Medical Research and Development) was established in 2015 as Japan\'s NIH/DARPA hybrid — with authority to fund, coordinate, and accelerate medical research translation. The Moonshot R&D Programme functions as a genuine high-risk/high-reward funding mechanism. JST (Japan Science and Technology Agency) has a CREST/PRESTO programme for bold basic science. These represent real institutional infrastructure for translational breakthroughs, though coordination between AMED, MEXT, and MHLW remains complex.',
-        links: [{ label: 'AMED Overview', url: 'https://www.amed.go.jp/en/', comment: 'AMED — Japan\'s central medical research agency; translation from basic to clinical; established 2015' }],
-      },
-      [BreakthroughAgencyClaim.FUNDING_SCALE]: {
-        score: 4,
-        text: 'AMED budget: approximately JPY 130B per year (USD ~900M). Moonshot Goal 7 (healthy longevity): JPY 50B over 10 years. Total biomedical R&D funding including MEXT and JSPS: JPY 1T+ per year. In absolute terms, Japan\'s public biomedical research funding scale is among the largest in the world — comparable to the UK MRC+NIHR combined budget.',
-        links: [{ label: 'AMED Annual Budget', url: 'https://www.amed.go.jp/en/aboutus/organization/budget.html', comment: 'AMED — JPY 130B annual budget; largest single medical research funder in Japan' }],
-      },
-      [BreakthroughAgencyClaim.RISK_TOLERANCE]: {
+      [BreakthroughAgencyClaim.AGENCY_MODEL]: {
         score: 3,
-        text: 'Moonshot Programme explicitly funds "ambitious, challenging targets that drastically change our society" — the highest institutional risk appetite in Japan\'s funding landscape. However, traditional MEXT/JSPS/AMED grant mechanisms are conservative and incremental. The Moonshot model represents a significant improvement, but most Japanese public science funding remains risk-averse compared to NIH\'s Pioneer Awards or ARPA-H.',
-        links: [{ label: 'JST Moonshot Programme', url: 'https://www.jst.go.jp/moonshot/en/', comment: 'Moonshot — Japan\'s most risk-tolerant public research programme; Goal 7 for longevity' }],
+        text: 'AMED functions as Japan\'s medical research ARPA-equivalent, with milestone-based programme management for translational goals. JST Moonshot Programme uses directed challenge methodology (quantified 2050 goals) explicitly modelled on ARPA. Japan\'s Innovation Network Corporation (INC) and INCJ provide bridge funding for translational spinouts. The agencies are competent but the programme-manager model is less developed than US DARPA or UK ARIA.',
+        links: [{ label: 'AMED Translational Research', url: 'https://www.amed.go.jp/en/', comment: 'AMED — milestone-based medical translational research; bridge to clinical development' }],
+      },
+      [BreakthroughAgencyClaim.LONGEVITY_MANDATE]: {
+        score: 4,
+        text: 'Moonshot R&D Goal 7 is Japan\'s explicit government-mandated longevity target: "Realise a society in which people can be free from disease and disability by 2050 through the development of aging suppression technologies." JPY 50B committed. This is one of the world\'s most explicit national longevity science mandates, with a quantified timeline and dedicated agency implementation. Japan\'s demographic reality gives this mandate unusual political durability.',
+        links: [{ label: 'Moonshot Goal 7', url: 'https://www.amed.go.jp/en/program/list/04/01/005.html', comment: 'AMED Moonshot Goal 7 — JPY 50B; healthy lifespan extension to 2050; explicit national longevity mandate' }],
+      },
+      [BreakthroughAgencyClaim.FUNDING_TYPE]: {
+        score: 3,
+        text: 'AMED Moonshot provides non-dilutive grants with no IP encumbrance for public researchers. JST Bridge programme and INC provide co-investment for spinouts. Research grants are non-dilutive; commercialisation vehicles involve equity. Japan does not have a Bayh-Dole equivalent — universities and research institutes historically retained IP with negotiated licensing, though reforms since 2015 are improving developer IP access.',
+        links: [{ label: 'JST Technology Transfer', url: 'https://www.jst.go.jp/tt/en/', comment: 'JST — technology licensing and transfer; non-dilutive research funding; IP retained by institution with licensing pathway' }],
+      },
+      [BreakthroughAgencyClaim.IP_FRAMEWORK]: {
+        score: 2,
+        text: 'Japan does not have a Bayh-Dole equivalent — universities historically retained IP from publicly funded research. Reform efforts (2015 University Reform Law, 2018 Open Innovation Act) have improved but not fully matched the US model. IP transfer from university to spinout is possible but takes 6–18 months. RIKEN has a more efficient IP transfer model. Individual researcher IP retention is not the default.',
+        links: [{ label: 'JST Technology Transfer Programme', url: 'https://www.jst.go.jp/tt/en/', comment: 'JST — IP transfer programme; university retains IP; licensing pathways improving but slower than Bayh-Dole' }],
+      },
+      [BreakthroughAgencyClaim.CHALLENGE_SPECIFICITY]: {
+        score: 4,
+        text: 'Moonshot Goal 7 specifies quantified targets: "dramatic extension of healthy lifespan" and "suppression of the onset of age-related diseases" by 2050, with interim milestone metrics. Individual Moonshot programmes define specific biological aging targets (epigenetic reset, cellular senescence clearance, metabolic restoration). This is among the more specific challenge formulations of any national longevity programme globally.',
+        links: [{ label: 'Moonshot R&D Goal 7 Targets', url: 'https://www.amed.go.jp/en/program/list/04/01/005.html', comment: 'Moonshot Goal 7 — specific biological aging targets with 2030 interim and 2050 final milestones' }],
       },
     },
+
     [TranslationField.ADAPTIVE_LICENSING]: {
       [AdaptiveLicensingClaim.CONDITIONAL_APPROVAL]: {
         score: 4,
-        text: 'SAKIGAKE designation (2015) provides Japan with a breakthrough therapy-equivalent pathway: priority review, early PMDA consultation, and conditional approval with post-market surveillance. Japan has approved CAR-T therapies, gene therapies, and regenerative medicine products under this mechanism faster than FDA or EMA in several instances. For aging-related biologics, SAKIGAKE is explicitly accessible.',
-        links: [{ label: 'PMDA SAKIGAKE Designation', url: 'https://www.pmda.go.jp/english/review-services/expedited-procedures/0001.html', comment: 'SAKIGAKE — Japanese breakthrough pathway; conditional approval with post-market data collection' }],
+        text: 'Japan\'s Sakigake (Cutting-Edge Medical Products) designation provides priority review and conditional approval for innovative therapies — a Japan-originated innovation that predated and influenced FDA Breakthrough Therapy designation. For regenerative medicine, Japan\'s Act on Safety of Regenerative Medicine (2014) allows conditional/time-limited approval of regenerative medicine products. This is a world-leading mechanism for adaptive licensing of novel therapies.',
+        links: [{ label: 'PMDA Sakigake Designation', url: 'https://www.pmda.go.jp/english/review-services/expedited-programs/0002.html', comment: 'Sakigake — conditional approval for innovative therapies; predated FDA Breakthrough designation; uniquely permissive for regenerative medicine' }],
       },
       [AdaptiveLicensingClaim.ROLLING_REVIEW]: {
         score: 3,
-        text: 'PMDA accepts rolling submissions for SAKIGAKE-designated products. Under the standard review pathway, rolling submission is available for innovative products approved abroad by FDA or EMA first. Japan\'s "conditional-and-time-limited" approval mechanism for regenerative medicine is a genuine innovation in adaptive licensing, though complex to navigate.',
-        links: [{ label: 'PMDA Rolling Submission', url: 'https://www.pmda.go.jp/english/review-services/expedited-procedures/0002.html', comment: 'PMDA — rolling submission available for SAKIGAKE and overseas-approved innovative products' }],
+        text: 'PMDA accepts rolling submission for Sakigake-designated products and select innovative therapies. Pre-submission consultation (RS Strategy Consultation) is used as an effective rolling dialogue. For general products, rolling review is less systematised than in the US or EU. Japan\'s Sakigake track is the most advanced rolling review mechanism in Asia.',
+        links: [{ label: 'PMDA RS Consultation', url: 'https://www.pmda.go.jp/english/rs-sb-std/rs/', comment: 'PMDA RS — rolling dialogue for Sakigake products; pre-submission consultation accepted' }],
       },
-      [AdaptiveLicensingClaim.REGISTRY_LINKAGE]: {
+      [AdaptiveLicensingClaim.SURROGATE_ENDPOINTS]: {
         score: 3,
-        text: 'Japan has the National Database of Health Insurance Claims and Specific Health Checkups (NDB) — a comprehensive claims database linkable for post-market surveillance. PMDA uses NDB data for pharmacovigilance. For conditional approvals, post-market registry linkage is feasible but not yet automated. The infrastructure exists; the process is still primarily manual.',
-        links: [{ label: 'Japan NDB Health Insurance Database', url: 'https://www.mhlw.go.jp/english/database/db-insurance/dl/national_database.pdf', comment: 'NDB — national claims database; PMDA-accessible for post-market surveillance of approved products' }],
+        text: 'PMDA accepts functional aging endpoints (grip strength, SPPB, cognitive measures) in geriatric indications. Biological age surrogates are not yet accepted in regulatory submissions, though they appear in academic papers. Japan\'s AMED-funded aging trials are building the evidence base for surrogate qualification. Sarcopenia and frailty functional composites have the strongest regulatory acceptance.',
+        links: [{ label: 'PMDA Geriatric Drug Guidelines', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA — functional aging endpoints per ICH E7 accepted; biological age surrogates research-stage only' }],
+      },
+      [AdaptiveLicensingClaim.POST_MARKET_FRAMEWORK]: {
+        score: 3,
+        text: 'Japan has a mandatory post-marketing surveillance (PMS) system for all new products, including re-examination periods (4–10 years) where real-world data must be collected and submitted. For conditionally approved products (Sakigake, regenerative medicine), confirmatory data requirements are clearly defined. PMDA actively enforces PMS requirements and has precedents for withdrawal of conditionally approved products where confirmatory data was inadequate.',
+        links: [{ label: 'PMDA Post-Marketing Surveillance', url: 'https://www.pmda.go.jp/english/safety/post-market-safety/0001.html', comment: 'PMDA PMS — mandatory re-examination; real-world data collection; active enforcement of confirmatory data' }],
+      },
+      [AdaptiveLicensingClaim.EXPANDED_ACCESS]: {
+        score: 3,
+        text: 'Japan has a Named Patient Programme (individual patient use of unapproved drugs) and physician-initiated clinical trials framework. Compassionate use of unapproved products is regulated by MHLW — feasible but requires formal application. The Sakigake conditional approval pathway serves as a structured expanded access route for innovative therapies. Processing time for named patient access: 4–8 weeks.',
+        links: [{ label: 'MHLW Compassionate Use', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — named patient programme; compassionate use pathway; 4–8 week processing for approved indications' }],
       },
     },
+
     [TranslationField.TRIAL_DESIGN_MODERNIZATION]: {
-      [TrialDesignClaim.PLATFORM_TRIALS]: {
+      [TrialDesignClaim.ADAPTIVE_DESIGNS]: {
         score: 3,
-        text: 'AMED has funded platform trial infrastructure in oncology (MASTER KEY Project) and COVID-19. No active aging platform trial in Japan. The capability exists; the Moonshot Goal 7 programme may catalyse an aging platform trial infrastructure. Japanese trial methodology has historically been conservative — single-arm, Japan-only designs — but this is improving.',
-        links: [{ label: 'AMED MASTER KEY Platform Trial', url: 'https://www.amed.go.jp/en/', comment: 'AMED — MASTER KEY precision oncology platform trial; proof of concept for Japanese platform trial design' }],
+        text: 'PMDA accepts adaptive designs in submissions and has published guidance on Bayesian adaptive dose-finding. Japanese academic statisticians (Keio, Tokyo, Osaka) are leaders in adaptive trial methodology. AMED funds adaptive aging trials. Adaptive designs are accepted in oncology and increasingly in other areas. The culture of trial conservatism in Japan is changing with PMDA guidance evolution.',
+        links: [{ label: 'PMDA Adaptive Design Guidance', url: 'https://www.pmda.go.jp/english/review-services/reviews/0001.html', comment: 'PMDA — Bayesian adaptive design guidance; accepted in regulatory submissions' }],
       },
-      [TrialDesignClaim.REGISTER_BASED_TRIALS]: {
+      [TrialDesignClaim.SYNTHETIC_CONTROLS]: {
         score: 3,
-        text: 'Japan\'s NDB (National Database) contains ~1 billion claims records and is increasingly used for registry-based evidence generation. J-MIHARI project demonstrates prospective registry use for drug evaluation. Full register-based RCT methodology (Scandinavian model) has not been implemented for aging trials but the infrastructure would permit it.',
-        links: [{ label: 'J-MIHARI Registry Evidence', url: 'https://www.pmda.go.jp/english/about-pmda/0014.html', comment: 'PMDA J-MIHARI — registry-based drug evaluation using NDB claims data' }],
+        text: 'PMDA accepts historical and external controls for orphan and rare disease indications where randomisation is infeasible. Japan\'s JAGS and national disease registries provide high-quality data for synthetic control arm construction. Real-world data from the Japan National Database (NDB) supports synthetic arm development. Formal PMDA guidance on synthetic controls for aging indications has not been published.',
+        links: [{ label: 'Japan National Database (NDB)', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/reseputo/index.html', comment: 'NDB — national claims database; high-quality data for synthetic control arm construction' }],
       },
-      [TrialDesignClaim.BAYESIAN_ADAPTIVE]: {
+      [TrialDesignClaim.DECENTRALIZED_TRIALS]: {
         score: 2,
-        text: 'PMDA guidelines are primarily frequentist. Bayesian adaptive designs are accepted in specific oncology and paediatric contexts but are not the norm. Japan\'s regulatory conservatism means adaptive designs require extensive pre-discussion with PMDA and face higher evidence standards. The academic biostatistics capability exists (University of Tokyo, Keio), but regulatory acceptance lags significantly behind FDA and EMA.',
-        links: [{ label: 'PMDA Statistical Guidelines', url: 'https://www.pmda.go.jp/english/review-services/expedited-procedures/0001.html', comment: 'PMDA — statistical guidance; Bayesian accepted in limited contexts; mostly frequentist standard' }],
+        text: 'MHLW issued DCT guidelines in 2022, permitting remote consent, home visits by nurses, and electronic PRO in some trial categories. Full DCT implementation remains early — Japanese clinical practice favours in-person site visits, and implementation of the DCT framework has been cautious. Wearable-derived endpoints are in early regulatory dialogue but not yet accepted as primary in submissions.',
+        links: [{ label: 'MHLW DCT Guidelines 2022', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — 2022 DCT framework; remote consent and e-PRO permitted; implementation cautious and early-stage' }],
+      },
+      [TrialDesignClaim.PLATFORM_PROTOCOLS]: {
+        score: 2,
+        text: 'Platform trials have been used in Japan for oncology (Japan Master Protocol for Lung Cancer, MONSTAR-SCREEN) but have not been extended to aging-mechanism interventions. PMDA has reviewed platform protocol submissions in oncology. AMED has proposed aging-focused master protocols. The operational infrastructure exists; regulatory acceptance for aging-specific platform protocols has not yet been tested.',
+        links: [{ label: 'Japan Master Protocol for Lung Cancer', url: 'https://www.jcog.jp/', comment: 'JCOG — platform trial precedent in oncology; PMDA has reviewed master protocol submissions' }],
+      },
+      [TrialDesignClaim.RWE_INTEGRATION]: {
+        score: 3,
+        text: 'PMDA has published RWE guidance and accepted real-world evidence for label extensions and post-market decisions. Japan\'s National Database (NDB — 1B+ insurance claims) is among the world\'s richest sources of longitudinal health data for RWE studies. PMDA has conditionally accepted RWE for some approval purposes. The database infrastructure is exceptional; regulatory integration for primary approvals is still developing.',
+        links: [{ label: 'PMDA Real World Data Guidance', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA RWE guidance — accepted for label extension; primary approval RWE integration developing' }],
       },
     },
+
     [TranslationField.REGULATORY_SANDBOXES]: {
-      [RegulatorySandboxClaim.SANDBOX_EXISTS]: {
+      [RegulatorySandboxClaim.SANDBOX_EXISTENCE]: {
         score: 3,
-        text: 'Japan\'s Regulatory Sandbox System (2019, Ministry of Economy, Trade and Industry) enables testing of new business models and technologies without full compliance. The "Conditional-Time-Limited" approval for regenerative medicine products functions as a therapeutic sandbox — products can be approved with limited evidence and used under controlled conditions while more data is gathered.',
-        links: [{ label: 'Japan Regulatory Sandbox', url: 'https://www.meti.go.jp/english/policy/economy/regulatory_sandbox.html', comment: 'METI regulatory sandbox system — technology and business model testing; Conditional-Time-Limited approval for regenerative medicine' }],
+        text: 'Japan\'s Act on Safety of Regenerative Medicine (2014) created a conditional approval pathway that functions as a regulatory sandbox for regenerative medicine and advanced therapies — time-limited approval with mandatory confirmatory data collection. MHLW also has a Regulatory Science research programme that pre-competitively engages with novel modalities. PMDA consultations function as informal sandboxes for truly novel products.',
+        links: [{ label: 'Act on Regenerative Medicine Safety', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — 2014 Act; conditional approval for regenerative medicine; built-in real-world data collection sandbox' }],
       },
-      [RegulatorySandboxClaim.LONGEVITY_SPECIFIC]: {
+      [RegulatorySandboxClaim.BIOTECH_COVERAGE]: {
+        score: 3,
+        text: 'Regenerative medicine sandbox covers cell therapies, gene therapies, and tissue engineering — including aging-adjacent applications. Novel drug modalities (senolytics, geroprotectors) fall under standard drug regulation without sandbox accommodation. PMDA\'s RS consultation programme provides quasi-sandbox conditions for novel modalities. Digital health is covered under a separate SaMD (Software as Medical Device) framework.',
+        links: [{ label: 'PMDA Advanced Therapy Consultation', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA — gene and cell therapy consultation; regenerative medicine sandbox; novel drugs under standard pathway' }],
+      },
+      [RegulatorySandboxClaim.PATIENT_SCOPE]: {
+        score: 3,
+        text: 'Regenerative medicine conditional approval allows patients with target indications to access therapies under mandatory real-world data collection. Prevention and healthy aging participants are not yet included in sandbox programmes. Ethics review by Special Committee under MHLW permits wider patient scopes for academic studies. Healthy volunteer aging intervention studies are conducted under the standard clinical trial framework.',
+        links: [{ label: 'MHLW Regenerative Medicine Special Committee', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — regenerative medicine patient access; mandatory follow-up; prevention studies under standard CT framework' }],
+      },
+      [RegulatorySandboxClaim.LEGAL_PROTECTION]: {
+        score: 3,
+        text: 'Conditional approval under the Regenerative Medicine Act provides defined legal status for developers and physicians — a formal safe harbour for the duration of the conditional approval period. Standard clinical trial indemnity framework applies to all MHLW-approved trials. Liability protection for physicians administering conditionally approved regenerative medicines is explicitly defined in the Act.',
+        links: [{ label: 'Regenerative Medicine Act Legal Framework', url: 'https://www.mhlw.go.jp/english/', comment: 'Regenerative Medicine Act — explicit physician and developer liability framework; defined safe harbour' }],
+      },
+      [RegulatorySandboxClaim.LONGEVITY_APPLICABILITY]: {
         score: 2,
-        text: 'No longevity-specific regulatory sandbox. The Moonshot Goal 7 programme and AMED\'s Geriatric Disease Research create institutional context, but PMDA has not established a named longevity innovation pathway. The closest equivalent is the regenerative medicine conditional approval track, which some longevity biologics could qualify for.',
-        links: [{ label: 'Moonshot Goal 7 Programme', url: 'https://www.jst.go.jp/moonshot/en/research/goal7/', comment: 'Moonshot Goal 7 — JPY 50B for healthy longevity; creates demand but not a PMDA regulatory sandbox' }],
+        text: 'Longevity interventions are not explicitly included in Japan\'s existing sandbox mechanisms. Aging-adjacent indications (sarcopenia, frailty, age-related macular degeneration) can use standard and accelerated pathways. The Moonshot Goal 7 mandate creates political context for eventual longevity-specific regulatory pathway development, but no named longevity sandbox exists.',
+        links: [{ label: 'AMED Moonshot and PMDA Interface', url: 'https://www.amed.go.jp/en/', comment: 'AMED Moonshot Goal 7 — creates regulatory context; PMDA consultation used for longevity product pathway-finding' }],
       },
     },
+
     [TranslationField.AGING_ENDPOINT_ECOSYSTEM]: {
-      [AgingEndpointClaim.BIOMARKER_QUALIFICATION]: {
+      [AgingEndpointClaim.ENDPOINT_ACCEPTANCE]: {
         score: 3,
-        text: 'PMDA has not formally qualified aging biomarkers as regulatory endpoints. However, Japan has world-class cohort data for endpoint validation: JAGES (Japan Gerontological Evaluation Study, 350k+ participants), JSTAR (Japanese Study of Aging and Retirement), and Hisayama study (60+ years of longitudinal data). Functional endpoints (grip strength, gait speed per Japanese Society of Geriatrics sarcopenia criteria) are accepted. Epigenetic clock research is active at RIKEN and Kyoto University.',
-        links: [{ label: 'JAGES – Japan Gerontological Evaluation Study', url: 'https://jages.net/', comment: 'JAGES — 350k+ participants; world\'s largest aging social determinants cohort; used for endpoint validation' }],
+        text: 'PMDA accepts functional aging endpoints (grip strength, gait speed, SPPB, MMSE) in geriatric indications per ICH E7. Composite aging biomarkers have been used as secondary endpoints in AMED-funded trials. Biological age surrogates (epigenetic clocks, proteomic age) are research tools, not yet accepted in regulatory submissions. Japan\'s aging trial volume is the highest globally — creating the evidence base for future endpoint qualification.',
+        links: [{ label: 'PMDA Geriatric Drug Development', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA — functional aging endpoints per ICH E7; composite secondaries accepted; biological age not yet regulatory' }],
       },
-      [AgingEndpointClaim.COMPOSITE_ENDPOINTS]: {
+      [AgingEndpointClaim.QUALIFICATION_PATHWAY]: {
+        score: 3,
+        text: 'PMDA participates in ICH biomarker qualification processes and has its own biomarker qualification pilot programme. Japanese academic consortia (AMED-funded) are developing qualification packages for aging biomarkers. Tokyo Metropolitan Institute of Gerontology (TMIG) maintains normative aging data for endpoint reference. The qualification pathway exists within the ICH framework; aging-specific applications are in early stages.',
+        links: [{ label: 'PMDA Biomarker Qualification', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA — biomarker qualification pilot programme; ICH participation; TMIG normative aging data for reference' }],
+      },
+      [AgingEndpointClaim.CODEV_FRAMEWORK]: {
+        score: 2,
+        text: 'Japan has a companion diagnostic framework (PMDA guidance) designed for treatment-selection diagnostics. Co-development of aging endpoints with therapeutics is not specifically accommodated. Standard IND/CTA applications can include aging biomarker secondary endpoints, but integrated co-development submissions require case-by-case negotiation with PMDA.',
+        links: [{ label: 'PMDA Companion Diagnostic Guidance', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA — companion diagnostic framework; aging endpoint co-development case-by-case negotiation required' }],
+      },
+      [AgingEndpointClaim.REFERENCE_INFRASTRUCTURE]: {
+        score: 5,
+        text: 'Japan has unparalleled aging biomarker reference infrastructure: the Hisayama Study (60+ years of longitudinal follow-up, 1,700+ participants with autopsy-confirmed diagnoses), JAGES (Japan Gerontological Interdisciplinary Study, 350,000+ participants), Okinawa Centenarian Study, TMIG longitudinal data, and the National Longevity Medical Research Centre cohorts. No country has deeper longitudinal aging reference data extending over multiple generations.',
+        links: [
+          { label: 'Hisayama Study', url: 'https://www.hisayama.med.kyushu-u.ac.jp/', comment: 'Hisayama — 60+ year longitudinal aging cohort; autopsy-confirmed; world\'s most complete aging reference dataset' },
+          { label: 'JAGES Study', url: 'https://www.jages.net/', comment: 'JAGES — 350,000+ participant aging study; national scale reference population for aging biomarkers' },
+        ],
+      },
+      [AgingEndpointClaim.STANDARDIZATION]: {
         score: 4,
-        text: 'Japan has developed its own sarcopenia diagnostic criteria (AWGS — Asian Working Group for Sarcopenia) that differ from Western standards in cut-points. PMDA accepts AWGS-derived composite endpoints for sarcopenia indications. The Hisayama and Circulatory Risk in Communities Study provide 40–60-year longitudinal data validating composite aging endpoints in Japanese populations. Japan\'s endpoint science for Asian populations is the most developed globally.',
-        links: [{ label: 'AWGS Sarcopenia Criteria', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8640867/', comment: 'AWGS — Asian sarcopenia criteria; lower muscle mass thresholds than Western EWGSOP; PMDA-accepted' }],
+        text: 'Japan Geriatrics Society, TMIG, and AMED have published standardised measurement protocols for functional aging endpoints that are widely adopted in Japanese aging trials. Japan participates in Asian Working Group for Sarcopenia (AWGS) — the standard-setting body for sarcopenia endpoints in Asian populations. Japanese norms for grip strength, gait speed, and cognitive endpoints are among the best-validated globally for Asian populations.',
+        links: [{ label: 'Asian Working Group for Sarcopenia', url: 'https://www.awgsarcopenia.org/', comment: 'AWGS — Asia-Pacific sarcopenia endpoint standards; Japan is a founding and leading member' }],
       },
     },
   },
 
   healthcare: {
     [HealthcareField.POPULATION_SCREENINGS]: {
-      [PopulationScreeningClaim.CANCER_SCREENING_COVERAGE]: {
-        score: ScreeningLevel.NATIONAL_PROGRAMME,
-        text: 'Japan has a comprehensive national cancer screening programme under the Cancer Control Act: gastric, colorectal, lung, breast, and cervical cancer with municipality-level delivery and national subsidies. Uptake rates are 40–50% — below Scandinavian levels but improving. The gastric cancer programme is unique globally in scale.',
-        links: [{ label: 'Japan Cancer Screening Programme', url: 'https://www.mhlw.go.jp/english/wp/wp-hw10/dl/P0002.pdf', comment: 'MHLW — national cancer screening; gastric, colorectal, lung, breast, cervical; municipality delivery' }],
+      [PopulationScreeningClaim.CARDIOVASCULAR_RISK]: {
+        score: ScreeningLevel.PROACTIVE,
+        text: 'Japan\'s Specific Health Checkup and Guidance programme (特定健診, 2008) mandates annual metabolic syndrome screening for all insured persons aged 40–74. The programme is employer/insurer funded and delivered at high participation rates (55%+). Cardiovascular risk factors (blood pressure, lipids, glucose, waist circumference) are measured with mandatory physician follow-up for high-risk results. Among the most comprehensive CV risk screening systems in any OECD country.',
+        links: [{ label: 'MHLW Specific Health Checkup', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html', comment: 'MHLW — mandatory annual CV and metabolic syndrome screening for all insured 40–74' }],
       },
-      [PopulationScreeningClaim.CARDIOVASCULAR_RISK_SCREENING]: {
-        score: ScreeningLevel.NATIONAL_PROGRAMME,
-        text: 'The Specific Health Checkup and Specific Health Guidance programme (Tokutei Kenshin, 2008) mandates metabolic syndrome screening for all insured adults aged 40–74. Employers and health insurers are legally required to offer this screening. ~30M adults screened annually. Japan\'s metabolic syndrome screening programme is one of the largest mandatory employer-based programmes globally.',
-        links: [{ label: 'Tokutei Kenshin – Specific Health Checkup', url: 'https://www.mhlw.go.jp/english/database/db-hss/dl/shu_01e.pdf', comment: 'MHLW — mandatory health checkup for 40–74 year-olds; 30M+ screened annually; metabolic syndrome focus' }],
+      [PopulationScreeningClaim.BREAST_CANCER]: {
+        score: ScreeningLevel.PROACTIVE,
+        text: 'Japan\'s municipal cancer screening programme provides 2-yearly mammography for women aged 40+. Municipalities actively contact eligible women for screening — proactive invitation system. National Cancer Centre supports programme delivery. Participation rates have been historically around 40% but are improving with digital reminder campaigns and workplace screening initiatives.',
+        links: [{ label: 'Japan National Cancer Centre Screening', url: 'https://www.ncc.go.jp/en/', comment: 'NCC — national cancer screening programme; biennial mammography; proactive municipal invitation' }],
       },
-      [PopulationScreeningClaim.METABOLIC_SCREENING]: {
-        score: ScreeningLevel.NATIONAL_PROGRAMME,
-        text: 'The Tokutei Kenshin programme is explicitly a metabolic syndrome screening system — the most systematic employer-mandated metabolic health check in the OECD. Covers waist circumference, blood pressure, blood glucose, HbA1c, and lipids. Results feed into National Database (NDB) with 1B+ claims records for population monitoring.',
-        links: [{ label: 'Tokutei Kenshin Metabolic Screening', url: 'https://www.mhlw.go.jp/english/database/db-hss/dl/shu_01e.pdf', comment: 'MHLW — most comprehensive national metabolic syndrome screening programme in OECD' }],
+      [PopulationScreeningClaim.COLORECTAL_CANCER]: {
+        score: ScreeningLevel.PROACTIVE,
+        text: 'Annual faecal occult blood test (FOBT) is offered by municipalities for adults 40+. Japan has one of the higher colorectal cancer screening participation rates in Asia (~35–40%), supported by employer-based health checkup systems. Positive FOBT results trigger colonoscopy referral. The screening programme has contributed to Japan\'s relatively good colorectal cancer outcomes.',
+        links: [{ label: 'Japan Cancer Screening Guidelines', url: 'https://www.ncc.go.jp/en/', comment: 'Japan NCC — annual FOBT from age 40; municipal delivery with proactive invitation' }],
       },
-      [PopulationScreeningClaim.COGNITIVE_SCREENING]: {
-        score: ScreeningLevel.PARTIAL_PROGRAMMES,
-        text: 'Dementia screening is integrated into municipal elderly health programmes and the Tokutei Kenshin (cognitive questions added for 70+). The "Ninchisho (dementia) initiatives" include GP-level screening with MMSE and HDS-R. Not universal — coverage varies by municipality. Japan has the world\'s largest dementia prevalence by proportion and significant infrastructure, though universal national screening is not mandated.',
-        links: [{ label: 'Japan Dementia Measures Promotion Plan', url: 'https://www.mhlw.go.jp/english/policy/care-welfare/care-welfare-elderly/dl/dementia_e.pdf', comment: 'MHLW — national dementia plan; cognitive screening in health checkups and municipal programmes' }],
+      [PopulationScreeningClaim.CERVICAL_CANCER_HPV]: {
+        score: ScreeningLevel.PROACTIVE,
+        text: 'Municipal cervical cancer screening is offered biannually from age 20. Japan had HPV vaccination programme suspended 2013–2022 due to safety concerns; reinstated 2022. HPV primary testing is being phased in to replace cytology-based screening. Participation rates (~40%) are improving post-reinstatement of vaccination. Japan is behind Nordic peers in HPV testing adoption but proactive invitation is in place.',
+        links: [{ label: 'Japan Cervical Cancer Screening', url: 'https://www.ncc.go.jp/en/', comment: 'Japan NCC — biennial cervical screening; HPV primary testing phase-in; proactive municipal invitation' }],
       },
-      [PopulationScreeningClaim.BONE_DENSITY_SCREENING]: {
-        score: ScreeningLevel.PARTIAL_PROGRAMMES,
-        text: 'DXA bone density screening is available in the Tokutei Kenshin system as an optional component in some municipalities, and is standard in post-menopausal women\'s check programmes. The Japanese Society for Bone and Mineral Research guidelines are widely implemented in gynaecological and geriatric settings. Coverage is good but not universal.',
-        links: [{ label: 'Japanese Society for Bone and Mineral Research', url: 'https://jsbmr.umin.jp/index.html', comment: 'JSBMR — osteoporosis screening guidelines widely implemented; DXA in Tokutei Kenshin optional module' }],
+      [PopulationScreeningClaim.AAA_ULTRASOUND]: {
+        score: ScreeningLevel.PRIVATE_ONLY,
+        text: 'No national AAA ultrasound screening programme in Japan. Available at specialist referral and in private human dock (人間ドック) comprehensive health checkup packages at private medical centres. Japan\'s national cancer screening programme does not include AAA. The private human dock system serves as a de facto screening mechanism for motivated individuals who can afford the comprehensive packages.',
+        links: [{ label: 'Japan Human Dock Association', url: 'https://www.ningen-dock.jp/', comment: 'Human dock — private comprehensive health screening; AAA ultrasound available in premium packages' }],
       },
-      [PopulationScreeningClaim.VISION_HEARING]: {
-        score: ScreeningLevel.PARTIAL_PROGRAMMES,
-        text: 'Japan\'s school-based screening is excellent (annual hearing and vision checks). Adult hearing screening is not nationally mandated but is offered by many municipalities as part of elderly health programmes. The JHEAR (Japan Hearing Aid Research) initiative is expanding screening awareness. Presbycusis is screened in some geriatric health programmes.',
-        links: [{ label: 'Japan Hearing Health Initiatives', url: 'https://www.mhlw.go.jp/', comment: 'MHLW — elderly health programmes include hearing assessment; not yet universal for adults' }],
+      [PopulationScreeningClaim.DIABETES_METABOLIC]: {
+        score: ScreeningLevel.PROACTIVE,
+        text: 'Japan\'s Specific Health Checkup mandates annual HbA1c and fasting glucose measurement for all insured adults aged 40–74. Pre-diabetes lifestyle intervention is mandatory for high-risk results. Japan has one of the world\'s most comprehensive metabolic screening systems, embedded in the employment-based health insurance structure. Coverage exceeds 75% of the target population.',
+        links: [{ label: 'MHLW Specific Health Checkup – Diabetes', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000161103.html', comment: 'MHLW — annual HbA1c screening mandated for insured adults 40–74; pre-diabetes intervention pathway' }],
+      },
+      [PopulationScreeningClaim.OSTEOPOROSIS_DEXA]: {
+        score: ScreeningLevel.FUNDED_PASSIVE,
+        text: 'Municipal osteoporosis screening is available for women aged 40, 45, 50, 55, 60, 65, 70. Government-funded at municipal level; patients must initiate through health checkup. Coverage is partial — municipal programme delivery varies. Japan\'s high osteoporosis burden (one of the world\'s highest hip fracture rates) has driven investment in screening infrastructure but uptake is inconsistent across municipalities.',
+        links: [{ label: 'Japan Osteoporosis Foundation', url: 'https://www.josteo.com/', comment: 'JOF — municipal osteoporosis screening programme; specific age-group targeting; funded but patient-initiated' }],
+      },
+      [PopulationScreeningClaim.LUNG_CANCER_CT]: {
+        score: ScreeningLevel.COST_SHARING,
+        text: 'Japan has no national low-dose CT lung screening programme for the general population. CT chest is available in private human dock packages and some municipal screening programmes. Evidence review by Japan Lung Cancer Society is ongoing. The private human dock system covers CT lung screening for willing payers. National programme deployment is under active policy discussion.',
+        links: [{ label: 'Japan Lung Cancer Society', url: 'https://www.haigan.gr.jp/', comment: 'Japan Lung Cancer Society — evidence review for CT screening; private human dock CT available; national programme pending' }],
+      },
+      [PopulationScreeningClaim.ATRIAL_FIBRILLATION]: {
+        score: ScreeningLevel.COST_SHARING,
+        text: 'Pulse palpation is part of the standard Specific Health Checkup. ECG is included in many human dock packages. No systematic national ECG-based AF screening at defined age thresholds. Some municipalities are piloting wearable-based AF detection for seniors. The connection between AF screening and stroke prevention has strong policy resonance in Japan given high stroke incidence.',
+        links: [{ label: 'Japan Heart Foundation – AF', url: 'https://www.jhf.or.jp/', comment: 'Japan Heart Foundation — AF awareness; pulse check in specific health checkup; pilot wearable AF detection' }],
+      },
+      [PopulationScreeningClaim.COGNITIVE_DECLINE]: {
+        score: ScreeningLevel.COST_SHARING,
+        text: 'Cognitive screening is offered in some municipal long-term care prevention programmes for adults 65+. MMSE and HDS-R tools are used. Japan\'s national dementia plan (New Orange Plan, 2015) includes early diagnosis targets. Not yet a universal age-triggered programme — more opportunistic in primary care and specific prevention programmes. The Integrated Community Care System provides pathway for identified individuals.',
+        links: [{ label: 'Japan New Orange Plan', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000064084.html', comment: 'New Orange Plan — national dementia strategy including early detection; municipal cognitive screening pilots' }],
+      },
+      [PopulationScreeningClaim.POLYGENIC_RISK]: {
+        score: ScreeningLevel.PRIVATE_ONLY,
+        text: 'Genetic testing for disease risk is available from private services. Not incorporated into national screening programmes. MHLW has published guidelines on genetic testing but has not mandated or subsidised PRS-based risk screening. Japan\'s ToMMo (Tohoku Medical Megabank) has generated large-scale Japanese-specific genetic reference data that could underpin a national PRS programme.',
+        links: [{ label: 'Tohoku Medical Megabank (ToMMo)', url: 'https://www.megabank.tohoku.ac.jp/english/', comment: 'ToMMo — 200,000+ whole genome sequences; Japanese-specific reference for PRS development; clinical deployment pending' }],
       },
       [PopulationScreeningClaim.SARCOPENIA_MUSCLE_MASS]: {
-        score: ScreeningLevel.PARTIAL_PROGRAMMES,
-        text: 'Japan is a global leader in sarcopenia screening: the Frailty and Sarcopenia Programme (Koki/Koureisha Frailty Screening) is integrated into municipal elderly health programmes. JSG has defined Japanese-specific sarcopenia criteria (lower thresholds). AWGS criteria are used clinically. The Tokutei Kenshin includes grip strength measurement in some municipalities. Coverage is significant but not yet universal.',
-        links: [{ label: 'Japan Society of Geriatrics Sarcopenia', url: 'https://www.jpn-geriat-soc.or.jp/english/', comment: 'JSG — frailty and sarcopenia screening guidelines; AWGS criteria for Asian populations; municipal implementation' }],
+        score: ScreeningLevel.FUNDED_PASSIVE,
+        text: 'Japan\'s long-term care prevention system includes sarcopenia and frailty screening for community-dwelling elderly via municipal health promotion programmes. The Kihon Checklist (25-item frailty screening tool) is widely used in community settings. Grip strength and gait speed are measured in some comprehensive health checks. Formal national sarcopenia screening using AWGS criteria is not yet a universal proactive programme.',
+        links: [{ label: 'MHLW Long-Term Care Prevention', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/', comment: 'MHLW — long-term care prevention including frailty and sarcopenia screening; municipal delivery; AWGS criteria' }],
       },
       [PopulationScreeningClaim.SLEEP_APNEA]: {
-        score: ScreeningLevel.NO_PROGRAMME,
-        text: 'No national sleep apnea screening programme despite Japan\'s high OSA prevalence (~23% of adults). Occupational health guidelines for commercial drivers include OSA screening (MHLW guidance), but there is no general population programme. The sleeping disorders landscape is primarily managed via hospital referrals. Japan\'s culture around sleep deprivation (karoshi context) creates complex social dynamics around sleep health identification.',
-        links: [{ label: 'MHLW Sleep Disorder Guidelines', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — occupational OSA screening for high-risk workers; no general population programme' }],
+        score: ScreeningLevel.COST_SHARING,
+        text: 'No national sleep apnea screening programme. Japanese Society of Sleep Research guidelines recommend screening for high-risk individuals (obesity, witnessed apnea, daytime sleepiness). Some employers and municipalities include STOP-BANG questionnaire in health checkups. Sleep clinics at major hospitals handle referrals. Japan\'s high-work-culture OSA burden is acknowledged but not yet addressed by a structured national programme.',
+        links: [{ label: 'Japanese Society of Sleep Research', url: 'https://jssr.jp/', comment: 'JSSR — OSA screening guidelines for high-risk individuals; no national systematic programme' }],
       },
       [PopulationScreeningClaim.SCREENING_PROGRAMME_AGILITY]: {
         score: 2,
-        text: 'Japan\'s screening programme changes require MHLW committee review, Cancer Control Act amendments (for cancer), and municipal government buy-in — a multi-year process typically requiring 4–6 years from evidence to implementation. The federated municipal delivery system creates additional inertia. Japan has world-class evidence generation capacity but slow administrative adoption of new screening protocols.',
-        links: [{ label: 'MHLW Cancer Screening Committee', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW cancer screening committee — review cycle; municipal implementation adds further delay; 4–6 year typical timeline' }],
+        text: 'New national screening programmes in Japan require MHLW evidence review (typically 3–5 years), health technology assessment, and municipal implementation planning. The municipal delivery model creates a further 1–3 year lag between national policy and local deployment. Pilot programmes are possible with MHLW approval. The system is deliberate and evidence-based but slow to respond to emerging screening evidence.',
+        links: [{ label: 'MHLW Screening Evidence Review', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — evidence review process for new screenings; 3–5 year evaluation before national deployment; municipal lag adds further time' }],
       },
     },
 
     [HealthcareField.AGING_BIOMARKER_COLLECTIONS]: {
-      [BiomarkerCollectionClaim.LONGITUDINAL_COHORT]: {
-        score: 5,
-        text: 'Japan has the world\'s longest-running aging cohorts: Hisayama Study (1961, 7,000+ participants, 60+ years continuous), JAGES (Japan Gerontological Evaluation Study, 350,000+), JSTAR (Japanese Study of Aging and Retirement), and multiple prefectural centenarian studies. The Okinawa Centenarian Study (1975–) is the oldest continuous centenarian research programme globally. No other country comes close to Japan\'s depth of longitudinal aging data.',
-        links: [
-          { label: 'Hisayama Study', url: 'https://www.hisayama.med.kyushu-u.ac.jp/english/', comment: 'Hisayama — 60+ years of continuous aging cohort; world\'s longest cardiovascular and dementia aging study' },
-          { label: 'JAGES', url: 'https://jages.net/', comment: 'JAGES — 350,000+ participants across 40+ municipalities; largest aging social determinants cohort' },
-        ],
-      },
-      [BiomarkerCollectionClaim.BIOBANK_DEPTH]: {
-        score: 4,
-        text: 'Tohoku Medical Megabank (ToMMo, 150,000 participants, whole-genome sequencing) is Japan\'s largest population biobank with aging-specific modules. BBJ (BioBank Japan, 200,000+ participants, 51 diseases) provides disease-aging linkage. NCGM (National Center for Global Health and Medicine) biobank links to NDB claims data. Japan\'s biobank infrastructure is among the world\'s largest in absolute terms.',
-        links: [{ label: 'Tohoku Medical Megabank', url: 'https://www.megabank.tohoku.ac.jp/english/', comment: 'ToMMo — 150,000 participants, whole-genome sequencing, aging biomarker modules' }],
-      },
-      [BiomarkerCollectionClaim.OMICS_DEPTH]: {
-        score: 4,
-        text: 'RIKEN Center for Integrative Medical Sciences (IMS) conducts comprehensive multi-omics aging research — immune aging, methylation, proteomics. RIKEN has published extensively on Japanese-specific epigenetic aging clocks. Kyoto University, Keio, and University of Tokyo have active multi-omics aging programmes. Japan\'s omics aging research output is second only to the US in absolute volume.',
-        links: [{ label: 'RIKEN IMS Aging Research', url: 'https://www.ims.riken.jp/english/', comment: 'RIKEN IMS — multi-omics aging; immunosenescence; Japanese epigenetic clock validation' }],
-      },
-      [BiomarkerCollectionClaim.EHR_LINKAGE]: {
+      [BiomarkerCollectionClaim.PARTICIPATION_MODEL]: {
         score: 3,
-        text: 'Japan\'s NDB (1B+ claims, 60M+ patients) is linkable to some biobank samples and research datasets, but full individual-level EHR linkage for research is complex due to privacy law (Act on the Protection of Personal Information) and fragmented EHR systems across hospitals. The Next Generation Medical Infrastructure Law (2018) improved research data governance, but practical EHR-biobank linkage still requires multi-step IRB and ministry approval.',
-        links: [{ label: 'Japan Next Generation Medical Infrastructure Law', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — 2018 law enabling anonymised medical data utilisation; EHR-biobank linkage framework' }],
+        text: 'Japan\'s major aging cohorts (Hisayama, JAGES, Okinawa Centenarian, TMIG cohorts) operate on opt-in volunteer models. Tohoku Medical Megabank (ToMMo) has enrolled 150,000+ participants on broad research consent. Japan\'s cultural emphasis on contributing to community health creates good participation rates in academic cohorts. No national opt-out biobank model exists, but the scale of volunteer participation is globally significant.',
+        links: [{ label: 'Tohoku Medical Megabank', url: 'https://www.megabank.tohoku.ac.jp/english/', comment: 'ToMMo — 150,000+ participants; broad research consent; community participation model' }],
+      },
+      [BiomarkerCollectionClaim.RESAMPLING_FREQUENCY]: {
+        score: 5,
+        text: 'The Hisayama Study has followed participants annually or biennially for 60+ years — the world\'s longest aging cohort with continuous biomarker follow-up. TMIG cohorts resample every 3–5 years. JAGES resurveys every 2–3 years across 350,000+ participants. Japan\'s longitudinal depth in aging biomarker follow-up is unmatched globally, providing aging trajectory data spanning multiple generations.',
+        links: [{ label: 'Hisayama Study 60-Year Data', url: 'https://www.hisayama.med.kyushu-u.ac.jp/', comment: 'Hisayama — 60+ year continuous follow-up; annual/biennial assessments; world\'s longest aging cohort' }],
+      },
+      [BiomarkerCollectionClaim.BIOMARKER_DEPTH]: {
+        score: 4,
+        text: 'ToMMo provides WGS-level genomic data linked to biobank samples. RIKEN and AMED-funded aging cohorts conduct multi-omics profiling (genomics, proteomics, metabolomics). Japan Aging Brain (JAB) consortium profiles neuro-aging biomarkers including tau, amyloid, TDP-43. Functional aging phenotypes (grip, gait, cognition) are integrated with molecular data in several cohorts.',
+        links: [{ label: 'RIKEN Aging Biology Research', url: 'https://www.riken.jp/en/research/labs/bdr/', comment: 'RIKEN BDR — multi-omics aging profiling; molecular hallmarks of aging in human cohorts' }],
+      },
+      [BiomarkerCollectionClaim.CLINICAL_LINKAGE]: {
+        score: 3,
+        text: 'Japan\'s National Database (NDB, 1B+ insurance claims) is a major resource but is operationally separate from research cohort data. Linkage between research cohort biomarkers and NDB claims data is possible but requires complex data governance processes. Hisayama cohort has exceptional clinical linkage (including autopsy data). The national health insurance claims system covers 100% of the population — the potential for universal clinical linkage is high but implementation lags.',
+        links: [{ label: 'Japan National Database (NDB)', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/reseputo/', comment: 'NDB — 1B+ insurance claims; research linkage to biobank data possible with governance approval' }],
+      },
+      [BiomarkerCollectionClaim.RESEARCHER_ACCESS]: {
+        score: 3,
+        text: 'NDB access requires MHLW application (3–6 months). ToMMo and academic biobank access is via institutional application to the respective biobank committee (2–4 months). International researcher access to Japanese biobanks requires bilateral data sharing agreements in addition to local governance. Processes are transparent and functional but not fast. DDBJ provides open access to public genomic data.',
+        links: [{ label: 'DDBJ Data Access', url: 'https://www.ddbj.nig.ac.jp/index-e.html', comment: 'DDBJ — open access genomic data; NDB and biobank access via institutional application 2–6 months' }],
       },
     },
 
     [HealthcareField.PREVENTIVE_TRIALS]: {
       [PreventiveTrialsClaim.TRIAL_EFFICIENCY]: {
         score: 3,
-        text: 'Japan has the capacity for large-scale trials given its population of 125M and established AMED trial network. However, Japanese trial initiation is slow: average 6–12 months from approval to first patient due to multi-site IRB approvals, PMDA consultations, and Japanese-language protocol requirements. International sponsors often exclude Japan from global trials for these reasons. Japan-only trial designs are less efficient than international sites in global context.',
-        links: [{ label: 'AMED Clinical Trial Network', url: 'https://www.amed.go.jp/en/program/list/04/01/002.html', comment: 'AMED — clinical trial infrastructure; 6–12 month initiation times; PMDA consultation required' }],
+        text: 'Japan\'s large elderly population and universal healthcare system create strong enrolment potential for aging trials. Japan Society for Clinical Trials coordinates multi-site trial networks. However, Japan trial processes are deliberate — site activation takes 6–9 months and IRB processes at each institution are independent (no single-IRB equivalent). AMED has invested in trial infrastructure efficiency, bringing timelines closer to international standards.',
+        links: [{ label: 'AMED Clinical Trials Infrastructure', url: 'https://www.amed.go.jp/en/', comment: 'AMED — clinical trial infrastructure investment; 6–9 month site activation typical; improving efficiency' }],
       },
       [PreventiveTrialsClaim.REGULATORY_RWE_ACCEPTANCE]: {
         score: 3,
-        text: 'PMDA has published RWE guidelines (2020) accepting NDB-based evidence for post-market and some label extension uses. Japan participated in the ICH E18 genomics guideline and is implementing RWD frameworks. For preventive aging trials, RWE is accepted as supportive evidence but primary clinical endpoints remain mandatory. The J-MIHARI project is building PMDA\'s RWE capacity.',
-        links: [{ label: 'PMDA Real World Data Guidelines', url: 'https://www.pmda.go.jp/english/review-services/expedited-procedures/0001.html', comment: 'PMDA — RWE guidelines 2020; NDB-based evidence accepted for post-market surveillance' }],
+        text: 'PMDA has published RWE guidance and accepted real-world evidence for label extensions and post-market studies. Japan\'s NDB is among the richest RWE sources globally. For primary prevention aging trials, PMDA has conditionally accepted register-based outcome capture for some applications. The regulatory acceptance of RWE as primary evidence for prevention approvals is developing.',
+        links: [{ label: 'PMDA Real World Data', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA RWE — NDB-based evidence accepted for post-market; primary prevention RWE in developing regulatory dialogue' }],
       },
       [PreventiveTrialsClaim.LONGEVITY_ENDPOINTS_USED]: {
         score: 3,
-        text: 'AWGS-defined sarcopenia endpoints (grip strength, gait speed, muscle mass by DXA/BIA) are used in Japanese aging trials and accepted by PMDA for sarcopenia indications. Frailty indices (J-CHS criteria) are used. Biological aging biomarkers (epigenetic clocks, telomere length) appear as secondary exploratory endpoints in academic trials. PMDA accepts physical function composites but not biological age surrogates as primary endpoints.',
-        links: [{ label: 'AWGS Sarcopenia Endpoint Criteria', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8640867/', comment: 'AWGS 2019 — Japanese sarcopenia endpoints; PMDA-accepted for regulatory trials' }],
+        text: 'Japan has the highest volume of active aging intervention trials globally. Functional aging endpoints (grip strength, gait speed, SPPB, cognitive tests) are widely used as primary endpoints. Composite frailty indices (Fried, Kihon) are standard as pre-specified secondary endpoints. Biological age surrogates (epigenetic clocks) appear as exploratory endpoints in some AMED-funded studies.',
+        links: [{ label: 'JAGES Longitudinal Aging Studies', url: 'https://www.jages.net/', comment: 'JAGES — functional aging endpoints validated at scale; Japan leads globally in aging trial volume' }],
       },
       [PreventiveTrialsClaim.AGING_AGENTS_IN_PREVENTION]: {
         score: 4,
-        text: 'Japan is the global leader in registered aging intervention trials by volume. Metformin aging trials, NMN/NR supplement trials (Keio University), rapamycin pilot studies, senolytic trials, fisetin trials, and multiple traditional medicine (Kampo) aging trials are registered. The Moonshot Goal 7 programme specifically funds Phase II aging prevention trials. Japan has more active aging intervention trials per capita than any other country.',
-        links: [{ label: 'Japan NMN Aging Trials – Keio', url: 'https://www.keio.ac.jp/en/research/', comment: 'Keio University — NMN metabolism and aging trials; among most cited NMN human trial programmes' }],
+        text: 'Japan has the most active aging intervention trial landscape of any country by volume. Phase II trials of senolytics (dasatinib+quercetin), NMN, spermidine, rapamycin (in PEARL trial collaboration), and NAD precursors are running at multiple Japanese institutions. AMED Moonshot funds Phase II aging prevention trials. Japan\'s geriatric clinical trial network enables recruitment at scale for aging mechanism interventions.',
+        links: [{ label: 'AMED Moonshot Clinical Research', url: 'https://www.amed.go.jp/en/program/list/04/01/005.html', comment: 'AMED Moonshot — Phase II aging intervention trials; Japan has most active global aging trial volume' }],
       },
       [PreventiveTrialsClaim.NATIONAL_COORDINATION]: {
-        score: 4,
-        text: 'AMED\'s clinical research network (Japan Clinical Research Network, JCRN) coordinates multi-site aging trials. The Moonshot Goal 7 programme funds a dedicated coordination office. JGA (Japan Geriatrics Society) and JAGS coordinate aging trial methodology. National university hospitals (Tokyo, Kyoto, Osaka, Tohoku) form a de facto coordinated aging trial network. Japan\'s national coordination is mature, though slow.',
-        links: [{ label: 'AMED Japan Clinical Research Network', url: 'https://www.amed.go.jp/en/', comment: 'AMED JCRN — national clinical trial coordination; aging trials specifically funded under Moonshot Goal 7' }],
+        score: 3,
+        text: 'AMED coordinates national aging research trial networks including NCGG (National Centre for Geriatrics and Gerontology) and TMIG. National Longevity Sciences Centre (NCGG) runs multi-site aging trials. Japan Geriatrics Society provides trial endpoint standards. However, individual institutional IRB independence and no single-IRB system creates duplication. AMED has been working to establish more coordinated aging trial infrastructure.',
+        links: [{ label: 'National Centre for Geriatrics and Gerontology', url: 'https://www.ncgg.go.jp/index-e.html', comment: 'NCGG — national aging research centre; multi-site trial coordination; AMED-linked aging trial network' }],
       },
       [PreventiveTrialsClaim.PATIENT_TRIAL_ACCESS]: {
         score: 2,
-        text: 'UMIN-CTR (University Hospital Medical Information Network Clinical Trials Registry) is the national registry with ~20,000 registered trials. Patient-facing search is available in Japanese only. No national EHR-based patient-trial matching exists. Recruitment relies on physician referral and hospital-based notice boards. Japan\'s language barrier substantially limits trial accessibility for non-Japanese speakers and constrains proactive recruitment outreach.',
-        links: [{ label: 'UMIN Clinical Trials Registry', url: 'https://www.umin.ac.jp/ctr/index-j.htm', comment: 'UMIN-CTR — national trial registry; ~20,000 trials registered; patient search in Japanese only' }],
+        text: 'Japan\'s clinical trial registry (jRCT) provides public listings, but the patient-facing search interface is poorly optimised and primarily Japanese-language. No EHR-based automated patient-trial matching system exists nationally. Patients learn of trials primarily through physicians or academic centre outreach. Japan\'s language barrier compounds the access problem for non-Japanese speakers.',
+        links: [{ label: 'Japan Registry of Clinical Trials (jRCT)', url: 'https://jrct.niph.go.jp/', comment: 'jRCT — Japan trial registry; public listing available; patient-facing interface limited; Japanese-language primary' }],
       },
     },
 
     [HealthcareField.GERO_THERAPEUTIC_ENDPOINTS]: {
       [GeroEndpointsClaim.AGING_AS_INDICATION]: {
-        score: 3,
-        text: 'PMDA does not recognise aging as a therapeutic indication. However, sarcopenia, frailty, and age-related cognitive decline are accepted indication categories with approved products (frailty: some unapproved agents have received compassionate use; sarcopenia: no approved drug yet but active regulatory dialogue). MHLW\'s Moonshot Goal 7 creates political momentum for aging indication recognition. Japan is closer to formal recognition than most countries, given the Moonshot framework.',
-        links: [{ label: 'PMDA Geriatric Indications', url: 'https://www.pmda.go.jp/english/review-services/reviews/0006.html', comment: 'PMDA — geriatric medicine drug review; sarcopenia and frailty under discussion; systemic aging not yet an indication' }],
+        score: 2,
+        text: 'PMDA does not recognise aging as a therapeutic indication. Organ-specific aging indications (sarcopenia, frailty, age-related macular degeneration, osteoporosis) have approved drug precedents. Systemic aging as a primary indication is not on PMDA\'s current regulatory development agenda. The Moonshot Goal 7 mandate may eventually create pressure for indication recognition, but this has not yet translated into regulatory pathway development.',
+        links: [{ label: 'PMDA Geriatric Indication Framework', url: 'https://www.pmda.go.jp/english/', comment: 'PMDA — organ-specific aging indications accepted; systemic aging indication not yet recognised' }],
       },
       [GeroEndpointsClaim.ENDPOINT_ACCEPTANCE]: {
-        score: 4,
-        text: 'PMDA accepts AWGS sarcopenia endpoints, J-CHS frailty index, Barthel ADL, and MMSE/MoCA as primary endpoints for geriatric indications. For the Alzheimer\'s pipeline (lecanemab approved 2023 in Japan), PMDA showed willingness to accept amyloid PET as a surrogate endpoint — a significant precedent for biomarker surrogate acceptance. Japan\'s endpoint regulatory science is more advanced than most Asian jurisdictions.',
-        links: [{ label: 'PMDA Lecanemab Approval', url: 'https://www.pmda.go.jp/english/review-services/reviews/0006.html', comment: 'PMDA — lecanemab approved 2023; amyloid PET accepted as surrogate endpoint; significant biomarker precedent' }],
+        score: 3,
+        text: 'PMDA accepts functional aging endpoints in geriatric indications following ICH E7 — grip strength, gait speed, SPPB, MMSE. Composite frailty indices accepted as secondary endpoints. Biological age surrogates not yet in regulatory submissions. Japan\'s unique strength is the normative reference data (Hisayama, JAGES) for endpoint calibration — Japanese-norm aging endpoints are the world\'s best validated.',
+        links: [{ label: 'TMIG Aging Endpoint Standards', url: 'https://www.tmig.or.jp/en/', comment: 'TMIG — Japanese normative reference for aging endpoints; validation data for regulatory submissions' }],
+      },
+      [GeroEndpointsClaim.HEALTHSPAN_VALUATION]: {
+        score: 2,
+        text: 'Japan\'s HTA framework (established 2019 under MHLW) uses QALY-based cost-effectiveness analysis but has not published guidance on valuing healthspan extension beyond standard QALY. The economic case for healthy aging investment is well-established in Japanese health economics literature — the cost of frailty and dementia is enormous and well-quantified — but formal HTA methodology for aging-prevention interventions has not been developed.',
+        links: [{ label: 'MHLW HTA Framework', url: 'https://www.mhlw.go.jp/english/', comment: 'Japan HTA — QALY-based; healthspan-specific methodology not yet published; aging economic burden well-documented' }],
+      },
+      [GeroEndpointsClaim.COVERAGE_PATHWAY]: {
+        score: 2,
+        text: 'Japan\'s national health insurance (NHI) does not currently have a reimbursement pathway for aging-prevention agents not yet approved for disease indications. Drugs with aging-adjacent indications (osteoporosis, sarcopenia, dementia) are reimbursed. Novel geroprotectors would require standard HTA-based reimbursement assessment. Value-based pricing for aging outcomes has not been implemented.',
+        links: [{ label: 'MHLW Drug Reimbursement', url: 'https://www.mhlw.go.jp/english/', comment: 'Japan NHI — standard HTA reimbursement pathway; aging-prevention category not yet established' }],
+      },
+      [GeroEndpointsClaim.EXPEDITED_PATHWAY_ACCESS]: {
+        score: 3,
+        text: 'Japan\'s Sakigake designation provides priority review and conditional approval for innovative therapies — available to aging-mechanism agents meeting the criteria (first-in-class, significant clinical benefit, no comparable therapy). Some aging-adjacent agents have received priority review for disease indications. PMDA RS consultation helps aging product developers identify the fastest available pathway.',
+        links: [{ label: 'PMDA Sakigake for Aging Agents', url: 'https://www.pmda.go.jp/english/review-services/expedited-programs/0002.html', comment: 'Sakigake — available to first-in-class aging-mechanism agents meeting criteria; fastest available expedited pathway' }],
       },
     },
   },
 
   data: {
     [DataField.OPEN_ACCESS_TO_HEALTH_DATA]: {
-      [OpenDataClaim.NATIONAL_HEALTH_DATA_PLATFORM]: {
-        score: 3,
-        text: 'The National Database of Health Insurance Claims and Specific Health Checkups (NDB) is the world\'s largest single health claims database (~1B claims, 60M+ individuals). Research access is via MHLW application — approved researchers can analyse aggregated or pseudonymised data. The Next Generation Medical Infrastructure Law (2018) enabled anonymised EHR data utilisation for research. Full individual-level linkage for external researchers is restricted and slow.',
-        links: [{ label: 'Japan NDB National Database', url: 'https://www.mhlw.go.jp/english/database/db-insurance/index.html', comment: 'NDB — 1B+ claims, 60M+ individuals; research access via MHLW application; world\'s largest health claims database' }],
-      },
-      [OpenDataClaim.RESEARCH_ACCESS_SPEED]: {
+      [OpenDataClaim.ACCESS_PROCESS]: {
         score: 2,
-        text: 'NDB research access approval takes 6–12 months. Individual hospital EHR research access adds further institutional IRB review time. Japan\'s data governance is thorough but slow — driven by strict personal information protection law and extensive committee review processes. The practical research access speed is among the slowest of advanced economies with comparable data infrastructure.',
-        links: [{ label: 'NDB Access Application Process', url: 'https://www.mhlw.go.jp/english/database/db-insurance/index.html', comment: 'NDB — 6–12 month approval process; strict MHLW and ethics committee review requirements' }],
+        text: 'Japan\'s National Database (NDB, 1B+ insurance claims) access requires MHLW application — a multi-agency process taking 3–6 months with detailed research plan review. Data is provided as anonymised extracts, not via federated compute. Administrative burden is significant; forms are primarily Japanese-language. International researchers face additional translation and bilateral agreement requirements. The data is extraordinarily valuable but access friction is high.',
+        links: [{ label: 'NDB Access Process', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/reseputo/', comment: 'NDB — MHLW application; 3–6 months; Japanese-language process; extraordinary data value but high access friction' }],
       },
-      [OpenDataClaim.DATA_LINKAGE_CAPABILITY]: {
+      [OpenDataClaim.LINKABILITY]: {
         score: 3,
-        text: 'NDB linkage with biobank data (BBJ, ToMMo) is possible under specific research protocols using anonymised linking keys. Death registry linkage is available for epidemiological research. The Next Generation Medical Infrastructure Law improved legal basis for linkage. In practice, multi-step ministry approvals and fragmented EHR systems across 8,000+ hospitals limit seamless large-scale linkage.',
-        links: [{ label: 'Japan Medical Information Utilisation Law', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — Next Generation Medical Infrastructure Law; improved data linkage legal framework for research' }],
+        text: 'Japan\'s NDB covers insurance claims for 100% of the population. Disease registries (cancer, stroke, myocardial infarction) are nationwide. However, linkage between NDB, disease registries, and research cohort biobanks is operationally complex — each source has separate governance and no universal patient linkage identifier. Hisayama cohort has exceptional clinical linkage (including autopsy data).',
+        links: [{ label: 'Japan NDB Research', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/reseputo/', comment: 'NDB — 100% population claims coverage; limited cross-database linkage capability; governance coordination needed' }],
+      },
+      [OpenDataClaim.PRIVACY_RESOLUTION]: {
+        score: 2,
+        text: 'NDB data is provided as anonymised extracts with disclosure control — no trusted research environment (TRE) equivalent. Analysis must be conducted on pre-extracted anonymised files rather than via secure on-site computation. Japan\'s privacy law (Act on Protection of Personal Information) is being updated but has not yet produced a TRE infrastructure comparable to UK or Nordic models.',
+        links: [{ label: 'Japan PPC Privacy Framework', url: 'https://www.ppc.go.jp/en/', comment: 'Japan PPC — privacy law reform underway; no TRE equivalent yet; NDB provided as anonymised extracts' }],
+      },
+      [OpenDataClaim.AI_USE_GOVERNANCE]: {
+        score: 2,
+        text: 'No dedicated AI health data governance framework equivalent to UK or Singapore models. MHLW has published general AI in healthcare guidelines but specific AI use on NDB data requires case-by-case approval. Japan\'s Digital Agency is working on a next-generation health data infrastructure that would include AI-ready formats, but implementation timeline is 2025–2028.',
+        links: [{ label: 'Japan Digital Agency Health Data', url: 'https://www.digital.go.jp/en/', comment: 'Digital Agency — health data infrastructure reform; AI-ready formats in development for 2025–2028 deployment' }],
+      },
+      [OpenDataClaim.CROSS_BORDER_SHARING]: {
+        score: 2,
+        text: 'Japan\'s Act on Protection of Personal Information (APPI) requires case-by-case authorisation for cross-border health data transfers. No general adequacy determination with the EU covers health data. Bilateral research data sharing agreements are negotiated individually (NDB data export is particularly restricted). Japan participates in OHDSI federated networks where data does not need to cross borders.',
+        links: [{ label: 'APPI Cross-Border Data Rules', url: 'https://www.ppc.go.jp/en/', comment: 'APPI — case-by-case cross-border approval; NDB export heavily restricted; federated analysis preferred' }],
       },
     },
+
     [DataField.INTEROPERABILITY_STANDARDS]: {
-      [InteroperabilityClaim.HL7_FHIR_ADOPTION]: {
+      [InteroperabilityClaim.EHR_COVERAGE]: {
         score: 3,
-        text: 'MHLW has designated HL7 FHIR as Japan\'s national healthcare interoperability standard and set implementation targets for hospitals. FHIR adoption in practice is early-stage — Japan\'s hospital IT systems are highly fragmented (8,000+ hospitals, many with legacy proprietary systems). The Digital Agency\'s Health DX (Digital Transformation) plan prioritises FHIR rollout by 2030.',
-        links: [{ label: 'MHLW Health IT Standards', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — FHIR designated as national standard; implementation timeline 2025–2030; fragmented hospital IT is main barrier' }],
+        text: 'Japan has near-universal EHR adoption in hospitals (>95% of acute hospitals) driven by financial incentive programmes. However, fragmentation across hospital systems and limited clinic-level EHR coverage create gaps. The Japan Medical Association\'s OR-CA/ORCA platform is widely used. A national standard for EHR interoperability (SS-MIX2) is in place but compliance is uneven.',
+        links: [{ label: 'MHLW Health IT Strategy', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — near-universal hospital EHR; SS-MIX2 standard; fragmentation across systems remains a challenge' }],
       },
-      [InteroperabilityClaim.CROSS_BORDER_DATA]: {
+      [InteroperabilityClaim.TERMINOLOGY_COMPLIANCE]: {
         score: 2,
-        text: 'Japan has bilateral data transfer agreements with EU (adequacy decision 2019) and several other jurisdictions under the APPI adequacy framework. Research data sharing internationally is possible but requires NDB-specific permissions and is not streamlined. Japan\'s biobanks (ToMMo, BBJ) have international sharing policies but actual data export is tightly controlled. In practice, federated analysis without data leaving Japan is the preferred approach.',
-        links: [{ label: 'Japan EU Adequacy Decision', url: 'https://www.ppc.go.jp/en/personalinfo/legal/APPI/', comment: 'PPC — Japan-EU mutual adequacy; cross-border health data transfer legal framework' }],
+        text: 'Japan uses its own medical coding systems (ICD-10-J, MEDIS-DC) alongside international standards. FHIR adoption is in early stages — MHLW published FHIR R4 Japan implementation guide in 2022. SNOMED CT is not widely mandated. Machine-readable interoperability across hospital systems is limited. Japan\'s health IT modernisation programme aims to achieve FHIR-based interoperability by 2030.',
+        links: [{ label: 'MHLW FHIR Japan Implementation', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW FHIR R4 — Japan implementation guide 2022; FHIR adoption early stage; 2030 full implementation target' }],
+      },
+      [InteroperabilityClaim.REGISTRY_COMPLETENESS]: {
+        score: 4,
+        text: 'Japan has comprehensive national disease registries: Japan Cancer Registry (all cancer diagnoses nationwide since 2016), Stroke Registry, Myocardial Infarction Registry, dementia registry, and rare disease registries. All are digital and nationally mandated. The NDB covers all insurance claims. Death registry is complete and timely. Registry completeness is among the highest in Asia.',
+        links: [{ label: 'Japan Cancer Registry', url: 'https://ganjoho.jp/en/public/statistics/registry.html', comment: 'Japan Cancer Registry — mandatory nationwide coverage since 2016; digital and linked to death registry' }],
+      },
+      [InteroperabilityClaim.DATA_FRESHNESS]: {
+        score: 3,
+        text: 'NDB is released annually with 12–18 month lag. Cancer registry data has 1–2 year lag. Disease surveillance data (influenza, COVID) is near-real-time. Japan\'s Digital Agency reform aims to reduce NDB lag to 6 months by 2025. For real-time clinical data, hospital EHR access (separately governed) is more current.',
+        links: [{ label: 'NDB Data Release Schedule', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/reseputo/', comment: 'NDB — annual release; 12–18 month lag; Digital Agency reform targeting 6-month lag by 2025' }],
+      },
+      [InteroperabilityClaim.COMPUTABLE_PHENOTYPING]: {
+        score: 3,
+        text: 'Japan participates in OHDSI through NDB OMOP-CDM mapping by several academic institutions. Validated ICD-10-J phenotyping algorithms exist for major conditions. The JMDC (Japan Medical Data Centre) commercial claims database is OMOP-mapped. National phenotype library is not yet published. Academic groups at Kyoto, Tokyo, and Osaka have developed validated cohort-definition algorithms for aging research.',
+        links: [{ label: 'Japan OHDSI Network', url: 'https://www.ohdsi.org/', comment: 'Japan participates in OHDSI; NDB OMOP-CDM mapping by academic institutions; validated aging phenotypes developing' }],
       },
     },
+
     [DataField.STANDARDIZED_TRIAL_ENDPOINTS]: {
-      [ResearchClinicalClaim.COMMON_DATA_MODELS]: {
-        score: 3,
-        text: 'Japanese research institutes are adopting OMOP-CDM through OHDSI membership. AMED-funded research networks are implementing OMOP for multi-site trial data harmonisation. BBJ and ToMMo have partial OMOP mapping. Not universal — many Japanese hospital databases use proprietary formats. Progress is real but behind Singapore, Sweden, and the US in standardisation.',
-        links: [{ label: 'OHDSI Japan Chapter', url: 'https://www.ohdsi.org/', comment: 'OHDSI Japan — OMOP-CDM adoption growing in AMED research network hospitals' }],
+      [ResearchClinicalClaim.SHARED_ONTOLOGIES]: {
+        score: 2,
+        text: 'Japan uses domestic medical coding (ICD-10-J, MEDIS-DC) alongside limited international ontology adoption. OMOP-CDM mapping has been done for selected databases but is not nationally mandated. HPO and OBO adoption in research is limited to specialist bioinformatics groups. Cross-dataset joins require significant manual curation. Japan\'s health ontology infrastructure trails Scandinavian or UK standards significantly.',
+        links: [{ label: 'MHLW Health Informatics Standards', url: 'https://www.mhlw.go.jp/english/', comment: 'MHLW — domestic coding standards; OMOP mapping in select institutions; international ontology adoption limited' }],
       },
-      [ResearchClinicalClaim.FEDERATED_ANALYSIS]: {
+      [ResearchClinicalClaim.RESEARCH_COHORT_LINKAGE]: {
         score: 3,
-        text: 'Japan\'s federated analysis infrastructure is developing — AMED\'s Federated Learning platform and the MID-NET pharmacovigilance network (PMDA) both implement federated computation. MHLW\'s cloud-based NDB analysis environment allows analysis at the data source. Federated capability is real but less mature than Singapore\'s TRUST platform or Sweden\'s register-based analysis infrastructure.',
-        links: [{ label: 'PMDA MID-NET', url: 'https://www.pmda.go.jp/english/safety/mid-net/0001.html', comment: 'PMDA MID-NET — federated pharmacovigilance network across Japanese hospitals; post-market surveillance' }],
+        text: 'Research cohort linkage to NDB, cancer registry, and death registry is possible through formal application processes. Hisayama Study has exceptional linkage including autopsy confirmation. TMIG cohorts maintain linkage to municipal health records. AMED-funded aging cohorts have registry linkage built into study design. The process is administratively intensive but functional for major research cohorts.',
+        links: [{ label: 'TMIG Cohort Registry Linkage', url: 'https://www.tmig.or.jp/en/', comment: 'TMIG — aging cohort with mortality, hospitalisation, and cause-of-death registry linkage' }],
+      },
+      [ResearchClinicalClaim.FAIR_DATA_COMPLIANCE]: {
+        score: 2,
+        text: 'MEXT and AMED have published open data policies for publicly funded research requiring data availability on reasonable request. Formal FAIR mandate is not yet enforced; compliance is voluntary and variable. DDBJ provides open access for genomic data. Clinical trial data sharing requirements are weaker than FDA or EMA requirements.',
+        links: [{ label: 'AMED Open Data Policy', url: 'https://www.amed.go.jp/en/', comment: 'AMED — open data policy; voluntary FAIR compliance; DDBJ for genomic data; clinical data sharing weak' }],
+      },
+      [ResearchClinicalClaim.PHARMACOVIGILANCE_FEEDBACK]: {
+        score: 3,
+        text: 'PMDA\'s MIHARI (Medical Information for Risk Assessment Initiative) programme uses NDB data for automated pharmacovigilance signal detection — a world-leading capability using population-scale real-world data for safety surveillance. MIHARI signals have triggered regulatory action on multiple occasions. The feedback loop from NDB signal to research hypothesis is functional.',
+        links: [{ label: 'PMDA MIHARI Programme', url: 'https://www.pmda.go.jp/safety/surveillance-analysis/0016.html', comment: 'PMDA MIHARI — NDB-based automated pharmacovigilance; 1B+ claims for signal detection; regulatory actions taken' }],
+      },
+      [ResearchClinicalClaim.OPEN_SCIENCE_MANDATE]: {
+        score: 2,
+        text: 'Trial registration is required in Japan (jRCT mandatory since 2018). Results reporting within 12 months is required for AMED-funded trials but enforcement is inconsistent. Data sharing and code sharing are encouraged but not mandated. Japan has a significant dark data problem in clinical research — many trials remain unpublished or selectively published.',
+        links: [{ label: 'jRCT Trial Registration', url: 'https://jrct.niph.go.jp/', comment: 'jRCT — mandatory trial registration since 2018; results reporting required for AMED grants; compliance variable' }],
       },
     },
   },
 
   international: {
     [InternationalField.REGULATORY_HARMONIZATION]: {
-      [RegulatoryHarmonizationClaim.ICH_PARTICIPATION]: {
+      [RegulatoryHarmonizationClaim.TRIAL_DATA_ACCEPTANCE]: {
         score: 5,
-        text: 'Japan was an ICH founding member in 1990 and has been central to every major ICH guideline. PMDA is one of three core ICH members alongside FDA and EMA. Japanese regulators have led development of ICH guidelines on geriatric clinical trials (E7), multi-regional trials (E17), and genomics (E18). Japan\'s ICH leadership is second to none.',
-        links: [{ label: 'PMDA ICH Founding Membership', url: 'https://www.pmda.go.jp/english/int-activities/0004.html', comment: 'PMDA — ICH founding member; co-authors major regulatory guidelines; highest possible ICH engagement' }],
+        text: 'Japan is a founding member of ICH and PMDA routinely accepts international trial data as primary evidence. Japan adopted ICH E17 (multi-regional clinical trial guidelines) as a domestic standard — a guideline Japan co-developed. PMDA does not require separate Japanese arms for most product categories if the sponsor can demonstrate appropriate Japanese representation in the global trial or provide bridging data.',
+        links: [{ label: 'PMDA ICH Participation', url: 'https://www.pmda.go.jp/english/rs-sb-std/standards-guidelines/ICH/0001.html', comment: 'PMDA — ICH founding member; ICH E17 co-developer; foreign trial data accepted as primary evidence' }],
       },
-      [RegulatoryHarmonizationClaim.MUTUAL_RECOGNITION]: {
+      [RegulatoryHarmonizationClaim.JOINT_REVIEW_PARTICIPATION]: {
+        score: 4,
+        text: 'PMDA participates actively in Project Orbis (international oncology joint review) and is one of its most active members — participating in ~50% of all Project Orbis submissions alongside FDA, EMA, and Health Canada. PMDA co-chairs several ICH Expert Working Groups. Japan chairs ICH quality standards working groups and was lead developer of ICH E17.',
+        links: [{ label: 'PMDA Project Orbis', url: 'https://www.pmda.go.jp/english/review-services/reviews/0001.html', comment: 'PMDA — active Project Orbis member; ICH EWG co-chair; one of most internationally engaged regulators' }],
+      },
+      [RegulatoryHarmonizationClaim.STANDARD_ALIGNMENT]: {
+        score: 5,
+        text: 'Japan is a founding ICH member and PMDA has adopted all ICH guidelines as domestic regulatory standards. Japan actively contributes to developing new ICH guidelines — co-authoring E17, leading quality guidelines (Q11, Q12), and chairing multiple expert working groups. PMDA\'s regulatory science capacity is globally referenced. Japan is the highest-capacity regulatory system in Asia and one of the top five globally.',
+        links: [{ label: 'PMDA ICH Contribution', url: 'https://www.pmda.go.jp/english/rs-sb-std/standards-guidelines/ICH/', comment: 'PMDA — ICH founding member; co-authored E17 and multiple quality guidelines; chairs EWGs' }],
+      },
+      [RegulatoryHarmonizationClaim.FOREIGN_APPROVAL_RELIANCE]: {
         score: 3,
-        text: 'PMDA has a work-sharing arrangement with FDA and EMA for innovative product review (consultations, data sharing) but not full mutual recognition. GMP mutual recognition with several partners. Japan is not in the PIC/S like some European countries. PMDA approval is increasingly respected globally but does not trigger automatic approval elsewhere. Japan\'s regulatory decisions are referenced but not mutually accepted.',
-        links: [{ label: 'PMDA International Work Sharing', url: 'https://www.pmda.go.jp/english/int-activities/0004.html', comment: 'PMDA — work-sharing with FDA and EMA; not full mutual recognition; GMP recognition agreements' }],
+        text: 'Japan does not have a formal foreign approval reliance pathway equivalent to Singapore\'s Immediate Access. FDA or EMA approval is taken as strong supporting evidence that can trigger expedited review, but domestic PMDA assessment is required. For Sakigake-designated products, foreign approval from trusted regulators can accelerate the domestic review timeline.',
+        links: [{ label: 'PMDA Expedited Review', url: 'https://www.pmda.go.jp/english/review-services/expedited-programs/', comment: 'PMDA — foreign approval as supporting evidence for expedited review; domestic assessment still required' }],
+      },
+      [RegulatoryHarmonizationClaim.RECIPROCAL_RECOGNITION]: {
+        score: 3,
+        text: 'Japan has GMP mutual recognition agreements with the EU, US, and several other jurisdictions — PMDA inspection results are accepted by FDA and EMA. Japan is not part of a formal mutual recognition network for product approvals equivalent to the EU single market. Bilateral MRAs cover manufacturing inspections but not full approval equivalence.',
+        links: [{ label: 'PMDA International GMP Cooperation', url: 'https://www.pmda.go.jp/english/rs-sb-std/std-gmp/', comment: 'PMDA — GMP MRA with FDA and EMA; inspection reciprocity; product approval equivalence not formalised' }],
       },
     },
+
     [InternationalField.SHARED_PHYSICAL_INFRASTRUCTURE]: {
-      [SharedPhysicalInfraClaim.BIOBANK_ACCESS]: {
+      [SharedPhysicalInfraClaim.BSL_ACCESS]: {
         score: 3,
-        text: 'ToMMo and BBJ have international researcher access programmes but require individual application and Japanese institution collaboration. Sample sharing follows strict export controls. Japan\'s centenarian study samples (Okinawa Centenarian Study) are unique globally but access for international researchers is limited. The value is enormous; the access difficulty is also substantial.',
-        links: [{ label: 'Tohoku Medical Megabank International Access', url: 'https://www.megabank.tohoku.ac.jp/english/', comment: 'ToMMo — international researcher access; requires Japanese institution collaboration; unique aging cohort samples' }],
+        text: 'BSL-3 facilities are available at multiple Japanese research institutions including RIKEN, Osaka University, and Nagasaki University BCRC. BSL-4 is available at NIID (National Institute of Infectious Diseases), Nagasaki, and Hokkaido University. Shared access programmes exist for academic researchers at BSL-3 level. Aging-specific gene therapy work (viral vector production, gene editing) can be conducted at existing BSL-3 facilities.',
+        links: [{ label: 'NIID BSL-4 Facility', url: 'https://www.niid.go.jp/niid/en/', comment: 'NIID — BSL-4 facility; BSL-3 distributed across RIKEN and university medical centres' }],
       },
-      [SharedPhysicalInfraClaim.COMPUTING_INFRASTRUCTURE]: {
+      [SharedPhysicalInfraClaim.GMP_CAPACITY]: {
+        score: 3,
+        text: 'Japan has established GMP manufacturing capacity for cell and gene therapy, including academic GMP suites at RIKEN BDR, NCGG, and major university hospitals. FUJIFILM Diosynth and CDMOs have Japanese operations. Gene therapy GMP manufacturing is feasible but the CDMO sector is less developed than UK or Singapore for novel modalities. AMED has funded GMP infrastructure at academic centres.',
+        links: [{ label: 'RIKEN BDR GMP Facility', url: 'https://www.bdr.riken.jp/en/', comment: 'RIKEN BDR — academic GMP manufacturing; cell and gene therapy for aging research clinical trials' }],
+      },
+      [SharedPhysicalInfraClaim.COMPUTE_INFRA]: {
         score: 4,
-        text: 'Japan has world-class supercomputing infrastructure: Fugaku (previously world\'s fastest supercomputer) is operated by RIKEN and available for biomedical research via application. AMED\'s computational biology platforms support aging genomics. Japan invested heavily in bioinformatics infrastructure as part of the Moonshot and beyond.',
-        links: [{ label: 'Fugaku Supercomputer', url: 'https://www.riken.jp/en/facilities/labs/r-ccs/', comment: 'RIKEN Fugaku — world-class HPC; available for biomedical and aging genomics research' }],
+        text: 'Japan has world-class HPC infrastructure: Fugaku (RIKEN, previously world\'s #1 supercomputer) is available for biomedical research through a competitive allocation process. TSUBAME at Tokyo Institute of Technology and SQUID at Osaka University provide additional capacity. Multiple petaflop-scale systems are accessible to academic researchers. Biomedical AI compute is well-resourced; allocation competition is intense.',
+        links: [{ label: 'RIKEN Fugaku Supercomputer', url: 'https://www.riken.jp/en/research/facilities/r-ccs/', comment: 'Fugaku — available for biomedical research; petaflop-scale capacity; competitive allocation for aging research' }],
+      },
+      [SharedPhysicalInfraClaim.SEQUENCING_SCALE]: {
+        score: 4,
+        text: 'ToMMo (Tohoku Medical Megabank) has generated 200,000+ whole-genome sequences from the Tohoku earthquake recovery cohort — one of the largest national sequencing programmes globally. RIKEN and NCGG maintain sequencing infrastructure for aging cohorts. Japan\'s sequencing scale is substantial; the ToMMo cohort provides Japanese-specific genome reference data of direct use for aging genetics research.',
+        links: [{ label: 'ToMMo 200K Genome Project', url: 'https://www.megabank.tohoku.ac.jp/english/', comment: 'ToMMo — 200,000+ WGS; Japanese reference genome; world-scale sequencing cohort for aging genetics' }],
+      },
+      [SharedPhysicalInfraClaim.MODEL_ORGANISM_PLATFORMS]: {
+        score: 4,
+        text: 'Japan has a world-class model organism research infrastructure for aging: RIKEN BRC is a world-leading repository of genetically modified mouse models. C. elegans aging research is highly active at multiple Japanese universities. Japan leads globally in centenarian and longevity genetics studies using human cohort models. NIG (National Institute of Genetics) manages mouse and Drosophila aging model repositories.',
+        links: [{ label: 'RIKEN BRC Mouse Repository', url: 'https://www.brc.riken.jp/en/', comment: 'RIKEN BRC — world-class genetically modified mouse models; aging model repository; shared access programme' }],
       },
     },
+
     [InternationalField.INTERNATIONAL_RESEARCH_NETWORK]: {
-      [IntlResearchNetworkClaim.CONSORTIUM_MEMBERSHIP]: {
+      [IntlResearchNetworkClaim.CONSORTIUM_DEPTH]: {
         score: 4,
-        text: 'Japan participates in: TAME trial (Japanese centenarian studies as reference cohorts), Human Cell Atlas, International Longevity Alliance, OHDSI, and APEC health research frameworks. RIKEN has bilateral agreements with leading international aging institutes. Japan\'s aging research output is the second largest globally; its international network reflects this position.',
-        links: [{ label: 'RIKEN International Collaborations', url: 'https://www.riken.jp/en/collab/', comment: 'RIKEN — extensive international collaboration network; aging research bilateral agreements with NIH, ERC, and others' }],
+        text: 'Japan participates in: Global Alliance for Genomics and Health (GA4GH), OHDSI, Human Cell Atlas, International Centenarian Consortium, and bilateral aging research networks with US (NIA), EU (Horizon collaborations), and China. AMED and JSPS maintain active international collaboration frameworks. Japan is particularly dominant in geriatrics science (JGS) and in aging-biology basic research (RIKEN-led consortia).',
+        links: [{ label: 'AMED International Collaboration', url: 'https://www.amed.go.jp/en/', comment: 'AMED — bilateral aging research collaborations; NIA, NIH, EU Horizon, and Asian network participation' }],
       },
-      [IntlResearchNetworkClaim.DATA_SHARING_AGREEMENTS]: {
+      [IntlResearchNetworkClaim.DATA_SHARING_FRAMEWORKS]: {
+        score: 2,
+        text: 'Japan\'s APPI cross-border data transfer restrictions make data sharing with international partners complex. Bilateral MoUs are needed for most health data export. Japan participates in OHDSI federated network where analysis code rather than data crosses borders. ToMMo has bilateral sharing agreements with UK Biobank and selected European biobanks.',
+        links: [{ label: 'Japan international data sharing', url: 'https://www.ppc.go.jp/en/', comment: 'APPI — bilateral agreements needed; OHDSI federated model avoids data export; ToMMo UK Biobank agreement' }],
+      },
+      [IntlResearchNetworkClaim.JOINT_FUNDING_ACCESS]: {
         score: 3,
-        text: 'Japan has EU adequacy decision, bilateral agreements with Canada, Australia, and select US research institutions for health data sharing. NBDC (National Bioscience Database Centre) manages international genomic data sharing for Japanese biobanks. Data sharing is possible but bureaucratic — requires individual MoU and strict anonymisation protocols.',
-        links: [{ label: 'NBDC Data Sharing', url: 'https://biosciencedbc.jp/en/', comment: 'NBDC — Japanese biobank international data sharing framework; EU adequacy and bilateral agreements' }],
+        text: 'Japan-US collaboration through JST-NSF bilateral programmes and NIA-AMED bilateral grants provides joint funding for aging research. EU-Japan partnership enables Horizon-adjacent joint funding. JSPS International Collaboration grants fund bilateral and multilateral aging research projects. Japan\'s science budget for international collaboration is substantial but bilateral rather than multilateral.',
+        links: [{ label: 'JST International Collaboration', url: 'https://www.jst.go.jp/inter/index_en.html', comment: 'JST — Japan-US NSF bilateral grants; Japan-EU collaboration; NIA-AMED bilateral aging grants' }],
+      },
+      [IntlResearchNetworkClaim.FIELD_INFLUENCE]: {
+        score: 5,
+        text: 'Japan is the world\'s leading nation in longevity science by several metrics: highest volume of aging biology publications, world\'s most advanced geriatric medicine specialty, the Hisayama study (most cited aging cohort globally), and Japanese Blue Zones (Okinawa) as a model for longevity research. Japanese researchers lead major international aging science societies. Japan\'s demographic reality gives it unique authority in translating aging science to policy.',
+        links: [{ label: 'Japan Geriatrics Society International', url: 'https://www.jpn-geriat-soc.or.jp/', comment: 'JGS — world leader in geriatric medicine; highest aging publication volume; Okinawa longevity model globally referenced' }],
+      },
+      [IntlResearchNetworkClaim.PATENT_COOPERATION]: {
+        score: 4,
+        text: 'Japan is a major PCT user — Japanese institutions and companies file among the world\'s largest patent volumes (JPO is one of the IP5 offices). RIKEN and universities hold significant aging-biology patent portfolios. Japan-US IP cooperation frameworks (JSPS-NSF joint IP arrangements) facilitate co-patent development. Japan\'s IP framework is mature and internationally credible.',
+        links: [{ label: 'JPO Patent Cooperation', url: 'https://www.jpo.go.jp/e/', comment: 'JPO — IP5 office; major PCT volume; RIKEN aging biology patent portfolio; Japan-US IP cooperation framework' }],
       },
     },
   },
@@ -402,27 +697,24 @@ const japan: CountryData = {
   societal: {
     [SocietalField.SOCIETAL_READINESS]: {
       [SocietalReadinessClaim.PUBLIC_TRUST]: {
-        score: 3,
-        text: 'Japanese institutional trust has been declining since the 1990s lost decade and was further damaged by Fukushima (2011). Edelman Trust Barometer shows Japan at ~50% trust in government (below global average) but ~65% in science/medicine. Trust in healthcare specifically is high — Japanese patients follow medical advice and engage with national screening programmes. The gap between healthcare trust and general institutional trust is striking.',
-        links: [{ label: 'Edelman Trust Barometer 2024 – Japan', url: 'https://www.edelman.com/trust/2024/trust-barometer', comment: 'Japan: ~50% government trust, ~65% science/medicine trust; declining trend since 1990s' }],
+        score: 4,
+        text: 'Japan has high institutional trust in healthcare — trust in physicians and hospitals is consistently above 80% in surveys. Science and government trust are moderate (~55–65% in Edelman measures), somewhat lowered by post-Fukushima regulatory credibility questions and the HPV vaccine suspension controversy (2013–2022). Trust in the national health insurance system is very high. Overall, Japan\'s public trust environment is favourable for health research and preventive programmes.',
+        links: [{ label: 'Edelman Trust Barometer – Japan', url: 'https://www.edelman.com/trust', comment: 'Japan: moderate government trust (~60%); high healthcare system trust; HPV saga historically reduced vaccine confidence' }],
       },
       [SocietalReadinessClaim.LONGEVITY_ACCEPTANCE]: {
-        score: 4,
-        text: 'Japan is a super-aged society — 29% of the population is over 65, the world\'s highest proportion. Longevity is a lived reality and deeply embedded cultural aspiration (JJukyu — longevity/prosperity wish). The Okinawan centenarian cultural tradition and the concept of "Ikigai" (reason for being) make longevity culturally resonant. Public acceptance of aging research is high, though longevity extension beyond current norms faces some cultural ambivalence among the very elderly themselves.',
-        links: [{ label: 'Japan Aging Statistics 2024', url: 'https://www.stat.go.jp/english/data/nenkan/index.html', comment: 'Japan Statistics Bureau — 29% over-65 population; world\'s most aged society; cultural longevity context' }],
+        score: 5,
+        text: 'Japan\'s society is the world\'s most demographically aged (30%+ over 65) and has uniquely high cultural acceptance of longevity science. "Healthy aging" is a national cultural goal (健康寿命 — healthy lifespan) with government campaigns stretching back decades. Japanese cultural values (ikigai, hara hachi bu, strong social ties) are globally cited as longevity factors. Public demand for aging research and preventive medicine is structurally embedded in Japanese society.',
+        links: [{ label: 'Ministry of Health Healthy Japan 21', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kenkounippon21.html', comment: 'Healthy Japan 21 — multi-decade national healthy aging campaign; healthy lifespan extension as public goal' }],
       },
       [SocietalReadinessClaim.POLITICAL_WILL]: {
         score: 4,
-        text: 'Moonshot Goal 7 ("Realise a society in which people can be free from the fear of cancer, cardiovascular, and other diseases and be healthy and active to 100 years of age by 2050") is the most explicit quantified longevity political commitment made by any government. JPY 50B is allocated. Japan\'s aging demographic makes longevity policy politically mandatory — no party can avoid it. The commitment is real; execution speed is slower than Singapore.',
-        links: [{ label: 'JST Moonshot Goal 7', url: 'https://www.jst.go.jp/moonshot/en/research/goal7/', comment: 'Moonshot Goal 7 — explicit 100-year healthy life target; JPY 50B funding; government priority endorsed by cabinet' }],
+        text: 'Japan has among the strongest political commitment to healthy aging of any government — driven by demographic necessity. The Moonshot Goal 7 is a PM-office endorsed commitment with JPY 50B funding. MHLW\'s comprehensive long-term care and prevention programmes have had sustained cross-party political support for three decades. Japan\'s healthcare spending and aging research investment are explicitly framed as a national security and economic growth issue.',
+        links: [{ label: 'Japan Moonshot R&D Programme', url: 'https://www.jst.go.jp/moonshot/en/', comment: 'PM-office endorsed Moonshot — JPY 50B for healthy aging by 2050; cross-party political support for three decades' }],
       },
       [SocietalReadinessClaim.QUACKERY_RESISTANCE]: {
         score: 2,
-        text: 'Japan has a large and culturally embedded supplement and functional food market (Tokuho — Food for Specified Health Uses, FOSHU) with thousands of products making indirect health claims. The anti-aging supplement and traditional medicine (Kampo) market is vast. Consumer Affairs Agency and MHLW regulate health claims but enforcement on implicit anti-aging messaging is weak. "Anti-aging" is one of Japan\'s most commercially exploited terms, with limited biomarker evidence requirements. A4M-equivalent practitioners operate, though the Japan Society of Anti-Aging Medicine (JAAM) is more science-oriented than A4M.',
-        links: [
-          { label: 'FOSHU Functional Food System', url: 'https://www.mhlw.go.jp/english/topics/foodsafety/fhc/02.html', comment: 'MHLW FOSHU — functional food labelling; thousands of products; indirect anti-aging claims common' },
-          { label: 'Japan Society of Anti-Aging Medicine', url: 'https://www.anti-aging.gr.jp/', comment: 'JAAM — more science-oriented than A4M but operates in same anti-aging medicine space' },
-        ],
+        text: 'Japan has a large and poorly regulated anti-aging supplement and cosmetic market. The FOSHU (Foods for Specified Health Uses) system allows health claims with scientific substantiation, but enforcement against exaggerated anti-aging claims is inconsistent. TCM-adjacent (Kampo) anti-aging practices occupy a significant grey zone — sold through pharmacies with limited evidence requirements. Japan\'s cultural openness to supplement and food-based anti-aging approaches creates a permissive environment for unproven claims.',
+        links: [{ label: 'Japan FOSHU System', url: 'https://www.mhlw.go.jp/english/topics/foodsafety/fhc/02.html', comment: 'FOSHU — functional food health claims system; substantiation required but anti-aging claim enforcement inconsistent' }],
       },
     },
   },
