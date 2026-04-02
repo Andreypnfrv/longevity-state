@@ -135,8 +135,8 @@ const usa: CountryData = {
     [TalentsField.CLINICIAN_SCIENTIST_PATHWAY]: {
       [ClinicianScientistClaim.COMBINED_DEGREE_EXISTS]: {
         score: 4,
-        text: 'NIH MSTP (Medical Scientist Training Program) funds MD–PhD training at 49 institutions, ~170 new students/year. The largest and most structured national MD–PhD programme globally. Multiple aging-focused tracks available.',
-        links: [{ label: 'NIH MSTP', url: 'https://www.nigms.nih.gov/Training/InstPredoc/Pages/PredocOverview-MSTP.aspx', comment: 'Federally funded MD–PhD programme at 49 institutions, $178M/year' }],
+        text: 'NIH MSTP (Medical Scientist Training Program) funds MD–PhD training at 56 institutions, ~170 new students/year. The largest and most structured national MD–PhD programme globally. Multiple aging-focused tracks available.',
+        links: [{ label: 'NIH MSTP', url: 'https://www.nigms.nih.gov/training/Pages/TWD-Dashboard/sub-programs?program=Cross-Disciplinary%20Pathway%20Programs', comment: 'Federally funded MD–PhD programme at 56 institutions, $67M/year' }],
       },
       [ClinicianScientistClaim.PUBLIC_FUNDING]: {
         score: 4,
